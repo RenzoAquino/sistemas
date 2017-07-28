@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktConfirmationMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktConfirmation">
+    <id column="CONFIRMATION_PARENT_ID" jdbcType="BIGINT" property="CONFIRMATION_PARENT_ID" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_confirmation
+    where CONFIRMATION_PARENT_ID = #{CONFIRMATION_PARENT_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktConfirmation">
+    insert into fkt_confirmation (CONFIRMATION_PARENT_ID)
+    values (#{CONFIRMATION_PARENT_ID,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktConfirmation">
+    insert into fkt_confirmation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="CONFIRMATION_PARENT_ID != null">
+        CONFIRMATION_PARENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CONFIRMATION_PARENT_ID != null">
+        #{CONFIRMATION_PARENT_ID,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

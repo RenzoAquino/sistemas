@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.base.dao.mapper.TxxxxBandfactMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.base.dao.model.TxxxxBandfact">
+    <id column="NUM_RUC" jdbcType="VARCHAR" property="NUM_RUC" />
+    <id column="TIP_DOCU" jdbcType="CHAR" property="TIP_DOCU" />
+    <id column="NUM_DOCU" jdbcType="VARCHAR" property="NUM_DOCU" />
+    <result column="FEC_CARG" jdbcType="TIMESTAMP" property="FEC_CARG" />
+    <result column="FEC_GENE" jdbcType="TIMESTAMP" property="FEC_GENE" />
+    <result column="FEC_ENVI" jdbcType="TIMESTAMP" property="FEC_ENVI" />
+    <result column="DES_OBSE" jdbcType="VARCHAR" property="DES_OBSE" />
+    <result column="NOM_ARCH" jdbcType="VARCHAR" property="NOM_ARCH" />
+    <result column="IND_SITU" jdbcType="CHAR" property="IND_SITU" />
+    <result column="TIP_ARCH" jdbcType="CHAR" property="TIP_ARCH" />
+    <result column="FIRM_DIGITAL" jdbcType="VARCHAR" property="FIRM_DIGITAL" />
+    <result column="TIP_DOC_REFERENCIA" jdbcType="CHAR" property="TIP_DOCU" />
+    <result column="NUM_DOC_REFERENCIA" jdbcType="VARCHAR" property="NUM_DOCU" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    NUM_RUC, TIP_DOCU, NUM_DOCU, FEC_CARG, FEC_GENE, FEC_ENVI, DES_OBSE, NOM_ARCH, IND_SITU, 
+    TIP_ARCH, FIRM_DIGITAL,TIP_DOC_REFERENCIA,NUM_DOC_REFERENCIA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.sgv.base.dao.model.TxxxxBandfact" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sistemagestionventa.txxxx_bandfact
+    where NUM_RUC = #{NUM_RUC,jdbcType=VARCHAR}
+      and TIP_DOCU = #{TIP_DOCU,jdbcType=CHAR}
+      and NUM_DOCU = #{NUM_DOCU,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByReference" parameterType="com.sgv.base.dao.model.TxxxxBandfact" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sistemagestionventa.txxxx_bandfact
+    where NUM_RUC = #{NUM_RUC,jdbcType=VARCHAR}
+      and TIP_DOC_REFERENCIA = #{TIP_DOC_REFERENCIA,jdbcType=CHAR}
+      and NUM_DOC_REFERENCIA = #{NUM_DOC_REFERENCIA,jdbcType=VARCHAR}
+      and TIP_DOCU = #{TIP_DOCU,jdbcType=CHAR}
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from txxxx_bandfact
+    where NUM_RUC = #{NUM_RUC,jdbcType=VARCHAR}
+      and TIP_DOCU = #{TIP_DOCU,jdbcType=CHAR}
+      and NUM_DOCU = #{NUM_DOCU,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.base.dao.model.TxxxxBandfact">
+    insert into txxxx_bandfact (NUM_RUC, TIP_DOCU, NUM_DOCU, 
+      FEC_CARG, FEC_GENE, FEC_ENVI, 
+      DES_OBSE, NOM_ARCH, IND_SITU, 
+      TIP_ARCH, FIRM_DIGITAL,TIP_DOC_REFERENCIA,NUM_DOC_REFERENCIA)
+    values (#{NUM_RUC,jdbcType=VARCHAR}, #{TIP_DOCU,jdbcType=CHAR}, #{NUM_DOCU,jdbcType=VARCHAR}, 
+      #{FEC_CARG,jdbcType=TIMESTAMP}, #{FEC_GENE,jdbcType=TIMESTAMP}, #{FEC_ENVI,jdbcType=TIMESTAMP}, 
+      #{DES_OBSE,jdbcType=VARCHAR}, #{NOM_ARCH,jdbcType=VARCHAR}, #{IND_SITU,jdbcType=CHAR}, 
+      #{TIP_ARCH,jdbcType=CHAR}, #{FIRM_DIGITAL,jdbcType=VARCHAR}, #{TIP_DOC_REFERENCIA,jdbcType=CHAR}, 
+      #{NUM_DOC_REFERENCIA,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.base.dao.model.TxxxxBandfact">
+    insert into sistemagestionventa.txxxx_bandfact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="NUM_RUC != null">
+        NUM_RUC,
+      </if>
+      <if test="TIP_DOCU != null">
+        TIP_DOCU,
+      </if>
+      <if test="NUM_DOCU != null">
+        NUM_DOCU,
+      </if>
+      <if test="FEC_CARG != null">
+        FEC_CARG,
+      </if>
+      <if test="FEC_GENE != null">
+        FEC_GENE,
+      </if>
+      <if test="FEC_ENVI != null">
+        FEC_ENVI,
+      </if>
+      <if test="DES_OBSE != null">
+        DES_OBSE,
+      </if>
+      <if test="NOM_ARCH != null">
+        NOM_ARCH,
+      </if>
+      <if test="IND_SITU != null">
+        IND_SITU,
+      </if>
+      <if test="TIP_ARCH != null">
+        TIP_ARCH,
+      </if>
+      <if test="FIRM_DIGITAL != null">
+        FIRM_DIGITAL,
+      </if>
+      <if test="TIP_DOC_REFERENCIA != null">
+        TIP_DOC_REFERENCIA,
+      </if>
+      <if test="NUM_DOC_REFERENCIA != null">
+        NUM_DOC_REFERENCIA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="NUM_RUC != null">
+        #{NUM_RUC,jdbcType=VARCHAR},
+      </if>
+      <if test="TIP_DOCU != null">
+        #{TIP_DOCU,jdbcType=CHAR},
+      </if>
+      <if test="NUM_DOCU != null">
+        #{NUM_DOCU,jdbcType=VARCHAR},
+      </if>
+      <if test="FEC_CARG != null">
+        #{FEC_CARG,jdbcType=TIMESTAMP},
+      </if>
+      <if test="FEC_GENE != null">
+        #{FEC_GENE,jdbcType=TIMESTAMP},
+      </if>
+      <if test="FEC_ENVI != null">
+        #{FEC_ENVI,jdbcType=TIMESTAMP},
+      </if>
+      <if test="DES_OBSE != null">
+        #{DES_OBSE,jdbcType=VARCHAR},
+      </if>
+      <if test="NOM_ARCH != null">
+        #{NOM_ARCH,jdbcType=VARCHAR},
+      </if>
+      <if test="IND_SITU != null">
+        #{IND_SITU,jdbcType=CHAR},
+      </if>
+      <if test="TIP_ARCH != null">
+        #{TIP_ARCH,jdbcType=CHAR},
+      </if>
+      <if test="FIRM_DIGITAL != null">
+        #{FIRM_DIGITAL,jdbcType=VARCHAR},
+      </if>
+      <if test="TIP_DOC_REFERENCIA != null">
+        #{TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="NUM_DOC_REFERENCIA != null">
+        #{NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.base.dao.model.TxxxxBandfact">
+    update sistemagestionventa.txxxx_bandfact
+    <set>
+      <if test="FEC_CARG != null">
+        FEC_CARG = #{FEC_CARG,jdbcType=TIMESTAMP},
+      </if>
+      <if test="FEC_GENE != null">
+        FEC_GENE = #{FEC_GENE,jdbcType=TIMESTAMP},
+      </if>
+      <if test="FEC_ENVI != null">
+        FEC_ENVI = #{FEC_ENVI,jdbcType=TIMESTAMP},
+      </if>
+      <if test="DES_OBSE != null">
+        DES_OBSE = #{DES_OBSE,jdbcType=VARCHAR},
+      </if>
+      <if test="NOM_ARCH != null">
+        NOM_ARCH = #{NOM_ARCH,jdbcType=VARCHAR},
+      </if>
+      <if test="IND_SITU != null">
+        IND_SITU = #{IND_SITU,jdbcType=CHAR},
+      </if>
+      <if test="TIP_ARCH != null">
+        TIP_ARCH = #{TIP_ARCH,jdbcType=CHAR},
+      </if>
+      <if test="FIRM_DIGITAL != null">
+        FIRM_DIGITAL = #{FIRM_DIGITAL,jdbcType=VARCHAR},
+      </if>
+      <if test="TIP_DOC_REFERENCIA != null">
+        TIP_DOC_REFERENCIA = #{TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="NUM_DOC_REFERENCIA != null">
+        NUM_DOC_REFERENCIA = #{NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NUM_RUC = #{NUM_RUC,jdbcType=VARCHAR}
+      and TIP_DOCU = #{TIP_DOCU,jdbcType=CHAR}
+      and NUM_DOCU = #{NUM_DOCU,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.base.dao.model.TxxxxBandfact">
+    update txxxx_bandfact
+    set FEC_CARG = #{FEC_CARG,jdbcType=TIMESTAMP},
+      FEC_GENE = #{FEC_GENE,jdbcType=TIMESTAMP},
+      FEC_ENVI = #{FEC_ENVI,jdbcType=TIMESTAMP},
+      DES_OBSE = #{DES_OBSE,jdbcType=VARCHAR},
+      NOM_ARCH = #{NOM_ARCH,jdbcType=VARCHAR},
+      IND_SITU = #{IND_SITU,jdbcType=CHAR},
+      TIP_ARCH = #{TIP_ARCH,jdbcType=CHAR},
+      FIRM_DIGITAL = #{FIRM_DIGITAL,jdbcType=VARCHAR},
+      TIP_DOC_REFERENCIA = #{TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      NUM_DOC_REFERENCIA = #{NUM_DOC_REFERENCIA,jdbcType=VARCHAR}
+
+    where NUM_RUC = #{NUM_RUC,jdbcType=VARCHAR}
+      and TIP_DOCU = #{TIP_DOCU,jdbcType=CHAR}
+      and NUM_DOCU = #{NUM_DOCU,jdbcType=VARCHAR}
+  </update>
+  
+  
+
+  
+    <select id="obtenerValorActualSecuencia" parameterType="com.sgv.base.dao.model.TxxxxBandfact" resultType="java.lang.Double">
+		SELECT MAX(CONVERT(SUBSTRING(NUM_DOCU, 13),DECIMAL(3,0)))
+		FROM sistemagestionventa.txxxx_bandfact
+		WHERE TIP_DOCU = 'RA'
+  		AND DATE_FORMAT(FEC_CARG,'%m-%d-%Y') = DATE_FORMAT(NOW(),'%m-%d-%Y')
+  </select>
+</mapper>

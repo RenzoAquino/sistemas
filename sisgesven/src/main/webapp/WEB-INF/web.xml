@@ -1,0 +1,26 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app>
+  <display-name>Sistema de Gestión de Venta</display-name>
+  <servlet>
+    <servlet-name>enviarDocumentoSUNAT</servlet-name>
+    <servlet-class>
+      com.sgv.web.EnviarDocumentoSUNATServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>enviarDocumentoSUNAT</servlet-name>
+    <url-pattern>/enviarDocumentoSUNAT</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>consolidadorPedido</servlet-name>
+    <servlet-class>
+      com.sgv.web.ConsolidadorPedidoServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>consolidadorPedido</servlet-name>
+    <url-pattern>/consolidadorPedido</url-pattern>
+  </servlet-mapping>
+</web-app>

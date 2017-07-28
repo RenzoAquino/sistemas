@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktPaymentMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktPayment">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="CODE" jdbcType="VARCHAR" property="CODE" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="DEPOSITTEXT" jdbcType="VARCHAR" property="DEPOSITTEXT" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="DESCRIPTION" />
+    <result column="DISCOUNTDAYS" jdbcType="INTEGER" property="DISCOUNTDAYS" />
+    <result column="DISCOUNTVALUE" jdbcType="DOUBLE" property="DISCOUNTVALUE" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="NETDAYS" jdbcType="INTEGER" property="NETDAYS" />
+    <result column="PAIDTEXT" jdbcType="VARCHAR" property="PAIDTEXT" />
+    <result column="UNPAIDTEXT" jdbcType="VARCHAR" property="UNPAIDTEXT" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="PAYMENT_CATEGORY" jdbcType="BIGINT" property="PAYMENT_CATEGORY" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CODE, DATEADDED, DELETED, DEPOSITTEXT, DESCRIPTION, DISCOUNTDAYS, DISCOUNTVALUE, 
+    MODIFIED, MODIFIEDBY, NAME, NETDAYS, PAIDTEXT, UNPAIDTEXT, VALIDFROM, VALIDTO, PAYMENT_CATEGORY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_payment
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_payment
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktPayment">
+    insert into fkt_payment (ID, CODE, DATEADDED, 
+      DELETED, DEPOSITTEXT, DESCRIPTION, 
+      DISCOUNTDAYS, DISCOUNTVALUE, MODIFIED, 
+      MODIFIEDBY, NAME, NETDAYS, 
+      PAIDTEXT, UNPAIDTEXT, VALIDFROM, 
+      VALIDTO, PAYMENT_CATEGORY)
+    values (#{ID,jdbcType=BIGINT}, #{CODE,jdbcType=VARCHAR}, #{DATEADDED,jdbcType=DATE}, 
+      #{DELETED,jdbcType=BIT}, #{DEPOSITTEXT,jdbcType=VARCHAR}, #{DESCRIPTION,jdbcType=VARCHAR}, 
+      #{DISCOUNTDAYS,jdbcType=INTEGER}, #{DISCOUNTVALUE,jdbcType=DOUBLE}, #{MODIFIED,jdbcType=DATE}, 
+      #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, #{NETDAYS,jdbcType=INTEGER}, 
+      #{PAIDTEXT,jdbcType=VARCHAR}, #{UNPAIDTEXT,jdbcType=VARCHAR}, #{VALIDFROM,jdbcType=DATE}, 
+      #{VALIDTO,jdbcType=DATE}, #{PAYMENT_CATEGORY,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktPayment">
+    insert into fkt_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="CODE != null">
+        CODE,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="DEPOSITTEXT != null">
+        DEPOSITTEXT,
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION,
+      </if>
+      <if test="DISCOUNTDAYS != null">
+        DISCOUNTDAYS,
+      </if>
+      <if test="DISCOUNTVALUE != null">
+        DISCOUNTVALUE,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="NETDAYS != null">
+        NETDAYS,
+      </if>
+      <if test="PAIDTEXT != null">
+        PAIDTEXT,
+      </if>
+      <if test="UNPAIDTEXT != null">
+        UNPAIDTEXT,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="PAYMENT_CATEGORY != null">
+        PAYMENT_CATEGORY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="CODE != null">
+        #{CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DEPOSITTEXT != null">
+        #{DEPOSITTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="DESCRIPTION != null">
+        #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="DISCOUNTDAYS != null">
+        #{DISCOUNTDAYS,jdbcType=INTEGER},
+      </if>
+      <if test="DISCOUNTVALUE != null">
+        #{DISCOUNTVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NETDAYS != null">
+        #{NETDAYS,jdbcType=INTEGER},
+      </if>
+      <if test="PAIDTEXT != null">
+        #{PAIDTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="UNPAIDTEXT != null">
+        #{UNPAIDTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="PAYMENT_CATEGORY != null">
+        #{PAYMENT_CATEGORY,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.model.FktPayment">
+    update fkt_payment
+    <set>
+      <if test="CODE != null">
+        CODE = #{CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DEPOSITTEXT != null">
+        DEPOSITTEXT = #{DEPOSITTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION = #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="DISCOUNTDAYS != null">
+        DISCOUNTDAYS = #{DISCOUNTDAYS,jdbcType=INTEGER},
+      </if>
+      <if test="DISCOUNTVALUE != null">
+        DISCOUNTVALUE = #{DISCOUNTVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NETDAYS != null">
+        NETDAYS = #{NETDAYS,jdbcType=INTEGER},
+      </if>
+      <if test="PAIDTEXT != null">
+        PAIDTEXT = #{PAIDTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="UNPAIDTEXT != null">
+        UNPAIDTEXT = #{UNPAIDTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="PAYMENT_CATEGORY != null">
+        PAYMENT_CATEGORY = #{PAYMENT_CATEGORY,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.model.FktPayment">
+    update fkt_payment
+    set CODE = #{CODE,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      DEPOSITTEXT = #{DEPOSITTEXT,jdbcType=VARCHAR},
+      DESCRIPTION = #{DESCRIPTION,jdbcType=VARCHAR},
+      DISCOUNTDAYS = #{DISCOUNTDAYS,jdbcType=INTEGER},
+      DISCOUNTVALUE = #{DISCOUNTVALUE,jdbcType=DOUBLE},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NETDAYS = #{NETDAYS,jdbcType=INTEGER},
+      PAIDTEXT = #{PAIDTEXT,jdbcType=VARCHAR},
+      UNPAIDTEXT = #{UNPAIDTEXT,jdbcType=VARCHAR},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      PAYMENT_CATEGORY = #{PAYMENT_CATEGORY,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

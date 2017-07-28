@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.base.dao.mapper.MaestroParametroMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.base.dao.model.MaestroParametro">
+    <result column="MPRM_ID" jdbcType="BIGINT" property="MPRM_ID" />
+    <result column="MPRM_ID_PADRE" jdbcType="BIGINT" property="MPRM_ID_PADRE" />
+    <result column="NPRM_CODIGO" jdbcType="CHAR" property="NPRM_CODIGO" />
+    <result column="NPRM_NOMBRE" jdbcType="VARCHAR" property="NPRM_NOMBRE" />
+    <result column="NPRM_DESCRIPCION" jdbcType="VARCHAR" property="NPRM_DESCRIPCION" />
+    <result column="NPRM_ORDEN" jdbcType="INTEGER" property="NPRM_ORDEN" />
+    <result column="NPRM_ESTADO" jdbcType="CHAR" property="NPRM_ESTADO" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sgv.base.dao.model.MaestroParametro">
+    insert into maestro_parametro (MPRM_ID, MPRM_ID_PADRE, NPRM_CODIGO, 
+      NPRM_NOMBRE, NPRM_DESCRIPCION, NPRM_ORDEN, 
+      NPRM_ESTADO)
+    values (#{MPRM_ID,jdbcType=BIGINT}, #{MPRM_ID_PADRE,jdbcType=BIGINT}, #{NPRM_CODIGO,jdbcType=CHAR}, 
+      #{NPRM_NOMBRE,jdbcType=VARCHAR}, #{NPRM_DESCRIPCION,jdbcType=VARCHAR}, #{NPRM_ORDEN,jdbcType=INTEGER}, 
+      #{NPRM_ESTADO,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.base.dao.model.MaestroParametro">
+    insert into maestro_parametro
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="MPRM_ID != null">
+        MPRM_ID,
+      </if>
+      <if test="MPRM_ID_PADRE != null">
+        MPRM_ID_PADRE,
+      </if>
+      <if test="NPRM_CODIGO != null">
+        NPRM_CODIGO,
+      </if>
+      <if test="NPRM_NOMBRE != null">
+        NPRM_NOMBRE,
+      </if>
+      <if test="NPRM_DESCRIPCION != null">
+        NPRM_DESCRIPCION,
+      </if>
+      <if test="NPRM_ORDEN != null">
+        NPRM_ORDEN,
+      </if>
+      <if test="NPRM_ESTADO != null">
+        NPRM_ESTADO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="MPRM_ID != null">
+        #{MPRM_ID,jdbcType=BIGINT},
+      </if>
+      <if test="MPRM_ID_PADRE != null">
+        #{MPRM_ID_PADRE,jdbcType=BIGINT},
+      </if>
+      <if test="NPRM_CODIGO != null">
+        #{NPRM_CODIGO,jdbcType=CHAR},
+      </if>
+      <if test="NPRM_NOMBRE != null">
+        #{NPRM_NOMBRE,jdbcType=VARCHAR},
+      </if>
+      <if test="NPRM_DESCRIPCION != null">
+        #{NPRM_DESCRIPCION,jdbcType=VARCHAR},
+      </if>
+      <if test="NPRM_ORDEN != null">
+        #{NPRM_ORDEN,jdbcType=INTEGER},
+      </if>
+      <if test="NPRM_ESTADO != null">
+        #{NPRM_ESTADO,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMap" type="com.sgv.base.dao.model.MaestroParametro">
+    <result column="MPRM_ID" jdbcType="BIGINT" property="MPRM_ID" />
+    <result column="MPRM_ID_PADRE" jdbcType="BIGINT" property="MPRM_ID_PADRE" />
+    <result column="NPRM_CODIGO" jdbcType="CHAR" property="NPRM_CODIGO" />
+    <result column="NPRM_NOMBRE" jdbcType="VARCHAR" property="NPRM_NOMBRE" />
+    <result column="NPRM_DESCRIPCION" jdbcType="VARCHAR" property="NPRM_DESCRIPCION" />
+    <result column="NPRM_ORDEN" jdbcType="INTEGER" property="NPRM_ORDEN" />
+    <result column="NPRM_ESTADO" jdbcType="CHAR" property="NPRM_ESTADO" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sgv.base.dao.model.MaestroParametro">
+    insert into maestro_parametro (MPRM_ID, MPRM_ID_PADRE, NPRM_CODIGO, 
+      NPRM_NOMBRE, NPRM_DESCRIPCION, NPRM_ORDEN, 
+      NPRM_ESTADO)
+    values (#{MPRM_ID,jdbcType=BIGINT}, #{MPRM_ID_PADRE,jdbcType=BIGINT}, #{NPRM_CODIGO,jdbcType=CHAR}, 
+      #{NPRM_NOMBRE,jdbcType=VARCHAR}, #{NPRM_DESCRIPCION,jdbcType=VARCHAR}, #{NPRM_ORDEN,jdbcType=INTEGER}, 
+      #{NPRM_ESTADO,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.base.dao.model.MaestroParametro">
+    insert into maestro_parametro
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="MPRM_ID != null">
+        MPRM_ID,
+      </if>
+      <if test="MPRM_ID_PADRE != null">
+        MPRM_ID_PADRE,
+      </if>
+      <if test="NPRM_CODIGO != null">
+        NPRM_CODIGO,
+      </if>
+      <if test="NPRM_NOMBRE != null">
+        NPRM_NOMBRE,
+      </if>
+      <if test="NPRM_DESCRIPCION != null">
+        NPRM_DESCRIPCION,
+      </if>
+      <if test="NPRM_ORDEN != null">
+        NPRM_ORDEN,
+      </if>
+      <if test="NPRM_ESTADO != null">
+        NPRM_ESTADO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="MPRM_ID != null">
+        #{MPRM_ID,jdbcType=BIGINT},
+      </if>
+      <if test="MPRM_ID_PADRE != null">
+        #{MPRM_ID_PADRE,jdbcType=BIGINT},
+      </if>
+      <if test="NPRM_CODIGO != null">
+        #{NPRM_CODIGO,jdbcType=CHAR},
+      </if>
+      <if test="NPRM_NOMBRE != null">
+        #{NPRM_NOMBRE,jdbcType=VARCHAR},
+      </if>
+      <if test="NPRM_DESCRIPCION != null">
+        #{NPRM_DESCRIPCION,jdbcType=VARCHAR},
+      </if>
+      <if test="NPRM_ORDEN != null">
+        #{NPRM_ORDEN,jdbcType=INTEGER},
+      </if>
+      <if test="NPRM_ESTADO != null">
+        #{NPRM_ESTADO,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

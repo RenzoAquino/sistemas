@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktIndividualdocumentinfoMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktIndividualdocumentinfo">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="NOVATDESCRIPTION" jdbcType="VARCHAR" property="NOVATDESCRIPTION" />
+    <result column="NOVATNAME" jdbcType="VARCHAR" property="NOVATNAME" />
+    <result column="PAYMENTDESCRIPTION" jdbcType="VARCHAR" property="PAYMENTDESCRIPTION" />
+    <result column="PAYMENTNAME" jdbcType="VARCHAR" property="PAYMENTNAME" />
+    <result column="PAYMENTTEXT" jdbcType="VARCHAR" property="PAYMENTTEXT" />
+    <result column="SHIPPINGAUTOVAT" jdbcType="INTEGER" property="SHIPPINGAUTOVAT" />
+    <result column="SHIPPINGDESCRIPTION" jdbcType="VARCHAR" property="SHIPPINGDESCRIPTION" />
+    <result column="SHIPPINGNAME" jdbcType="VARCHAR" property="SHIPPINGNAME" />
+    <result column="SHIPPINGVALUE" jdbcType="DOUBLE" property="SHIPPINGVALUE" />
+    <result column="SHIPPINGVATDESCRIPTION" jdbcType="VARCHAR" property="SHIPPINGVATDESCRIPTION" />
+    <result column="SHIPPINGVATVALUE" jdbcType="DOUBLE" property="SHIPPINGVATVALUE" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DATEADDED, DELETED, MODIFIED, MODIFIEDBY, NAME, NOVATDESCRIPTION, NOVATNAME, 
+    PAYMENTDESCRIPTION, PAYMENTNAME, PAYMENTTEXT, SHIPPINGAUTOVAT, SHIPPINGDESCRIPTION, 
+    SHIPPINGNAME, SHIPPINGVALUE, SHIPPINGVATDESCRIPTION, SHIPPINGVATVALUE, VALIDFROM, 
+    VALIDTO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_individualdocumentinfo
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_individualdocumentinfo
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktIndividualdocumentinfo">
+    insert into fkt_individualdocumentinfo (ID, DATEADDED, DELETED, 
+      MODIFIED, MODIFIEDBY, NAME, 
+      NOVATDESCRIPTION, NOVATNAME, PAYMENTDESCRIPTION, 
+      PAYMENTNAME, PAYMENTTEXT, SHIPPINGAUTOVAT, 
+      SHIPPINGDESCRIPTION, SHIPPINGNAME, SHIPPINGVALUE, 
+      SHIPPINGVATDESCRIPTION, SHIPPINGVATVALUE, 
+      VALIDFROM, VALIDTO)
+    values (#{ID,jdbcType=BIGINT}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
+      #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, 
+      #{NOVATDESCRIPTION,jdbcType=VARCHAR}, #{NOVATNAME,jdbcType=VARCHAR}, #{PAYMENTDESCRIPTION,jdbcType=VARCHAR}, 
+      #{PAYMENTNAME,jdbcType=VARCHAR}, #{PAYMENTTEXT,jdbcType=VARCHAR}, #{SHIPPINGAUTOVAT,jdbcType=INTEGER}, 
+      #{SHIPPINGDESCRIPTION,jdbcType=VARCHAR}, #{SHIPPINGNAME,jdbcType=VARCHAR}, #{SHIPPINGVALUE,jdbcType=DOUBLE}, 
+      #{SHIPPINGVATDESCRIPTION,jdbcType=VARCHAR}, #{SHIPPINGVATVALUE,jdbcType=DOUBLE}, 
+      #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktIndividualdocumentinfo">
+    insert into fkt_individualdocumentinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="NOVATDESCRIPTION != null">
+        NOVATDESCRIPTION,
+      </if>
+      <if test="NOVATNAME != null">
+        NOVATNAME,
+      </if>
+      <if test="PAYMENTDESCRIPTION != null">
+        PAYMENTDESCRIPTION,
+      </if>
+      <if test="PAYMENTNAME != null">
+        PAYMENTNAME,
+      </if>
+      <if test="PAYMENTTEXT != null">
+        PAYMENTTEXT,
+      </if>
+      <if test="SHIPPINGAUTOVAT != null">
+        SHIPPINGAUTOVAT,
+      </if>
+      <if test="SHIPPINGDESCRIPTION != null">
+        SHIPPINGDESCRIPTION,
+      </if>
+      <if test="SHIPPINGNAME != null">
+        SHIPPINGNAME,
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        SHIPPINGVALUE,
+      </if>
+      <if test="SHIPPINGVATDESCRIPTION != null">
+        SHIPPINGVATDESCRIPTION,
+      </if>
+      <if test="SHIPPINGVATVALUE != null">
+        SHIPPINGVATVALUE,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NOVATDESCRIPTION != null">
+        #{NOVATDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="NOVATNAME != null">
+        #{NOVATNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PAYMENTDESCRIPTION != null">
+        #{PAYMENTDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="PAYMENTNAME != null">
+        #{PAYMENTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PAYMENTTEXT != null">
+        #{PAYMENTTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGAUTOVAT != null">
+        #{SHIPPINGAUTOVAT,jdbcType=INTEGER},
+      </if>
+      <if test="SHIPPINGDESCRIPTION != null">
+        #{SHIPPINGDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGNAME != null">
+        #{SHIPPINGNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="SHIPPINGVATDESCRIPTION != null">
+        #{SHIPPINGVATDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVATVALUE != null">
+        #{SHIPPINGVATVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktIndividualdocumentinfo">
+    update fkt_individualdocumentinfo
+    <set>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NOVATDESCRIPTION != null">
+        NOVATDESCRIPTION = #{NOVATDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="NOVATNAME != null">
+        NOVATNAME = #{NOVATNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PAYMENTDESCRIPTION != null">
+        PAYMENTDESCRIPTION = #{PAYMENTDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="PAYMENTNAME != null">
+        PAYMENTNAME = #{PAYMENTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PAYMENTTEXT != null">
+        PAYMENTTEXT = #{PAYMENTTEXT,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGAUTOVAT != null">
+        SHIPPINGAUTOVAT = #{SHIPPINGAUTOVAT,jdbcType=INTEGER},
+      </if>
+      <if test="SHIPPINGDESCRIPTION != null">
+        SHIPPINGDESCRIPTION = #{SHIPPINGDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGNAME != null">
+        SHIPPINGNAME = #{SHIPPINGNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="SHIPPINGVATDESCRIPTION != null">
+        SHIPPINGVATDESCRIPTION = #{SHIPPINGVATDESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVATVALUE != null">
+        SHIPPINGVATVALUE = #{SHIPPINGVATVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.mapper.model.FktIndividualdocumentinfo">
+    update fkt_individualdocumentinfo
+    set DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NOVATDESCRIPTION = #{NOVATDESCRIPTION,jdbcType=VARCHAR},
+      NOVATNAME = #{NOVATNAME,jdbcType=VARCHAR},
+      PAYMENTDESCRIPTION = #{PAYMENTDESCRIPTION,jdbcType=VARCHAR},
+      PAYMENTNAME = #{PAYMENTNAME,jdbcType=VARCHAR},
+      PAYMENTTEXT = #{PAYMENTTEXT,jdbcType=VARCHAR},
+      SHIPPINGAUTOVAT = #{SHIPPINGAUTOVAT,jdbcType=INTEGER},
+      SHIPPINGDESCRIPTION = #{SHIPPINGDESCRIPTION,jdbcType=VARCHAR},
+      SHIPPINGNAME = #{SHIPPINGNAME,jdbcType=VARCHAR},
+      SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      SHIPPINGVATDESCRIPTION = #{SHIPPINGVATDESCRIPTION,jdbcType=VARCHAR},
+      SHIPPINGVATVALUE = #{SHIPPINGVATVALUE,jdbcType=DOUBLE},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

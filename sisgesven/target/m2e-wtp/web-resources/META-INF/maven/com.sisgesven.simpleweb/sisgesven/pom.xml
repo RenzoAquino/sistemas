@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+  http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sisgesven.simpleweb</groupId>
+  <artifactId>sisgesven</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Sistema de Gestion de Venta</name>
+  <url>http://maven.apache.org</url>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    
+   <!-- JSTL Dependency -->
+	<dependency>
+		<groupId>jstl</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
+
+   <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.4.2</version>
+	</dependency>	
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.42</version>
+   </dependency>
+   
+   <!-- UTIL -->
+   <dependency>
+    <groupId>joda-time</groupId>
+    <artifactId>joda-time</artifactId>
+    <version>2.9.7</version>
+</dependency>
+   
+  </dependencies>  
+  
+  <build>
+    <finalName>sisgesven</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>      
+      <plugin>
+		  <groupId>org.mortbay.jetty</groupId>
+		  <artifactId>maven-jetty-plugin</artifactId>
+		  <configuration>
+		    <connectors>
+		      <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+		        <port>8092</port>
+		      </connector>
+		      <connector implementation="org.mortbay.jetty.security.SslSocketConnector">
+		        <port>8091</port>
+		        <maxIdleTime>60000</maxIdleTime>
+		        <keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
+		        <password>jetty6</password>
+		        <keyPassword>jetty6</keyPassword>
+		      </connector>
+		    </connectors>
+		  </configuration>
+		</plugin>
+		<plugin>
+		  <groupId>org.codehaus.mojo</groupId>
+		  <artifactId>keytool-maven-plugin</artifactId>
+		  <executions>
+		    <execution>
+		      <phase>generate-resources</phase>
+		      <id>clean</id>
+		      <goals>
+		        <goal>clean</goal>
+		      </goals>
+		    </execution>
+		    <execution>
+		      <phase>generate-resources</phase>
+		      <id>generateKeyPair</id>
+		      <goals>
+		        <goal>generateKeyPair</goal>
+		      </goals>
+		    </execution>
+		  </executions>
+		  <configuration>
+		    <keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
+		    <dname>CN=BioCreative, OU=NLM, O=NIH, L=Bethesda, ST=DC</dname>
+		    <keypass>jetty6</keypass>
+		    <storepass>jetty6</storepass>
+		    <alias>jetty6</alias>
+		    <keyalg>RSA</keyalg>
+		  </configuration>
+		</plugin>
+    </plugins>
+  </build>
+</project>

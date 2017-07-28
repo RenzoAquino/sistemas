@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.base.dao.mapper.ControlVentaMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.base.dao.model.ControlVenta">
+    <id column="CVNT_ID" jdbcType="BIGINT" property="CVNT_ID" />
+    <result column="CVNT_FEC_EMI_DOCUMENTO" jdbcType="DATE" property="CVNT_FEC_EMI_DOCUMENTO" />
+    <result column="CVNT_FEC_VEN_DOCUMENTO" jdbcType="DATE" property="CVNT_FEC_VEN_DOCUMENTO" />
+    <result column="CVNT_TIP_DOCUMENTO" jdbcType="CHAR" property="CVNT_TIP_DOCUMENTO" />
+    <result column="CVNT_NUM_DOCUMENTO" jdbcType="VARCHAR" property="CVNT_NUM_DOCUMENTO" />
+    <result column="CVNT_TIP_DOC_EMISOR" jdbcType="CHAR" property="CVNT_TIP_DOC_EMISOR" />
+    <result column="CVNT_NUM_DOC_EMISOR" jdbcType="VARCHAR" property="CVNT_NUM_DOC_EMISOR" />
+    <result column="CVNT_RAZ_SOC_EMISOR" jdbcType="VARCHAR" property="CVNT_RAZ_SOC_EMISOR" />
+    <result column="CVNT_TIP_DOC_RECEPTOR" jdbcType="CHAR" property="CVNT_TIP_DOC_RECEPTOR" />
+    <result column="CVNT_NUM_DOC_RECEPTOR" jdbcType="VARCHAR" property="CVNT_NUM_DOC_RECEPTOR" />
+    <result column="CVNT_RAZ_SOC_RECEPTOR" jdbcType="VARCHAR" property="CVNT_RAZ_SOC_RECEPTOR" />
+    <result column="CVNT_VAL_FAC_EXPORTACION" jdbcType="DOUBLE" property="CVNT_VAL_FAC_EXPORTACION" />
+    <result column="CVNT_VAL_OPE_GRAVADA" jdbcType="DOUBLE" property="CVNT_VAL_OPE_GRAVADA" />
+    <result column="CVNT_VAL_OPE_EXONERADA" jdbcType="DOUBLE" property="CVNT_VAL_OPE_EXONERADA" />
+    <result column="CVNT_VAL_OPE_INAFECTA" jdbcType="DOUBLE" property="CVNT_VAL_OPE_INAFECTA" />
+    <result column="CVNT_ISC" jdbcType="DOUBLE" property="CVNT_ISC" />
+    <result column="CVNT_IGV" jdbcType="DOUBLE" property="CVNT_IGV" />
+    <result column="CVNT_OTR_TRIBUTOS" jdbcType="DOUBLE" property="CVNT_OTR_TRIBUTOS" />
+    <result column="CVNT_IMP_TOTAL" jdbcType="DOUBLE" property="CVNT_IMP_TOTAL" />
+    <result column="CVNT_TIP_CAMBIO" jdbcType="DOUBLE" property="CVNT_TIP_CAMBIO" />
+    <result column="CVNT_FEC_DOC_REFERENCIA" jdbcType="DATE" property="CVNT_FEC_DOC_REFERENCIA" />
+    <result column="CVNT_TIP_DOC_REFERENCIA" jdbcType="CHAR" property="CVNT_TIP_DOC_REFERENCIA" />
+    <result column="CVNT_NUM_DOC_REFERENCIA" jdbcType="VARCHAR" property="CVNT_NUM_DOC_REFERENCIA" />
+    <result column="CVNT_ESTADO" jdbcType="CHAR" property="CVNT_ESTADO" />
+    <result column="CVNT_OBSERVACION" jdbcType="VARCHAR" property="CVNT_OBSERVACION" />
+    <result column="CVNT_EST_ANTERIOR" jdbcType="CHAR" property="CVNT_EST_ANTERIOR" />
+    <result column="CVNT_OBS_ANTERIOR" jdbcType="VARCHAR" property="CVNT_OBS_ANTERIOR" />
+    <result column="CVNT_PERIDO" jdbcType="DATE" property="CVNT_PERIDO" />
+    <result column="CVNT_TIP_MONEDA" jdbcType="CHAR" property="CVNT_TIP_MONEDA" />
+    <result column="CVNT_FEC_CREACION" jdbcType="TIMESTAMP" property="CVNT_FEC_CREACION" />
+    <result column="CVNT_FEC_MODIFICACION" jdbcType="TIMESTAMP" property="CVNT_FEC_MODIFICACION" />
+    <result column="CVNT_USU_CREACION" jdbcType="VARCHAR" property="CVNT_USU_CREACION" />
+    <result column="CVNT_US_MODIFICACION" jdbcType="VARCHAR" property="CVNT_US_MODIFICACION" />
+    <result column="CVNT_FEC_ORD_PEDIDO" jdbcType="DATE" property="CVNT_FEC_ORD_PEDIDO" />
+    <result column="CVNT_FEC_SER_PEDIDO" jdbcType="DATE" property="CVNT_FEC_SER_PEDIDO" />
+    <result column="CVNT_FEC_REC_PEDIDO" jdbcType="DATE" property="CVNT_FEC_REC_PEDIDO" />
+    <result column="CVNT_FEC_PAG_PEDIDO" jdbcType="DATE" property="CVNT_FEC_PAG_PEDIDO" />
+    <result column="CVNT_IND_PAGADO" jdbcType="CHAR" property="CVNT_IND_PAGADO" />
+    <result column="CVNT_NUM_OC_PEDIDO" jdbcType="VARCHAR" property="CVNT_NUM_OC_PEDIDO" />
+    <result column="CVNT_CMM_DOCUMENTO" jdbcType="VARCHAR" property="CVNT_CMM_DOCUMENTO" />
+    <result column="CVNT_EST_DOCUMENTO" jdbcType="CHAR" property="CVNT_EST_DOCUMENTO" />
+    <result column="CVNT_ES_DIGITAL" jdbcType="CHAR" property="CVNT_ES_DIGITAL" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CVNT_ID, CVNT_FEC_EMI_DOCUMENTO, CVNT_FEC_VEN_DOCUMENTO, CVNT_TIP_DOCUMENTO, CVNT_NUM_DOCUMENTO, 
+    CVNT_TIP_DOC_EMISOR, CVNT_NUM_DOC_EMISOR, CVNT_RAZ_SOC_EMISOR, CVNT_TIP_DOC_RECEPTOR, 
+    CVNT_NUM_DOC_RECEPTOR, CVNT_RAZ_SOC_RECEPTOR, CVNT_VAL_FAC_EXPORTACION, CVNT_VAL_OPE_GRAVADA, 
+    CVNT_VAL_OPE_EXONERADA, CVNT_VAL_OPE_INAFECTA, CVNT_ISC, CVNT_IGV, CVNT_OTR_TRIBUTOS, 
+    CVNT_IMP_TOTAL, CVNT_TIP_CAMBIO, CVNT_FEC_DOC_REFERENCIA, CVNT_TIP_DOC_REFERENCIA, 
+    CVNT_NUM_DOC_REFERENCIA, CVNT_ESTADO, CVNT_OBSERVACION, CVNT_EST_ANTERIOR, CVNT_OBS_ANTERIOR, 
+    CVNT_PERIDO, CVNT_TIP_MONEDA, CVNT_FEC_CREACION, 
+    CVNT_FEC_MODIFICACION, CVNT_USU_CREACION, CVNT_US_MODIFICACION, CVNT_FEC_ORD_PEDIDO, 
+    CVNT_FEC_SER_PEDIDO, CVNT_FEC_REC_PEDIDO, CVNT_FEC_PAG_PEDIDO, CVNT_IND_PAGADO, CVNT_NUM_OC_PEDIDO, 
+    CVNT_CMM_DOCUMENTO, CVNT_EST_DOCUMENTO, CVNT_ES_DIGITAL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from control_venta
+    where CVNT_ID = #{CVNT_ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from control_venta
+    where CVNT_ID = #{CVNT_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.base.dao.model.ControlVenta">
+    insert into control_venta (CVNT_ID, CVNT_FEC_EMI_DOCUMENTO, CVNT_FEC_VEN_DOCUMENTO, 
+      CVNT_TIP_DOCUMENTO, CVNT_NUM_DOCUMENTO, CVNT_TIP_DOC_EMISOR, 
+      CVNT_NUM_DOC_EMISOR, CVNT_RAZ_SOC_EMISOR, 
+      CVNT_TIP_DOC_RECEPTOR, CVNT_NUM_DOC_RECEPTOR, 
+      CVNT_RAZ_SOC_RECEPTOR, CVNT_VAL_FAC_EXPORTACION, 
+      CVNT_VAL_OPE_GRAVADA, CVNT_VAL_OPE_EXONERADA, 
+      CVNT_VAL_OPE_INAFECTA, CVNT_ISC, CVNT_IGV, 
+      CVNT_OTR_TRIBUTOS, CVNT_IMP_TOTAL, CVNT_TIP_CAMBIO, 
+      CVNT_FEC_DOC_REFERENCIA, CVNT_TIP_DOC_REFERENCIA, 
+      CVNT_NUM_DOC_REFERENCIA, CVNT_ESTADO, CVNT_OBSERVACION, 
+      CVNT_EST_ANTERIOR, CVNT_OBS_ANTERIOR, CVNT_PERIDO, CVNT_TIP_MONEDA, 
+      CVNT_FEC_CREACION, CVNT_FEC_MODIFICACION, 
+      CVNT_USU_CREACION, CVNT_US_MODIFICACION, 
+      CVNT_FEC_ORD_PEDIDO, CVNT_FEC_SER_PEDIDO, CVNT_FEC_REC_PEDIDO, 
+      CVNT_FEC_PAG_PEDIDO, CVNT_IND_PAGADO, CVNT_NUM_OC_PEDIDO, 
+      CVNT_CMM_DOCUMENTO, CVNT_EST_DOCUMENTO, CVNT_ES_DIGITAL
+      )
+    values (#{CVNT_ID,jdbcType=BIGINT}, #{CVNT_FEC_EMI_DOCUMENTO,jdbcType=DATE}, #{CVNT_FEC_VEN_DOCUMENTO,jdbcType=DATE}, 
+      #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR}, #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR}, #{CVNT_TIP_DOC_EMISOR,jdbcType=CHAR}, 
+      #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR}, #{CVNT_RAZ_SOC_EMISOR,jdbcType=VARCHAR}, 
+      #{CVNT_TIP_DOC_RECEPTOR,jdbcType=CHAR}, #{CVNT_NUM_DOC_RECEPTOR,jdbcType=VARCHAR}, 
+      #{CVNT_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR}, #{CVNT_VAL_FAC_EXPORTACION,jdbcType=DOUBLE}, 
+      #{CVNT_VAL_OPE_GRAVADA,jdbcType=DOUBLE}, #{CVNT_VAL_OPE_EXONERADA,jdbcType=DOUBLE}, 
+      #{CVNT_VAL_OPE_INAFECTA,jdbcType=DOUBLE}, #{CVNT_ISC,jdbcType=DOUBLE}, #{CVNT_IGV,jdbcType=DOUBLE}, 
+      #{CVNT_OTR_TRIBUTOS,jdbcType=DOUBLE}, #{CVNT_IMP_TOTAL,jdbcType=DOUBLE}, #{CVNT_TIP_CAMBIO,jdbcType=DOUBLE}, 
+      #{CVNT_FEC_DOC_REFERENCIA,jdbcType=DATE}, #{CVNT_TIP_DOC_REFERENCIA,jdbcType=CHAR}, 
+      #{CVNT_NUM_DOC_REFERENCIA,jdbcType=VARCHAR}, #{CVNT_ESTADO,jdbcType=CHAR}, #{CVNT_OBSERVACION,jdbcType=VARCHAR}, 
+      #{CVNT_EST_ANTERIOR,jdbcType=CHAR}, #{CVNT_OBS_ANTERIOR,jdbcType=VARCHAR}, #{CVNT_PERIDO,jdbcType=DATE},
+      #{CVNT_TIP_MONEDA,jdbcType=CHAR}, 
+      #{CVNT_FEC_CREACION,jdbcType=TIMESTAMP}, #{CVNT_FEC_MODIFICACION,jdbcType=TIMESTAMP}, 
+      #{CVNT_USU_CREACION,jdbcType=VARCHAR}, #{CVNT_US_MODIFICACION,jdbcType=VARCHAR}, 
+      #{CVNT_FEC_ORD_PEDIDO,jdbcType=DATE}, #{CVNT_FEC_SER_PEDIDO,jdbcType=DATE}, #{CVNT_FEC_REC_PEDIDO,jdbcType=DATE}, 
+      #{CVNT_FEC_PAG_PEDIDO,jdbcType=DATE}, #{CVNT_IND_PAGADO,jdbcType=CHAR}, #{CVNT_NUM_OC_PEDIDO,jdbcType=VARCHAR}, 
+      #{CVNT_CMM_DOCUMENTO,jdbcType=VARCHAR}, #{CVNT_EST_DOCUMENTO,jdbcType=CHAR}, #{CVNT_ES_DIGITAL,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.base.dao.model.ControlVenta"
+  	useGeneratedKeys="true" keyProperty="CVNT_ID" keyColumn="CVNT_ID">
+    insert into sistemagestionventa.control_venta
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <!--if test="CVNT_ID != null">
+        CVNT_ID,
+      </if-->
+      <if test="CVNT_FEC_EMI_DOCUMENTO != null">
+        CVNT_FEC_EMI_DOCUMENTO,
+      </if>
+      <if test="CVNT_FEC_VEN_DOCUMENTO != null">
+        CVNT_FEC_VEN_DOCUMENTO,
+      </if>
+      <if test="CVNT_TIP_DOCUMENTO != null">
+        CVNT_TIP_DOCUMENTO,
+      </if>
+      <if test="CVNT_NUM_DOCUMENTO != null">
+        CVNT_NUM_DOCUMENTO,
+      </if>
+      <if test="CVNT_TIP_DOC_EMISOR != null">
+        CVNT_TIP_DOC_EMISOR,
+      </if>
+      <if test="CVNT_NUM_DOC_EMISOR != null">
+        CVNT_NUM_DOC_EMISOR,
+      </if>
+      <if test="CVNT_RAZ_SOC_EMISOR != null">
+        CVNT_RAZ_SOC_EMISOR,
+      </if>
+      <if test="CVNT_TIP_DOC_RECEPTOR != null">
+        CVNT_TIP_DOC_RECEPTOR,
+      </if>
+      <if test="CVNT_NUM_DOC_RECEPTOR != null">
+        CVNT_NUM_DOC_RECEPTOR,
+      </if>
+      <if test="CVNT_RAZ_SOC_RECEPTOR != null">
+        CVNT_RAZ_SOC_RECEPTOR,
+      </if>
+      <if test="CVNT_VAL_FAC_EXPORTACION != null">
+        CVNT_VAL_FAC_EXPORTACION,
+      </if>
+      <if test="CVNT_VAL_OPE_GRAVADA != null">
+        CVNT_VAL_OPE_GRAVADA,
+      </if>
+      <if test="CVNT_VAL_OPE_EXONERADA != null">
+        CVNT_VAL_OPE_EXONERADA,
+      </if>
+      <if test="CVNT_VAL_OPE_INAFECTA != null">
+        CVNT_VAL_OPE_INAFECTA,
+      </if>
+      <if test="CVNT_ISC != null">
+        CVNT_ISC,
+      </if>
+      <if test="CVNT_IGV != null">
+        CVNT_IGV,
+      </if>
+      <if test="CVNT_OTR_TRIBUTOS != null">
+        CVNT_OTR_TRIBUTOS,
+      </if>
+      <if test="CVNT_IMP_TOTAL != null">
+        CVNT_IMP_TOTAL,
+      </if>
+      <if test="CVNT_TIP_CAMBIO != null">
+        CVNT_TIP_CAMBIO,
+      </if>
+      <if test="CVNT_FEC_DOC_REFERENCIA != null">
+        CVNT_FEC_DOC_REFERENCIA,
+      </if>
+      <if test="CVNT_TIP_DOC_REFERENCIA != null">
+        CVNT_TIP_DOC_REFERENCIA,
+      </if>
+      <if test="CVNT_NUM_DOC_REFERENCIA != null">
+        CVNT_NUM_DOC_REFERENCIA,
+      </if>
+      <if test="CVNT_ESTADO != null">
+        CVNT_ESTADO,
+      </if>
+      <if test="CVNT_OBSERVACION != null">
+        CVNT_OBSERVACION,
+      </if>
+      <if test="CVNT_EST_ANTERIOR != null">
+        CVNT_EST_ANTERIOR,
+      </if>
+      <if test="CVNT_OBS_ANTERIOR != null">
+        CVNT_OBS_ANTERIOR,
+      </if>
+      <if test="CVNT_PERIDO != null">
+        CVNT_PERIDO,
+      </if>
+      <if test="CVNT_TIP_MONEDA != null">
+        CVNT_TIP_MONEDA,
+      </if>
+      <if test="CVNT_FEC_CREACION != null">
+        CVNT_FEC_CREACION,
+      </if>
+      <if test="CVNT_FEC_MODIFICACION != null">
+        CVNT_FEC_MODIFICACION,
+      </if>
+      <if test="CVNT_USU_CREACION != null">
+        CVNT_USU_CREACION,
+      </if>
+      <if test="CVNT_US_MODIFICACION != null">
+        CVNT_US_MODIFICACION,
+      </if>
+      <if test="CVNT_FEC_ORD_PEDIDO != null">
+        CVNT_FEC_ORD_PEDIDO,
+      </if>
+      <if test="CVNT_FEC_SER_PEDIDO != null">
+        CVNT_FEC_SER_PEDIDO,
+      </if>
+      <if test="CVNT_FEC_REC_PEDIDO != null">
+        CVNT_FEC_REC_PEDIDO,
+      </if>
+      <if test="CVNT_FEC_PAG_PEDIDO != null">
+        CVNT_FEC_PAG_PEDIDO,
+      </if>
+      <if test="CVNT_IND_PAGADO != null">
+        CVNT_IND_PAGADO,
+      </if>
+      <if test="CVNT_NUM_OC_PEDIDO != null">
+        CVNT_NUM_OC_PEDIDO,
+      </if>
+      <if test="CVNT_CMM_DOCUMENTO != null">
+        CVNT_CMM_DOCUMENTO,
+      </if>
+      <if test="CVNT_EST_DOCUMENTO != null">
+        CVNT_EST_DOCUMENTO,
+      </if>
+      <if test="CVNT_ES_DIGITAL != null">
+        CVNT_ES_DIGITAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CVNT_ID != null">
+        #{CVNT_ID,jdbcType=BIGINT},
+      </if>
+      <if test="CVNT_FEC_EMI_DOCUMENTO != null">
+        #{CVNT_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_VEN_DOCUMENTO != null">
+        #{CVNT_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_DOCUMENTO != null">
+        #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOCUMENTO != null">
+        #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_TIP_DOC_EMISOR != null">
+        #{CVNT_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_EMISOR != null">
+        #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_RAZ_SOC_EMISOR != null">
+        #{CVNT_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_TIP_DOC_RECEPTOR != null">
+        #{CVNT_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_RECEPTOR != null">
+        #{CVNT_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_RAZ_SOC_RECEPTOR != null">
+        #{CVNT_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_VAL_FAC_EXPORTACION != null">
+        #{CVNT_VAL_FAC_EXPORTACION,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_GRAVADA != null">
+        #{CVNT_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_EXONERADA != null">
+        #{CVNT_VAL_OPE_EXONERADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_INAFECTA != null">
+        #{CVNT_VAL_OPE_INAFECTA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_ISC != null">
+        #{CVNT_ISC,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_IGV != null">
+        #{CVNT_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_OTR_TRIBUTOS != null">
+        #{CVNT_OTR_TRIBUTOS,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_IMP_TOTAL != null">
+        #{CVNT_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_TIP_CAMBIO != null">
+        #{CVNT_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_FEC_DOC_REFERENCIA != null">
+        #{CVNT_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_DOC_REFERENCIA != null">
+        #{CVNT_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_REFERENCIA != null">
+        #{CVNT_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_ESTADO != null">
+        #{CVNT_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_OBSERVACION != null">
+        #{CVNT_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_EST_ANTERIOR != null">
+        #{CVNT_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_OBS_ANTERIOR != null">
+        #{CVNT_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_PERIDO != null">
+        #{CVNT_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_MONEDA != null">
+        #{CVNT_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_FEC_CREACION != null">
+        #{CVNT_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CVNT_FEC_MODIFICACION != null">
+        #{CVNT_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CVNT_USU_CREACION != null">
+        #{CVNT_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_US_MODIFICACION != null">
+        #{CVNT_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_FEC_ORD_PEDIDO != null">
+        #{CVNT_FEC_ORD_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_SER_PEDIDO != null">
+        #{CVNT_FEC_SER_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_REC_PEDIDO != null">
+        #{CVNT_FEC_REC_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_PAG_PEDIDO != null">
+        #{CVNT_FEC_PAG_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_IND_PAGADO != null">
+        #{CVNT_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_OC_PEDIDO != null">
+        #{CVNT_NUM_OC_PEDIDO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_CMM_DOCUMENTO != null">
+        #{CVNT_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_EST_DOCUMENTO != null">
+        #{CVNT_EST_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_ES_DIGITAL != null">
+        #{CVNT_ES_DIGITAL,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.base.dao.model.ControlVenta">
+    update control_venta
+    <set>
+      <if test="CVNT_FEC_EMI_DOCUMENTO != null">
+        CVNT_FEC_EMI_DOCUMENTO = #{CVNT_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_VEN_DOCUMENTO != null">
+        CVNT_FEC_VEN_DOCUMENTO = #{CVNT_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_DOCUMENTO != null">
+        CVNT_TIP_DOCUMENTO = #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOCUMENTO != null">
+        CVNT_NUM_DOCUMENTO = #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_TIP_DOC_EMISOR != null">
+        CVNT_TIP_DOC_EMISOR = #{CVNT_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_EMISOR != null">
+        CVNT_NUM_DOC_EMISOR = #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_RAZ_SOC_EMISOR != null">
+        CVNT_RAZ_SOC_EMISOR = #{CVNT_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_TIP_DOC_RECEPTOR != null">
+        CVNT_TIP_DOC_RECEPTOR = #{CVNT_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_RECEPTOR != null">
+        CVNT_NUM_DOC_RECEPTOR = #{CVNT_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_RAZ_SOC_RECEPTOR != null">
+        CVNT_RAZ_SOC_RECEPTOR = #{CVNT_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_VAL_FAC_EXPORTACION != null">
+        CVNT_VAL_FAC_EXPORTACION = #{CVNT_VAL_FAC_EXPORTACION,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_GRAVADA != null">
+        CVNT_VAL_OPE_GRAVADA = #{CVNT_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_EXONERADA != null">
+        CVNT_VAL_OPE_EXONERADA = #{CVNT_VAL_OPE_EXONERADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_INAFECTA != null">
+        CVNT_VAL_OPE_INAFECTA = #{CVNT_VAL_OPE_INAFECTA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_ISC != null">
+        CVNT_ISC = #{CVNT_ISC,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_IGV != null">
+        CVNT_IGV = #{CVNT_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_OTR_TRIBUTOS != null">
+        CVNT_OTR_TRIBUTOS = #{CVNT_OTR_TRIBUTOS,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_IMP_TOTAL != null">
+        CVNT_IMP_TOTAL = #{CVNT_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_TIP_CAMBIO != null">
+        CVNT_TIP_CAMBIO = #{CVNT_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_FEC_DOC_REFERENCIA != null">
+        CVNT_FEC_DOC_REFERENCIA = #{CVNT_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_DOC_REFERENCIA != null">
+        CVNT_TIP_DOC_REFERENCIA = #{CVNT_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_REFERENCIA != null">
+        CVNT_NUM_DOC_REFERENCIA = #{CVNT_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_ESTADO != null">
+        CVNT_ESTADO = #{CVNT_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_OBSERVACION != null">
+        CVNT_OBSERVACION = #{CVNT_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_EST_ANTERIOR != null">
+        CVNT_EST_ANTERIOR = #{CVNT_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_OBS_ANTERIOR != null">
+        CVNT_OBS_ANTERIOR = #{CVNT_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_PERIDO != null">
+        CVNT_PERIDO = #{CVNT_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_MONEDA != null">
+        CVNT_TIP_MONEDA = #{CVNT_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_FEC_CREACION != null">
+        CVNT_FEC_CREACION = #{CVNT_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CVNT_FEC_MODIFICACION != null">
+        CVNT_FEC_MODIFICACION = #{CVNT_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CVNT_USU_CREACION != null">
+        CVNT_USU_CREACION = #{CVNT_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_US_MODIFICACION != null">
+        CVNT_US_MODIFICACION = #{CVNT_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_FEC_ORD_PEDIDO != null">
+        CVNT_FEC_ORD_PEDIDO = #{CVNT_FEC_ORD_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_SER_PEDIDO != null">
+        CVNT_FEC_SER_PEDIDO = #{CVNT_FEC_SER_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_REC_PEDIDO != null">
+        CVNT_FEC_REC_PEDIDO = #{CVNT_FEC_REC_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_PAG_PEDIDO != null">
+        CVNT_FEC_PAG_PEDIDO = #{CVNT_FEC_PAG_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_IND_PAGADO != null">
+        CVNT_IND_PAGADO = #{CVNT_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_OC_PEDIDO != null">
+        CVNT_NUM_OC_PEDIDO = #{CVNT_NUM_OC_PEDIDO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_CMM_DOCUMENTO != null">
+        CVNT_CMM_DOCUMENTO = #{CVNT_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_EST_DOCUMENTO != null">
+        CVNT_EST_DOCUMENTO = #{CVNT_EST_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_ES_DIGITAL != null">
+        CVNT_ES_DIGITAL = #{CVNT_ES_DIGITAL,jdbcType=CHAR},
+      </if>
+    </set>
+    where CVNT_ID = #{CVNT_ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.base.dao.model.ControlVenta">
+    update control_venta
+    set CVNT_FEC_EMI_DOCUMENTO = #{CVNT_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      CVNT_FEC_VEN_DOCUMENTO = #{CVNT_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      CVNT_TIP_DOCUMENTO = #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR},
+      CVNT_NUM_DOCUMENTO = #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      CVNT_TIP_DOC_EMISOR = #{CVNT_TIP_DOC_EMISOR,jdbcType=CHAR},
+      CVNT_NUM_DOC_EMISOR = #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      CVNT_RAZ_SOC_EMISOR = #{CVNT_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      CVNT_TIP_DOC_RECEPTOR = #{CVNT_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      CVNT_NUM_DOC_RECEPTOR = #{CVNT_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      CVNT_RAZ_SOC_RECEPTOR = #{CVNT_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      CVNT_VAL_FAC_EXPORTACION = #{CVNT_VAL_FAC_EXPORTACION,jdbcType=DOUBLE},
+      CVNT_VAL_OPE_GRAVADA = #{CVNT_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      CVNT_VAL_OPE_EXONERADA = #{CVNT_VAL_OPE_EXONERADA,jdbcType=DOUBLE},
+      CVNT_VAL_OPE_INAFECTA = #{CVNT_VAL_OPE_INAFECTA,jdbcType=DOUBLE},
+      CVNT_ISC = #{CVNT_ISC,jdbcType=DOUBLE},
+      CVNT_IGV = #{CVNT_IGV,jdbcType=DOUBLE},
+      CVNT_OTR_TRIBUTOS = #{CVNT_OTR_TRIBUTOS,jdbcType=DOUBLE},
+      CVNT_IMP_TOTAL = #{CVNT_IMP_TOTAL,jdbcType=DOUBLE},
+      CVNT_TIP_CAMBIO = #{CVNT_TIP_CAMBIO,jdbcType=DOUBLE},
+      CVNT_FEC_DOC_REFERENCIA = #{CVNT_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      CVNT_TIP_DOC_REFERENCIA = #{CVNT_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      CVNT_NUM_DOC_REFERENCIA = #{CVNT_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      CVNT_ESTADO = #{CVNT_ESTADO,jdbcType=CHAR},
+      CVNT_OBSERVACION = #{CVNT_OBSERVACION,jdbcType=VARCHAR},
+      CVNT_EST_ANTERIOR = #{CVNT_EST_ANTERIOR,jdbcType=CHAR},
+      CVNT_OBS_ANTERIOR = #{CVNT_OBS_ANTERIOR,jdbcType=VARCHAR},
+      CVNT_PERIDO = #{CVNT_PERIDO,jdbcType=DATE},
+      CVNT_TIP_MONEDA = #{CVNT_TIP_MONEDA,jdbcType=CHAR},
+      CVNT_FEC_CREACION = #{CVNT_FEC_CREACION,jdbcType=TIMESTAMP},
+      CVNT_FEC_MODIFICACION = #{CVNT_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      CVNT_USU_CREACION = #{CVNT_USU_CREACION,jdbcType=VARCHAR},
+      CVNT_US_MODIFICACION = #{CVNT_US_MODIFICACION,jdbcType=VARCHAR},
+      CVNT_FEC_ORD_PEDIDO = #{CVNT_FEC_ORD_PEDIDO,jdbcType=DATE},
+      CVNT_FEC_SER_PEDIDO = #{CVNT_FEC_SER_PEDIDO,jdbcType=DATE},
+      CVNT_FEC_REC_PEDIDO = #{CVNT_FEC_REC_PEDIDO,jdbcType=DATE},
+      CVNT_FEC_PAG_PEDIDO = #{CVNT_FEC_PAG_PEDIDO,jdbcType=DATE},
+      CVNT_IND_PAGADO = #{CVNT_IND_PAGADO,jdbcType=CHAR},
+      CVNT_NUM_OC_PEDIDO = #{CVNT_NUM_OC_PEDIDO,jdbcType=VARCHAR},
+      CVNT_CMM_DOCUMENTO = #{CVNT_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      CVNT_EST_DOCUMENTO = #{CVNT_EST_DOCUMENTO,jdbcType=CHAR},
+      CVNT_ES_DIGITAL = #{CVNT_ES_DIGITAL,jdbcType=CHAR}
+    where CVNT_ID = #{CVNT_ID,jdbcType=BIGINT}
+  </update>
+  <select id="selectByDocumento" parameterType="com.sgv.base.dao.model.ControlVenta" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sistemagestionventa.control_venta
+    where CVNT_NUM_DOC_EMISOR = #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR}
+    and   CVNT_TIP_DOCUMENTO = #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR}
+    and   CVNT_NUM_DOCUMENTO = #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR}
+  </select>
+   <update id="updateByDocumento" parameterType="com.sgv.base.dao.model.ControlVenta">
+    update sistemagestionventa.control_venta
+    <set>
+      <if test="CVNT_FEC_EMI_DOCUMENTO != null">
+        CVNT_FEC_EMI_DOCUMENTO = #{CVNT_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_VEN_DOCUMENTO != null">
+        CVNT_FEC_VEN_DOCUMENTO = #{CVNT_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_DOCUMENTO != null">
+        CVNT_TIP_DOCUMENTO = #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOCUMENTO != null">
+        CVNT_NUM_DOCUMENTO = #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_TIP_DOC_EMISOR != null">
+        CVNT_TIP_DOC_EMISOR = #{CVNT_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_EMISOR != null">
+        CVNT_NUM_DOC_EMISOR = #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_RAZ_SOC_EMISOR != null">
+        CVNT_RAZ_SOC_EMISOR = #{CVNT_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_TIP_DOC_RECEPTOR != null">
+        CVNT_TIP_DOC_RECEPTOR = #{CVNT_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_RECEPTOR != null">
+        CVNT_NUM_DOC_RECEPTOR = #{CVNT_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_RAZ_SOC_RECEPTOR != null">
+        CVNT_RAZ_SOC_RECEPTOR = #{CVNT_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_VAL_FAC_EXPORTACION != null">
+        CVNT_VAL_FAC_EXPORTACION = #{CVNT_VAL_FAC_EXPORTACION,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_GRAVADA != null">
+        CVNT_VAL_OPE_GRAVADA = #{CVNT_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_EXONERADA != null">
+        CVNT_VAL_OPE_EXONERADA = #{CVNT_VAL_OPE_EXONERADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_VAL_OPE_INAFECTA != null">
+        CVNT_VAL_OPE_INAFECTA = #{CVNT_VAL_OPE_INAFECTA,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_ISC != null">
+        CVNT_ISC = #{CVNT_ISC,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_IGV != null">
+        CVNT_IGV = #{CVNT_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_OTR_TRIBUTOS != null">
+        CVNT_OTR_TRIBUTOS = #{CVNT_OTR_TRIBUTOS,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_IMP_TOTAL != null">
+        CVNT_IMP_TOTAL = #{CVNT_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_TIP_CAMBIO != null">
+        CVNT_TIP_CAMBIO = #{CVNT_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CVNT_FEC_DOC_REFERENCIA != null">
+        CVNT_FEC_DOC_REFERENCIA = #{CVNT_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_DOC_REFERENCIA != null">
+        CVNT_TIP_DOC_REFERENCIA = #{CVNT_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_DOC_REFERENCIA != null">
+        CVNT_NUM_DOC_REFERENCIA = #{CVNT_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_ESTADO != null">
+        CVNT_ESTADO = #{CVNT_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_OBSERVACION != null">
+        CVNT_OBSERVACION = #{CVNT_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_EST_ANTERIOR != null">
+        CVNT_EST_ANTERIOR = #{CVNT_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_OBS_ANTERIOR != null">
+        CVNT_OBS_ANTERIOR = #{CVNT_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_PERIDO != null">
+        CVNT_PERIDO = #{CVNT_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_TIP_MONEDA != null">
+        CVNT_TIP_MONEDA = #{CVNT_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_FEC_CREACION != null">
+        CVNT_FEC_CREACION = #{CVNT_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CVNT_FEC_MODIFICACION != null">
+        CVNT_FEC_MODIFICACION = #{CVNT_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CVNT_USU_CREACION != null">
+        CVNT_USU_CREACION = #{CVNT_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_US_MODIFICACION != null">
+        CVNT_US_MODIFICACION = #{CVNT_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_FEC_ORD_PEDIDO != null">
+        CVNT_FEC_ORD_PEDIDO = #{CVNT_FEC_ORD_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_SER_PEDIDO != null">
+        CVNT_FEC_SER_PEDIDO = #{CVNT_FEC_SER_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_REC_PEDIDO != null">
+        CVNT_FEC_REC_PEDIDO = #{CVNT_FEC_REC_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_FEC_PAG_PEDIDO != null">
+        CVNT_FEC_PAG_PEDIDO = #{CVNT_FEC_PAG_PEDIDO,jdbcType=DATE},
+      </if>
+      <if test="CVNT_IND_PAGADO != null">
+        CVNT_IND_PAGADO = #{CVNT_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_NUM_OC_PEDIDO != null">
+        CVNT_NUM_OC_PEDIDO = #{CVNT_NUM_OC_PEDIDO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_CMM_DOCUMENTO != null">
+        CVNT_CMM_DOCUMENTO = #{CVNT_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CVNT_EST_DOCUMENTO != null">
+        CVNT_EST_DOCUMENTO = #{CVNT_EST_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CVNT_ES_DIGITAL != null">
+        CVNT_ES_DIGITAL = #{CVNT_ES_DIGITAL,jdbcType=CHAR},
+      </if>
+    </set>
+      where CVNT_NUM_DOC_EMISOR = #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR}
+    	and   CVNT_TIP_DOCUMENTO = #{CVNT_TIP_DOCUMENTO,jdbcType=CHAR}
+    	and   CVNT_NUM_DOCUMENTO = #{CVNT_NUM_DOCUMENTO,jdbcType=VARCHAR}
+  </update>  
+  <select id="selectByReference" parameterType="com.sgv.base.dao.model.ControlVenta" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sistemagestionventa.control_venta
+    where CVNT_NUM_DOC_EMISOR = #{CVNT_NUM_DOC_EMISOR,jdbcType=VARCHAR}
+    and   CVNT_TIP_DOC_REFERENCIA = #{CVNT_TIP_DOC_REFERENCIA,jdbcType=CHAR}
+    and   CVNT_NUM_DOC_REFERENCIA = #{CVNT_NUM_DOC_REFERENCIA,jdbcType=VARCHAR}
+  </select>
+</mapper>

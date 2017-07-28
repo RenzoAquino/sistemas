@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktDocumentMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktDocument">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="DTYPE" jdbcType="VARCHAR" property="DTYPE" />
+    <result column="ADDRESSFIRSTLINE" jdbcType="VARCHAR" property="ADDRESSFIRSTLINE" />
+    <result column="BILLINGTYPE" jdbcType="INTEGER" property="BILLINGTYPE" />
+    <result column="CONSULTANT" jdbcType="VARCHAR" property="CONSULTANT" />
+    <result column="CUSTOMERREF" jdbcType="VARCHAR" property="CUSTOMERREF" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="DEPOSIT" jdbcType="BIT" property="DEPOSIT" />
+    <result column="DOCUMENTDATE" jdbcType="DATE" property="DOCUMENTDATE" />
+    <result column="DUEDAYS" jdbcType="INTEGER" property="DUEDAYS" />
+    <result column="ITEMSREBATE" jdbcType="DOUBLE" property="ITEMSREBATE" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="NETGROSS" jdbcType="INTEGER" property="NETGROSS" />
+    <result column="ODTPATH" jdbcType="VARCHAR" property="ODTPATH" />
+    <result column="ORDERDATE" jdbcType="DATE" property="ORDERDATE" />
+    <result column="PAID" jdbcType="BIT" property="PAID" />
+    <result column="PAIDVALUE" jdbcType="DOUBLE" property="PAIDVALUE" />
+    <result column="PAYDATE" jdbcType="DATE" property="PAYDATE" />
+    <result column="PDFPATH" jdbcType="VARCHAR" property="PDFPATH" />
+    <result column="PRINTTEMPLATE" jdbcType="VARCHAR" property="PRINTTEMPLATE" />
+    <result column="PRINTED" jdbcType="BIT" property="PRINTED" />
+    <result column="PROGRESS" jdbcType="INTEGER" property="PROGRESS" />
+    <result column="SERVICEDATE" jdbcType="DATE" property="SERVICEDATE" />
+    <result column="SHIPPINGAUTOVAT" jdbcType="VARCHAR" property="SHIPPINGAUTOVAT" />
+    <result column="SHIPPINGVALUE" jdbcType="DOUBLE" property="SHIPPINGVALUE" />
+    <result column="TOTALVALUE" jdbcType="DOUBLE" property="TOTALVALUE" />
+    <result column="TRANSACTIONID" jdbcType="INTEGER" property="TRANSACTIONID" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="WEBSHOPDATE" jdbcType="DATE" property="WEBSHOPDATE" />
+    <result column="WEBSHOPID" jdbcType="VARCHAR" property="WEBSHOPID" />
+    <result column="FK_INDIVIDUALINFO" jdbcType="BIGINT" property="FK_INDIVIDUALINFO" />
+    <result column="FK_CONTACT" jdbcType="BIGINT" property="FK_CONTACT"  />
+    <result column="FK_DELIVERYCONTACT" jdbcType="BIGINT" property="FK_DELIVERYCONTACT" />
+    <result column="DOCUMENT_INVOICEREFERENCE" jdbcType="BIGINT" property="DOCUMENT_INVOICEREFERENCE" />
+    <result column="FK_NOVATREF" jdbcType="BIGINT" property="FK_NOVATREF" />
+    <result column="FK_PAYMENT" jdbcType="BIGINT" property="FK_PAYMENT" />
+    <result column="FK_SHIPPING" jdbcType="BIGINT" property="FK_SHIPPING" />
+    <result column="FK_SRCDOCUMENT" jdbcType="BIGINT" property="FK_SRCDOCUMENT" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sgv.fakturama.dao.model.FktDocument">
+    <result column="MESSAGE" jdbcType="LONGVARCHAR" property="MESSAGE" />
+    <result column="MESSAGE2" jdbcType="LONGVARCHAR" property="MESSAGE2" />
+    <result column="MESSAGE3" jdbcType="LONGVARCHAR" property="MESSAGE3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DTYPE, ADDRESSFIRSTLINE, BILLINGTYPE, CONSULTANT, CUSTOMERREF, DATEADDED, DELETED, 
+    DEPOSIT, DOCUMENTDATE, DUEDAYS, ITEMSREBATE, MODIFIED, MODIFIEDBY, NAME, NETGROSS, 
+    ODTPATH, ORDERDATE, PAID, PAIDVALUE, PAYDATE, PDFPATH, PRINTTEMPLATE, PRINTED, PROGRESS, 
+    SERVICEDATE, SHIPPINGAUTOVAT, SHIPPINGVALUE, TOTALVALUE, TRANSACTIONID, VALIDFROM, 
+    VALIDTO, WEBSHOPDATE, WEBSHOPID, FK_INDIVIDUALINFO, FK_CONTACT, FK_DELIVERYCONTACT, 
+    DOCUMENT_INVOICEREFERENCE, FK_NOVATREF, FK_PAYMENT, FK_SHIPPING, FK_SRCDOCUMENT
+  </sql>
+  <sql id="Blob_Column_List">
+    MESSAGE, MESSAGE2, MESSAGE3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fkt_document
+    where ID = #{ID,jdbcType=BIGINT}java.lang.Long
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_document
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktDocument">
+    insert into fkt_document (ID, DTYPE, ADDRESSFIRSTLINE, 
+      BILLINGTYPE, CONSULTANT, CUSTOMERREF, 
+      DATEADDED, DELETED, DEPOSIT, DOCUMENTDATE, 
+      DUEDAYS, ITEMSREBATE, MODIFIED, 
+      MODIFIEDBY, NAME, NETGROSS, 
+      ODTPATH, ORDERDATE, PAID, 
+      PAIDVALUE, PAYDATE, PDFPATH, 
+      PRINTTEMPLATE, PRINTED, PROGRESS, 
+      SERVICEDATE, SHIPPINGAUTOVAT, SHIPPINGVALUE, 
+      TOTALVALUE, TRANSACTIONID, VALIDFROM, 
+      VALIDTO, WEBSHOPDATE, WEBSHOPID, 
+      FK_INDIVIDUALINFO, FK_CONTACT, FK_DELIVERYCONTACT, 
+      DOCUMENT_INVOICEREFERENCE, FK_NOVATREF, FK_PAYMENT, 
+      FK_SHIPPING, FK_SRCDOCUMENT, MESSAGE, 
+      MESSAGE2, MESSAGE3)
+    values (#{ID,jdbcType=BIGINT}, #{DTYPE,jdbcType=VARCHAR}, #{ADDRESSFIRSTLINE,jdbcType=VARCHAR}, 
+      #{BILLINGTYPE,jdbcType=INTEGER}, #{CONSULTANT,jdbcType=VARCHAR}, #{CUSTOMERREF,jdbcType=VARCHAR}, 
+      #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, #{DEPOSIT,jdbcType=BIT}, #{DOCUMENTDATE,jdbcType=DATE}, 
+      #{DUEDAYS,jdbcType=INTEGER}, #{ITEMSREBATE,jdbcType=DOUBLE}, #{MODIFIED,jdbcType=DATE}, 
+      #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, #{NETGROSS,jdbcType=INTEGER}, 
+      #{ODTPATH,jdbcType=VARCHAR}, #{ORDERDATE,jdbcType=DATE}, #{PAID,jdbcType=BIT}, 
+      #{PAIDVALUE,jdbcType=DOUBLE}, #{PAYDATE,jdbcType=DATE}, #{PDFPATH,jdbcType=VARCHAR}, 
+      #{PRINTTEMPLATE,jdbcType=VARCHAR}, #{PRINTED,jdbcType=BIT}, #{PROGRESS,jdbcType=INTEGER}, 
+      #{SERVICEDATE,jdbcType=DATE}, #{SHIPPINGAUTOVAT,jdbcType=VARCHAR}, #{SHIPPINGVALUE,jdbcType=DOUBLE}, 
+      #{TOTALVALUE,jdbcType=DOUBLE}, #{TRANSACTIONID,jdbcType=INTEGER}, #{VALIDFROM,jdbcType=DATE}, 
+      #{VALIDTO,jdbcType=DATE}, #{WEBSHOPDATE,jdbcType=DATE}, #{WEBSHOPID,jdbcType=VARCHAR}, 
+      #{FK_INDIVIDUALINFO,jdbcType=BIGINT}, #{FK_CONTACT,jdbcType=BIGINT}, #{FK_DELIVERYCONTACT,jdbcType=BIGINT}, 
+      #{DOCUMENT_INVOICEREFERENCE,jdbcType=BIGINT}, #{FK_NOVATREF,jdbcType=BIGINT}, #{FK_PAYMENT,jdbcType=BIGINT}, 
+      #{FK_SHIPPING,jdbcType=BIGINT}, #{FK_SRCDOCUMENT,jdbcType=BIGINT}, #{MESSAGE,jdbcType=LONGVARCHAR}, 
+      #{MESSAGE2,jdbcType=LONGVARCHAR}, #{MESSAGE3,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktDocument">
+    insert into fkt_document
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DTYPE != null">
+        DTYPE,
+      </if>
+      <if test="ADDRESSFIRSTLINE != null">
+        ADDRESSFIRSTLINE,
+      </if>
+      <if test="BILLINGTYPE != null">
+        BILLINGTYPE,
+      </if>
+      <if test="CONSULTANT != null">
+        CONSULTANT,
+      </if>
+      <if test="CUSTOMERREF != null">
+        CUSTOMERREF,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="DEPOSIT != null">
+        DEPOSIT,
+      </if>
+      <if test="DOCUMENTDATE != null">
+        DOCUMENTDATE,
+      </if>
+      <if test="DUEDAYS != null">
+        DUEDAYS,
+      </if>
+      <if test="ITEMSREBATE != null">
+        ITEMSREBATE,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="NETGROSS != null">
+        NETGROSS,
+      </if>
+      <if test="ODTPATH != null">
+        ODTPATH,
+      </if>
+      <if test="ORDERDATE != null">
+        ORDERDATE,
+      </if>
+      <if test="PAID != null">
+        PAID,
+      </if>
+      <if test="PAIDVALUE != null">
+        PAIDVALUE,
+      </if>
+      <if test="PAYDATE != null">
+        PAYDATE,
+      </if>
+      <if test="PDFPATH != null">
+        PDFPATH,
+      </if>
+      <if test="PRINTTEMPLATE != null">
+        PRINTTEMPLATE,
+      </if>
+      <if test="PRINTED != null">
+        PRINTED,
+      </if>
+      <if test="PROGRESS != null">
+        PROGRESS,
+      </if>
+      <if test="SERVICEDATE != null">
+        SERVICEDATE,
+      </if>
+      <if test="SHIPPINGAUTOVAT != null">
+        SHIPPINGAUTOVAT,
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        SHIPPINGVALUE,
+      </if>
+      <if test="TOTALVALUE != null">
+        TOTALVALUE,
+      </if>
+      <if test="TRANSACTIONID != null">
+        TRANSACTIONID,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="WEBSHOPDATE != null">
+        WEBSHOPDATE,
+      </if>
+      <if test="WEBSHOPID != null">
+        WEBSHOPID,
+      </if>
+      <if test="FK_INDIVIDUALINFO != null">
+        FK_INDIVIDUALINFO,
+      </if>
+      <if test="FK_CONTACT != null">
+        FK_CONTACT,
+      </if>
+      <if test="FK_DELIVERYCONTACT != null">
+        FK_DELIVERYCONTACT,
+      </if>
+      <if test="DOCUMENT_INVOICEREFERENCE != null">
+        DOCUMENT_INVOICEREFERENCE,
+      </if>
+      <if test="FK_NOVATREF != null">
+        FK_NOVATREF,
+      </if>
+      <if test="FK_PAYMENT != null">
+        FK_PAYMENT,
+      </if>
+      <if test="FK_SHIPPING != null">
+        FK_SHIPPING,
+      </if>
+      <if test="FK_SRCDOCUMENT != null">
+        FK_SRCDOCUMENT,
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE,
+      </if>
+      <if test="MESSAGE2 != null">
+        MESSAGE2,
+      </if>
+      <if test="MESSAGE3 != null">
+        MESSAGE3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="DTYPE != null">
+        #{DTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ADDRESSFIRSTLINE != null">
+        #{ADDRESSFIRSTLINE,jdbcType=VARCHAR},
+      </if>
+      <if test="BILLINGTYPE != null">
+        #{BILLINGTYPE,jdbcType=INTEGER},
+      </if>
+      <if test="CONSULTANT != null">
+        #{CONSULTANT,jdbcType=VARCHAR},
+      </if>
+      <if test="CUSTOMERREF != null">
+        #{CUSTOMERREF,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DEPOSIT != null">
+        #{DEPOSIT,jdbcType=BIT},
+      </if>
+      <if test="DOCUMENTDATE != null">
+        #{DOCUMENTDATE,jdbcType=DATE},
+      </if>
+      <if test="DUEDAYS != null">
+        #{DUEDAYS,jdbcType=INTEGER},
+      </if>
+      <if test="ITEMSREBATE != null">
+        #{ITEMSREBATE,jdbcType=DOUBLE},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NETGROSS != null">
+        #{NETGROSS,jdbcType=INTEGER},
+      </if>
+      <if test="ODTPATH != null">
+        #{ODTPATH,jdbcType=VARCHAR},
+      </if>
+      <if test="ORDERDATE != null">
+        #{ORDERDATE,jdbcType=DATE},
+      </if>
+      <if test="PAID != null">
+        #{PAID,jdbcType=BIT},
+      </if>
+      <if test="PAIDVALUE != null">
+        #{PAIDVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="PAYDATE != null">
+        #{PAYDATE,jdbcType=DATE},
+      </if>
+      <if test="PDFPATH != null">
+        #{PDFPATH,jdbcType=VARCHAR},
+      </if>
+      <if test="PRINTTEMPLATE != null">
+        #{PRINTTEMPLATE,jdbcType=VARCHAR},
+      </if>
+      <if test="PRINTED != null">
+        #{PRINTED,jdbcType=BIT},
+      </if>
+      <if test="PROGRESS != null">
+        #{PROGRESS,jdbcType=INTEGER},
+      </if>
+      <if test="SERVICEDATE != null">
+        #{SERVICEDATE,jdbcType=DATE},
+      </if>
+      <if test="SHIPPINGAUTOVAT != null">
+        #{SHIPPINGAUTOVAT,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="TOTALVALUE != null">
+        #{TOTALVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="TRANSACTIONID != null">
+        #{TRANSACTIONID,jdbcType=INTEGER},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="WEBSHOPDATE != null">
+        #{WEBSHOPDATE,jdbcType=DATE},
+      </if>
+      <if test="WEBSHOPID != null">
+        #{WEBSHOPID,jdbcType=VARCHAR},
+      </if>
+      <if test="FK_INDIVIDUALINFO != null">
+        #{FK_INDIVIDUALINFO,jdbcType=BIGINT},
+      </if>
+      <if test="FK_CONTACT != null">
+        #{FK_CONTACT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_DELIVERYCONTACT != null">
+        #{FK_DELIVERYCONTACT,jdbcType=BIGINT},
+      </if>
+      <if test="DOCUMENT_INVOICEREFERENCE != null">
+        #{DOCUMENT_INVOICEREFERENCE,jdbcType=BIGINT},
+      </if>
+      <if test="FK_NOVATREF != null">
+        #{FK_NOVATREF,jdbcType=BIGINT},
+      </if>
+      <if test="FK_PAYMENT != null">
+        #{FK_PAYMENT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_SHIPPING != null">
+        #{FK_SHIPPING,jdbcType=BIGINT},
+      </if>
+      <if test="FK_SRCDOCUMENT != null">
+        #{FK_SRCDOCUMENT,jdbcType=BIGINT},
+      </if>
+      <if test="MESSAGE != null">
+        #{MESSAGE,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="MESSAGE2 != null">
+        #{MESSAGE2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="MESSAGE3 != null">
+        #{MESSAGE3,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.model.FktDocument">
+    update fkt_document
+    <set>
+      <if test="DTYPE != null">
+        DTYPE = #{DTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ADDRESSFIRSTLINE != null">
+        ADDRESSFIRSTLINE = #{ADDRESSFIRSTLINE,jdbcType=VARCHAR},
+      </if>
+      <if test="BILLINGTYPE != null">
+        BILLINGTYPE = #{BILLINGTYPE,jdbcType=INTEGER},
+      </if>
+      <if test="CONSULTANT != null">
+        CONSULTANT = #{CONSULTANT,jdbcType=VARCHAR},
+      </if>
+      <if test="CUSTOMERREF != null">
+        CUSTOMERREF = #{CUSTOMERREF,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DEPOSIT != null">
+        DEPOSIT = #{DEPOSIT,jdbcType=BIT},
+      </if>
+      <if test="DOCUMENTDATE != null">
+        DOCUMENTDATE = #{DOCUMENTDATE,jdbcType=DATE},
+      </if>
+      <if test="DUEDAYS != null">
+        DUEDAYS = #{DUEDAYS,jdbcType=INTEGER},
+      </if>
+      <if test="ITEMSREBATE != null">
+        ITEMSREBATE = #{ITEMSREBATE,jdbcType=DOUBLE},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NETGROSS != null">
+        NETGROSS = #{NETGROSS,jdbcType=INTEGER},
+      </if>
+      <if test="ODTPATH != null">
+        ODTPATH = #{ODTPATH,jdbcType=VARCHAR},
+      </if>
+      <if test="ORDERDATE != null">
+        ORDERDATE = #{ORDERDATE,jdbcType=DATE},
+      </if>
+      <if test="PAID != null">
+        PAID = #{PAID,jdbcType=BIT},
+      </if>
+      <if test="PAIDVALUE != null">
+        PAIDVALUE = #{PAIDVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="PAYDATE != null">
+        PAYDATE = #{PAYDATE,jdbcType=DATE},
+      </if>
+      <if test="PDFPATH != null">
+        PDFPATH = #{PDFPATH,jdbcType=VARCHAR},
+      </if>
+      <if test="PRINTTEMPLATE != null">
+        PRINTTEMPLATE = #{PRINTTEMPLATE,jdbcType=VARCHAR},
+      </if>
+      <if test="PRINTED != null">
+        PRINTED = #{PRINTED,jdbcType=BIT},
+      </if>
+      <if test="PROGRESS != null">
+        PROGRESS = #{PROGRESS,jdbcType=INTEGER},
+      </if>
+      <if test="SERVICEDATE != null">
+        SERVICEDATE = #{SERVICEDATE,jdbcType=DATE},
+      </if>
+      <if test="SHIPPINGAUTOVAT != null">
+        SHIPPINGAUTOVAT = #{SHIPPINGAUTOVAT,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="TOTALVALUE != null">
+        TOTALVALUE = #{TOTALVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="TRANSACTIONID != null">
+        TRANSACTIONID = #{TRANSACTIONID,jdbcType=INTEGER},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="WEBSHOPDATE != null">
+        WEBSHOPDATE = #{WEBSHOPDATE,jdbcType=DATE},
+      </if>
+      <if test="WEBSHOPID != null">
+        WEBSHOPID = #{WEBSHOPID,jdbcType=VARCHAR},
+      </if>
+      <if test="FK_INDIVIDUALINFO != null">
+        FK_INDIVIDUALINFO = #{FK_INDIVIDUALINFO,jdbcType=BIGINT},
+      </if>
+      <if test="FK_CONTACT != null">
+        FK_CONTACT = #{FK_CONTACT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_DELIVERYCONTACT != null">
+        FK_DELIVERYCONTACT = #{FK_DELIVERYCONTACT,jdbcType=BIGINT},
+      </if>
+      <if test="DOCUMENT_INVOICEREFERENCE != null">
+        DOCUMENT_INVOICEREFERENCE = #{DOCUMENT_INVOICEREFERENCE,jdbcType=BIGINT},
+      </if>
+      <if test="FK_NOVATREF != null">
+        FK_NOVATREF = #{FK_NOVATREF,jdbcType=BIGINT},
+      </if>
+      <if test="FK_PAYMENT != null">
+        FK_PAYMENT = #{FK_PAYMENT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_SHIPPING != null">
+        FK_SHIPPING = #{FK_SHIPPING,jdbcType=BIGINT},
+      </if>
+      <if test="FK_SRCDOCUMENT != null">
+        FK_SRCDOCUMENT = #{FK_SRCDOCUMENT,jdbcType=BIGINT},
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE = #{MESSAGE,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="MESSAGE2 != null">
+        MESSAGE2 = #{MESSAGE2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="MESSAGE3 != null">
+        MESSAGE3 = #{MESSAGE3,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sgv.fakturama.dao.model.FktDocument">
+    update fkt_document
+    set DTYPE = #{DTYPE,jdbcType=VARCHAR},
+      ADDRESSFIRSTLINE = #{ADDRESSFIRSTLINE,jdbcType=VARCHAR},
+      BILLINGTYPE = #{BILLINGTYPE,jdbcType=INTEGER},
+      CONSULTANT = #{CONSULTANT,jdbcType=VARCHAR},
+      CUSTOMERREF = #{CUSTOMERREF,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      DEPOSIT = #{DEPOSIT,jdbcType=BIT},
+      DOCUMENTDATE = #{DOCUMENTDATE,jdbcType=DATE},
+      DUEDAYS = #{DUEDAYS,jdbcType=INTEGER},
+      ITEMSREBATE = #{ITEMSREBATE,jdbcType=DOUBLE},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NETGROSS = #{NETGROSS,jdbcType=INTEGER},
+      ODTPATH = #{ODTPATH,jdbcType=VARCHAR},
+      ORDERDATE = #{ORDERDATE,jdbcType=DATE},
+      PAID = #{PAID,jdbcType=BIT},
+      PAIDVALUE = #{PAIDVALUE,jdbcType=DOUBLE},
+      PAYDATE = #{PAYDATE,jdbcType=DATE},
+      PDFPATH = #{PDFPATH,jdbcType=VARCHAR},
+      PRINTTEMPLATE = #{PRINTTEMPLATE,jdbcType=VARCHAR},
+      PRINTED = #{PRINTED,jdbcType=BIT},
+      PROGRESS = #{PROGRESS,jdbcType=INTEGER},
+      SERVICEDATE = #{SERVICEDATE,jdbcType=DATE},
+      SHIPPINGAUTOVAT = #{SHIPPINGAUTOVAT,jdbcType=VARCHAR},
+      SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      TOTALVALUE = #{TOTALVALUE,jdbcType=DOUBLE},
+      TRANSACTIONID = #{TRANSACTIONID,jdbcType=INTEGER},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      WEBSHOPDATE = #{WEBSHOPDATE,jdbcType=DATE},
+      WEBSHOPID = #{WEBSHOPID,jdbcType=VARCHAR},
+      FK_INDIVIDUALINFO = #{FK_INDIVIDUALINFO,jdbcType=BIGINT},
+      FK_CONTACT = #{FK_CONTACT,jdbcType=BIGINT},
+      FK_DELIVERYCONTACT = #{FK_DELIVERYCONTACT,jdbcType=BIGINT},
+      DOCUMENT_INVOICEREFERENCE = #{DOCUMENT_INVOICEREFERENCE,jdbcType=BIGINT},
+      FK_NOVATREF = #{FK_NOVATREF,jdbcType=BIGINT},
+      FK_PAYMENT = #{FK_PAYMENT,jdbcType=BIGINT},
+      FK_SHIPPING = #{FK_SHIPPING,jdbcType=BIGINT},
+      FK_SRCDOCUMENT = #{FK_SRCDOCUMENT,jdbcType=BIGINT},
+      MESSAGE = #{MESSAGE,jdbcType=LONGVARCHAR},
+      MESSAGE2 = #{MESSAGE2,jdbcType=LONGVARCHAR},
+      MESSAGE3 = #{MESSAGE3,jdbcType=LONGVARCHAR}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.model.FktDocument">
+    update fkt_document
+    set DTYPE = #{DTYPE,jdbcType=VARCHAR},
+      ADDRESSFIRSTLINE = #{ADDRESSFIRSTLINE,jdbcType=VARCHAR},
+      BILLINGTYPE = #{BILLINGTYPE,jdbcType=INTEGER},
+      CONSULTANT = #{CONSULTANT,jdbcType=VARCHAR},
+      CUSTOMERREF = #{CUSTOMERREF,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      DEPOSIT = #{DEPOSIT,jdbcType=BIT},
+      DOCUMENTDATE = #{DOCUMENTDATE,jdbcType=DATE},
+      DUEDAYS = #{DUEDAYS,jdbcType=INTEGER},
+      ITEMSREBATE = #{ITEMSREBATE,jdbcType=DOUBLE},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NETGROSS = #{NETGROSS,jdbcType=INTEGER},
+      ODTPATH = #{ODTPATH,jdbcType=VARCHAR},
+      ORDERDATE = #{ORDERDATE,jdbcType=DATE},
+      PAID = #{PAID,jdbcType=BIT},
+      PAIDVALUE = #{PAIDVALUE,jdbcType=DOUBLE},
+      PAYDATE = #{PAYDATE,jdbcType=DATE},
+      PDFPATH = #{PDFPATH,jdbcType=VARCHAR},
+      PRINTTEMPLATE = #{PRINTTEMPLATE,jdbcType=VARCHAR},
+      PRINTED = #{PRINTED,jdbcType=BIT},
+      PROGRESS = #{PROGRESS,jdbcType=INTEGER},
+      SERVICEDATE = #{SERVICEDATE,jdbcType=DATE},
+      SHIPPINGAUTOVAT = #{SHIPPINGAUTOVAT,jdbcType=VARCHAR},
+      SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      TOTALVALUE = #{TOTALVALUE,jdbcType=DOUBLE},
+      TRANSACTIONID = #{TRANSACTIONID,jdbcType=INTEGER},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      WEBSHOPDATE = #{WEBSHOPDATE,jdbcType=DATE},
+      WEBSHOPID = #{WEBSHOPID,jdbcType=VARCHAR},
+      FK_INDIVIDUALINFO = #{FK_INDIVIDUALINFO,jdbcType=BIGINT},
+      FK_CONTACT = #{FK_CONTACT,jdbcType=BIGINT},
+      FK_DELIVERYCONTACT = #{FK_DELIVERYCONTACT,jdbcType=BIGINT},
+      DOCUMENT_INVOICEREFERENCE = #{DOCUMENT_INVOICEREFERENCE,jdbcType=BIGINT},
+      FK_NOVATREF = #{FK_NOVATREF,jdbcType=BIGINT},
+      FK_PAYMENT = #{FK_PAYMENT,jdbcType=BIGINT},
+      FK_SHIPPING = #{FK_SHIPPING,jdbcType=BIGINT},
+      FK_SRCDOCUMENT = #{FK_SRCDOCUMENT,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Base_Column_SUNAT_List">
+	fkt_document.ID, fkt_document.DTYPE, ADDRESSFIRSTLINE, BILLINGTYPE, CONSULTANT, CUSTOMERREF, fkt_document.DATEADDED, fkt_document.DELETED,
+	DEPOSIT, DOCUMENTDATE, DUEDAYS, ITEMSREBATE, fkt_document.MODIFIED, fkt_document.MODIFIEDBY, fkt_document.NAME, NETGROSS,
+	ODTPATH, ORDERDATE, PAID, PAIDVALUE, PAYDATE, PDFPATH, PRINTTEMPLATE, PRINTED, PROGRESS,
+	SERVICEDATE, SHIPPINGAUTOVAT, SHIPPINGVALUE, TOTALVALUE, TRANSACTIONID, fkt_document.VALIDFROM,
+	fkt_document.VALIDTO, WEBSHOPDATE, WEBSHOPID, FK_INDIVIDUALINFO, FK_CONTACT, FK_DELIVERYCONTACT,
+	DOCUMENT_INVOICEREFERENCE, FK_NOVATREF, fkt_document.FK_PAYMENT, FK_SHIPPING, FK_SRCDOCUMENT,
+	DATE_ADD(DOCUMENTDATE,INTERVAL DUEDAYS DAY) AS DUEDATE
+  </sql>
+  <sql id="FktContactMapper_Base_Column_List">
+    fkt_contact.ID AS CONTACT_ID, COMPANY, VATNUMBER, fkt_contact.FIRSTNAME AS CONTACT_FIRSTNAME,fkt_contact.NAME AS CONTACT_NAME
+  </sql>
+  <sql id="FktDocumentItemMapper_Base">
+    fkt_documentitem.ID AS DOCUMENTITEM_ID, fkt_documentitem.DATEADDED AS DOCUMENTITEM_DATEADDED, fkt_documentitem.DELETED AS DOCUMENTITEM_DELETED, GTIN, ITEMNUMBER, ITEMREBATE, ITEMTYPE,
+    fkt_documentitem.MODIFIED AS DOCUMENTITEM_MODIFIED, fkt_documentitem.MODIFIEDBY AS DOCUMENTITEM_MODIFIEDBY,      fkt_documentitem.NAME AS DOCUMENTITEM_NAME, NOVAT, OPTIONAL, POSNR, PRICE, QUANTITY, QUANTITYUNIT, TARA,
+    fkt_documentitem.VALIDFROM AS DOCUMENTITEM_VALIDFROM, fkt_documentitem.VALIDTO AS DOCUMENTITEM_VALIDTO,      VESTINGPERIODEND, VESTINGPERIODSTART, WEIGHT, FK_VAT, FK_PRODUCT, FK_DOCUMENT        
+  </sql>
+  <sql id="FktDocumentItemMapper_Blob">
+    fkt_documentitem.DESCRIPTION AS DOCUMENTITEM_DESCRIPTION, PICTURE
+  </sql>
+  <sql id="FktAddressMapper_Base_Column_List">
+    fkt_address.ID AS ADDRESS_ID, CITY, CITYADDON, COUNTRYCODE, fkt_address.DATEADDED AS ADDRESS_DATEADDED, fkt_address.DELETED AS ADDRESS_DELETED, MANUALADDRESS, fkt_address.MODIFIED AS ADDRESS_MODIFIED, fkt_address.MODIFIEDBY AS ADDRESS_MODIFIEDBY, 
+    fkt_address.NAME AS ADDRESS_NAME, STREET, fkt_address.VALIDFROM AS ADDRESS_VALIDFROM, fkt_address.VALIDTO AS ADDRESS_VALIDTO, ZIP
+  </sql>
+  <sql id="FktVatMapper_Base_Column_List">
+    fkt_vat.ID AS VAT_ID, fkt_vat.DATEADDED AS VAT_DATEADDED, fkt_vat.DELETED AS VAT_DELETED, fkt_vat.DESCRIPTION AS VAT_DESCRIPTION, fkt_vat.MODIFIED AS VAT_MODIFIED, fkt_vat.MODIFIEDBY AS VAT_MODIFIEDBY, 
+    fkt_vat.NAME AS VAT_NAME, TAXVALUE, fkt_vat.VALIDFROM AS VAT_VALIDFROM, fkt_vat.VALIDTO AS VAT_VALIDTO, VAT_CATEGORY
+  </sql>  
+  <resultMap extends="ResultMapWithBLOBs" id="ResultMapWithContac" type="com.sgv.fakturama.dao.model.FktDocument">
+  	<result column="DUEDATE" jdbcType="DATE" property="DUEDATE" />
+    <association property="contact" column="CONTACT_ID" 
+	    resultMap="com.sgv.fakturama.dao.FktContactMapper.BaseResultSunatMap"/>
+	<collection property="items" javaType="ArrayList" ofType="com.sgv.fakturama.dao.model.FktDocumentitem"
+	    column="FK_DOCUMENT" resultMap="com.sgv.fakturama.dao.FktDocumentitemMapper.BaseResultSunatMap"/>	    
+  </resultMap>
+    
+  <select id="selectByNumero" parameterType="com.sgv.common.vo.DocumentoVO" resultMap="ResultMapWithContac">
+    select 
+    <include refid="Base_Column_SUNAT_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    ,
+    <include refid="FktDocumentItemMapper_Base" />
+    ,
+    <include refid="FktDocumentItemMapper_Blob" />
+    ,
+    <include refid="FktContactMapper_Base_Column_List" />
+    ,
+    <include refid="FktAddressMapper_Base_Column_List" />
+    ,
+    <include refid="FktVatMapper_Base_Column_List" />    
+    from fkt_document
+    INNER JOIN fkt_contact ON fkt_document.FK_CONTACT = fkt_contact.ID
+    INNER JOIN fkt_documentitem ON fkt_document.ID = fkt_documentitem.FK_DOCUMENT
+    INNER JOIN fkt_address ON fkt_contact.FK_ADDRESS = fkt_address.ID 
+    INNER JOIN fkt_vat ON fkt_vat.ID = fkt_documentitem.FK_VAT
+    where fkt_document.DTYPE = #{documentoTipo,jdbcType=VARCHAR}
+    and fkt_document.NAME = #{documentoNumero,jdbcType=VARCHAR}
+	and fkt_document.DELETED =  #{eliminado,jdbcType=BIT}
+    
+    ORDER BY TAXVALUE ASC, DOCUMENTITEM_NAME ASC
+
+  </select>
+  <select id="selectByNumeroBasico" parameterType="com.sgv.common.vo.DocumentoVO" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" /> 
+    from fkt_document
+    where fkt_document.DTYPE = #{documentoTipo,jdbcType=VARCHAR}
+    and fkt_document.NAME = #{documentoNumero,jdbcType=VARCHAR}
+	and fkt_document.DELETED =  #{eliminado,jdbcType=BIT}
+  </select>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithContac">
+    select 
+    <include refid="Base_Column_SUNAT_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    ,
+    <include refid="FktDocumentItemMapper_Base" />
+    ,
+    <include refid="FktDocumentItemMapper_Blob" />
+    ,
+    <include refid="FktContactMapper_Base_Column_List" />
+    ,
+    <include refid="FktAddressMapper_Base_Column_List" />
+    ,
+    <include refid="FktVatMapper_Base_Column_List" />    
+    from fkt_document
+    INNER JOIN fkt_contact ON fkt_document.FK_CONTACT = fkt_contact.ID
+    INNER JOIN fkt_documentitem ON fkt_document.ID = fkt_documentitem.FK_DOCUMENT
+    INNER JOIN fkt_address ON fkt_contact.FK_ADDRESS = fkt_address.ID 
+    INNER JOIN fkt_vat ON fkt_vat.ID = fkt_documentitem.FK_VAT
+    where fkt_document.ID = #{ID,jdbcType=BIGINT}
+    
+    ORDER BY TAXVALUE ASC, DOCUMENTITEM_NAME ASC
+
+  </select>
+  
+   <select id="obtenerPedidos" parameterType="com.sgv.common.vo.ConsolidadorPedidoVO" resultMap="ResultMapWithContac">
+    select 
+    <include refid="Base_Column_SUNAT_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    ,
+    <include refid="FktDocumentItemMapper_Base" />
+    ,
+    <include refid="FktDocumentItemMapper_Blob" />
+    ,
+    <include refid="FktContactMapper_Base_Column_List" />
+    ,
+    <include refid="FktAddressMapper_Base_Column_List" />
+    ,
+    <include refid="FktVatMapper_Base_Column_List" />    
+    from fkt_document
+    INNER JOIN fkt_contact ON fkt_document.FK_CONTACT = fkt_contact.ID
+    INNER JOIN fkt_documentitem ON fkt_document.ID = fkt_documentitem.FK_DOCUMENT
+    INNER JOIN fkt_address ON fkt_contact.FK_ADDRESS = fkt_address.ID 
+    INNER JOIN fkt_vat ON fkt_vat.ID = fkt_documentitem.FK_VAT
+    where fkt_contact.VATNUMBER = #{clienteRUC,jdbcType=VARCHAR}
+    and fkt_document.DOCUMENTDATE between STR_TO_DATE(#{fechaInicio,jdbcType=DATE} ,'%d/%m/%Y') and STR_TO_DATE(#{fechaFin,jdbcType=DATE},'%d/%m/%Y')
+    and fkt_document.DTYPE = #{tipoDocumento,jdbcType=VARCHAR}
+    and fkt_document.DELETED = #{deleted,jdbcType=BIT}
+    and fkt_documentitem.DELETED = #{deleted,jdbcType=BIT}
+    and fkt_document.NAME NOT IN ('PD01-00000066','PD01-00000067','PD01-00000068','PD01-00000069')
+    
+    ORDER BY TAXVALUE ASC, DOCUMENTITEM_NAME ASC
+
+  </select>
+</mapper>

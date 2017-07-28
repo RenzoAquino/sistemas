@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.mapper.DatabasechangeloglockMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.Databasechangeloglock">
+    <id column="ID" jdbcType="INTEGER" property="ID" />
+    <result column="LOCKED" jdbcType="BIT" property="LOCKED" />
+    <result column="LOCKGRANTED" jdbcType="TIMESTAMP" property="LOCKGRANTED" />
+    <result column="LOCKEDBY" jdbcType="VARCHAR" property="LOCKEDBY" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, LOCKED, LOCKGRANTED, LOCKEDBY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from databasechangeloglock
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from databasechangeloglock
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.mapper.model.Databasechangeloglock">
+    insert into databasechangeloglock (ID, LOCKED, LOCKGRANTED, 
+      LOCKEDBY)
+    values (#{ID,jdbcType=INTEGER}, #{LOCKED,jdbcType=BIT}, #{LOCKGRANTED,jdbcType=TIMESTAMP}, 
+      #{LOCKEDBY,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.mapper.model.Databasechangeloglock">
+    insert into databasechangeloglock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="LOCKED != null">
+        LOCKED,
+      </if>
+      <if test="LOCKGRANTED != null">
+        LOCKGRANTED,
+      </if>
+      <if test="LOCKEDBY != null">
+        LOCKEDBY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="LOCKED != null">
+        #{LOCKED,jdbcType=BIT},
+      </if>
+      <if test="LOCKGRANTED != null">
+        #{LOCKGRANTED,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LOCKEDBY != null">
+        #{LOCKEDBY,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.mapper.mapper.model.Databasechangeloglock">
+    update databasechangeloglock
+    <set>
+      <if test="LOCKED != null">
+        LOCKED = #{LOCKED,jdbcType=BIT},
+      </if>
+      <if test="LOCKGRANTED != null">
+        LOCKGRANTED = #{LOCKGRANTED,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LOCKEDBY != null">
+        LOCKEDBY = #{LOCKEDBY,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.mapper.mapper.model.Databasechangeloglock">
+    update databasechangeloglock
+    set LOCKED = #{LOCKED,jdbcType=BIT},
+      LOCKGRANTED = #{LOCKGRANTED,jdbcType=TIMESTAMP},
+      LOCKEDBY = #{LOCKEDBY,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

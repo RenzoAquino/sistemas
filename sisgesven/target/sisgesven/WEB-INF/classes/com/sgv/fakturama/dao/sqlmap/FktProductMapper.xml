@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktProductMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktProduct">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="BLOCK1" jdbcType="INTEGER" property="BLOCK1" />
+    <result column="BLOCK2" jdbcType="INTEGER" property="BLOCK2" />
+    <result column="BLOCK3" jdbcType="INTEGER" property="BLOCK3" />
+    <result column="BLOCK4" jdbcType="INTEGER" property="BLOCK4" />
+    <result column="BLOCK5" jdbcType="INTEGER" property="BLOCK5" />
+    <result column="CDF01" jdbcType="VARCHAR" property="CDF01" />
+    <result column="CDF02" jdbcType="VARCHAR" property="CDF02" />
+    <result column="CDF03" jdbcType="VARCHAR" property="CDF03" />
+    <result column="COSTPRICE" jdbcType="DOUBLE" property="COSTPRICE" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="GTIN" jdbcType="BIGINT" property="GTIN" />
+    <result column="ITEMNUMBER" jdbcType="VARCHAR" property="ITEMNUMBER" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="PRICE1" jdbcType="DOUBLE" property="PRICE1" />
+    <result column="PRICE2" jdbcType="DOUBLE" property="PRICE2" />
+    <result column="PRICE3" jdbcType="DOUBLE" property="PRICE3" />
+    <result column="PRICE4" jdbcType="DOUBLE" property="PRICE4" />
+    <result column="PRICE5" jdbcType="DOUBLE" property="PRICE5" />
+    <result column="QUANTITY" jdbcType="DOUBLE" property="QUANTITY" />
+    <result column="QUANTITYUNIT" jdbcType="VARCHAR" property="QUANTITYUNIT" />
+    <result column="SELLINGUNIT" jdbcType="INTEGER" property="SELLINGUNIT" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="WEBSHOPID" jdbcType="BIGINT" property="WEBSHOPID" />
+    <result column="WEIGHT" jdbcType="DOUBLE" property="WEIGHT" />
+    <result column="PRODUCT_CATEGORIES" jdbcType="BIGINT" property="PRODUCT_CATEGORIES" />
+    <result column="FK_VAT" jdbcType="BIGINT" property="FK_VAT" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sgv.fakturama.dao.model.FktProduct">
+    <result column="DESCRIPTION" jdbcType="LONGVARCHAR" property="DESCRIPTION" />
+    <result column="PICTURE" jdbcType="LONGVARBINARY" property="PICTURE" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, BLOCK1, BLOCK2, BLOCK3, BLOCK4, BLOCK5, CDF01, CDF02, CDF03, COSTPRICE, DATEADDED, 
+    DELETED, GTIN, ITEMNUMBER, MODIFIED, MODIFIEDBY, NAME, PRICE1, PRICE2, PRICE3, PRICE4, 
+    PRICE5, QUANTITY, QUANTITYUNIT, SELLINGUNIT, VALIDFROM, VALIDTO, WEBSHOPID, WEIGHT, 
+    PRODUCT_CATEGORIES, FK_VAT
+  </sql>
+  <sql id="Blob_Column_List">
+    DESCRIPTION, PICTURE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fkt_product
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_product
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktProduct">
+    insert into fkt_product (ID, BLOCK1, BLOCK2, 
+      BLOCK3, BLOCK4, BLOCK5, 
+      CDF01, CDF02, CDF03, 
+      COSTPRICE, DATEADDED, DELETED, 
+      GTIN, ITEMNUMBER, MODIFIED, 
+      MODIFIEDBY, NAME, PRICE1, 
+      PRICE2, PRICE3, PRICE4, 
+      PRICE5, QUANTITY, QUANTITYUNIT, 
+      SELLINGUNIT, VALIDFROM, VALIDTO, 
+      WEBSHOPID, WEIGHT, PRODUCT_CATEGORIES, 
+      FK_VAT, DESCRIPTION, PICTURE
+      )
+    values (#{ID,jdbcType=BIGINT}, #{BLOCK1,jdbcType=INTEGER}, #{BLOCK2,jdbcType=INTEGER}, 
+      #{BLOCK3,jdbcType=INTEGER}, #{BLOCK4,jdbcType=INTEGER}, #{BLOCK5,jdbcType=INTEGER}, 
+      #{CDF01,jdbcType=VARCHAR}, #{CDF02,jdbcType=VARCHAR}, #{CDF03,jdbcType=VARCHAR}, 
+      #{COSTPRICE,jdbcType=DOUBLE}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
+      #{GTIN,jdbcType=BIGINT}, #{ITEMNUMBER,jdbcType=VARCHAR}, #{MODIFIED,jdbcType=DATE}, 
+      #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, #{PRICE1,jdbcType=DOUBLE}, 
+      #{PRICE2,jdbcType=DOUBLE}, #{PRICE3,jdbcType=DOUBLE}, #{PRICE4,jdbcType=DOUBLE}, 
+      #{PRICE5,jdbcType=DOUBLE}, #{QUANTITY,jdbcType=DOUBLE}, #{QUANTITYUNIT,jdbcType=VARCHAR}, 
+      #{SELLINGUNIT,jdbcType=INTEGER}, #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE}, 
+      #{WEBSHOPID,jdbcType=BIGINT}, #{WEIGHT,jdbcType=DOUBLE}, #{PRODUCT_CATEGORIES,jdbcType=BIGINT}, 
+      #{FK_VAT,jdbcType=BIGINT}, #{DESCRIPTION,jdbcType=LONGVARCHAR}, #{PICTURE,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktProduct">
+    insert into fkt_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="BLOCK1 != null">
+        BLOCK1,
+      </if>
+      <if test="BLOCK2 != null">
+        BLOCK2,
+      </if>
+      <if test="BLOCK3 != null">
+        BLOCK3,
+      </if>
+      <if test="BLOCK4 != null">
+        BLOCK4,
+      </if>
+      <if test="BLOCK5 != null">
+        BLOCK5,
+      </if>
+      <if test="CDF01 != null">
+        CDF01,
+      </if>
+      <if test="CDF02 != null">
+        CDF02,
+      </if>
+      <if test="CDF03 != null">
+        CDF03,
+      </if>
+      <if test="COSTPRICE != null">
+        COSTPRICE,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="GTIN != null">
+        GTIN,
+      </if>
+      <if test="ITEMNUMBER != null">
+        ITEMNUMBER,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="PRICE1 != null">
+        PRICE1,
+      </if>
+      <if test="PRICE2 != null">
+        PRICE2,
+      </if>
+      <if test="PRICE3 != null">
+        PRICE3,
+      </if>
+      <if test="PRICE4 != null">
+        PRICE4,
+      </if>
+      <if test="PRICE5 != null">
+        PRICE5,
+      </if>
+      <if test="QUANTITY != null">
+        QUANTITY,
+      </if>
+      <if test="QUANTITYUNIT != null">
+        QUANTITYUNIT,
+      </if>
+      <if test="SELLINGUNIT != null">
+        SELLINGUNIT,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="WEBSHOPID != null">
+        WEBSHOPID,
+      </if>
+      <if test="WEIGHT != null">
+        WEIGHT,
+      </if>
+      <if test="PRODUCT_CATEGORIES != null">
+        PRODUCT_CATEGORIES,
+      </if>
+      <if test="FK_VAT != null">
+        FK_VAT,
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION,
+      </if>
+      <if test="PICTURE != null">
+        PICTURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="BLOCK1 != null">
+        #{BLOCK1,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK2 != null">
+        #{BLOCK2,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK3 != null">
+        #{BLOCK3,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK4 != null">
+        #{BLOCK4,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK5 != null">
+        #{BLOCK5,jdbcType=INTEGER},
+      </if>
+      <if test="CDF01 != null">
+        #{CDF01,jdbcType=VARCHAR},
+      </if>
+      <if test="CDF02 != null">
+        #{CDF02,jdbcType=VARCHAR},
+      </if>
+      <if test="CDF03 != null">
+        #{CDF03,jdbcType=VARCHAR},
+      </if>
+      <if test="COSTPRICE != null">
+        #{COSTPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="GTIN != null">
+        #{GTIN,jdbcType=BIGINT},
+      </if>
+      <if test="ITEMNUMBER != null">
+        #{ITEMNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PRICE1 != null">
+        #{PRICE1,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE2 != null">
+        #{PRICE2,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE3 != null">
+        #{PRICE3,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE4 != null">
+        #{PRICE4,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE5 != null">
+        #{PRICE5,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITY != null">
+        #{QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITYUNIT != null">
+        #{QUANTITYUNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="SELLINGUNIT != null">
+        #{SELLINGUNIT,jdbcType=INTEGER},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="WEBSHOPID != null">
+        #{WEBSHOPID,jdbcType=BIGINT},
+      </if>
+      <if test="WEIGHT != null">
+        #{WEIGHT,jdbcType=DOUBLE},
+      </if>
+      <if test="PRODUCT_CATEGORIES != null">
+        #{PRODUCT_CATEGORIES,jdbcType=BIGINT},
+      </if>
+      <if test="FK_VAT != null">
+        #{FK_VAT,jdbcType=BIGINT},
+      </if>
+      <if test="DESCRIPTION != null">
+        #{DESCRIPTION,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="PICTURE != null">
+        #{PICTURE,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.model.FktProduct">
+    update fkt_product
+    <set>
+      <if test="BLOCK1 != null">
+        BLOCK1 = #{BLOCK1,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK2 != null">
+        BLOCK2 = #{BLOCK2,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK3 != null">
+        BLOCK3 = #{BLOCK3,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK4 != null">
+        BLOCK4 = #{BLOCK4,jdbcType=INTEGER},
+      </if>
+      <if test="BLOCK5 != null">
+        BLOCK5 = #{BLOCK5,jdbcType=INTEGER},
+      </if>
+      <if test="CDF01 != null">
+        CDF01 = #{CDF01,jdbcType=VARCHAR},
+      </if>
+      <if test="CDF02 != null">
+        CDF02 = #{CDF02,jdbcType=VARCHAR},
+      </if>
+      <if test="CDF03 != null">
+        CDF03 = #{CDF03,jdbcType=VARCHAR},
+      </if>
+      <if test="COSTPRICE != null">
+        COSTPRICE = #{COSTPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="GTIN != null">
+        GTIN = #{GTIN,jdbcType=BIGINT},
+      </if>
+      <if test="ITEMNUMBER != null">
+        ITEMNUMBER = #{ITEMNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PRICE1 != null">
+        PRICE1 = #{PRICE1,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE2 != null">
+        PRICE2 = #{PRICE2,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE3 != null">
+        PRICE3 = #{PRICE3,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE4 != null">
+        PRICE4 = #{PRICE4,jdbcType=DOUBLE},
+      </if>
+      <if test="PRICE5 != null">
+        PRICE5 = #{PRICE5,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITY != null">
+        QUANTITY = #{QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITYUNIT != null">
+        QUANTITYUNIT = #{QUANTITYUNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="SELLINGUNIT != null">
+        SELLINGUNIT = #{SELLINGUNIT,jdbcType=INTEGER},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="WEBSHOPID != null">
+        WEBSHOPID = #{WEBSHOPID,jdbcType=BIGINT},
+      </if>
+      <if test="WEIGHT != null">
+        WEIGHT = #{WEIGHT,jdbcType=DOUBLE},
+      </if>
+      <if test="PRODUCT_CATEGORIES != null">
+        PRODUCT_CATEGORIES = #{PRODUCT_CATEGORIES,jdbcType=BIGINT},
+      </if>
+      <if test="FK_VAT != null">
+        FK_VAT = #{FK_VAT,jdbcType=BIGINT},
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION = #{DESCRIPTION,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="PICTURE != null">
+        PICTURE = #{PICTURE,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sgv.fakturama.dao.model.FktProduct">
+    update fkt_product
+    set BLOCK1 = #{BLOCK1,jdbcType=INTEGER},
+      BLOCK2 = #{BLOCK2,jdbcType=INTEGER},
+      BLOCK3 = #{BLOCK3,jdbcType=INTEGER},
+      BLOCK4 = #{BLOCK4,jdbcType=INTEGER},
+      BLOCK5 = #{BLOCK5,jdbcType=INTEGER},
+      CDF01 = #{CDF01,jdbcType=VARCHAR},
+      CDF02 = #{CDF02,jdbcType=VARCHAR},
+      CDF03 = #{CDF03,jdbcType=VARCHAR},
+      COSTPRICE = #{COSTPRICE,jdbcType=DOUBLE},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      GTIN = #{GTIN,jdbcType=BIGINT},
+      ITEMNUMBER = #{ITEMNUMBER,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      PRICE1 = #{PRICE1,jdbcType=DOUBLE},
+      PRICE2 = #{PRICE2,jdbcType=DOUBLE},
+      PRICE3 = #{PRICE3,jdbcType=DOUBLE},
+      PRICE4 = #{PRICE4,jdbcType=DOUBLE},
+      PRICE5 = #{PRICE5,jdbcType=DOUBLE},
+      QUANTITY = #{QUANTITY,jdbcType=DOUBLE},
+      QUANTITYUNIT = #{QUANTITYUNIT,jdbcType=VARCHAR},
+      SELLINGUNIT = #{SELLINGUNIT,jdbcType=INTEGER},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      WEBSHOPID = #{WEBSHOPID,jdbcType=BIGINT},
+      WEIGHT = #{WEIGHT,jdbcType=DOUBLE},
+      PRODUCT_CATEGORIES = #{PRODUCT_CATEGORIES,jdbcType=BIGINT},
+      FK_VAT = #{FK_VAT,jdbcType=BIGINT},
+      DESCRIPTION = #{DESCRIPTION,jdbcType=LONGVARCHAR},
+      PICTURE = #{PICTURE,jdbcType=LONGVARBINARY}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.model.FktProduct">
+    update fkt_product
+    set BLOCK1 = #{BLOCK1,jdbcType=INTEGER},
+      BLOCK2 = #{BLOCK2,jdbcType=INTEGER},
+      BLOCK3 = #{BLOCK3,jdbcType=INTEGER},
+      BLOCK4 = #{BLOCK4,jdbcType=INTEGER},
+      BLOCK5 = #{BLOCK5,jdbcType=INTEGER},
+      CDF01 = #{CDF01,jdbcType=VARCHAR},
+      CDF02 = #{CDF02,jdbcType=VARCHAR},
+      CDF03 = #{CDF03,jdbcType=VARCHAR},
+      COSTPRICE = #{COSTPRICE,jdbcType=DOUBLE},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      GTIN = #{GTIN,jdbcType=BIGINT},
+      ITEMNUMBER = #{ITEMNUMBER,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      PRICE1 = #{PRICE1,jdbcType=DOUBLE},
+      PRICE2 = #{PRICE2,jdbcType=DOUBLE},
+      PRICE3 = #{PRICE3,jdbcType=DOUBLE},
+      PRICE4 = #{PRICE4,jdbcType=DOUBLE},
+      PRICE5 = #{PRICE5,jdbcType=DOUBLE},
+      QUANTITY = #{QUANTITY,jdbcType=DOUBLE},
+      QUANTITYUNIT = #{QUANTITYUNIT,jdbcType=VARCHAR},
+      SELLINGUNIT = #{SELLINGUNIT,jdbcType=INTEGER},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      WEBSHOPID = #{WEBSHOPID,jdbcType=BIGINT},
+      WEIGHT = #{WEIGHT,jdbcType=DOUBLE},
+      PRODUCT_CATEGORIES = #{PRODUCT_CATEGORIES,jdbcType=BIGINT},
+      FK_VAT = #{FK_VAT,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

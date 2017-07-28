@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktDocumentitemMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktDocumentitem">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="GTIN" jdbcType="BIGINT" property="GTIN" />
+    <result column="ITEMNUMBER" jdbcType="VARCHAR" property="ITEMNUMBER" />
+    <result column="ITEMREBATE" jdbcType="DOUBLE" property="ITEMREBATE" />
+    <result column="ITEMTYPE" jdbcType="VARCHAR" property="ITEMTYPE" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="NOVAT" jdbcType="BIT" property="NOVAT" />
+    <result column="OPTIONAL" jdbcType="BIT" property="OPTIONAL" />
+    <result column="POSNR" jdbcType="INTEGER" property="POSNR" />
+    <result column="PRICE" jdbcType="DOUBLE" property="PRICE" />
+    <result column="QUANTITY" jdbcType="DOUBLE" property="QUANTITY" />
+    <result column="QUANTITYUNIT" jdbcType="VARCHAR" property="QUANTITYUNIT" />
+    <result column="TARA" jdbcType="DOUBLE" property="TARA" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="VESTINGPERIODEND" jdbcType="DATE" property="VESTINGPERIODEND" />
+    <result column="VESTINGPERIODSTART" jdbcType="DATE" property="VESTINGPERIODSTART" />
+    <result column="WEIGHT" jdbcType="DOUBLE" property="WEIGHT" />
+    <result column="FK_VAT" jdbcType="BIGINT" property="FK_VAT" />
+    <result column="FK_PRODUCT" jdbcType="BIGINT" property="FK_PRODUCT" />
+    <result column="FK_DOCUMENT" jdbcType="BIGINT" property="FK_DOCUMENT" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sgv.fakturama.dao.model.FktDocumentitem">
+    <result column="DESCRIPTION" jdbcType="LONGVARCHAR" property="DESCRIPTION" />
+    <result column="PICTURE" jdbcType="LONGVARBINARY" property="PICTURE" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DATEADDED, DELETED, GTIN, ITEMNUMBER, ITEMREBATE, ITEMTYPE, MODIFIED, MODIFIEDBY, 
+    NAME, NOVAT, OPTIONAL, POSNR, PRICE, QUANTITY, QUANTITYUNIT, TARA, VALIDFROM, VALIDTO, 
+    VESTINGPERIODEND, VESTINGPERIODSTART, WEIGHT, FK_VAT, FK_PRODUCT, FK_DOCUMENT
+  </sql>
+  <sql id="Blob_Column_List">
+    DESCRIPTION, PICTURE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fkt_documentitem
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_documentitem
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktDocumentitem">
+    insert into fkt_documentitem (ID, DATEADDED, DELETED, 
+      GTIN, ITEMNUMBER, ITEMREBATE, 
+      ITEMTYPE, MODIFIED, MODIFIEDBY, 
+      NAME, NOVAT, OPTIONAL, POSNR, 
+      PRICE, QUANTITY, QUANTITYUNIT, 
+      TARA, VALIDFROM, VALIDTO, 
+      VESTINGPERIODEND, VESTINGPERIODSTART, WEIGHT, 
+      FK_VAT, FK_PRODUCT, FK_DOCUMENT, 
+      DESCRIPTION, PICTURE)
+    values (#{ID,jdbcType=BIGINT}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
+      #{GTIN,jdbcType=BIGINT}, #{ITEMNUMBER,jdbcType=VARCHAR}, #{ITEMREBATE,jdbcType=DOUBLE}, 
+      #{ITEMTYPE,jdbcType=VARCHAR}, #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, 
+      #{NAME,jdbcType=VARCHAR}, #{NOVAT,jdbcType=BIT}, #{OPTIONAL,jdbcType=BIT}, #{POSNR,jdbcType=INTEGER}, 
+      #{PRICE,jdbcType=DOUBLE}, #{QUANTITY,jdbcType=DOUBLE}, #{QUANTITYUNIT,jdbcType=VARCHAR}, 
+      #{TARA,jdbcType=DOUBLE}, #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE}, 
+      #{VESTINGPERIODEND,jdbcType=DATE}, #{VESTINGPERIODSTART,jdbcType=DATE}, #{WEIGHT,jdbcType=DOUBLE}, 
+      #{FK_VAT,jdbcType=BIGINT}, #{FK_PRODUCT,jdbcType=BIGINT}, #{FK_DOCUMENT,jdbcType=BIGINT}, 
+      #{DESCRIPTION,jdbcType=LONGVARCHAR}, #{PICTURE,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktDocumentitem"
+  	useGeneratedKeys="true" keyProperty="ID" keyColumn="ID">
+    insert into fkt_documentitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <!--if test="ID != null">
+        ID,
+      </if-->
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="GTIN != null">
+        GTIN,
+      </if>
+      <if test="ITEMNUMBER != null">
+        ITEMNUMBER,
+      </if>
+      <if test="ITEMREBATE != null">
+        ITEMREBATE,
+      </if>
+      <if test="ITEMTYPE != null">
+        ITEMTYPE,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="NOVAT != null">
+        NOVAT,
+      </if>
+      <if test="OPTIONAL != null">
+        OPTIONAL,
+      </if>
+      <if test="POSNR != null">
+        POSNR,
+      </if>
+      <if test="PRICE != null">
+        PRICE,
+      </if>
+      <if test="QUANTITY != null">
+        QUANTITY,
+      </if>
+      <if test="QUANTITYUNIT != null">
+        QUANTITYUNIT,
+      </if>
+      <if test="TARA != null">
+        TARA,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="VESTINGPERIODEND != null">
+        VESTINGPERIODEND,
+      </if>
+      <if test="VESTINGPERIODSTART != null">
+        VESTINGPERIODSTART,
+      </if>
+      <if test="WEIGHT != null">
+        WEIGHT,
+      </if>
+      <if test="FK_VAT != null">
+        FK_VAT,
+      </if>
+      <if test="FK_PRODUCT != null">
+        FK_PRODUCT,
+      </if>
+      <if test="FK_DOCUMENT != null">
+        FK_DOCUMENT,
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION,
+      </if>
+      <if test="PICTURE != null">
+        PICTURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="GTIN != null">
+        #{GTIN,jdbcType=BIGINT},
+      </if>
+      <if test="ITEMNUMBER != null">
+        #{ITEMNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEMREBATE != null">
+        #{ITEMREBATE,jdbcType=DOUBLE},
+      </if>
+      <if test="ITEMTYPE != null">
+        #{ITEMTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NOVAT != null">
+        #{NOVAT,jdbcType=BIT},
+      </if>
+      <if test="OPTIONAL != null">
+        #{OPTIONAL,jdbcType=BIT},
+      </if>
+      <if test="POSNR != null">
+        #{POSNR,jdbcType=INTEGER},
+      </if>
+      <if test="PRICE != null">
+        #{PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITY != null">
+        #{QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITYUNIT != null">
+        #{QUANTITYUNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="TARA != null">
+        #{TARA,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="VESTINGPERIODEND != null">
+        #{VESTINGPERIODEND,jdbcType=DATE},
+      </if>
+      <if test="VESTINGPERIODSTART != null">
+        #{VESTINGPERIODSTART,jdbcType=DATE},
+      </if>
+      <if test="WEIGHT != null">
+        #{WEIGHT,jdbcType=DOUBLE},
+      </if>
+      <if test="FK_VAT != null">
+        #{FK_VAT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_PRODUCT != null">
+        #{FK_PRODUCT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_DOCUMENT != null">
+        #{FK_DOCUMENT,jdbcType=BIGINT},
+      </if>
+      <if test="DESCRIPTION != null">
+        #{DESCRIPTION,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="PICTURE != null">
+        #{PICTURE,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.model.FktDocumentitem">
+    update fkt_documentitem
+    <set>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="GTIN != null">
+        GTIN = #{GTIN,jdbcType=BIGINT},
+      </if>
+      <if test="ITEMNUMBER != null">
+        ITEMNUMBER = #{ITEMNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEMREBATE != null">
+        ITEMREBATE = #{ITEMREBATE,jdbcType=DOUBLE},
+      </if>
+      <if test="ITEMTYPE != null">
+        ITEMTYPE = #{ITEMTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NOVAT != null">
+        NOVAT = #{NOVAT,jdbcType=BIT},
+      </if>
+      <if test="OPTIONAL != null">
+        OPTIONAL = #{OPTIONAL,jdbcType=BIT},
+      </if>
+      <if test="POSNR != null">
+        POSNR = #{POSNR,jdbcType=INTEGER},
+      </if>
+      <if test="PRICE != null">
+        PRICE = #{PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITY != null">
+        QUANTITY = #{QUANTITY,jdbcType=DOUBLE},
+      </if>
+      <if test="QUANTITYUNIT != null">
+        QUANTITYUNIT = #{QUANTITYUNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="TARA != null">
+        TARA = #{TARA,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="VESTINGPERIODEND != null">
+        VESTINGPERIODEND = #{VESTINGPERIODEND,jdbcType=DATE},
+      </if>
+      <if test="VESTINGPERIODSTART != null">
+        VESTINGPERIODSTART = #{VESTINGPERIODSTART,jdbcType=DATE},
+      </if>
+      <if test="WEIGHT != null">
+        WEIGHT = #{WEIGHT,jdbcType=DOUBLE},
+      </if>
+      <if test="FK_VAT != null">
+        FK_VAT = #{FK_VAT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_PRODUCT != null">
+        FK_PRODUCT = #{FK_PRODUCT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_DOCUMENT != null">
+        FK_DOCUMENT = #{FK_DOCUMENT,jdbcType=BIGINT},
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION = #{DESCRIPTION,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="PICTURE != null">
+        PICTURE = #{PICTURE,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sgv.fakturama.dao.model.FktDocumentitem">
+    update fkt_documentitem
+    set DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      GTIN = #{GTIN,jdbcType=BIGINT},
+      ITEMNUMBER = #{ITEMNUMBER,jdbcType=VARCHAR},
+      ITEMREBATE = #{ITEMREBATE,jdbcType=DOUBLE},
+      ITEMTYPE = #{ITEMTYPE,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NOVAT = #{NOVAT,jdbcType=BIT},
+      OPTIONAL = #{OPTIONAL,jdbcType=BIT},
+      POSNR = #{POSNR,jdbcType=INTEGER},
+      PRICE = #{PRICE,jdbcType=DOUBLE},
+      QUANTITY = #{QUANTITY,jdbcType=DOUBLE},
+      QUANTITYUNIT = #{QUANTITYUNIT,jdbcType=VARCHAR},
+      TARA = #{TARA,jdbcType=DOUBLE},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      VESTINGPERIODEND = #{VESTINGPERIODEND,jdbcType=DATE},
+      VESTINGPERIODSTART = #{VESTINGPERIODSTART,jdbcType=DATE},
+      WEIGHT = #{WEIGHT,jdbcType=DOUBLE},
+      FK_VAT = #{FK_VAT,jdbcType=BIGINT},
+      FK_PRODUCT = #{FK_PRODUCT,jdbcType=BIGINT},
+      FK_DOCUMENT = #{FK_DOCUMENT,jdbcType=BIGINT},
+      DESCRIPTION = #{DESCRIPTION,jdbcType=LONGVARCHAR},
+      PICTURE = #{PICTURE,jdbcType=LONGVARBINARY}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.model.FktDocumentitem">
+    update fkt_documentitem
+    set DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      GTIN = #{GTIN,jdbcType=BIGINT},
+      ITEMNUMBER = #{ITEMNUMBER,jdbcType=VARCHAR},
+      ITEMREBATE = #{ITEMREBATE,jdbcType=DOUBLE},
+      ITEMTYPE = #{ITEMTYPE,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NOVAT = #{NOVAT,jdbcType=BIT},
+      OPTIONAL = #{OPTIONAL,jdbcType=BIT},
+      POSNR = #{POSNR,jdbcType=INTEGER},
+      PRICE = #{PRICE,jdbcType=DOUBLE},
+      QUANTITY = #{QUANTITY,jdbcType=DOUBLE},
+      QUANTITYUNIT = #{QUANTITYUNIT,jdbcType=VARCHAR},
+      TARA = #{TARA,jdbcType=DOUBLE},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      VESTINGPERIODEND = #{VESTINGPERIODEND,jdbcType=DATE},
+      VESTINGPERIODSTART = #{VESTINGPERIODSTART,jdbcType=DATE},
+      WEIGHT = #{WEIGHT,jdbcType=DOUBLE},
+      FK_VAT = #{FK_VAT,jdbcType=BIGINT},
+      FK_PRODUCT = #{FK_PRODUCT,jdbcType=BIGINT},
+      FK_DOCUMENT = #{FK_DOCUMENT,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  
+  <resultMap id="BaseResultSunatMap" type="com.sgv.fakturama.dao.model.FktDocumentitem">
+	<id column="DOCUMENTITEM_ID" jdbcType="BIGINT" property="ID" />
+    <result column="DOCUMENTITEM_DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DOCUMENTITEM_DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="GTIN" jdbcType="BIGINT" property="GTIN" />
+    <result column="ITEMNUMBER" jdbcType="VARCHAR" property="ITEMNUMBER" />
+    <result column="ITEMREBATE" jdbcType="DOUBLE" property="ITEMREBATE" />
+    <result column="ITEMTYPE" jdbcType="VARCHAR" property="ITEMTYPE" />
+    <result column="DOCUMENTITEM_MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="DOCUMENTITEM_MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="DOCUMENTITEM_NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="NOVAT" jdbcType="BIT" property="NOVAT" />
+    <result column="OPTIONAL" jdbcType="BIT" property="OPTIONAL" />
+    <result column="POSNR" jdbcType="INTEGER" property="POSNR" />
+    <result column="PRICE" jdbcType="DOUBLE" property="PRICE" />
+    <result column="QUANTITY" jdbcType="DOUBLE" property="QUANTITY" />
+    <result column="QUANTITYUNIT" jdbcType="VARCHAR" property="QUANTITYUNIT" />
+    <result column="TARA" jdbcType="DOUBLE" property="TARA" />
+    <result column="DOCUMENTITEM_VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="DOCUMENTITEM_VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="VESTINGPERIODEND" jdbcType="DATE" property="VESTINGPERIODEND" />
+    <result column="VESTINGPERIODSTART" jdbcType="DATE" property="VESTINGPERIODSTART" />
+    <result column="WEIGHT" jdbcType="DOUBLE" property="WEIGHT" />
+    <result column="FK_VAT" jdbcType="BIGINT" property="FK_VAT" />
+    <result column="FK_PRODUCT" jdbcType="BIGINT" property="FK_PRODUCT" />
+    <result column="FK_DOCUMENT" jdbcType="BIGINT" property="FK_DOCUMENT" />
+    <result column="DOCUMENTITEM_DESCRIPTION" jdbcType="LONGVARCHAR" property="DESCRIPTION" />
+    <result column="PICTURE" jdbcType="LONGVARBINARY" property="PICTURE" />
+	<association property="vat" column="VAT_ID" 
+    resultMap="com.sgv.fakturama.dao.FktVatMapper.BaseResultSunatMap"/>
+  </resultMap>
+  
+  <delete id="deleteByFKDocument" parameterType="java.lang.Long">
+    delete from fkt_documentitem
+    where FK_DOCUMENT = #{ID,jdbcType=BIGINT}
+  </delete>
+</mapper>

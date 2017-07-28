@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.base.dao.mapper.ControlCompraMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.base.dao.model.ControlCompra">
+    <id column="CCMP_ID" jdbcType="BIGINT" property="CCMP_ID" />
+    <result column="CCMP_FEC_EMI_DOCUMENTO" jdbcType="DATE" property="CCMP_FEC_EMI_DOCUMENTO" />
+    <result column="CCMP_FEC_VEN_DOCUMENTO" jdbcType="DATE" property="CCMP_FEC_VEN_DOCUMENTO" />
+    <result column="CCMP_TIP_DOCUMENTO" jdbcType="CHAR" property="CCMP_TIP_DOCUMENTO" />
+    <result column="CCMP_NUM_DOCUMENTO" jdbcType="VARCHAR" property="CCMP_NUM_DOCUMENTO" />
+    <result column="CCMP_TIP_DOC_EMISOR" jdbcType="CHAR" property="CCMP_TIP_DOC_EMISOR" />
+    <result column="CCMP_NUM_DOC_EMISOR" jdbcType="VARCHAR" property="CCMP_NUM_DOC_EMISOR" />
+    <result column="CCMP_RAZ_SOC_EMISOR" jdbcType="VARCHAR" property="CCMP_RAZ_SOC_EMISOR" />
+    <result column="CCMP_TIP_DOC_RECEPTOR" jdbcType="CHAR" property="CCMP_TIP_DOC_RECEPTOR" />
+    <result column="CCMP_NUM_DOC_RECEPTOR" jdbcType="VARCHAR" property="CCMP_NUM_DOC_RECEPTOR" />
+    <result column="CCMP_RAZ_SOC_RECEPTOR" jdbcType="VARCHAR" property="CCMP_RAZ_SOC_RECEPTOR" />
+    <result column="CCMP_VAL_OPE_GRAVADA" jdbcType="DOUBLE" property="CCMP_VAL_OPE_GRAVADA" />
+    <result column="CCMP_VAL_OPE_NO_GRAVADA" jdbcType="DOUBLE" property="CCMP_VAL_OPE_NO_GRAVADA" />
+    <result column="CCMP_IGV" jdbcType="DOUBLE" property="CCMP_IGV" />
+    <result column="CCMP_NRO_COM_PAG_NO_DOMICILIADO" jdbcType="VARCHAR" property="CCMP_NRO_COM_PAG_NO_DOMICILIADO" />
+    <result column="CCMP_IMP_TOTAL" jdbcType="DOUBLE" property="CCMP_IMP_TOTAL" />
+    <result column="CCMP_TIP_CAMBIO" jdbcType="DOUBLE" property="CCMP_TIP_CAMBIO" />
+    <result column="CCMP_FEC_DOC_REFERENCIA" jdbcType="DATE" property="CCMP_FEC_DOC_REFERENCIA" />
+    <result column="CCMP_TIP_DOC_REFERENCIA" jdbcType="CHAR" property="CCMP_TIP_DOC_REFERENCIA" />
+    <result column="CCMP_NUM_DOC_REFERENCIA" jdbcType="VARCHAR" property="CCMP_NUM_DOC_REFERENCIA" />
+    <result column="CCMP_ESTADO" jdbcType="CHAR" property="CCMP_ESTADO" />
+    <result column="CCMP_OBSERVACION" jdbcType="VARCHAR" property="CCMP_OBSERVACION" />
+    <result column="CCMP_EST_ANTERIOR" jdbcType="CHAR" property="CCMP_EST_ANTERIOR" />
+    <result column="CCMP_OBS_ANTERIOR" jdbcType="VARCHAR" property="CCMP_OBS_ANTERIOR" />
+    <result column="CCMP_PERIDO" jdbcType="DATE" property="CCMP_PERIDO" />
+    <result column="CCMP_TIP_MONEDA" jdbcType="CHAR" property="CCMP_TIP_MONEDA" />
+    <result column="CCMP_FEC_CREACION" jdbcType="TIMESTAMP" property="CCMP_FEC_CREACION" />
+    <result column="CCMP_FEC_MODIFICACION" jdbcType="TIMESTAMP" property="CCMP_FEC_MODIFICACION" />
+    <result column="CCMP_USU_CREACION" jdbcType="VARCHAR" property="CCMP_USU_CREACION" />
+    <result column="CCMP_US_MODIFICACION" jdbcType="VARCHAR" property="CCMP_US_MODIFICACION" />
+    <result column="CCMP_IND_PAGADO" jdbcType="CHAR" property="CCMP_IND_PAGADO" />
+    <result column="CCMP_CMM_DOCUMENTO" jdbcType="VARCHAR" property="CCMP_CMM_DOCUMENTO" />
+    <result column="CCMP_NUM_CNS_DPT_DETRACCION" jdbcType="VARCHAR" property="CCMP_NUM_CNS_DPT_DETRACCION" />
+    <result column="CCMP_FEC_EMI_CNS_DPT_DETRACCION" jdbcType="DATE" property="CCMP_FEC_EMI_CNS_DPT_DETRACCION" />
+    <result column="CCMP_PRC_IGV" jdbcType="DOUBLE" property="CCMP_PRC_IGV" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CCMP_ID, CCMP_FEC_EMI_DOCUMENTO, CCMP_FEC_VEN_DOCUMENTO, CCMP_TIP_DOCUMENTO, CCMP_NUM_DOCUMENTO, 
+    CCMP_TIP_DOC_EMISOR, CCMP_NUM_DOC_EMISOR, CCMP_RAZ_SOC_EMISOR, CCMP_TIP_DOC_RECEPTOR, 
+    CCMP_NUM_DOC_RECEPTOR, CCMP_RAZ_SOC_RECEPTOR, CCMP_VAL_OPE_GRAVADA, CCMP_VAL_OPE_NO_GRAVADA, 
+    CCMP_IGV, CCMP_NRO_COM_PAG_NO_DOMICILIADO, CCMP_IMP_TOTAL, CCMP_TIP_CAMBIO, CCMP_FEC_DOC_REFERENCIA, 
+    CCMP_TIP_DOC_REFERENCIA, CCMP_NUM_DOC_REFERENCIA, CCMP_ESTADO, CCMP_OBSERVACION, 
+    CCMP_EST_ANTERIOR, CCMP_OBS_ANTERIOR, CCMP_PERIDO, CCMP_TIP_MONEDA, CCMP_FEC_CREACION, 
+    CCMP_FEC_MODIFICACION, CCMP_USU_CREACION, CCMP_US_MODIFICACION, CCMP_IND_PAGADO, 
+    CCMP_CMM_DOCUMENTO, CCMP_NUM_CNS_DPT_DETRACCION, CCMP_FEC_EMI_CNS_DPT_DETRACCION, 
+    CCMP_PRC_IGV
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from control_compra
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from control_compra
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.base.dao.model.ControlCompra">
+    insert into control_compra (CCMP_ID, CCMP_FEC_EMI_DOCUMENTO, CCMP_FEC_VEN_DOCUMENTO, 
+      CCMP_TIP_DOCUMENTO, CCMP_NUM_DOCUMENTO, CCMP_TIP_DOC_EMISOR, 
+      CCMP_NUM_DOC_EMISOR, CCMP_RAZ_SOC_EMISOR, 
+      CCMP_TIP_DOC_RECEPTOR, CCMP_NUM_DOC_RECEPTOR, 
+      CCMP_RAZ_SOC_RECEPTOR, CCMP_VAL_OPE_GRAVADA, 
+      CCMP_VAL_OPE_NO_GRAVADA, CCMP_IGV, CCMP_NRO_COM_PAG_NO_DOMICILIADO, 
+      CCMP_IMP_TOTAL, CCMP_TIP_CAMBIO, CCMP_FEC_DOC_REFERENCIA, 
+      CCMP_TIP_DOC_REFERENCIA, CCMP_NUM_DOC_REFERENCIA, 
+      CCMP_ESTADO, CCMP_OBSERVACION, CCMP_EST_ANTERIOR, 
+      CCMP_OBS_ANTERIOR, CCMP_PERIDO, CCMP_TIP_MONEDA, 
+      CCMP_FEC_CREACION, CCMP_FEC_MODIFICACION, 
+      CCMP_USU_CREACION, CCMP_US_MODIFICACION, 
+      CCMP_IND_PAGADO, CCMP_CMM_DOCUMENTO, CCMP_NUM_CNS_DPT_DETRACCION, 
+      CCMP_FEC_EMI_CNS_DPT_DETRACCION, CCMP_PRC_IGV
+      )
+    values (#{CCMP_ID,jdbcType=BIGINT}, #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE}, #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE}, 
+      #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR}, #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR}, #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR}, 
+      #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR}, #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR}, 
+      #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR}, #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR}, 
+      #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR}, #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE}, 
+      #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE}, #{CCMP_IGV,jdbcType=DOUBLE}, #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR}, 
+      #{CCMP_IMP_TOTAL,jdbcType=DOUBLE}, #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE}, #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE}, 
+      #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR}, #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR}, 
+      #{CCMP_ESTADO,jdbcType=CHAR}, #{CCMP_OBSERVACION,jdbcType=VARCHAR}, #{CCMP_EST_ANTERIOR,jdbcType=CHAR}, 
+      #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR}, #{CCMP_PERIDO,jdbcType=DATE}, #{CCMP_TIP_MONEDA,jdbcType=CHAR}, 
+      #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP}, #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP}, 
+      #{CCMP_USU_CREACION,jdbcType=VARCHAR}, #{CCMP_US_MODIFICACION,jdbcType=VARCHAR}, 
+      #{CCMP_IND_PAGADO,jdbcType=CHAR}, #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR}, #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR}, 
+      #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE}, #{CCMP_PRC_IGV,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.base.dao.model.ControlCompra">
+    insert into control_compra
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="CCMP_ID != null">
+        CCMP_ID,
+      </if>
+      <if test="CCMP_FEC_EMI_DOCUMENTO != null">
+        CCMP_FEC_EMI_DOCUMENTO,
+      </if>
+      <if test="CCMP_FEC_VEN_DOCUMENTO != null">
+        CCMP_FEC_VEN_DOCUMENTO,
+      </if>
+      <if test="CCMP_TIP_DOCUMENTO != null">
+        CCMP_TIP_DOCUMENTO,
+      </if>
+      <if test="CCMP_NUM_DOCUMENTO != null">
+        CCMP_NUM_DOCUMENTO,
+      </if>
+      <if test="CCMP_TIP_DOC_EMISOR != null">
+        CCMP_TIP_DOC_EMISOR,
+      </if>
+      <if test="CCMP_NUM_DOC_EMISOR != null">
+        CCMP_NUM_DOC_EMISOR,
+      </if>
+      <if test="CCMP_RAZ_SOC_EMISOR != null">
+        CCMP_RAZ_SOC_EMISOR,
+      </if>
+      <if test="CCMP_TIP_DOC_RECEPTOR != null">
+        CCMP_TIP_DOC_RECEPTOR,
+      </if>
+      <if test="CCMP_NUM_DOC_RECEPTOR != null">
+        CCMP_NUM_DOC_RECEPTOR,
+      </if>
+      <if test="CCMP_RAZ_SOC_RECEPTOR != null">
+        CCMP_RAZ_SOC_RECEPTOR,
+      </if>
+      <if test="CCMP_VAL_OPE_GRAVADA != null">
+        CCMP_VAL_OPE_GRAVADA,
+      </if>
+      <if test="CCMP_VAL_OPE_NO_GRAVADA != null">
+        CCMP_VAL_OPE_NO_GRAVADA,
+      </if>
+      <if test="CCMP_IGV != null">
+        CCMP_IGV,
+      </if>
+      <if test="CCMP_NRO_COM_PAG_NO_DOMICILIADO != null">
+        CCMP_NRO_COM_PAG_NO_DOMICILIADO,
+      </if>
+      <if test="CCMP_IMP_TOTAL != null">
+        CCMP_IMP_TOTAL,
+      </if>
+      <if test="CCMP_TIP_CAMBIO != null">
+        CCMP_TIP_CAMBIO,
+      </if>
+      <if test="CCMP_FEC_DOC_REFERENCIA != null">
+        CCMP_FEC_DOC_REFERENCIA,
+      </if>
+      <if test="CCMP_TIP_DOC_REFERENCIA != null">
+        CCMP_TIP_DOC_REFERENCIA,
+      </if>
+      <if test="CCMP_NUM_DOC_REFERENCIA != null">
+        CCMP_NUM_DOC_REFERENCIA,
+      </if>
+      <if test="CCMP_ESTADO != null">
+        CCMP_ESTADO,
+      </if>
+      <if test="CCMP_OBSERVACION != null">
+        CCMP_OBSERVACION,
+      </if>
+      <if test="CCMP_EST_ANTERIOR != null">
+        CCMP_EST_ANTERIOR,
+      </if>
+      <if test="CCMP_OBS_ANTERIOR != null">
+        CCMP_OBS_ANTERIOR,
+      </if>
+      <if test="CCMP_PERIDO != null">
+        CCMP_PERIDO,
+      </if>
+      <if test="CCMP_TIP_MONEDA != null">
+        CCMP_TIP_MONEDA,
+      </if>
+      <if test="CCMP_FEC_CREACION != null">
+        CCMP_FEC_CREACION,
+      </if>
+      <if test="CCMP_FEC_MODIFICACION != null">
+        CCMP_FEC_MODIFICACION,
+      </if>
+      <if test="CCMP_USU_CREACION != null">
+        CCMP_USU_CREACION,
+      </if>
+      <if test="CCMP_US_MODIFICACION != null">
+        CCMP_US_MODIFICACION,
+      </if>
+      <if test="CCMP_IND_PAGADO != null">
+        CCMP_IND_PAGADO,
+      </if>
+      <if test="CCMP_CMM_DOCUMENTO != null">
+        CCMP_CMM_DOCUMENTO,
+      </if>
+      <if test="CCMP_NUM_CNS_DPT_DETRACCION != null">
+        CCMP_NUM_CNS_DPT_DETRACCION,
+      </if>
+      <if test="CCMP_FEC_EMI_CNS_DPT_DETRACCION != null">
+        CCMP_FEC_EMI_CNS_DPT_DETRACCION,
+      </if>
+      <if test="CCMP_PRC_IGV != null">
+        CCMP_PRC_IGV,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CCMP_ID != null">
+        #{CCMP_ID,jdbcType=BIGINT},
+      </if>
+      <if test="CCMP_FEC_EMI_DOCUMENTO != null">
+        #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_FEC_VEN_DOCUMENTO != null">
+        #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOCUMENTO != null">
+        #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOCUMENTO != null">
+        #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_EMISOR != null">
+        #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_EMISOR != null">
+        #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_EMISOR != null">
+        #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_RECEPTOR != null">
+        #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_RECEPTOR != null">
+        #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_RECEPTOR != null">
+        #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_VAL_OPE_GRAVADA != null">
+        #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_VAL_OPE_NO_GRAVADA != null">
+        #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_IGV != null">
+        #{CCMP_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_NRO_COM_PAG_NO_DOMICILIADO != null">
+        #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IMP_TOTAL != null">
+        #{CCMP_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_TIP_CAMBIO != null">
+        #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_FEC_DOC_REFERENCIA != null">
+        #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOC_REFERENCIA != null">
+        #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_REFERENCIA != null">
+        #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_ESTADO != null">
+        #{CCMP_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBSERVACION != null">
+        #{CCMP_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_EST_ANTERIOR != null">
+        #{CCMP_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBS_ANTERIOR != null">
+        #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_PERIDO != null">
+        #{CCMP_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_MONEDA != null">
+        #{CCMP_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_FEC_CREACION != null">
+        #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_FEC_MODIFICACION != null">
+        #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_USU_CREACION != null">
+        #{CCMP_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_US_MODIFICACION != null">
+        #{CCMP_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IND_PAGADO != null">
+        #{CCMP_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_CMM_DOCUMENTO != null">
+        #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_NUM_CNS_DPT_DETRACCION != null">
+        #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_FEC_EMI_CNS_DPT_DETRACCION != null">
+        #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE},
+      </if>
+      <if test="CCMP_PRC_IGV != null">
+        #{CCMP_PRC_IGV,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.base.dao.model.ControlCompra">
+    update control_compra
+    <set>
+      <if test="CCMP_FEC_EMI_DOCUMENTO != null">
+        CCMP_FEC_EMI_DOCUMENTO = #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_FEC_VEN_DOCUMENTO != null">
+        CCMP_FEC_VEN_DOCUMENTO = #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOCUMENTO != null">
+        CCMP_TIP_DOCUMENTO = #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOCUMENTO != null">
+        CCMP_NUM_DOCUMENTO = #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_EMISOR != null">
+        CCMP_TIP_DOC_EMISOR = #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_EMISOR != null">
+        CCMP_NUM_DOC_EMISOR = #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_EMISOR != null">
+        CCMP_RAZ_SOC_EMISOR = #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_RECEPTOR != null">
+        CCMP_TIP_DOC_RECEPTOR = #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_RECEPTOR != null">
+        CCMP_NUM_DOC_RECEPTOR = #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_RECEPTOR != null">
+        CCMP_RAZ_SOC_RECEPTOR = #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_VAL_OPE_GRAVADA != null">
+        CCMP_VAL_OPE_GRAVADA = #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_VAL_OPE_NO_GRAVADA != null">
+        CCMP_VAL_OPE_NO_GRAVADA = #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_IGV != null">
+        CCMP_IGV = #{CCMP_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_NRO_COM_PAG_NO_DOMICILIADO != null">
+        CCMP_NRO_COM_PAG_NO_DOMICILIADO = #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IMP_TOTAL != null">
+        CCMP_IMP_TOTAL = #{CCMP_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_TIP_CAMBIO != null">
+        CCMP_TIP_CAMBIO = #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_FEC_DOC_REFERENCIA != null">
+        CCMP_FEC_DOC_REFERENCIA = #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOC_REFERENCIA != null">
+        CCMP_TIP_DOC_REFERENCIA = #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_REFERENCIA != null">
+        CCMP_NUM_DOC_REFERENCIA = #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_ESTADO != null">
+        CCMP_ESTADO = #{CCMP_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBSERVACION != null">
+        CCMP_OBSERVACION = #{CCMP_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_EST_ANTERIOR != null">
+        CCMP_EST_ANTERIOR = #{CCMP_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBS_ANTERIOR != null">
+        CCMP_OBS_ANTERIOR = #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_PERIDO != null">
+        CCMP_PERIDO = #{CCMP_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_MONEDA != null">
+        CCMP_TIP_MONEDA = #{CCMP_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_FEC_CREACION != null">
+        CCMP_FEC_CREACION = #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_FEC_MODIFICACION != null">
+        CCMP_FEC_MODIFICACION = #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_USU_CREACION != null">
+        CCMP_USU_CREACION = #{CCMP_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_US_MODIFICACION != null">
+        CCMP_US_MODIFICACION = #{CCMP_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IND_PAGADO != null">
+        CCMP_IND_PAGADO = #{CCMP_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_CMM_DOCUMENTO != null">
+        CCMP_CMM_DOCUMENTO = #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_NUM_CNS_DPT_DETRACCION != null">
+        CCMP_NUM_CNS_DPT_DETRACCION = #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_FEC_EMI_CNS_DPT_DETRACCION != null">
+        CCMP_FEC_EMI_CNS_DPT_DETRACCION = #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE},
+      </if>
+      <if test="CCMP_PRC_IGV != null">
+        CCMP_PRC_IGV = #{CCMP_PRC_IGV,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.base.dao.model.ControlCompra">
+    update control_compra
+    set CCMP_FEC_EMI_DOCUMENTO = #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      CCMP_FEC_VEN_DOCUMENTO = #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      CCMP_TIP_DOCUMENTO = #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR},
+      CCMP_NUM_DOCUMENTO = #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      CCMP_TIP_DOC_EMISOR = #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR},
+      CCMP_NUM_DOC_EMISOR = #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      CCMP_RAZ_SOC_EMISOR = #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      CCMP_TIP_DOC_RECEPTOR = #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      CCMP_NUM_DOC_RECEPTOR = #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      CCMP_RAZ_SOC_RECEPTOR = #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      CCMP_VAL_OPE_GRAVADA = #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      CCMP_VAL_OPE_NO_GRAVADA = #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE},
+      CCMP_IGV = #{CCMP_IGV,jdbcType=DOUBLE},
+      CCMP_NRO_COM_PAG_NO_DOMICILIADO = #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR},
+      CCMP_IMP_TOTAL = #{CCMP_IMP_TOTAL,jdbcType=DOUBLE},
+      CCMP_TIP_CAMBIO = #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE},
+      CCMP_FEC_DOC_REFERENCIA = #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      CCMP_TIP_DOC_REFERENCIA = #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      CCMP_NUM_DOC_REFERENCIA = #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      CCMP_ESTADO = #{CCMP_ESTADO,jdbcType=CHAR},
+      CCMP_OBSERVACION = #{CCMP_OBSERVACION,jdbcType=VARCHAR},
+      CCMP_EST_ANTERIOR = #{CCMP_EST_ANTERIOR,jdbcType=CHAR},
+      CCMP_OBS_ANTERIOR = #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR},
+      CCMP_PERIDO = #{CCMP_PERIDO,jdbcType=DATE},
+      CCMP_TIP_MONEDA = #{CCMP_TIP_MONEDA,jdbcType=CHAR},
+      CCMP_FEC_CREACION = #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP},
+      CCMP_FEC_MODIFICACION = #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      CCMP_USU_CREACION = #{CCMP_USU_CREACION,jdbcType=VARCHAR},
+      CCMP_US_MODIFICACION = #{CCMP_US_MODIFICACION,jdbcType=VARCHAR},
+      CCMP_IND_PAGADO = #{CCMP_IND_PAGADO,jdbcType=CHAR},
+      CCMP_CMM_DOCUMENTO = #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      CCMP_NUM_CNS_DPT_DETRACCION = #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR},
+      CCMP_FEC_EMI_CNS_DPT_DETRACCION = #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE},
+      CCMP_PRC_IGV = #{CCMP_PRC_IGV,jdbcType=DOUBLE}
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.sgv.base.dao.model.ControlCompra">
+    <id column="CCMP_ID" jdbcType="BIGINT" property="CCMP_ID" />
+    <result column="CCMP_FEC_EMI_DOCUMENTO" jdbcType="DATE" property="CCMP_FEC_EMI_DOCUMENTO" />
+    <result column="CCMP_FEC_VEN_DOCUMENTO" jdbcType="DATE" property="CCMP_FEC_VEN_DOCUMENTO" />
+    <result column="CCMP_TIP_DOCUMENTO" jdbcType="CHAR" property="CCMP_TIP_DOCUMENTO" />
+    <result column="CCMP_NUM_DOCUMENTO" jdbcType="VARCHAR" property="CCMP_NUM_DOCUMENTO" />
+    <result column="CCMP_TIP_DOC_EMISOR" jdbcType="CHAR" property="CCMP_TIP_DOC_EMISOR" />
+    <result column="CCMP_NUM_DOC_EMISOR" jdbcType="VARCHAR" property="CCMP_NUM_DOC_EMISOR" />
+    <result column="CCMP_RAZ_SOC_EMISOR" jdbcType="VARCHAR" property="CCMP_RAZ_SOC_EMISOR" />
+    <result column="CCMP_TIP_DOC_RECEPTOR" jdbcType="CHAR" property="CCMP_TIP_DOC_RECEPTOR" />
+    <result column="CCMP_NUM_DOC_RECEPTOR" jdbcType="VARCHAR" property="CCMP_NUM_DOC_RECEPTOR" />
+    <result column="CCMP_RAZ_SOC_RECEPTOR" jdbcType="VARCHAR" property="CCMP_RAZ_SOC_RECEPTOR" />
+    <result column="CCMP_VAL_OPE_GRAVADA" jdbcType="DOUBLE" property="CCMP_VAL_OPE_GRAVADA" />
+    <result column="CCMP_VAL_OPE_NO_GRAVADA" jdbcType="DOUBLE" property="CCMP_VAL_OPE_NO_GRAVADA" />
+    <result column="CCMP_IGV" jdbcType="DOUBLE" property="CCMP_IGV" />
+    <result column="CCMP_NRO_COM_PAG_NO_DOMICILIADO" jdbcType="VARCHAR" property="CCMP_NRO_COM_PAG_NO_DOMICILIADO" />
+    <result column="CCMP_IMP_TOTAL" jdbcType="DOUBLE" property="CCMP_IMP_TOTAL" />
+    <result column="CCMP_TIP_CAMBIO" jdbcType="DOUBLE" property="CCMP_TIP_CAMBIO" />
+    <result column="CCMP_FEC_DOC_REFERENCIA" jdbcType="DATE" property="CCMP_FEC_DOC_REFERENCIA" />
+    <result column="CCMP_TIP_DOC_REFERENCIA" jdbcType="CHAR" property="CCMP_TIP_DOC_REFERENCIA" />
+    <result column="CCMP_NUM_DOC_REFERENCIA" jdbcType="VARCHAR" property="CCMP_NUM_DOC_REFERENCIA" />
+    <result column="CCMP_ESTADO" jdbcType="CHAR" property="CCMP_ESTADO" />
+    <result column="CCMP_OBSERVACION" jdbcType="VARCHAR" property="CCMP_OBSERVACION" />
+    <result column="CCMP_EST_ANTERIOR" jdbcType="CHAR" property="CCMP_EST_ANTERIOR" />
+    <result column="CCMP_OBS_ANTERIOR" jdbcType="VARCHAR" property="CCMP_OBS_ANTERIOR" />
+    <result column="CCMP_PERIDO" jdbcType="DATE" property="CCMP_PERIDO" />
+    <result column="CCMP_TIP_MONEDA" jdbcType="CHAR" property="CCMP_TIP_MONEDA" />
+    <result column="CCMP_FEC_CREACION" jdbcType="TIMESTAMP" property="CCMP_FEC_CREACION" />
+    <result column="CCMP_FEC_MODIFICACION" jdbcType="TIMESTAMP" property="CCMP_FEC_MODIFICACION" />
+    <result column="CCMP_USU_CREACION" jdbcType="VARCHAR" property="CCMP_USU_CREACION" />
+    <result column="CCMP_US_MODIFICACION" jdbcType="VARCHAR" property="CCMP_US_MODIFICACION" />
+    <result column="CCMP_IND_PAGADO" jdbcType="CHAR" property="CCMP_IND_PAGADO" />
+    <result column="CCMP_CMM_DOCUMENTO" jdbcType="VARCHAR" property="CCMP_CMM_DOCUMENTO" />
+    <result column="CCMP_NUM_CNS_DPT_DETRACCION" jdbcType="VARCHAR" property="CCMP_NUM_CNS_DPT_DETRACCION" />
+    <result column="CCMP_FEC_EMI_CNS_DPT_DETRACCION" jdbcType="DATE" property="CCMP_FEC_EMI_CNS_DPT_DETRACCION" />
+    <result column="CCMP_PRC_IGV" jdbcType="DOUBLE" property="CCMP_PRC_IGV" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CCMP_ID, CCMP_FEC_EMI_DOCUMENTO, CCMP_FEC_VEN_DOCUMENTO, CCMP_TIP_DOCUMENTO, CCMP_NUM_DOCUMENTO, 
+    CCMP_TIP_DOC_EMISOR, CCMP_NUM_DOC_EMISOR, CCMP_RAZ_SOC_EMISOR, CCMP_TIP_DOC_RECEPTOR, 
+    CCMP_NUM_DOC_RECEPTOR, CCMP_RAZ_SOC_RECEPTOR, CCMP_VAL_OPE_GRAVADA, CCMP_VAL_OPE_NO_GRAVADA, 
+    CCMP_IGV, CCMP_NRO_COM_PAG_NO_DOMICILIADO, CCMP_IMP_TOTAL, CCMP_TIP_CAMBIO, CCMP_FEC_DOC_REFERENCIA, 
+    CCMP_TIP_DOC_REFERENCIA, CCMP_NUM_DOC_REFERENCIA, CCMP_ESTADO, CCMP_OBSERVACION, 
+    CCMP_EST_ANTERIOR, CCMP_OBS_ANTERIOR, CCMP_PERIDO, CCMP_TIP_MONEDA, CCMP_FEC_CREACION, 
+    CCMP_FEC_MODIFICACION, CCMP_USU_CREACION, CCMP_US_MODIFICACION, CCMP_IND_PAGADO, 
+    CCMP_CMM_DOCUMENTO, CCMP_NUM_CNS_DPT_DETRACCION, CCMP_FEC_EMI_CNS_DPT_DETRACCION, 
+    CCMP_PRC_IGV
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from control_compra
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from control_compra
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.base.dao.model.ControlCompra">
+    insert into control_compra (CCMP_ID, CCMP_FEC_EMI_DOCUMENTO, CCMP_FEC_VEN_DOCUMENTO, 
+      CCMP_TIP_DOCUMENTO, CCMP_NUM_DOCUMENTO, CCMP_TIP_DOC_EMISOR, 
+      CCMP_NUM_DOC_EMISOR, CCMP_RAZ_SOC_EMISOR, 
+      CCMP_TIP_DOC_RECEPTOR, CCMP_NUM_DOC_RECEPTOR, 
+      CCMP_RAZ_SOC_RECEPTOR, CCMP_VAL_OPE_GRAVADA, 
+      CCMP_VAL_OPE_NO_GRAVADA, CCMP_IGV, CCMP_NRO_COM_PAG_NO_DOMICILIADO, 
+      CCMP_IMP_TOTAL, CCMP_TIP_CAMBIO, CCMP_FEC_DOC_REFERENCIA, 
+      CCMP_TIP_DOC_REFERENCIA, CCMP_NUM_DOC_REFERENCIA, 
+      CCMP_ESTADO, CCMP_OBSERVACION, CCMP_EST_ANTERIOR, 
+      CCMP_OBS_ANTERIOR, CCMP_PERIDO, CCMP_TIP_MONEDA, 
+      CCMP_FEC_CREACION, CCMP_FEC_MODIFICACION, 
+      CCMP_USU_CREACION, CCMP_US_MODIFICACION, 
+      CCMP_IND_PAGADO, CCMP_CMM_DOCUMENTO, CCMP_NUM_CNS_DPT_DETRACCION, 
+      CCMP_FEC_EMI_CNS_DPT_DETRACCION, CCMP_PRC_IGV
+      )
+    values (#{CCMP_ID,jdbcType=BIGINT}, #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE}, #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE}, 
+      #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR}, #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR}, #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR}, 
+      #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR}, #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR}, 
+      #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR}, #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR}, 
+      #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR}, #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE}, 
+      #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE}, #{CCMP_IGV,jdbcType=DOUBLE}, #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR}, 
+      #{CCMP_IMP_TOTAL,jdbcType=DOUBLE}, #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE}, #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE}, 
+      #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR}, #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR}, 
+      #{CCMP_ESTADO,jdbcType=CHAR}, #{CCMP_OBSERVACION,jdbcType=VARCHAR}, #{CCMP_EST_ANTERIOR,jdbcType=CHAR}, 
+      #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR}, #{CCMP_PERIDO,jdbcType=DATE}, #{CCMP_TIP_MONEDA,jdbcType=CHAR}, 
+      #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP}, #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP}, 
+      #{CCMP_USU_CREACION,jdbcType=VARCHAR}, #{CCMP_US_MODIFICACION,jdbcType=VARCHAR}, 
+      #{CCMP_IND_PAGADO,jdbcType=CHAR}, #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR}, #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR}, 
+      #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE}, #{CCMP_PRC_IGV,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.base.dao.model.ControlCompra">
+    insert into control_compra
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="CCMP_ID != null">
+        CCMP_ID,
+      </if>
+      <if test="CCMP_FEC_EMI_DOCUMENTO != null">
+        CCMP_FEC_EMI_DOCUMENTO,
+      </if>
+      <if test="CCMP_FEC_VEN_DOCUMENTO != null">
+        CCMP_FEC_VEN_DOCUMENTO,
+      </if>
+      <if test="CCMP_TIP_DOCUMENTO != null">
+        CCMP_TIP_DOCUMENTO,
+      </if>
+      <if test="CCMP_NUM_DOCUMENTO != null">
+        CCMP_NUM_DOCUMENTO,
+      </if>
+      <if test="CCMP_TIP_DOC_EMISOR != null">
+        CCMP_TIP_DOC_EMISOR,
+      </if>
+      <if test="CCMP_NUM_DOC_EMISOR != null">
+        CCMP_NUM_DOC_EMISOR,
+      </if>
+      <if test="CCMP_RAZ_SOC_EMISOR != null">
+        CCMP_RAZ_SOC_EMISOR,
+      </if>
+      <if test="CCMP_TIP_DOC_RECEPTOR != null">
+        CCMP_TIP_DOC_RECEPTOR,
+      </if>
+      <if test="CCMP_NUM_DOC_RECEPTOR != null">
+        CCMP_NUM_DOC_RECEPTOR,
+      </if>
+      <if test="CCMP_RAZ_SOC_RECEPTOR != null">
+        CCMP_RAZ_SOC_RECEPTOR,
+      </if>
+      <if test="CCMP_VAL_OPE_GRAVADA != null">
+        CCMP_VAL_OPE_GRAVADA,
+      </if>
+      <if test="CCMP_VAL_OPE_NO_GRAVADA != null">
+        CCMP_VAL_OPE_NO_GRAVADA,
+      </if>
+      <if test="CCMP_IGV != null">
+        CCMP_IGV,
+      </if>
+      <if test="CCMP_NRO_COM_PAG_NO_DOMICILIADO != null">
+        CCMP_NRO_COM_PAG_NO_DOMICILIADO,
+      </if>
+      <if test="CCMP_IMP_TOTAL != null">
+        CCMP_IMP_TOTAL,
+      </if>
+      <if test="CCMP_TIP_CAMBIO != null">
+        CCMP_TIP_CAMBIO,
+      </if>
+      <if test="CCMP_FEC_DOC_REFERENCIA != null">
+        CCMP_FEC_DOC_REFERENCIA,
+      </if>
+      <if test="CCMP_TIP_DOC_REFERENCIA != null">
+        CCMP_TIP_DOC_REFERENCIA,
+      </if>
+      <if test="CCMP_NUM_DOC_REFERENCIA != null">
+        CCMP_NUM_DOC_REFERENCIA,
+      </if>
+      <if test="CCMP_ESTADO != null">
+        CCMP_ESTADO,
+      </if>
+      <if test="CCMP_OBSERVACION != null">
+        CCMP_OBSERVACION,
+      </if>
+      <if test="CCMP_EST_ANTERIOR != null">
+        CCMP_EST_ANTERIOR,
+      </if>
+      <if test="CCMP_OBS_ANTERIOR != null">
+        CCMP_OBS_ANTERIOR,
+      </if>
+      <if test="CCMP_PERIDO != null">
+        CCMP_PERIDO,
+      </if>
+      <if test="CCMP_TIP_MONEDA != null">
+        CCMP_TIP_MONEDA,
+      </if>
+      <if test="CCMP_FEC_CREACION != null">
+        CCMP_FEC_CREACION,
+      </if>
+      <if test="CCMP_FEC_MODIFICACION != null">
+        CCMP_FEC_MODIFICACION,
+      </if>
+      <if test="CCMP_USU_CREACION != null">
+        CCMP_USU_CREACION,
+      </if>
+      <if test="CCMP_US_MODIFICACION != null">
+        CCMP_US_MODIFICACION,
+      </if>
+      <if test="CCMP_IND_PAGADO != null">
+        CCMP_IND_PAGADO,
+      </if>
+      <if test="CCMP_CMM_DOCUMENTO != null">
+        CCMP_CMM_DOCUMENTO,
+      </if>
+      <if test="CCMP_NUM_CNS_DPT_DETRACCION != null">
+        CCMP_NUM_CNS_DPT_DETRACCION,
+      </if>
+      <if test="CCMP_FEC_EMI_CNS_DPT_DETRACCION != null">
+        CCMP_FEC_EMI_CNS_DPT_DETRACCION,
+      </if>
+      <if test="CCMP_PRC_IGV != null">
+        CCMP_PRC_IGV,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CCMP_ID != null">
+        #{CCMP_ID,jdbcType=BIGINT},
+      </if>
+      <if test="CCMP_FEC_EMI_DOCUMENTO != null">
+        #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_FEC_VEN_DOCUMENTO != null">
+        #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOCUMENTO != null">
+        #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOCUMENTO != null">
+        #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_EMISOR != null">
+        #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_EMISOR != null">
+        #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_EMISOR != null">
+        #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_RECEPTOR != null">
+        #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_RECEPTOR != null">
+        #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_RECEPTOR != null">
+        #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_VAL_OPE_GRAVADA != null">
+        #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_VAL_OPE_NO_GRAVADA != null">
+        #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_IGV != null">
+        #{CCMP_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_NRO_COM_PAG_NO_DOMICILIADO != null">
+        #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IMP_TOTAL != null">
+        #{CCMP_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_TIP_CAMBIO != null">
+        #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_FEC_DOC_REFERENCIA != null">
+        #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOC_REFERENCIA != null">
+        #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_REFERENCIA != null">
+        #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_ESTADO != null">
+        #{CCMP_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBSERVACION != null">
+        #{CCMP_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_EST_ANTERIOR != null">
+        #{CCMP_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBS_ANTERIOR != null">
+        #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_PERIDO != null">
+        #{CCMP_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_MONEDA != null">
+        #{CCMP_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_FEC_CREACION != null">
+        #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_FEC_MODIFICACION != null">
+        #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_USU_CREACION != null">
+        #{CCMP_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_US_MODIFICACION != null">
+        #{CCMP_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IND_PAGADO != null">
+        #{CCMP_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_CMM_DOCUMENTO != null">
+        #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_NUM_CNS_DPT_DETRACCION != null">
+        #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_FEC_EMI_CNS_DPT_DETRACCION != null">
+        #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE},
+      </if>
+      <if test="CCMP_PRC_IGV != null">
+        #{CCMP_PRC_IGV,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.base.dao.model.ControlCompra">
+    update control_compra
+    <set>
+      <if test="CCMP_FEC_EMI_DOCUMENTO != null">
+        CCMP_FEC_EMI_DOCUMENTO = #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_FEC_VEN_DOCUMENTO != null">
+        CCMP_FEC_VEN_DOCUMENTO = #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOCUMENTO != null">
+        CCMP_TIP_DOCUMENTO = #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOCUMENTO != null">
+        CCMP_NUM_DOCUMENTO = #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_EMISOR != null">
+        CCMP_TIP_DOC_EMISOR = #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_EMISOR != null">
+        CCMP_NUM_DOC_EMISOR = #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_EMISOR != null">
+        CCMP_RAZ_SOC_EMISOR = #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_TIP_DOC_RECEPTOR != null">
+        CCMP_TIP_DOC_RECEPTOR = #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_RECEPTOR != null">
+        CCMP_NUM_DOC_RECEPTOR = #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_RAZ_SOC_RECEPTOR != null">
+        CCMP_RAZ_SOC_RECEPTOR = #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_VAL_OPE_GRAVADA != null">
+        CCMP_VAL_OPE_GRAVADA = #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_VAL_OPE_NO_GRAVADA != null">
+        CCMP_VAL_OPE_NO_GRAVADA = #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_IGV != null">
+        CCMP_IGV = #{CCMP_IGV,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_NRO_COM_PAG_NO_DOMICILIADO != null">
+        CCMP_NRO_COM_PAG_NO_DOMICILIADO = #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IMP_TOTAL != null">
+        CCMP_IMP_TOTAL = #{CCMP_IMP_TOTAL,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_TIP_CAMBIO != null">
+        CCMP_TIP_CAMBIO = #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE},
+      </if>
+      <if test="CCMP_FEC_DOC_REFERENCIA != null">
+        CCMP_FEC_DOC_REFERENCIA = #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_DOC_REFERENCIA != null">
+        CCMP_TIP_DOC_REFERENCIA = #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_NUM_DOC_REFERENCIA != null">
+        CCMP_NUM_DOC_REFERENCIA = #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_ESTADO != null">
+        CCMP_ESTADO = #{CCMP_ESTADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBSERVACION != null">
+        CCMP_OBSERVACION = #{CCMP_OBSERVACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_EST_ANTERIOR != null">
+        CCMP_EST_ANTERIOR = #{CCMP_EST_ANTERIOR,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_OBS_ANTERIOR != null">
+        CCMP_OBS_ANTERIOR = #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_PERIDO != null">
+        CCMP_PERIDO = #{CCMP_PERIDO,jdbcType=DATE},
+      </if>
+      <if test="CCMP_TIP_MONEDA != null">
+        CCMP_TIP_MONEDA = #{CCMP_TIP_MONEDA,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_FEC_CREACION != null">
+        CCMP_FEC_CREACION = #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_FEC_MODIFICACION != null">
+        CCMP_FEC_MODIFICACION = #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CCMP_USU_CREACION != null">
+        CCMP_USU_CREACION = #{CCMP_USU_CREACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_US_MODIFICACION != null">
+        CCMP_US_MODIFICACION = #{CCMP_US_MODIFICACION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_IND_PAGADO != null">
+        CCMP_IND_PAGADO = #{CCMP_IND_PAGADO,jdbcType=CHAR},
+      </if>
+      <if test="CCMP_CMM_DOCUMENTO != null">
+        CCMP_CMM_DOCUMENTO = #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_NUM_CNS_DPT_DETRACCION != null">
+        CCMP_NUM_CNS_DPT_DETRACCION = #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR},
+      </if>
+      <if test="CCMP_FEC_EMI_CNS_DPT_DETRACCION != null">
+        CCMP_FEC_EMI_CNS_DPT_DETRACCION = #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE},
+      </if>
+      <if test="CCMP_PRC_IGV != null">
+        CCMP_PRC_IGV = #{CCMP_PRC_IGV,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.base.dao.model.ControlCompra">
+    update control_compra
+    set CCMP_FEC_EMI_DOCUMENTO = #{CCMP_FEC_EMI_DOCUMENTO,jdbcType=DATE},
+      CCMP_FEC_VEN_DOCUMENTO = #{CCMP_FEC_VEN_DOCUMENTO,jdbcType=DATE},
+      CCMP_TIP_DOCUMENTO = #{CCMP_TIP_DOCUMENTO,jdbcType=CHAR},
+      CCMP_NUM_DOCUMENTO = #{CCMP_NUM_DOCUMENTO,jdbcType=VARCHAR},
+      CCMP_TIP_DOC_EMISOR = #{CCMP_TIP_DOC_EMISOR,jdbcType=CHAR},
+      CCMP_NUM_DOC_EMISOR = #{CCMP_NUM_DOC_EMISOR,jdbcType=VARCHAR},
+      CCMP_RAZ_SOC_EMISOR = #{CCMP_RAZ_SOC_EMISOR,jdbcType=VARCHAR},
+      CCMP_TIP_DOC_RECEPTOR = #{CCMP_TIP_DOC_RECEPTOR,jdbcType=CHAR},
+      CCMP_NUM_DOC_RECEPTOR = #{CCMP_NUM_DOC_RECEPTOR,jdbcType=VARCHAR},
+      CCMP_RAZ_SOC_RECEPTOR = #{CCMP_RAZ_SOC_RECEPTOR,jdbcType=VARCHAR},
+      CCMP_VAL_OPE_GRAVADA = #{CCMP_VAL_OPE_GRAVADA,jdbcType=DOUBLE},
+      CCMP_VAL_OPE_NO_GRAVADA = #{CCMP_VAL_OPE_NO_GRAVADA,jdbcType=DOUBLE},
+      CCMP_IGV = #{CCMP_IGV,jdbcType=DOUBLE},
+      CCMP_NRO_COM_PAG_NO_DOMICILIADO = #{CCMP_NRO_COM_PAG_NO_DOMICILIADO,jdbcType=VARCHAR},
+      CCMP_IMP_TOTAL = #{CCMP_IMP_TOTAL,jdbcType=DOUBLE},
+      CCMP_TIP_CAMBIO = #{CCMP_TIP_CAMBIO,jdbcType=DOUBLE},
+      CCMP_FEC_DOC_REFERENCIA = #{CCMP_FEC_DOC_REFERENCIA,jdbcType=DATE},
+      CCMP_TIP_DOC_REFERENCIA = #{CCMP_TIP_DOC_REFERENCIA,jdbcType=CHAR},
+      CCMP_NUM_DOC_REFERENCIA = #{CCMP_NUM_DOC_REFERENCIA,jdbcType=VARCHAR},
+      CCMP_ESTADO = #{CCMP_ESTADO,jdbcType=CHAR},
+      CCMP_OBSERVACION = #{CCMP_OBSERVACION,jdbcType=VARCHAR},
+      CCMP_EST_ANTERIOR = #{CCMP_EST_ANTERIOR,jdbcType=CHAR},
+      CCMP_OBS_ANTERIOR = #{CCMP_OBS_ANTERIOR,jdbcType=VARCHAR},
+      CCMP_PERIDO = #{CCMP_PERIDO,jdbcType=DATE},
+      CCMP_TIP_MONEDA = #{CCMP_TIP_MONEDA,jdbcType=CHAR},
+      CCMP_FEC_CREACION = #{CCMP_FEC_CREACION,jdbcType=TIMESTAMP},
+      CCMP_FEC_MODIFICACION = #{CCMP_FEC_MODIFICACION,jdbcType=TIMESTAMP},
+      CCMP_USU_CREACION = #{CCMP_USU_CREACION,jdbcType=VARCHAR},
+      CCMP_US_MODIFICACION = #{CCMP_US_MODIFICACION,jdbcType=VARCHAR},
+      CCMP_IND_PAGADO = #{CCMP_IND_PAGADO,jdbcType=CHAR},
+      CCMP_CMM_DOCUMENTO = #{CCMP_CMM_DOCUMENTO,jdbcType=VARCHAR},
+      CCMP_NUM_CNS_DPT_DETRACCION = #{CCMP_NUM_CNS_DPT_DETRACCION,jdbcType=VARCHAR},
+      CCMP_FEC_EMI_CNS_DPT_DETRACCION = #{CCMP_FEC_EMI_CNS_DPT_DETRACCION,jdbcType=DATE},
+      CCMP_PRC_IGV = #{CCMP_PRC_IGV,jdbcType=DOUBLE}
+    where CCMP_ID = #{CCMP_ID,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktContactMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktContact">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="DTYPE" jdbcType="VARCHAR" property="DTYPE" />
+    <result column="BIRTHDAY" jdbcType="DATE" property="BIRTHDAY" />
+    <result column="COMPANY" jdbcType="VARCHAR" property="COMPANY" />
+    <result column="CONTACTTYPE" jdbcType="INTEGER" property="CONTACTTYPE" />
+    <result column="CUSTOMERNUMBER" jdbcType="VARCHAR" property="CUSTOMERNUMBER" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="DISCOUNT" jdbcType="DOUBLE" property="DISCOUNT" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="EMAIL" />
+    <result column="FAX" jdbcType="VARCHAR" property="FAX" />
+    <result column="FIRSTNAME" jdbcType="VARCHAR" property="FIRSTNAME" />
+    <result column="GENDER" jdbcType="INTEGER" property="GENDER" />
+    <result column="GLN" jdbcType="BIGINT" property="GLN" />
+    <result column="MANDATEREFERENCE" jdbcType="VARCHAR" property="MANDATEREFERENCE" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="MOBILE" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="NOTE" jdbcType="VARCHAR" property="NOTE" />
+    <result column="PHONE" jdbcType="VARCHAR" property="PHONE" />
+    <result column="RELIABILITY" jdbcType="VARCHAR" property="RELIABILITY" />
+    <result column="SUPPLIERNUMBER" jdbcType="VARCHAR" property="SUPPLIERNUMBER" />
+    <result column="TITLE" jdbcType="VARCHAR" property="TITLE" />
+    <result column="USENETGROSS" jdbcType="SMALLINT" property="USENETGROSS" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="VATNUMBER" jdbcType="VARCHAR" property="VATNUMBER" />
+    <result column="VATNUMBERVALID" jdbcType="BIT" property="VATNUMBERVALID" />
+    <result column="WEBSHOPNAME" jdbcType="VARCHAR" property="WEBSHOPNAME" />
+    <result column="WEBSITE" jdbcType="VARCHAR" property="WEBSITE" />
+    <result column="FK_ADDRESS" jdbcType="BIGINT" property="FK_ADDRESS" />
+    <result column="FK_ALTERNATECONTACT" jdbcType="BIGINT" property="FK_ALTERNATECONTACT" />
+    <result column="FK_BANKACCOUNT" jdbcType="BIGINT" property="FK_BANKACCOUNT" />
+    <result column="FK_CATEGORY" jdbcType="BIGINT" property="FK_CATEGORY" />
+    <result column="FK_PAYMENT" jdbcType="BIGINT" property="FK_PAYMENT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DTYPE, BIRTHDAY, COMPANY, CONTACTTYPE, CUSTOMERNUMBER, DATEADDED, DELETED, DISCOUNT, 
+    EMAIL, FAX, FIRSTNAME, GENDER, GLN, MANDATEREFERENCE, MOBILE, MODIFIED, MODIFIEDBY, 
+    NAME, NOTE, PHONE, RELIABILITY, SUPPLIERNUMBER, TITLE, USENETGROSS, VALIDFROM, VALIDTO, 
+    VATNUMBER, VATNUMBERVALID, WEBSHOPNAME, WEBSITE, FK_ADDRESS, FK_ALTERNATECONTACT, 
+    FK_BANKACCOUNT, FK_CATEGORY, FK_PAYMENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_contact
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_contact
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktContact">
+    insert into fkt_contact (ID, DTYPE, BIRTHDAY, 
+      COMPANY, CONTACTTYPE, CUSTOMERNUMBER, 
+      DATEADDED, DELETED, DISCOUNT, 
+      EMAIL, FAX, FIRSTNAME, 
+      GENDER, GLN, MANDATEREFERENCE, 
+      MOBILE, MODIFIED, MODIFIEDBY, 
+      NAME, NOTE, PHONE, 
+      RELIABILITY, SUPPLIERNUMBER, TITLE, 
+      USENETGROSS, VALIDFROM, VALIDTO, 
+      VATNUMBER, VATNUMBERVALID, WEBSHOPNAME, 
+      WEBSITE, FK_ADDRESS, FK_ALTERNATECONTACT, 
+      FK_BANKACCOUNT, FK_CATEGORY, FK_PAYMENT
+      )
+    values (#{ID,jdbcType=BIGINT}, #{DTYPE,jdbcType=VARCHAR}, #{BIRTHDAY,jdbcType=DATE}, 
+      #{COMPANY,jdbcType=VARCHAR}, #{CONTACTTYPE,jdbcType=INTEGER}, #{CUSTOMERNUMBER,jdbcType=VARCHAR}, 
+      #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, #{DISCOUNT,jdbcType=DOUBLE}, 
+      #{EMAIL,jdbcType=VARCHAR}, #{FAX,jdbcType=VARCHAR}, #{FIRSTNAME,jdbcType=VARCHAR}, 
+      #{GENDER,jdbcType=INTEGER}, #{GLN,jdbcType=BIGINT}, #{MANDATEREFERENCE,jdbcType=VARCHAR}, 
+      #{MOBILE,jdbcType=VARCHAR}, #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, 
+      #{NAME,jdbcType=VARCHAR}, #{NOTE,jdbcType=VARCHAR}, #{PHONE,jdbcType=VARCHAR}, 
+      #{RELIABILITY,jdbcType=VARCHAR}, #{SUPPLIERNUMBER,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, 
+      #{USENETGROSS,jdbcType=SMALLINT}, #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE}, 
+      #{VATNUMBER,jdbcType=VARCHAR}, #{VATNUMBERVALID,jdbcType=BIT}, #{WEBSHOPNAME,jdbcType=VARCHAR}, 
+      #{WEBSITE,jdbcType=VARCHAR}, #{FK_ADDRESS,jdbcType=BIGINT}, #{FK_ALTERNATECONTACT,jdbcType=BIGINT}, 
+      #{FK_BANKACCOUNT,jdbcType=BIGINT}, #{FK_CATEGORY,jdbcType=BIGINT}, #{FK_PAYMENT,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktContact">
+    insert into fkt_contact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DTYPE != null">
+        DTYPE,
+      </if>
+      <if test="BIRTHDAY != null">
+        BIRTHDAY,
+      </if>
+      <if test="COMPANY != null">
+        COMPANY,
+      </if>
+      <if test="CONTACTTYPE != null">
+        CONTACTTYPE,
+      </if>
+      <if test="CUSTOMERNUMBER != null">
+        CUSTOMERNUMBER,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="DISCOUNT != null">
+        DISCOUNT,
+      </if>
+      <if test="EMAIL != null">
+        EMAIL,
+      </if>
+      <if test="FAX != null">
+        FAX,
+      </if>
+      <if test="FIRSTNAME != null">
+        FIRSTNAME,
+      </if>
+      <if test="GENDER != null">
+        GENDER,
+      </if>
+      <if test="GLN != null">
+        GLN,
+      </if>
+      <if test="MANDATEREFERENCE != null">
+        MANDATEREFERENCE,
+      </if>
+      <if test="MOBILE != null">
+        MOBILE,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="NOTE != null">
+        NOTE,
+      </if>
+      <if test="PHONE != null">
+        PHONE,
+      </if>
+      <if test="RELIABILITY != null">
+        RELIABILITY,
+      </if>
+      <if test="SUPPLIERNUMBER != null">
+        SUPPLIERNUMBER,
+      </if>
+      <if test="TITLE != null">
+        TITLE,
+      </if>
+      <if test="USENETGROSS != null">
+        USENETGROSS,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="VATNUMBER != null">
+        VATNUMBER,
+      </if>
+      <if test="VATNUMBERVALID != null">
+        VATNUMBERVALID,
+      </if>
+      <if test="WEBSHOPNAME != null">
+        WEBSHOPNAME,
+      </if>
+      <if test="WEBSITE != null">
+        WEBSITE,
+      </if>
+      <if test="FK_ADDRESS != null">
+        FK_ADDRESS,
+      </if>
+      <if test="FK_ALTERNATECONTACT != null">
+        FK_ALTERNATECONTACT,
+      </if>
+      <if test="FK_BANKACCOUNT != null">
+        FK_BANKACCOUNT,
+      </if>
+      <if test="FK_CATEGORY != null">
+        FK_CATEGORY,
+      </if>
+      <if test="FK_PAYMENT != null">
+        FK_PAYMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="DTYPE != null">
+        #{DTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="BIRTHDAY != null">
+        #{BIRTHDAY,jdbcType=DATE},
+      </if>
+      <if test="COMPANY != null">
+        #{COMPANY,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTACTTYPE != null">
+        #{CONTACTTYPE,jdbcType=INTEGER},
+      </if>
+      <if test="CUSTOMERNUMBER != null">
+        #{CUSTOMERNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DISCOUNT != null">
+        #{DISCOUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="EMAIL != null">
+        #{EMAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="FAX != null">
+        #{FAX,jdbcType=VARCHAR},
+      </if>
+      <if test="FIRSTNAME != null">
+        #{FIRSTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="GENDER != null">
+        #{GENDER,jdbcType=INTEGER},
+      </if>
+      <if test="GLN != null">
+        #{GLN,jdbcType=BIGINT},
+      </if>
+      <if test="MANDATEREFERENCE != null">
+        #{MANDATEREFERENCE,jdbcType=VARCHAR},
+      </if>
+      <if test="MOBILE != null">
+        #{MOBILE,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NOTE != null">
+        #{NOTE,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="RELIABILITY != null">
+        #{RELIABILITY,jdbcType=VARCHAR},
+      </if>
+      <if test="SUPPLIERNUMBER != null">
+        #{SUPPLIERNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="TITLE != null">
+        #{TITLE,jdbcType=VARCHAR},
+      </if>
+      <if test="USENETGROSS != null">
+        #{USENETGROSS,jdbcType=SMALLINT},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="VATNUMBER != null">
+        #{VATNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="VATNUMBERVALID != null">
+        #{VATNUMBERVALID,jdbcType=BIT},
+      </if>
+      <if test="WEBSHOPNAME != null">
+        #{WEBSHOPNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="WEBSITE != null">
+        #{WEBSITE,jdbcType=VARCHAR},
+      </if>
+      <if test="FK_ADDRESS != null">
+        #{FK_ADDRESS,jdbcType=BIGINT},
+      </if>
+      <if test="FK_ALTERNATECONTACT != null">
+        #{FK_ALTERNATECONTACT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_BANKACCOUNT != null">
+        #{FK_BANKACCOUNT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_CATEGORY != null">
+        #{FK_CATEGORY,jdbcType=BIGINT},
+      </if>
+      <if test="FK_PAYMENT != null">
+        #{FK_PAYMENT,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.model.FktContact">
+    update fkt_contact
+    <set>
+      <if test="DTYPE != null">
+        DTYPE = #{DTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="BIRTHDAY != null">
+        BIRTHDAY = #{BIRTHDAY,jdbcType=DATE},
+      </if>
+      <if test="COMPANY != null">
+        COMPANY = #{COMPANY,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTACTTYPE != null">
+        CONTACTTYPE = #{CONTACTTYPE,jdbcType=INTEGER},
+      </if>
+      <if test="CUSTOMERNUMBER != null">
+        CUSTOMERNUMBER = #{CUSTOMERNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DISCOUNT != null">
+        DISCOUNT = #{DISCOUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="EMAIL != null">
+        EMAIL = #{EMAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="FAX != null">
+        FAX = #{FAX,jdbcType=VARCHAR},
+      </if>
+      <if test="FIRSTNAME != null">
+        FIRSTNAME = #{FIRSTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="GENDER != null">
+        GENDER = #{GENDER,jdbcType=INTEGER},
+      </if>
+      <if test="GLN != null">
+        GLN = #{GLN,jdbcType=BIGINT},
+      </if>
+      <if test="MANDATEREFERENCE != null">
+        MANDATEREFERENCE = #{MANDATEREFERENCE,jdbcType=VARCHAR},
+      </if>
+      <if test="MOBILE != null">
+        MOBILE = #{MOBILE,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NOTE != null">
+        NOTE = #{NOTE,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        PHONE = #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="RELIABILITY != null">
+        RELIABILITY = #{RELIABILITY,jdbcType=VARCHAR},
+      </if>
+      <if test="SUPPLIERNUMBER != null">
+        SUPPLIERNUMBER = #{SUPPLIERNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="TITLE != null">
+        TITLE = #{TITLE,jdbcType=VARCHAR},
+      </if>
+      <if test="USENETGROSS != null">
+        USENETGROSS = #{USENETGROSS,jdbcType=SMALLINT},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="VATNUMBER != null">
+        VATNUMBER = #{VATNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="VATNUMBERVALID != null">
+        VATNUMBERVALID = #{VATNUMBERVALID,jdbcType=BIT},
+      </if>
+      <if test="WEBSHOPNAME != null">
+        WEBSHOPNAME = #{WEBSHOPNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="WEBSITE != null">
+        WEBSITE = #{WEBSITE,jdbcType=VARCHAR},
+      </if>
+      <if test="FK_ADDRESS != null">
+        FK_ADDRESS = #{FK_ADDRESS,jdbcType=BIGINT},
+      </if>
+      <if test="FK_ALTERNATECONTACT != null">
+        FK_ALTERNATECONTACT = #{FK_ALTERNATECONTACT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_BANKACCOUNT != null">
+        FK_BANKACCOUNT = #{FK_BANKACCOUNT,jdbcType=BIGINT},
+      </if>
+      <if test="FK_CATEGORY != null">
+        FK_CATEGORY = #{FK_CATEGORY,jdbcType=BIGINT},
+      </if>
+      <if test="FK_PAYMENT != null">
+        FK_PAYMENT = #{FK_PAYMENT,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.model.FktContact">
+    update fkt_contact
+    set DTYPE = #{DTYPE,jdbcType=VARCHAR},
+      BIRTHDAY = #{BIRTHDAY,jdbcType=DATE},
+      COMPANY = #{COMPANY,jdbcType=VARCHAR},
+      CONTACTTYPE = #{CONTACTTYPE,jdbcType=INTEGER},
+      CUSTOMERNUMBER = #{CUSTOMERNUMBER,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      DISCOUNT = #{DISCOUNT,jdbcType=DOUBLE},
+      EMAIL = #{EMAIL,jdbcType=VARCHAR},
+      FAX = #{FAX,jdbcType=VARCHAR},
+      FIRSTNAME = #{FIRSTNAME,jdbcType=VARCHAR},
+      GENDER = #{GENDER,jdbcType=INTEGER},
+      GLN = #{GLN,jdbcType=BIGINT},
+      MANDATEREFERENCE = #{MANDATEREFERENCE,jdbcType=VARCHAR},
+      MOBILE = #{MOBILE,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NOTE = #{NOTE,jdbcType=VARCHAR},
+      PHONE = #{PHONE,jdbcType=VARCHAR},
+      RELIABILITY = #{RELIABILITY,jdbcType=VARCHAR},
+      SUPPLIERNUMBER = #{SUPPLIERNUMBER,jdbcType=VARCHAR},
+      TITLE = #{TITLE,jdbcType=VARCHAR},
+      USENETGROSS = #{USENETGROSS,jdbcType=SMALLINT},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      VATNUMBER = #{VATNUMBER,jdbcType=VARCHAR},
+      VATNUMBERVALID = #{VATNUMBERVALID,jdbcType=BIT},
+      WEBSHOPNAME = #{WEBSHOPNAME,jdbcType=VARCHAR},
+      WEBSITE = #{WEBSITE,jdbcType=VARCHAR},
+      FK_ADDRESS = #{FK_ADDRESS,jdbcType=BIGINT},
+      FK_ALTERNATECONTACT = #{FK_ALTERNATECONTACT,jdbcType=BIGINT},
+      FK_BANKACCOUNT = #{FK_BANKACCOUNT,jdbcType=BIGINT},
+      FK_CATEGORY = #{FK_CATEGORY,jdbcType=BIGINT},
+      FK_PAYMENT = #{FK_PAYMENT,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+
+  <resultMap id="BaseResultSunatMap" type="com.sgv.fakturama.dao.model.FktContact">
+    <id column="CONTACT_ID" jdbcType="BIGINT" property="ID" />
+    <result column="COMPANY" jdbcType="VARCHAR" property="COMPANY" />
+    <result column="VATNUMBER" jdbcType="VARCHAR" property="VATNUMBER" />
+     <result column="CONTACT_FIRSTNAME" jdbcType="VARCHAR" property="FIRSTNAME" />
+      <result column="CONTACT_NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="FK_ADDRESS" jdbcType="BIGINT" property="FK_ADDRESS" />
+    <association property="address" column="ADDRESS_ID" 
+	    resultMap="com.sgv.fakturama.dao.FktAddressMapper.BaseResultSunatMap"/>
+  </resultMap>
+  <select id="selectByCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fkt_contact
+    where COMPANY = #{ID,jdbcType=VARCHAR}
+  </select>
+</mapper>

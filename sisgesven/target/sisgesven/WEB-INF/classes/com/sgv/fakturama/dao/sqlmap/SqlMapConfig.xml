@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/sistemaFacturacion" />
+				<property name="username" value="sisfac" />
+				<property name="password" value="zxcV1234!" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/sgv/base/dao/sqlmap/ControlVentaMapper.xml" />
+		<!--mapper resource="com/sgv/base/dao/sqlmap/ControlCompraMapper.xml" /-->
+		<mapper resource="com/sgv/base/dao/sqlmap/TxxxxBandfactMapper.xml" />
+		<mapper resource="com/sgv/fakturama/dao/sqlmap/FktDocumentMapper.xml" />
+		<mapper resource="com/sgv/fakturama/dao/sqlmap/FktContactMapper.xml" />
+		<mapper resource="com/sgv/fakturama/dao/sqlmap/FktDocumentitemMapper.xml" />
+		<mapper resource="com/sgv/fakturama/dao/sqlmap/FktUserpropertyMapper.xml" />
+		<mapper resource="com/sgv/fakturama/dao/sqlmap/FktAddressMapper.xml" />
+		<mapper resource="com/sgv/fakturama/dao/sqlmap/FktVatMapper.xml" />		
+			
+	</mappers>
+</configuration>

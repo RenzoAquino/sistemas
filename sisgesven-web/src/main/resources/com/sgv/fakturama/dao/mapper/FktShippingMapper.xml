@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktShippingMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktShipping">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="AUTOVAT" jdbcType="VARCHAR" property="AUTOVAT" />
+    <result column="CODE" jdbcType="VARCHAR" property="CODE" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="DESCRIPTION" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="SHIPPINGVALUE" jdbcType="DOUBLE" property="SHIPPINGVALUE" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="SHIPPING_CATEGORIES" jdbcType="BIGINT" property="SHIPPING_CATEGORIES" />
+    <result column="FK_VAT" jdbcType="BIGINT" property="FK_VAT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, AUTOVAT, CODE, DATEADDED, DELETED, DESCRIPTION, MODIFIED, MODIFIEDBY, NAME, SHIPPINGVALUE, 
+    VALIDFROM, VALIDTO, SHIPPING_CATEGORIES, FK_VAT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_shipping
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_shipping
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktShipping">
+    insert into fkt_shipping (ID, AUTOVAT, CODE, 
+      DATEADDED, DELETED, DESCRIPTION, 
+      MODIFIED, MODIFIEDBY, NAME, 
+      SHIPPINGVALUE, VALIDFROM, VALIDTO, 
+      SHIPPING_CATEGORIES, FK_VAT)
+    values (#{ID,jdbcType=BIGINT}, #{AUTOVAT,jdbcType=VARCHAR}, #{CODE,jdbcType=VARCHAR}, 
+      #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, #{DESCRIPTION,jdbcType=VARCHAR}, 
+      #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, 
+      #{SHIPPINGVALUE,jdbcType=DOUBLE}, #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE}, 
+      #{SHIPPING_CATEGORIES,jdbcType=BIGINT}, #{FK_VAT,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktShipping">
+    insert into fkt_shipping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="AUTOVAT != null">
+        AUTOVAT,
+      </if>
+      <if test="CODE != null">
+        CODE,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        SHIPPINGVALUE,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="SHIPPING_CATEGORIES != null">
+        SHIPPING_CATEGORIES,
+      </if>
+      <if test="FK_VAT != null">
+        FK_VAT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="AUTOVAT != null">
+        #{AUTOVAT,jdbcType=VARCHAR},
+      </if>
+      <if test="CODE != null">
+        #{CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DESCRIPTION != null">
+        #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="SHIPPING_CATEGORIES != null">
+        #{SHIPPING_CATEGORIES,jdbcType=BIGINT},
+      </if>
+      <if test="FK_VAT != null">
+        #{FK_VAT,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktShipping">
+    update fkt_shipping
+    <set>
+      <if test="AUTOVAT != null">
+        AUTOVAT = #{AUTOVAT,jdbcType=VARCHAR},
+      </if>
+      <if test="CODE != null">
+        CODE = #{CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION = #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIPPINGVALUE != null">
+        SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="SHIPPING_CATEGORIES != null">
+        SHIPPING_CATEGORIES = #{SHIPPING_CATEGORIES,jdbcType=BIGINT},
+      </if>
+      <if test="FK_VAT != null">
+        FK_VAT = #{FK_VAT,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.mapper.model.FktShipping">
+    update fkt_shipping
+    set AUTOVAT = #{AUTOVAT,jdbcType=VARCHAR},
+      CODE = #{CODE,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      DESCRIPTION = #{DESCRIPTION,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      SHIPPINGVALUE = #{SHIPPINGVALUE,jdbcType=DOUBLE},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      SHIPPING_CATEGORIES = #{SHIPPING_CATEGORIES,jdbcType=BIGINT},
+      FK_VAT = #{FK_VAT,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

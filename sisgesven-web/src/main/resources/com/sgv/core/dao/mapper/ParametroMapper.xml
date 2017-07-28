@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.core.dao.mapper.ParametroMapper">
+
+    <select id="obtenerListaParameto" parameterType="Integer" resultType="Parametro">
+        SELECT
+			MPRM_ID id,
+			MPRM_ID_PADRE idPadre,
+			NPRM_CODIGO codigo,
+			NPRM_NOMBRE nombre,
+			NPRM_DESCRIPCION descripcion,
+			NPRM_ORDEN orden,
+			NPRM_ESTADO estado
+		FROM sistemagestionventa.maestro_parametro
+		WHERE MPRM_ID_PADRE =  #{codigoPadre}
+		ORDER BY NPRM_ORDEN
+    </select>
+
+</mapper>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktTextmoduleMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="TEXTMODULE_CATEGORIES" jdbcType="BIGINT" property="TEXTMODULE_CATEGORIES" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    <result column="T_TEXT" jdbcType="LONGVARCHAR" property="t_TEXT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DATEADDED, DELETED, MODIFIED, MODIFIEDBY, NAME, VALIDFROM, VALIDTO, TEXTMODULE_CATEGORIES
+  </sql>
+  <sql id="Blob_Column_List">
+    T_TEXT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fkt_textmodule
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_textmodule
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    insert into fkt_textmodule (ID, DATEADDED, DELETED, 
+      MODIFIED, MODIFIEDBY, NAME, 
+      VALIDFROM, VALIDTO, TEXTMODULE_CATEGORIES, 
+      T_TEXT)
+    values (#{ID,jdbcType=BIGINT}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
+      #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, 
+      #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE}, #{TEXTMODULE_CATEGORIES,jdbcType=BIGINT}, 
+      #{t_TEXT,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    insert into fkt_textmodule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="TEXTMODULE_CATEGORIES != null">
+        TEXTMODULE_CATEGORIES,
+      </if>
+      <if test="t_TEXT != null">
+        T_TEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="TEXTMODULE_CATEGORIES != null">
+        #{TEXTMODULE_CATEGORIES,jdbcType=BIGINT},
+      </if>
+      <if test="t_TEXT != null">
+        #{t_TEXT,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    update fkt_textmodule
+    <set>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="TEXTMODULE_CATEGORIES != null">
+        TEXTMODULE_CATEGORIES = #{TEXTMODULE_CATEGORIES,jdbcType=BIGINT},
+      </if>
+      <if test="t_TEXT != null">
+        T_TEXT = #{t_TEXT,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    update fkt_textmodule
+    set DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      TEXTMODULE_CATEGORIES = #{TEXTMODULE_CATEGORIES,jdbcType=BIGINT},
+      T_TEXT = #{t_TEXT,jdbcType=LONGVARCHAR}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.mapper.model.FktTextmodule">
+    update fkt_textmodule
+    set DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      TEXTMODULE_CATEGORIES = #{TEXTMODULE_CATEGORIES,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

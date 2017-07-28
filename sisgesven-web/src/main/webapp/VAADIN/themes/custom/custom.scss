@@ -1,0 +1,13 @@
+@import "../valo/valo.scss";
+@mixin custom {
+  @include valo;
+   .v-upload {
+     -primary-color: #396;
+     -vaadin-upload-file-row: {
+         background-color: rgba(183, 225, 205, 0.24);
+         padding: 5px;
+         border-radius: 4px 4px 0px 0px;
+     };
+   }
+}
+@include custom;

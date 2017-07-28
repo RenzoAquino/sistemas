@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.core.dao.mapper.CompanyMapper">
+
+    <select id="findAll" resultType="Company">
+        SELECT id, name, website FROM company ORDER BY id
+    </select>
+    <select id="findOne" parameterType="Long" resultType="Company">
+        SELECT id, name, website FROM company WHERE id=#{id}
+    </select>
+    <select id="findByFilter" parameterType="Map" resultType="Company">
+    	<bind name="pattern" value="'%' + myFilter + '%'" />
+        SELECT id, name, website FROM company WHERE name LIKE #{pattern}
+    </select>    
+    <insert id="save" parameterType="Company">
+	    INSERT INTO company(name,website) VALUES (#{name},#{website})
+    </insert>
+    <update id="update" parameterType="Company">
+	    UPDATE company SET 
+	    	name=#{name}, 
+	    	website=#{website} 
+	    WHERE id=#{id}
+    </update>
+    <delete id="delete" parameterType="Company">
+	    DELETE FROM company  
+	    WHERE id=#{id}
+    </delete>    
+</mapper>

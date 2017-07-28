@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.mapper.DatabasechangelogMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.Databasechangelog">
+    <result column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="AUTHOR" jdbcType="VARCHAR" property="AUTHOR" />
+    <result column="FILENAME" jdbcType="VARCHAR" property="FILENAME" />
+    <result column="DATEEXECUTED" jdbcType="TIMESTAMP" property="DATEEXECUTED" />
+    <result column="ORDEREXECUTED" jdbcType="INTEGER" property="ORDEREXECUTED" />
+    <result column="EXECTYPE" jdbcType="VARCHAR" property="EXECTYPE" />
+    <result column="MD5SUM" jdbcType="VARCHAR" property="MD5SUM" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="DESCRIPTION" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="COMMENTS" />
+    <result column="TAG" jdbcType="VARCHAR" property="TAG" />
+    <result column="LIQUIBASE" jdbcType="VARCHAR" property="LIQUIBASE" />
+    <result column="CONTEXTS" jdbcType="VARCHAR" property="CONTEXTS" />
+    <result column="LABELS" jdbcType="VARCHAR" property="LABELS" />
+    <result column="DEPLOYMENT_ID" jdbcType="VARCHAR" property="DEPLOYMENT_ID" />
+  </resultMap>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.mapper.model.Databasechangelog">
+    insert into databasechangelog (ID, AUTHOR, FILENAME, 
+      DATEEXECUTED, ORDEREXECUTED, EXECTYPE, 
+      MD5SUM, DESCRIPTION, COMMENTS, 
+      TAG, LIQUIBASE, CONTEXTS, 
+      LABELS, DEPLOYMENT_ID)
+    values (#{ID,jdbcType=VARCHAR}, #{AUTHOR,jdbcType=VARCHAR}, #{FILENAME,jdbcType=VARCHAR}, 
+      #{DATEEXECUTED,jdbcType=TIMESTAMP}, #{ORDEREXECUTED,jdbcType=INTEGER}, #{EXECTYPE,jdbcType=VARCHAR}, 
+      #{MD5SUM,jdbcType=VARCHAR}, #{DESCRIPTION,jdbcType=VARCHAR}, #{COMMENTS,jdbcType=VARCHAR}, 
+      #{TAG,jdbcType=VARCHAR}, #{LIQUIBASE,jdbcType=VARCHAR}, #{CONTEXTS,jdbcType=VARCHAR}, 
+      #{LABELS,jdbcType=VARCHAR}, #{DEPLOYMENT_ID,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.mapper.model.Databasechangelog">
+    insert into databasechangelog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="AUTHOR != null">
+        AUTHOR,
+      </if>
+      <if test="FILENAME != null">
+        FILENAME,
+      </if>
+      <if test="DATEEXECUTED != null">
+        DATEEXECUTED,
+      </if>
+      <if test="ORDEREXECUTED != null">
+        ORDEREXECUTED,
+      </if>
+      <if test="EXECTYPE != null">
+        EXECTYPE,
+      </if>
+      <if test="MD5SUM != null">
+        MD5SUM,
+      </if>
+      <if test="DESCRIPTION != null">
+        DESCRIPTION,
+      </if>
+      <if test="COMMENTS != null">
+        COMMENTS,
+      </if>
+      <if test="TAG != null">
+        TAG,
+      </if>
+      <if test="LIQUIBASE != null">
+        LIQUIBASE,
+      </if>
+      <if test="CONTEXTS != null">
+        CONTEXTS,
+      </if>
+      <if test="LABELS != null">
+        LABELS,
+      </if>
+      <if test="DEPLOYMENT_ID != null">
+        DEPLOYMENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="AUTHOR != null">
+        #{AUTHOR,jdbcType=VARCHAR},
+      </if>
+      <if test="FILENAME != null">
+        #{FILENAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEEXECUTED != null">
+        #{DATEEXECUTED,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ORDEREXECUTED != null">
+        #{ORDEREXECUTED,jdbcType=INTEGER},
+      </if>
+      <if test="EXECTYPE != null">
+        #{EXECTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="MD5SUM != null">
+        #{MD5SUM,jdbcType=VARCHAR},
+      </if>
+      <if test="DESCRIPTION != null">
+        #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="COMMENTS != null">
+        #{COMMENTS,jdbcType=VARCHAR},
+      </if>
+      <if test="TAG != null">
+        #{TAG,jdbcType=VARCHAR},
+      </if>
+      <if test="LIQUIBASE != null">
+        #{LIQUIBASE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTEXTS != null">
+        #{CONTEXTS,jdbcType=VARCHAR},
+      </if>
+      <if test="LABELS != null">
+        #{LABELS,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPLOYMENT_ID != null">
+        #{DEPLOYMENT_ID,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

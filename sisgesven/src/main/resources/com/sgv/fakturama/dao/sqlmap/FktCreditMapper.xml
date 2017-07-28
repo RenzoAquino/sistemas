@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktCreditMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktCredit">
+    <id column="CREDIT_PARENT_ID" jdbcType="BIGINT" property="CREDIT_PARENT_ID" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_credit
+    where CREDIT_PARENT_ID = #{CREDIT_PARENT_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktCredit">
+    insert into fkt_credit (CREDIT_PARENT_ID)
+    values (#{CREDIT_PARENT_ID,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktCredit">
+    insert into fkt_credit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="CREDIT_PARENT_ID != null">
+        CREDIT_PARENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CREDIT_PARENT_ID != null">
+        #{CREDIT_PARENT_ID,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

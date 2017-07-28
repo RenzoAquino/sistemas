@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.FktVouchersMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.model.FktVouchers">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="DISCOUNTED" jdbcType="BIT" property="DISCOUNTED" />
+    <result column="DONOTBOOK" jdbcType="BIT" property="DONOTBOOK" />
+    <result column="DOCUMENTNUMBER" jdbcType="VARCHAR" property="DOCUMENTNUMBER" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="PAIDVALUE" jdbcType="DOUBLE" property="PAIDVALUE" />
+    <result column="TOTALVALUE" jdbcType="DOUBLE" property="TOTALVALUE" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="VOUCHERDATE" jdbcType="DATE" property="VOUCHERDATE" />
+    <result column="VOUCHERNUMBER" jdbcType="VARCHAR" property="VOUCHERNUMBER" />
+    <result column="VOUCHERTYPE" jdbcType="VARCHAR" property="VOUCHERTYPE" />
+    <result column="FK_CATEGORY" jdbcType="BIGINT" property="FK_CATEGORY" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DATEADDED, DELETED, DISCOUNTED, DONOTBOOK, DOCUMENTNUMBER, MODIFIED, MODIFIEDBY, 
+    NAME, PAIDVALUE, TOTALVALUE, VALIDFROM, VALIDTO, VOUCHERDATE, VOUCHERNUMBER, VOUCHERTYPE, 
+    FK_CATEGORY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_vouchers
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_vouchers
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.model.FktVouchers">
+    insert into fkt_vouchers (ID, DATEADDED, DELETED, 
+      DISCOUNTED, DONOTBOOK, DOCUMENTNUMBER, 
+      MODIFIED, MODIFIEDBY, NAME, 
+      PAIDVALUE, TOTALVALUE, VALIDFROM, 
+      VALIDTO, VOUCHERDATE, VOUCHERNUMBER, 
+      VOUCHERTYPE, FK_CATEGORY)
+    values (#{ID,jdbcType=BIGINT}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
+      #{DISCOUNTED,jdbcType=BIT}, #{DONOTBOOK,jdbcType=BIT}, #{DOCUMENTNUMBER,jdbcType=VARCHAR}, 
+      #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, 
+      #{PAIDVALUE,jdbcType=DOUBLE}, #{TOTALVALUE,jdbcType=DOUBLE}, #{VALIDFROM,jdbcType=DATE}, 
+      #{VALIDTO,jdbcType=DATE}, #{VOUCHERDATE,jdbcType=DATE}, #{VOUCHERNUMBER,jdbcType=VARCHAR}, 
+      #{VOUCHERTYPE,jdbcType=VARCHAR}, #{FK_CATEGORY,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktVouchers">
+    insert into fkt_vouchers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="DISCOUNTED != null">
+        DISCOUNTED,
+      </if>
+      <if test="DONOTBOOK != null">
+        DONOTBOOK,
+      </if>
+      <if test="DOCUMENTNUMBER != null">
+        DOCUMENTNUMBER,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="PAIDVALUE != null">
+        PAIDVALUE,
+      </if>
+      <if test="TOTALVALUE != null">
+        TOTALVALUE,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="VOUCHERDATE != null">
+        VOUCHERDATE,
+      </if>
+      <if test="VOUCHERNUMBER != null">
+        VOUCHERNUMBER,
+      </if>
+      <if test="VOUCHERTYPE != null">
+        VOUCHERTYPE,
+      </if>
+      <if test="FK_CATEGORY != null">
+        FK_CATEGORY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DISCOUNTED != null">
+        #{DISCOUNTED,jdbcType=BIT},
+      </if>
+      <if test="DONOTBOOK != null">
+        #{DONOTBOOK,jdbcType=BIT},
+      </if>
+      <if test="DOCUMENTNUMBER != null">
+        #{DOCUMENTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PAIDVALUE != null">
+        #{PAIDVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="TOTALVALUE != null">
+        #{TOTALVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="VOUCHERDATE != null">
+        #{VOUCHERDATE,jdbcType=DATE},
+      </if>
+      <if test="VOUCHERNUMBER != null">
+        #{VOUCHERNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="VOUCHERTYPE != null">
+        #{VOUCHERTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="FK_CATEGORY != null">
+        #{FK_CATEGORY,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.model.FktVouchers">
+    update fkt_vouchers
+    <set>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="DISCOUNTED != null">
+        DISCOUNTED = #{DISCOUNTED,jdbcType=BIT},
+      </if>
+      <if test="DONOTBOOK != null">
+        DONOTBOOK = #{DONOTBOOK,jdbcType=BIT},
+      </if>
+      <if test="DOCUMENTNUMBER != null">
+        DOCUMENTNUMBER = #{DOCUMENTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PAIDVALUE != null">
+        PAIDVALUE = #{PAIDVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="TOTALVALUE != null">
+        TOTALVALUE = #{TOTALVALUE,jdbcType=DOUBLE},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="VOUCHERDATE != null">
+        VOUCHERDATE = #{VOUCHERDATE,jdbcType=DATE},
+      </if>
+      <if test="VOUCHERNUMBER != null">
+        VOUCHERNUMBER = #{VOUCHERNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="VOUCHERTYPE != null">
+        VOUCHERTYPE = #{VOUCHERTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="FK_CATEGORY != null">
+        FK_CATEGORY = #{FK_CATEGORY,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.model.FktVouchers">
+    update fkt_vouchers
+    set DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      DISCOUNTED = #{DISCOUNTED,jdbcType=BIT},
+      DONOTBOOK = #{DONOTBOOK,jdbcType=BIT},
+      DOCUMENTNUMBER = #{DOCUMENTNUMBER,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      PAIDVALUE = #{PAIDVALUE,jdbcType=DOUBLE},
+      TOTALVALUE = #{TOTALVALUE,jdbcType=DOUBLE},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      VOUCHERDATE = #{VOUCHERDATE,jdbcType=DATE},
+      VOUCHERNUMBER = #{VOUCHERNUMBER,jdbcType=VARCHAR},
+      VOUCHERTYPE = #{VOUCHERTYPE,jdbcType=VARCHAR},
+      FK_CATEGORY = #{FK_CATEGORY,jdbcType=BIGINT}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

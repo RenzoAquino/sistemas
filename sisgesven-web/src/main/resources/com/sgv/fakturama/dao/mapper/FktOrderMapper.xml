@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktOrderMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktOrder">
+    <id column="ORDER_PARENT_ID" jdbcType="BIGINT" property="ORDER_PARENT_ID" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_order
+    where ORDER_PARENT_ID = #{ORDER_PARENT_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktOrder">
+    insert into fkt_order (ORDER_PARENT_ID)
+    values (#{ORDER_PARENT_ID,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktOrder">
+    insert into fkt_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ORDER_PARENT_ID != null">
+        ORDER_PARENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ORDER_PARENT_ID != null">
+        #{ORDER_PARENT_ID,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

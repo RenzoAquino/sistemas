@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktBankaccountMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktBankaccount">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="ACCOUNTHOLDER" jdbcType="VARCHAR" property="ACCOUNTHOLDER" />
+    <result column="BANKCODE" jdbcType="INTEGER" property="BANKCODE" />
+    <result column="BANKNAME" jdbcType="VARCHAR" property="BANKNAME" />
+    <result column="BIC" jdbcType="VARCHAR" property="BIC" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="IBAN" jdbcType="VARCHAR" property="IBAN" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ACCOUNTHOLDER, BANKCODE, BANKNAME, BIC, DATEADDED, DELETED, IBAN, MODIFIED, MODIFIEDBY, 
+    NAME, VALIDFROM, VALIDTO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_bankaccount
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_bankaccount
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktBankaccount">
+    insert into fkt_bankaccount (ID, ACCOUNTHOLDER, BANKCODE, 
+      BANKNAME, BIC, DATEADDED, 
+      DELETED, IBAN, MODIFIED, MODIFIEDBY, 
+      NAME, VALIDFROM, VALIDTO)
+    values (#{ID,jdbcType=BIGINT}, #{ACCOUNTHOLDER,jdbcType=VARCHAR}, #{BANKCODE,jdbcType=INTEGER}, 
+      #{BANKNAME,jdbcType=VARCHAR}, #{BIC,jdbcType=VARCHAR}, #{DATEADDED,jdbcType=DATE}, 
+      #{DELETED,jdbcType=BIT}, #{IBAN,jdbcType=VARCHAR}, #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, 
+      #{NAME,jdbcType=VARCHAR}, #{VALIDFROM,jdbcType=DATE}, #{VALIDTO,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktBankaccount">
+    insert into fkt_bankaccount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="ACCOUNTHOLDER != null">
+        ACCOUNTHOLDER,
+      </if>
+      <if test="BANKCODE != null">
+        BANKCODE,
+      </if>
+      <if test="BANKNAME != null">
+        BANKNAME,
+      </if>
+      <if test="BIC != null">
+        BIC,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="IBAN != null">
+        IBAN,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="ACCOUNTHOLDER != null">
+        #{ACCOUNTHOLDER,jdbcType=VARCHAR},
+      </if>
+      <if test="BANKCODE != null">
+        #{BANKCODE,jdbcType=INTEGER},
+      </if>
+      <if test="BANKNAME != null">
+        #{BANKNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="BIC != null">
+        #{BIC,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="IBAN != null">
+        #{IBAN,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktBankaccount">
+    update fkt_bankaccount
+    <set>
+      <if test="ACCOUNTHOLDER != null">
+        ACCOUNTHOLDER = #{ACCOUNTHOLDER,jdbcType=VARCHAR},
+      </if>
+      <if test="BANKCODE != null">
+        BANKCODE = #{BANKCODE,jdbcType=INTEGER},
+      </if>
+      <if test="BANKNAME != null">
+        BANKNAME = #{BANKNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="BIC != null">
+        BIC = #{BIC,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="IBAN != null">
+        IBAN = #{IBAN,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.mapper.model.FktBankaccount">
+    update fkt_bankaccount
+    set ACCOUNTHOLDER = #{ACCOUNTHOLDER,jdbcType=VARCHAR},
+      BANKCODE = #{BANKCODE,jdbcType=INTEGER},
+      BANKNAME = #{BANKNAME,jdbcType=VARCHAR},
+      BIC = #{BIC,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      IBAN = #{IBAN,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+</mapper>

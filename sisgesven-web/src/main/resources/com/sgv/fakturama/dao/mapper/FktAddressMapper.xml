@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgv.fakturama.dao.mapper.FktAddressMapper">
+  <resultMap id="BaseResultMap" type="com.sgv.fakturama.dao.mapper.model.FktAddress">
+    <id column="ID" jdbcType="BIGINT" property="ID" />
+    <result column="CITY" jdbcType="VARCHAR" property="CITY" />
+    <result column="CITYADDON" jdbcType="VARCHAR" property="CITYADDON" />
+    <result column="COUNTRYCODE" jdbcType="VARCHAR" property="COUNTRYCODE" />
+    <result column="DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="MANUALADDRESS" jdbcType="VARCHAR" property="MANUALADDRESS" />
+    <result column="MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="STREET" jdbcType="VARCHAR" property="STREET" />
+    <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="ZIP" jdbcType="VARCHAR" property="ZIP" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CITY, CITYADDON, COUNTRYCODE, DATEADDED, DELETED, MANUALADDRESS, MODIFIED, MODIFIEDBY, 
+    NAME, STREET, VALIDFROM, VALIDTO, ZIP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fkt_address
+    where ID = #{ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fkt_address
+    where ID = #{ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sgv.fakturama.dao.mapper.model.FktAddress">
+    insert into fkt_address (ID, CITY, CITYADDON, 
+      COUNTRYCODE, DATEADDED, DELETED, 
+      MANUALADDRESS, MODIFIED, MODIFIEDBY, 
+      NAME, STREET, VALIDFROM, 
+      VALIDTO, ZIP)
+    values (#{ID,jdbcType=BIGINT}, #{CITY,jdbcType=VARCHAR}, #{CITYADDON,jdbcType=VARCHAR}, 
+      #{COUNTRYCODE,jdbcType=VARCHAR}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
+      #{MANUALADDRESS,jdbcType=VARCHAR}, #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, 
+      #{NAME,jdbcType=VARCHAR}, #{STREET,jdbcType=VARCHAR}, #{VALIDFROM,jdbcType=DATE}, 
+      #{VALIDTO,jdbcType=DATE}, #{ZIP,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktAddress">
+    insert into fkt_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="CITY != null">
+        CITY,
+      </if>
+      <if test="CITYADDON != null">
+        CITYADDON,
+      </if>
+      <if test="COUNTRYCODE != null">
+        COUNTRYCODE,
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED,
+      </if>
+      <if test="DELETED != null">
+        DELETED,
+      </if>
+      <if test="MANUALADDRESS != null">
+        MANUALADDRESS,
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED,
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY,
+      </if>
+      <if test="NAME != null">
+        NAME,
+      </if>
+      <if test="STREET != null">
+        STREET,
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM,
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO,
+      </if>
+      <if test="ZIP != null">
+        ZIP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=BIGINT},
+      </if>
+      <if test="CITY != null">
+        #{CITY,jdbcType=VARCHAR},
+      </if>
+      <if test="CITYADDON != null">
+        #{CITYADDON,jdbcType=VARCHAR},
+      </if>
+      <if test="COUNTRYCODE != null">
+        #{COUNTRYCODE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="MANUALADDRESS != null">
+        #{MANUALADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="STREET != null">
+        #{STREET,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="ZIP != null">
+        #{ZIP,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgv.fakturama.dao.mapper.model.FktAddress">
+    update fkt_address
+    <set>
+      <if test="CITY != null">
+        CITY = #{CITY,jdbcType=VARCHAR},
+      </if>
+      <if test="CITYADDON != null">
+        CITYADDON = #{CITYADDON,jdbcType=VARCHAR},
+      </if>
+      <if test="COUNTRYCODE != null">
+        COUNTRYCODE = #{COUNTRYCODE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATEADDED != null">
+        DATEADDED = #{DATEADDED,jdbcType=DATE},
+      </if>
+      <if test="DELETED != null">
+        DELETED = #{DELETED,jdbcType=BIT},
+      </if>
+      <if test="MANUALADDRESS != null">
+        MANUALADDRESS = #{MANUALADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="MODIFIED != null">
+        MODIFIED = #{MODIFIED,jdbcType=DATE},
+      </if>
+      <if test="MODIFIEDBY != null">
+        MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="STREET != null">
+        STREET = #{STREET,jdbcType=VARCHAR},
+      </if>
+      <if test="VALIDFROM != null">
+        VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      </if>
+      <if test="VALIDTO != null">
+        VALIDTO = #{VALIDTO,jdbcType=DATE},
+      </if>
+      <if test="ZIP != null">
+        ZIP = #{ZIP,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgv.fakturama.dao.mapper.model.FktAddress">
+    update fkt_address
+    set CITY = #{CITY,jdbcType=VARCHAR},
+      CITYADDON = #{CITYADDON,jdbcType=VARCHAR},
+      COUNTRYCODE = #{COUNTRYCODE,jdbcType=VARCHAR},
+      DATEADDED = #{DATEADDED,jdbcType=DATE},
+      DELETED = #{DELETED,jdbcType=BIT},
+      MANUALADDRESS = #{MANUALADDRESS,jdbcType=VARCHAR},
+      MODIFIED = #{MODIFIED,jdbcType=DATE},
+      MODIFIEDBY = #{MODIFIEDBY,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      STREET = #{STREET,jdbcType=VARCHAR},
+      VALIDFROM = #{VALIDFROM,jdbcType=DATE},
+      VALIDTO = #{VALIDTO,jdbcType=DATE},
+      ZIP = #{ZIP,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultSunatMap" type="com.sgv.fakturama.dao.mapper.model.FktAddress">
+    <id column="ADDRESS_ID" jdbcType="BIGINT" property="ID" />
+    <result column="CITY" jdbcType="VARCHAR" property="CITY" />
+    <result column="CITYADDON" jdbcType="VARCHAR" property="CITYADDON" />
+    <result column="COUNTRYCODE" jdbcType="VARCHAR" property="COUNTRYCODE" />
+    <result column="ADDRESS_DATEADDED" jdbcType="DATE" property="DATEADDED" />
+    <result column="ADDRESS_DELETED" jdbcType="BIT" property="DELETED" />
+    <result column="MANUALADDRESS" jdbcType="VARCHAR" property="MANUALADDRESS" />
+    <result column="ADDRESS_MODIFIED" jdbcType="DATE" property="MODIFIED" />
+    <result column="ADDRESS_MODIFIEDBY" jdbcType="VARCHAR" property="MODIFIEDBY" />
+    <result column="ADDRESS_NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="STREET" jdbcType="VARCHAR" property="STREET" />
+    <result column="ADDRESS_VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
+    <result column="ADDRESS_VALIDTO" jdbcType="DATE" property="VALIDTO" />
+    <result column="ZIP" jdbcType="VARCHAR" property="ZIP" />
+  </resultMap>
+  
+</mapper>
