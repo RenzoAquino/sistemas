@@ -113,7 +113,7 @@ function myFunction() {
 			        <label for="nroFactura01" class="form__label"><b>Nro. Factura 01<sup>*</sup></b></label>
 			    </span>
 			    <span class="form__input-container">
-			        <input maxlength="50" name="nroFactura01" id="nroFactura01" type="text" value="PD01-00000066" class="input_text input_address idle form__input" readonly="readonly">
+			        <input maxlength="50" name="nroFactura01" id="nroFactura01" type="text" value="PDTMP-01" class="input_text input_address idle form__input" readonly="readonly">
 			    </span>
 			</div>
 			<div class="form__block jsAddressEditable">
@@ -121,7 +121,7 @@ function myFunction() {
 			        <label for="nroFactura02" class="form__label"><b>Nro. Factura 02<sup>*</sup></b></label>
 			    </span>
 			    <span class="form__input-container">
-			        <input maxlength="50" name="nroFactura02" id="nroFactura02" type="text" value="PD01-00000067" class="input_text input_address idle form__input" readonly="readonly">
+			        <input maxlength="50" name="nroFactura02" id="nroFactura02" type="text" value="PDTMP-02" class="input_text input_address idle form__input" readonly="readonly">
 			    </span>
 			</div>
 			
@@ -130,7 +130,7 @@ function myFunction() {
 			        <label for="nroFactura03" class="form__label"><b>Nro. Factura 03<sup>*</sup></b></label>
 			    </span>
 			    <span class="form__input-container">
-			        <input maxlength="50" name="nroFactura03" id="nroFactura03" type="text" value="PD01-00000068" class="input_text input_address idle form__input" readonly="readonly">
+			        <input maxlength="50" name="nroFactura03" id="nroFactura03" type="text" value="PDTMP-03" class="input_text input_address idle form__input" readonly="readonly">
 			    </span>
 			</div>
 			<div class="form__block jsAddressEditable">
@@ -138,7 +138,7 @@ function myFunction() {
 			        <label for="nroFactura04" class="form__label"><b>Nro. Factura 04<sup>*</sup></b></label>
 			    </span>
 			    <span class="form__input-container">
-			        <input maxlength="50" name="nroFactura04" id="nroFactura04" type="text" value="PD01-00000069" class="input_text input_address idle form__input" readonly="readonly">
+			        <input maxlength="50" name="nroFactura04" id="nroFactura04" type="text" value="PDTMP-04" class="input_text input_address idle form__input" readonly="readonly">
 			    </span>
 			</div>
 	                                        
