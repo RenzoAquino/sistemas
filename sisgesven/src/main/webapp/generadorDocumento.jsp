@@ -29,7 +29,7 @@
 function myFunction() {
 	
 	var tipoDocumento = document.getElementById("documentoTipo").value;
-	if(tipoDocumento == "Crédito")document.getElementById("documentoTipo").value = "Credito";
+	if(tipoDocumento == "Corrección factura")document.getElementById("documentoTipo").value = "Credito";}
     document.getElementById("myForm").submit();
 }
 </script>
