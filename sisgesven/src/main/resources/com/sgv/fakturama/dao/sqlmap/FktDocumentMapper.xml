@@ -630,7 +630,7 @@
   <sql id="FktDocumentItemMapper_Base">
     fkt_documentitem.ID AS DOCUMENTITEM_ID, fkt_documentitem.DATEADDED AS DOCUMENTITEM_DATEADDED, fkt_documentitem.DELETED AS DOCUMENTITEM_DELETED, GTIN, ITEMNUMBER, ITEMREBATE, ITEMTYPE,
     fkt_documentitem.MODIFIED AS DOCUMENTITEM_MODIFIED, fkt_documentitem.MODIFIEDBY AS DOCUMENTITEM_MODIFIEDBY,      fkt_documentitem.NAME AS DOCUMENTITEM_NAME, NOVAT, OPTIONAL, POSNR, PRICE, QUANTITY, QUANTITYUNIT, TARA,
-    fkt_documentitem.VALIDFROM AS DOCUMENTITEM_VALIDFROM, fkt_documentitem.VALIDTO AS DOCUMENTITEM_VALIDTO,      VESTINGPERIODEND, VESTINGPERIODSTART, WEIGHT, FK_VAT, FK_PRODUCT, FK_DOCUMENT        
+    fkt_documentitem.VALIDFROM AS DOCUMENTITEM_VALIDFROM, fkt_documentitem.VALIDTO AS DOCUMENTITEM_VALIDTO,      fkt_documentitem.VESTINGPERIODEND, fkt_documentitem.VESTINGPERIODSTART, WEIGHT, FK_VAT, FK_PRODUCT, FK_DOCUMENT        
   </sql>
   <sql id="FktDocumentItemMapper_Blob">
     fkt_documentitem.DESCRIPTION AS DOCUMENTITEM_DESCRIPTION, PICTURE
@@ -737,7 +737,7 @@
     and fkt_document.DTYPE = #{tipoDocumento,jdbcType=VARCHAR}
     and fkt_document.DELETED = #{deleted,jdbcType=BIT}
     and fkt_documentitem.DELETED = #{deleted,jdbcType=BIT}
-    and fkt_document.NAME NOT IN ('PD01-00000066','PD01-00000067','PD01-00000068','PD01-00000069')
+    and fkt_document.NAME NOT IN ('PDTMP-01','PDTMP-02','PDTMP-03','PDTMP-04')
     
     ORDER BY TAXVALUE ASC, DOCUMENTITEM_NAME ASC
 
