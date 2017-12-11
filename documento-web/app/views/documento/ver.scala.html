@@ -1,0 +1,16 @@
+@(documento: Documento)
+
+@import views.html.partials._documentosFormsFieldsView
+
+@layout(documento.name){
+    <h2>
+    @documento.name
+    </h2>
+    @_documentosFormsFieldsView(documento)
+
+    <a class="btn btn-primary" href="@routes.DocumentoController.editar(documento.id)">Editar</a>
+    <button class="btn btn-danger" onclick="sendDeleteRequest(
+            '@routes.DocumentoController.eliminar(documento.id)',
+            '@routes.DocumentoController.index()'
+    )">Eliminar</button>
+}

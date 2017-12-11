@@ -1,0 +1,18 @@
+@(documentos : List[Documento])
+
+@import views.html.partials._documentosFormsFieldsView
+
+@layout("Todos los documentos"){
+    <h1>
+        TODOS LOS DOCUMENTOS
+    </h1>
+    @for(documento <- documentos){
+        <a class="btn btn-link" href="@routes.DocumentoController.ver(documento.id)">@documento.name</a>
+        @_documentosFormsFieldsView(documento)
+    }
+
+    <!--a  class="btn btn-success" href="@routes.DocumentoController.crear()">
+        <i class="glyphicon glyphicon-plus-sign" ></i>
+        Crear Documento
+    </a-->
+}
