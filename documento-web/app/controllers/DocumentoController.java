@@ -1,6 +1,7 @@
 package controllers;
 
 import commons.TypeDocument_ES;
+import commons.util.ImprimirNotaPedido;
 import controllers.dto.DocumentoDTO;
 import io.ebean.Ebean;
 import io.ebean.Query;
@@ -158,6 +159,13 @@ public class DocumentoController extends Controller{
                 .findList();
 
         System.out.println(document);
+
+        ImprimirNotaPedido inp = new ImprimirNotaPedido();
+        try {
+            inp.imprimirFactura(document);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 /*
         FktContact fktContact = FktContact.find.byId(document.contact.ID);
