@@ -10,17 +10,15 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
-public class ImprimirNotaPedido {
+public class ImprimirNotaPedidoBase {
 
 	/*private static boolean jobRunning = true;*/
 
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		ImprimirNotaPedido impr = new ImprimirNotaPedido();
+		ImprimirNotaPedidoBase impr = new ImprimirNotaPedidoBase();
 		impr.imprimirFactura();
 
 	}
@@ -39,41 +37,58 @@ public class ImprimirNotaPedido {
 		//-----------------------------------------------------------------------------------------------------------------		
 		String nombreComercialEmpresa = "";
 		String nombreEmpresa = "INVERSIONES UNOCC S.A.C.";
-		String telefonoEmpresa = "Telefono: 470-8565";
+		String direccionEmpresa = "JR. BRIG. PUMACAHUA 2480";
+		//String direccionEmpresa = "JR. BRIG. PUMACAHUA 2480 - JR. BRIG. PUMACAHUA 2480 - JR. BRIG. PUMACAHUA 2480";
+		String ubigeoEmpresa = "";
+		String telefonoEmpresa = "Telefono: 470 8565";
+		String rucEmpresa = "RUC 204779543";
 		String correoEmpresa = "ventas@inversionesunocc.com";
 		
 		//-----------------------------------------------------------------------------------------------------------------
-		String _documento = "NOTA DE ENVIO:         "+documento.NAME;
+		String tipoDocumento = "NOTA DE PEDIDO";
+		String numeroDocumento = documento.NAME;
+		
 		//-----------------------------------------------------------------------------------------------------------------
+		String codigoCliente = "CODIGO: "+documento.contact.CUSTOMERNUMBER+"    RUC:"+documento.contact.VATNUMBER;
 		String nombreCliente = documento.contact.COMPANY;
 		String direccionCliente = "";//"CA. MARIA CURIE N 312 URB. SANTA ROSA";
 		String ubigeoCliente = "";//"LIMA-LIMA-LINCE";
 		
 		//-----------------------------------------------------------------------------------------------------------------
-		String cabeceraDetalle = "Cantidad  Unidad  Producto              ";
+		String cabeceraDetalle = "Producto  Cantidad  Precio  Importe";
 
 		//-----------------------------------------------------------------------------------------------------------------
-
+		String codigoItem = "AC0012";
 		String nombreItem = "FIDEO SPAGUETTI AL HUEVO  500 GR - DON VITTORIO";
-        String cantidadItem = ""+900.099;
-		String unidadMedida = "UND";
+		String cantidadItem = ""+90000.099;
+		String valorUnitarioItem = ""+1888.808;
+		String valorVentaItem = ""+800989.808;
 
-        int tamanioCI = 7;
-        int tamanioUM = 4;
-        int tamanioProducto = 27;
-
+        int tamanioCI = 9;
+        int tamanioVUI = 8;
+        int tamanioVVI = 12;
+        int tamanioOtros = 4;
+        int tamanioCodigo = 0;
+		
 		//-----------------------------------------------------------------------------------------------------------------
-
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String reportDate = df.format(documento.ORDERDATE);
-
-        System.out.println("Report Date: " + reportDate);
-
+		String preOperacionGravada = "OP GARAVADA";
+		String preOperacionExonerado = "OP EXONERADA";
+		String preIGV = "IGV";
+		String preImporteTotal = "IMPORTE TOTAL S/.";
+		
+		String valorOperacionGravada = ""+90989.008;
+		String valorOperacionExonerado = ""+80000.999;
+		String valorIGV = ""+10.889;
+		String valorImporteTotal = ""+988999.989;
+		
+		int tamanioEspacioBlanco = 6;
 		
 		String valor = "";
+		//int posicionInicialNombreEmpresa = (cantidadCaracteresPorFila-nombreEmpresa.length())/2;
+		//int posicionInicial = 0;
 		int numeroLinea = 0;
 		int linea = 0;
-		String fechaEmision = "Fecha de Emision: "+reportDate.substring(0,10)+" Hora: "+reportDate.substring(10);//"Fecha de Emision: "+documento.ORDERDATE+" Hora: "+"15:30";
+		String fechaEmision = "Fecha de Emision: 12/12/2017 Hora: "+"15:30";//"Fecha de Emision: "+documento.ORDERDATE+" Hora: "+"15:30";
 		String mensajeFinPagina = "Representación impresa de la nota de pedido generada desde el SISGESVEN";
 				
         PrinterMatrix printer = new PrinterMatrix();
@@ -108,33 +123,73 @@ public class ImprimirNotaPedido {
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
-
+       
+       valor = direccionEmpresa;
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
+       
+       valor = ubigeoEmpresa;
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
+       
        valor = telefonoEmpresa;
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
        
-       valor = correoEmpresa;
+       valor = rucEmpresa;
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
               
        //-------------------------------------------------------------------------------
+       
+       //valor = "-";
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, "");
        
-       valor = _documento;
+       
+       valor = tipoDocumento;
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
-
+       
+       valor = numeroDocumento;
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
+       
        //-------------------------------------------------------------------------------
+       /*
+       valor = "-";
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, repetirValor(valor,cantidadCaracteresPorFila));
+       */       
+       valor = codigoCliente;
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
 
        valor = nombreCliente;
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
+
+       if(direccionCliente != null && direccionCliente.trim().length() > 0){
+           valor = direccionCliente;
+           numeroLinea++; linea = numeroLinea;
+           System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+           printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
+
+           valor = ubigeoCliente;
+           numeroLinea++; linea = numeroLinea;
+           System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+           printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
+       }
        
        //-------------------------------------------------------------------------------
        valor = "-";
@@ -159,29 +214,46 @@ public class ImprimirNotaPedido {
        for(int x = 0; x <cantidadItems; x++){
            item = documento.items.get(x);
 
+           codigoItem = item.ITEMNUMBER;
            nombreItem = item.NAME;
            cantidadItem = ""+item.QUANTITY;
-           unidadMedida = item.QUANTITYUNIT;
+           valorUnitarioItem = ""+item.PRICE;
+           //String valorVentaItem = ""+800989.808;
 
     	   tmpItem = new StringBuilder();
     	   tmpItem.append(nombreItem);
 
+    	   System.out.println("-------------------- 01 ----- "+cantidadCaracteresPorFila);
+           System.out.println("-------------------- 011 ----- "+tmpItem);
+
     	   valor = (tmpItem.length() > 40)?(tmpItem.substring(0,cantidadCaracteresPorFila)): tmpItem.toString();
-/*
+           System.out.println("-------------------- 02 ----- "+valor);
+
            numeroLinea++; linea = numeroLinea;
            System.out.println("linea ["+linea+"] - nombreItem.length ["+valor.length()+"] - cantidadCaracteresPorFila ["+cantidadCaracteresPorFila+"]");
            printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, valor);
-*/
+           
            tmpItem = new StringBuilder();
-
-           int tamanioTotalRegistro = tamanioCI + 1 + tamanioUM + 1 + tamanioProducto;
+           if(codigoItem != null && codigoItem.trim().length() > 0) {
+    		   tmpItem.append(codigoItem).append(" ");        		   
+    	   } else {
+    		   tmpItem.append("       ");
+    	   }
+          
+           tamanioCodigo = tmpItem.toString().trim().length();
+           if(tamanioCodigo < 1){
+        	   tamanioCI = tamanioCI + 3;
+        	   tamanioVUI = tamanioVUI + 2;
+        	   tamanioVVI = tamanioVVI + 2;        	   
+           }
+           int tamanioTotalRegistro = tamanioCI + tamanioVUI + tamanioVVI + tamanioOtros;
            System.out.println("cantidadItem["+cantidadItem.length()+"] valor ["+cantidadItem+"]");
-           System.out.println("unidadMedida["+unidadMedida.length()+"] valor ["+unidadMedida+"]");
-           System.out.println("nombreItem["+nombreItem.length()+"] valor ["+nombreItem+"]");
+           System.out.println("valorUnitarioItem["+valorUnitarioItem.length()+"] valor ["+valorUnitarioItem+"]");
+           System.out.println("valorVentaItem["+valorVentaItem.length()+"] valor ["+valorVentaItem+"]");
            System.out.println("tamanioTotalRegistro ["+tamanioTotalRegistro+"]");
            
            
-           tmpItem.append(completarTamanio(cantidadItem,tamanioCI," ",true)).append(" ").append(completarTamanio(unidadMedida,tamanioUM," ",false)).append(" ").append(completarTamanio(nombreItem,tamanioProducto," ",false));
+           tmpItem.append(completarTamanio(cantidadItem,tamanioCI," ",true)).append(" x ").append(completarTamanio(valorUnitarioItem,tamanioVUI," ",true)).append(" ").append(completarTamanio(valorVentaItem,tamanioVVI," ",true));
            valor = tmpItem.toString();
            numeroLinea++; linea = numeroLinea;
            System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
@@ -195,6 +267,34 @@ public class ImprimirNotaPedido {
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, repetirValor(valor,cantidadCaracteresPorFila));     
        
+       tmpItem = new StringBuilder();
+       tmpItem.append(preOperacionExonerado).append(completarTamanio(valorOperacionExonerado,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preOperacionExonerado.length()))," ",true));
+       valor = tmpItem.toString();
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);       
+
+       tmpItem = new StringBuilder();
+       tmpItem.append(preOperacionGravada).append(completarTamanio(valorOperacionGravada,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preOperacionGravada.length()))," ",true));
+       valor = tmpItem.toString();
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);
+       
+       tmpItem = new StringBuilder();
+       tmpItem.append(preIGV).append(completarTamanio(valorIGV,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preIGV.length()))," ",true));
+       valor = tmpItem.toString();
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);
+       
+       tmpItem = new StringBuilder();
+       tmpItem.append(preImporteTotal).append(completarTamanio(valorImporteTotal,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preImporteTotal.length()))," ",true));
+       valor = tmpItem.toString();
+       numeroLinea++; linea = numeroLinea;
+       System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+       printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);       
+
        //-------------------------------------------------------------------------------
        valor = "";
        numeroLinea++; linea = numeroLinea;
@@ -324,6 +424,16 @@ public class ImprimirNotaPedido {
         int tamanioCodigo = 0;
 
         //-----------------------------------------------------------------------------------------------------------------
+        String preOperacionGravada = "OP GARAVADA";
+        String preOperacionExonerado = "OP EXONERADA";
+        String preIGV = "IGV";
+        String preImporteTotal = "IMPORTE TOTAL S/.";
+
+        String valorOperacionGravada = ""+90989.008;
+        String valorOperacionExonerado = ""+80000.999;
+        String valorIGV = ""+10.889;
+        String valorImporteTotal = ""+988999.989;
+
         int tamanioEspacioBlanco = 6;
 
         String valor = "";
@@ -497,6 +607,34 @@ public class ImprimirNotaPedido {
         numeroLinea++; linea = numeroLinea;
         System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
         printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, repetirValor(valor,cantidadCaracteresPorFila));
+
+        tmpItem = new StringBuilder();
+        tmpItem.append(preOperacionExonerado).append(completarTamanio(valorOperacionExonerado,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preOperacionExonerado.length()))," ",true));
+        valor = tmpItem.toString();
+        numeroLinea++; linea = numeroLinea;
+        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+        printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);
+
+        tmpItem = new StringBuilder();
+        tmpItem.append(preOperacionGravada).append(completarTamanio(valorOperacionGravada,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preOperacionGravada.length()))," ",true));
+        valor = tmpItem.toString();
+        numeroLinea++; linea = numeroLinea;
+        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+        printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);
+
+        tmpItem = new StringBuilder();
+        tmpItem.append(preIGV).append(completarTamanio(valorIGV,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preIGV.length()))," ",true));
+        valor = tmpItem.toString();
+        numeroLinea++; linea = numeroLinea;
+        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+        printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);
+
+        tmpItem = new StringBuilder();
+        tmpItem.append(preImporteTotal).append(completarTamanio(valorImporteTotal,(cantidadCaracteresPorFila-(tamanioEspacioBlanco+preImporteTotal.length()))," ",true));
+        valor = tmpItem.toString();
+        numeroLinea++; linea = numeroLinea;
+        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
+        printer.printTextWrap(linea, linea, tamanioEspacioBlanco, cantidadCaracteresPorFila, valor);
 
         //-------------------------------------------------------------------------------
         valor = "";

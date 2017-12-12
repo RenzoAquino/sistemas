@@ -1,9 +1,18 @@
 package commons.util.impresion.pos;
-
+/*
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+*/
+import com.sun.imageio.plugins.jpeg.JPEGImageWriter;
+import org.w3c.dom.Element;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageTypeSpecifier;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
+import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Double;
@@ -353,9 +362,9 @@ public class PrinterMatrix {
 	public void toImageFile(String fileName) {
 		int width = this.page[0].length * 10;
 		int height = this.page.length * 10;
-		BufferedImage image = new BufferedImage(width, height, 1);
+		BufferedImage image_to_save = new BufferedImage(width, height, 1);
 
-		Graphics2D g = image.createGraphics();
+		Graphics2D g = image_to_save.createGraphics();
 
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -386,16 +395,77 @@ public class PrinterMatrix {
 				}
 			}
 
-			FileOutputStream file = new FileOutputStream(fileName);
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(file);
-
-			JPEGEncodeParam jpegParams = encoder.getDefaultJPEGEncodeParam(image);
+			FileOutputStream fos = new FileOutputStream(fileName);
+/*
+			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(fos);
+			JPEGEncodeParam jpegParams = encoder.getDefaultJPEGEncodeParam(image_to_save);
 
 			jpegParams.setQuality(1.0F, false);
 			encoder.setJPEGEncodeParam(jpegParams);
-			encoder.encode(image);
+			encoder.encode(image_to_save);
 
-			file.close();
+			fos.close();
+*/
+
+			//old jpeg class
+			//com.sun.image.codec.jpeg.JPEGImageEncoder jpegEncoder = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(fos);
+			//com.sun.image.codec.jpeg.JPEGEncodeParam jpegEncodeParam = jpegEncoder.getDefaultJPEGEncodeParam(image_to_save);
+
+			// Image writer
+			JPEGImageWriter imageWriter = (JPEGImageWriter) ImageIO.getImageWritersBySuffix("jpeg").next();
+			ImageOutputStream ios = ImageIO.createImageOutputStream(fos);
+			imageWriter.setOutput(ios);
+
+			//and metadata
+			IIOMetadata imageMetaData = imageWriter.getDefaultImageMetadata(new ImageTypeSpecifier(image_to_save), null);
+
+			String jpgFlag = "96";
+			float JPEGcompression = 1.0F;
+
+			if (jpgFlag != null){
+
+				int dpi = 96;
+
+				try {
+					dpi = Integer.parseInt(jpgFlag);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				//old metadata
+				//jpegEncodeParam.setDensityUnit(com.sun.image.codec.jpeg.JPEGEncodeParam.DENSITY_UNIT_DOTS_INCH);
+				//jpegEncodeParam.setXDensity(dpi);
+				//jpegEncodeParam.setYDensity(dpi);
+
+				//new metadata
+				Element tree = (Element) imageMetaData.getAsTree("javax_imageio_jpeg_image_1.0");
+				Element jfif = (Element)tree.getElementsByTagName("app0JFIF").item(0);
+				jfif.setAttribute("Xdensity", Integer.toString(dpi));
+				jfif.setAttribute("Ydensity", Integer.toString(dpi));
+
+			}
+
+			if(JPEGcompression>=0 && JPEGcompression<=1f){
+
+				//old compression
+				//jpegEncodeParam.setQuality(JPEGcompression,false);
+
+				// new Compression
+				JPEGImageWriteParam jpegParams = (JPEGImageWriteParam) imageWriter.getDefaultWriteParam();
+				jpegParams.setCompressionMode(JPEGImageWriteParam.MODE_EXPLICIT);
+				jpegParams.setCompressionQuality(JPEGcompression);
+
+			}
+
+			//old write and clean
+			//jpegEncoder.encode(image_to_save, jpegEncodeParam);
+
+			//new Write and clean up
+			imageWriter.write(imageMetaData, new IIOImage(image_to_save, null, null), null);
+			ios.close();
+			imageWriter.dispose();
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
