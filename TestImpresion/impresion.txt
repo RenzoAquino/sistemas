@@ -1,7 +1,7 @@
-               Mi Market                
+                                        
         INVERSIONES UNOCC S.A.C.        
         JR. BRIG. PUMACAHUA 2480        
-              LINCE - LIMA              
+                                        
            Telefono: 470 8565           
              RUC 204779543              
                                         
@@ -23,8 +23,8 @@ AC0012 90000.099 x 1888.808   800989.808
       IMPORTE TOTAL S/.       988999.989
                                         
 Fecha de Emision: 09/08/2017 Hora: 15:30
-Representación impresa de la factura electrónica generada desde el sistema factu
-rador SUNAT. Puede verificarla utilizando su clave SOL
+Representaciï¿½ï¿½ï¿½n impresa de la factura electrï¿½ï¿½ï¿½nica generada desde el sistema f
+acturador SUNAT. Puede verificarla utilizando su clave SOL
                                         
                                         
                                         

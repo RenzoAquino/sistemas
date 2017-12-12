@@ -94,7 +94,7 @@ public class ImprimirNotaPedido {
 		int numeroLinea = 0;
 		int linea = 0;
 		String fechaEmision = "Fecha de Emision: "+"09/08/2017"+" Hora: "+"15:30";
-		String mensajeFinPagina = "Representación impresa de la factura electrónica generada desde el sistema facturador SUNAT. Puede verificarla utilizando su clave SOL";
+		String mensajeFinPagina = "Representaciï¿³n impresa de la factura electrï¿³nica generada desde el sistema facturador SUNAT. Puede verificarla utilizando su clave SOL";
 				
         PrinterMatrix printer = new PrinterMatrix();
 
@@ -384,7 +384,7 @@ public class ImprimirNotaPedido {
 		StringBuilder stb = new StringBuilder();
 		String tmp = "";
 		int tamanioValor = valor.length();
-		if(tamanioValor > tamanioMaximo) throw new Exception("ERROR: El tamaño del número ["+valor+"] excede el maximo valor de ["+tamanioMaximo+"]");
+		if(tamanioValor > tamanioMaximo) throw new Exception("ERROR: El tamaï¿±o del nï¿ºmero ["+valor+"] excede el maximo valor de ["+tamanioMaximo+"]");
 		
 		for(int x=0; x < (tamanioMaximo-tamanioValor); x++){
 			stb.append(valorCompletar);
