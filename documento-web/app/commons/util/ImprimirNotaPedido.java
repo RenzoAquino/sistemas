@@ -31,11 +31,15 @@ public class ImprimirNotaPedido {
 	
 	public void imprimirFactura(FktDocument documento) throws Exception{
 		int cantidadItems = documento.items.size();
+
+		if(cantidadItems < 4) cantidadItems = cantidadItems + 3;
+
 		int cantidadCaracteresPorFila = 40;
 		int cantidadLineasPorRegistro = 2;
-		int cantidadLineas =24+(cantidadItems*2)+8; //(CABECERA+PIE)+(CANTIDAD ITEMS)+(ESPACIO PARA CORTE)
+		int cantidadLineas =10+(cantidadItems*2)+4; //(CABECERA+PIE)+(CANTIDAD ITEMS)+(ESPACIO PARA CORTE)
 		int cantidadColumnas = cantidadCaracteresPorFila*cantidadLineasPorRegistro;
-		
+
+		System.out.println("cantidadLineas "+cantidadLineas);
 		//-----------------------------------------------------------------------------------------------------------------		
 		String nombreComercialEmpresa = "";
 		String nombreEmpresa = "INVERSIONES UNOCC S.A.C.";
@@ -43,12 +47,22 @@ public class ImprimirNotaPedido {
 		String correoEmpresa = "ventas@inversionesunocc.com";
 		
 		//-----------------------------------------------------------------------------------------------------------------
-		String _documento = "NOTA DE ENVIO:         "+documento.NAME;
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaPedido = df.format(documento.ORDERDATE);
+
+        System.out.println("Report Date: " + fechaPedido);
+
+
+        //String _documento = "NOTA DE ENVIO:         "+documento.NAME;
+        String _documento = "PEDIDO: "
+                .concat(completarTamanio(documento.NAME,13," ",true))
+                .concat(" FECHA: ").concat(fechaPedido);
+
+
+        //PEDIDO: PD02-00000011  FECHA: 12/12/2017
 		//-----------------------------------------------------------------------------------------------------------------
 		String nombreCliente = documento.contact.COMPANY;
-		String direccionCliente = "";//"CA. MARIA CURIE N 312 URB. SANTA ROSA";
-		String ubigeoCliente = "";//"LIMA-LIMA-LINCE";
-		
+
 		//-----------------------------------------------------------------------------------------------------------------
 		String cabeceraDetalle = "Cantidad  Unidad  Producto              ";
 
@@ -64,17 +78,16 @@ public class ImprimirNotaPedido {
 
 		//-----------------------------------------------------------------------------------------------------------------
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String reportDate = df.format(documento.ORDERDATE);
 
-        System.out.println("Report Date: " + reportDate);
+
 
 		
 		String valor = "";
 		int numeroLinea = 0;
 		int linea = 0;
-		String fechaEmision = "Fecha de Emision: "+reportDate.substring(0,10)+" Hora: "+reportDate.substring(10);//"Fecha de Emision: "+documento.ORDERDATE+" Hora: "+"15:30";
-		String mensajeFinPagina = "Representación impresa de la nota de pedido generada desde el SISGESVEN";
+        //String fechaEmision = "Fecha de Emision: "+fechaPedido.substring(0,10);
+		//String fechaEmision = "Fecha de Emision: "+fechaPedido.substring(0,10)+" Hora: "+fechaPedido.substring(10);//"Fecha de Emision: "+documento.ORDERDATE+" Hora: "+"15:30";
+		String mensajeFinPagina = "Gracias por su compra.";
 				
         PrinterMatrix printer = new PrinterMatrix();
 
@@ -154,9 +167,9 @@ public class ImprimirNotaPedido {
        printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, repetirValor(valor,cantidadCaracteresPorFila));
        
        StringBuilder tmpItem = new StringBuilder();
-       System.out.println("******************cantidadProductos ["+cantidadItems+"]");
+       System.out.println("******************cantidadProductos ["+documento.items.size()+"]");
         FktDocumentitem item = null;
-       for(int x = 0; x <cantidadItems; x++){
+       for(int x = 0; x <documento.items.size(); x++){
            item = documento.items.get(x);
 
            nombreItem = item.NAME;
@@ -200,23 +213,24 @@ public class ImprimirNotaPedido {
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, valor);     
-               
-       
+
+/*
        valor = fechaEmision;
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadCaracteresPorFila, valor);
-       
+*/
        //-------------------------------------------------------------------------------
 /*       valor = "-";
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
        printer.printTextWrap(linea, linea, 0, cantidadCaracteresPorFila, repetirValor(valor,cantidadCaracteresPorFila));
 */
+
        valor = mensajeFinPagina;
        numeroLinea++; linea = numeroLinea;
        System.out.println("linea ["+linea+"] - numeroLinea ["+numeroLinea+"]");
-        printer.printTextWrap(linea, (linea+(mensajeFinPagina.length()/cantidadCaracteresPorFila)+1), 0, cantidadColumnas, valor);
+        printer.printTextWrap(linea, linea, obtenerPosicionInicialParaCentrar(cantidadCaracteresPorFila, valor), cantidadColumnas, valor);
 
 
         
