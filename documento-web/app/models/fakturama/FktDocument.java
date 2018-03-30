@@ -3,6 +3,7 @@ package models.fakturama;
 import io.ebean.Finder;
 import io.ebean.Model;
 import io.ebean.annotation.NotNull;
+import models.Empresa;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -135,6 +136,8 @@ public class FktDocument extends Model {
 	private String respuesta; //NO EXISTE EN DB
 	@Transient
 	private String oc; //NO EXISTE EN DB
+	@Transient
+	public Empresa empresa; //NO EXISTE EN DB
 
 
 	public static Finder<Long,FktDocument> find = new Finder<>(FktDocument.class);
@@ -420,6 +423,11 @@ public class FktDocument extends Model {
 		if (oc != null) {
 			builder.append("oc=");
 			builder.append(oc);
+			builder.append(oc);
+		}
+		if (empresa != null) {
+			builder.append("empresa=");
+			builder.append(empresa);
 		}
 		builder.append("]");
 		return builder.toString();

@@ -152,6 +152,20 @@ create table fkt_documentitem (
   constraint pk_fkt_documentitem primary key (id)
 );
 
+create table fkt_userproperty (
+  id                            bigint auto_increment not null,
+  dateadded                     datetime(6),
+  deleted                       tinyint(1) default 0,
+  modified                      datetime(6),
+  modifiedby                    varchar(255),
+  name                          varchar(255),
+  t_user                        varchar(255),
+  validfrom                     datetime(6),
+  validto                       datetime(6),
+  t_value                       varchar(255),
+  constraint pk_fkt_userproperty primary key (id)
+);
+
 create table fkt_vat (
   id                            bigint auto_increment not null,
   dateadded                     datetime(6),
@@ -163,7 +177,7 @@ create table fkt_vat (
   taxvalue                      double,
   validfrom                     datetime(6),
   validto                       datetime(6),
-  vat_category                  bigint,
+  fk_category                   bigint,
   constraint pk_fkt_vat primary key (id)
 );
 
@@ -191,6 +205,8 @@ drop table if exists fkt_contact;
 drop table if exists fkt_document;
 
 drop table if exists fkt_documentitem;
+
+drop table if exists fkt_userproperty;
 
 drop table if exists fkt_vat;
 

@@ -1,14 +1,16 @@
 package controllers;
 
+import commons.Constantes;
 import commons.TypeDocument_ES;
 import commons.util.ImprimirNotaPedido;
+import commons.util.ImprimirNotaPedidoBase;
 import controllers.dto.DocumentoDTO;
-import io.ebean.Ebean;
-import io.ebean.Query;
 import models.Documento;
+import models.Empresa;
 import models.fakturama.FktContact;
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
+import models.fakturama.FktUserproperty;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -19,6 +21,7 @@ import views.html.errors.*;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Map;
 
 
 public class DocumentoController extends Controller{
@@ -113,24 +116,26 @@ public class DocumentoController extends Controller{
     }
 
     public Result verImprimirTicket(){
-        Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class);
+
+        DocumentoDTO dto = new DocumentoDTO();
+        dto.resumido ="R";
+        Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).fill(dto);
+
         return ok(verImprimirTicket.render(documentoDTOForm));
     }
 
     // para imprimir
-    public Result imprimirTicket(){
+    public Result imprimirTicket() throws Exception {
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).bindFromRequest();
         if(documentoDTOForm.hasErrors()){
             flash("danger","Por favor corregir los errores del formulario");
             return badRequest(verImprimirTicket.render(documentoDTOForm));
         }
 
-
-
-
         DocumentoDTO dto = documentoDTOForm.get();
         System.out.println(dto);
         FktDocument document = null;
+        Map<String,FktUserproperty> mapUserproperty = null;
 /*
         FktContact contact = FktContact.find.query().where().eq("vatnumber",dto.rucEmpresa).findOne();
         System.out.println(contact);
@@ -141,6 +146,19 @@ public class DocumentoController extends Controller{
                         .where().eq("name",document.NAME)
                         .findOne();
 */
+        //Buscar UserProperty
+        mapUserproperty = FktUserproperty.find.query()
+                .where()
+                .like("name","YOURCOMPANY_COMPANY_%")
+                .setMapKey("NAME")
+                .findMap();
+
+        Empresa empresa = new Empresa();
+        empresa.setRazonSocial(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_NAME).t_VALUE);
+        empresa.setEmail(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_EMAIL).t_VALUE);
+        empresa.setTelefono(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_TEL).t_VALUE);
+
+
         //Buscar Documento
         document = FktDocument.find.query()
                 //.fetch("contact" ).alias("c")
@@ -156,13 +174,21 @@ public class DocumentoController extends Controller{
                 .fetch("vat")
                 .where()
                 .eq("fk_document",document.ID)
+                .orderBy().asc("t0.name")
                 .findList();
 
+        document.empresa = empresa;
         System.out.println(document);
 
-        ImprimirNotaPedido inp = new ImprimirNotaPedido();
+        ImprimirNotaPedido imp = new ImprimirNotaPedido(document);
+        ImprimirNotaPedidoBase imp01 = new ImprimirNotaPedidoBase();
         try {
-            inp.imprimirFactura(document);
+            if(dto.resumido.equals("D")){
+                imp01.imprimirFactura(document);
+            }
+            else if(dto.resumido.equals("R")){
+                imp.imprimir();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

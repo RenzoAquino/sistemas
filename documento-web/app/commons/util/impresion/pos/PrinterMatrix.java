@@ -68,10 +68,12 @@ public class PrinterMatrix {
 		} else {
 			wrap = 1;
 		}
+		/*
 		System.out.println("textSize:" + textSize);
 		System.out.println("limitH:" + limitH);
 		System.out.println("limitV:" + limitV);
 		System.out.println("wrap:" + wrap);
+		*/
 		String[] wraped = new String[wrap];
 
 		int end = 0;
@@ -83,13 +85,13 @@ public class PrinterMatrix {
 				end = text.length();
 			}
 			wraped[(i - 1)] = text.substring(init, end);
-			System.out.println("wraped[" + (i - 1) + "]:[" + wraped[(i - 1)]+"]");
+			//System.out.println("wraped[" + (i - 1) + "]:[" + wraped[(i - 1)]+"]");
 			init = end;
 		}
 		for (int b = 0; b < wraped.length; ++b)
 			if (b <= linE) {
 				this.page[linI][colI] = wraped[b];
-				System.out.println("page[" + linI + "][" + colI + "]:[" + this.page[linI][colI]+"]");
+				//System.out.println("page[" + linI + "][" + colI + "]:[" + this.page[linI][colI]+"]");
 				++linI;
 			}
 	}
@@ -103,13 +105,13 @@ public class PrinterMatrix {
 					int size = tmp.length();
 
 					b += size;
-					System.out.print(tmp);
+					//System.out.print(tmp);
 				} else {
-					System.out.print(" ");
+					//System.out.print(" ");
 					++b;
 				}
 			}
-			System.out.println();
+			//System.out.println();
 		}
 	}
 
@@ -122,7 +124,7 @@ public class PrinterMatrix {
 				for (int b = 0; b < this.page[i].length;) {
 					String tmp = this.page[i][b];
 					if(b<40){
-						System.out.println("page["+(i+1)+"]["+(b+1)+"] - tmp ["+tmp+"]");
+						//System.out.println("page["+(i+1)+"]["+(b+1)+"] - tmp ["+tmp+"]");
 	
 						if ((tmp != null) && (!(tmp.equals("")))) {
 							int size = tmp.length();

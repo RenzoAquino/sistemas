@@ -1,14 +1,18 @@
 @import controllers.dto.DocumentoDTO
+@import models.CargaDatos
 @(documentoDTOForm: Form[DocumentoDTO])
+
 
 @import helper._
 
 @layout("Imprimir documento"){
-    <h3>
-        IMPRIMIR DOCUMENTO
-    </h3>
+    <h3>IMPRIMIR DOCUMENTO</h3>
     @helper.form(action = routes.DocumentoController.imprimirTicket()){
-
+        @inputRadioGroup(
+                   documentoDTOForm("resumido"),
+                   options = CargaDatos.cargarTipoImpresionTicketSeq.map(dto => dto.codigo -> dto.descripcion),
+                   '_label -> "Tipo de Impresion",
+                   '_error -> documentoDTOForm("resumido").error.map(_.withMessage("Seleccionar tipo")))
         @helper.inputText(documentoDTOForm("tipoDocumento"),'class ->"form-control", '_label -> "Tipo",'readonly -> "readonly" )
         @helper.inputText(documentoDTOForm("numero"),'class ->"form-control", '_label -> "Número",'autocomplete -> "off", 'placeholder -> "Ingrese el número de documento ...")
         @helper.inputText(documentoDTOForm("nombreEmpresa"),'class ->"form-control", '_label -> null, 'style -> "display: none",'readonly -> "readonly")

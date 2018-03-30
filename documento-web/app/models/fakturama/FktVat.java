@@ -31,7 +31,7 @@ public class FktVat extends Model {
 
     public Date VALIDTO;
 
-    public Long VAT_CATEGORY;
+    public Long FK_CATEGORY;
 
 	@Override
 	public String toString() {
@@ -46,7 +46,7 @@ public class FktVat extends Model {
 				", TAXVALUE=" + TAXVALUE +
 				", VALIDFROM=" + VALIDFROM +
 				", VALIDTO=" + VALIDTO +
-				", VAT_CATEGORY=" + VAT_CATEGORY +
+				", FK_CATEGORY=" + FK_CATEGORY +
 				'}';
 	}
 }

@@ -320,11 +320,11 @@ public class ImprimirNotaPedidoBase {
 
 
         
-        printer.toFile("impresion.txt");
+        printer.toFile("impresion_.txt");
 
       FileInputStream inputStream = null;
         try {
-            inputStream = new FileInputStream("impresion.txt");
+            inputStream = new FileInputStream("impresion_.txt");
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -375,7 +375,7 @@ public class ImprimirNotaPedidoBase {
         }
 
         inputStream.close();
-        System.out.println("*******");
+
 
 
     }
@@ -661,11 +661,11 @@ public class ImprimirNotaPedidoBase {
 
 
 
-        printer.toFile("impresion.txt");
+        printer.toFile("impresion_.txt");
 
         FileInputStream inputStream = null;
         try {
-            inputStream = new FileInputStream("impresion.txt");
+            inputStream = new FileInputStream("impresion_.txt");
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
