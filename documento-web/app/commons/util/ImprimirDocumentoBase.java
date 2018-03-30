@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public abstract class ImprimirDocumento {
+public abstract class ImprimirDocumentoBase {
 
     public static int PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA = 40;
     public static int PARAM_TICKET_LINEAS_CABECERA_PRINCIPAL = (4+1); //CABECERA PRINCIPAL + ESPACIO EN BLANCO
@@ -25,23 +25,30 @@ public abstract class ImprimirDocumento {
     public static final String PARAM_TICKET_ETIQUETA_FECHA = " FECHA: ";
     public static final String PARAM_TICKET_ETIQUETA_RUC = "RUC: ";
 
+    public static final String TICKET_MARCA_IGV = "*";
+
     public static final String PARAM_TICKET_FORMATO_FECHA = "dd/MM/yyyy";
 
 
 
-    public ImprimirDocumento(){
+    public ImprimirDocumentoBase(){
         super();
     }
 
-    public ImprimirDocumento(FktDocument documento) throws Exception {
+    public ImprimirDocumentoBase(FktDocument documento) throws Exception {
         super();
         this.documento = documento;
+
         cargarDatosCabeceraPrincipal();
         cargarDatosCabeceraDocumento();
+
+        cargarConfiguracionTamanioDetalle();
 
         calcularTamanioImpresion();
         cargarConfiguracionImpresion();
     }
+
+
 
     protected FktDocument documento;
     protected String nombreComercialEmpresa;
@@ -57,20 +64,25 @@ public abstract class ImprimirDocumento {
     protected String rucCliente;
     protected String razonSocialCliente;
 
-    protected int tamanioIGV;
+    protected int tamanioCodigoProducto;
+    protected int tamanioMarcaIGV;
     protected int tamanioCantidadItem;
     protected int tamanioUnidadMedida;
     protected int tamanioProducto;
     protected int tamanioPrecioUnitario;
-    protected int tamanioPrecioTotal;
+    protected int tamanioImporteItem;
 
     protected String cabeceraDetalleResumido  = "Cantidad  Unidad  Producto              ";
-    protected String cabeceraDetalleDetallado = "Producto   Cantidad   Precio   Importe  ";
-    protected String simpoloIGV = "*";
+    protected String cabeceraDetalleResumid_  = "1234567890123456789012345678901234567890";
+    protected String cabeceraDetalleDetallado = "Codigo Cantidad U.M. P.Unitario  Importe";
+    protected String marcaIGV = "";
+    protected String codigoItem = "";
     protected String nombreItem = "FIDEO SPAGUETTI AL HUEVO  500 GR - DON VITTORIO";
     protected String cantidadItem = "" + 900.099;
     protected String unidadMedida = "UND";
-    protected String importeItem = "" + 9900.099;
+    protected String precioUnitario = "" + 9900.099;
+    protected String importeItem = "" + 989900.099;
+    protected StringBuilder tmpItem;
 
     protected String nombreArchivo = "ticket.txt";
     protected String nombreImpresora = "BIXOLON SRP-270";
@@ -83,21 +95,22 @@ public abstract class ImprimirDocumento {
 
     //atributos usados para imprimir
     protected String _valor = "";
-    protected int _numeroLinea = 0;
-    protected int _linea = 0;
+    protected int numeroLinea = 0;
+    //protected int linea = 0;
 
     public void cargarDatosCabeceraPrincipal(){
         this.nombreComercialEmpresa = "";
         this.nombreEmpresa = documento.empresa.getRazonSocial(); //"INVERSIONES UNOCC S.A.C.";
         this.telefonoEmpresa = PARAM_TICKET_ETIQUETA_TELEFONO.concat(documento.empresa.getTelefono());//"Telefono: 470-8565";
         this.correoEmpresa = documento.empresa.getEmail();//"ventas@inversionesunocc.com";
+        this.rucEmpresa  = PARAM_TICKET_ETIQUETA_RUC.concat(documento.empresa.getRuc());
     }
 
     public void cargarDatosCabeceraDocumento() throws Exception {
         fechaDocumento = FechaUtil.convertirDateAString(documento.ORDERDATE,PARAM_TICKET_FORMATO_FECHA);
         //PEDIDO: PD02-00000011  FECHA: 12/12/2017
         registroDocumentoCliente = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase()+": "
-                .concat(completarTamanio(documento.NAME, 14, " ", false))
+                .concat(StringUtil.completarTamanio(documento.NAME, 14, " ", false))
                 .concat(PARAM_TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
         rucCliente = PARAM_TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
         razonSocialCliente = documento.contact.COMPANY;
@@ -113,8 +126,9 @@ public abstract class ImprimirDocumento {
         printer.setOutSize(cantidadLineas, cantidadColumnas);//setOutSize(60, 80);
     }
 
-    public abstract void calcularTamanioImpresion();
-    public abstract void imprimir() throws Exception;
+    protected abstract void cargarConfiguracionTamanioDetalle();
+    protected abstract void calcularTamanioImpresion();
+    protected abstract void imprimir() throws Exception;
 
     public void enviarAImpresora( ) throws IOException {
         FileInputStream inputStream = null;
@@ -183,29 +197,6 @@ public abstract class ImprimirDocumento {
         return null;
     }
 
-    protected String completarTamanio(String valor, int tamanioMaximo,String valorCompletar, boolean completarLadoIzquierdo) throws Exception {
-        StringBuilder stb = new StringBuilder();
-        String tmp = "";
-        int tamanioValor = valor.length();
-        if(tamanioValor > tamanioMaximo){
-            valor = valor.substring(0,tamanioMaximo);
-
-            System.err.println("ERROR: El tama￱o del n￺mero ["+valor+"] tamañoValor ["+tamanioValor+"] excede el maximo valor de ["+tamanioMaximo+"]");
-            tamanioValor = valor.length();
-            //throw new Exception("ERROR: El tama￱o del n￺mero ["+valor+"] excede el maximo valor de ["+tamanioMaximo+"]");
-        }
-
-        for(int x=0; x < (tamanioMaximo-tamanioValor); x++){
-            stb.append(valorCompletar);
-        }
-        tmp = stb.toString();
-
-        stb = new StringBuilder();
-        stb.append(valor);
-        stb.insert((completarLadoIzquierdo)?0:tamanioValor, tmp);
-        return stb.toString();
-    }
-
     protected int obtenerPosicionInicialParaCentrar(int cantidadCaracteresPorFila, String valor){
         return (cantidadCaracteresPorFila-valor.length())/2;
     }
@@ -217,18 +208,18 @@ public abstract class ImprimirDocumento {
     }
 
     protected void agregarLinea(String valor, boolean centrar) {
-        System.out.println("numeroLinea [" + _numeroLinea + "] - valor ["+valor+"]");
+        System.out.println("numeroLinea [" + numeroLinea + "] - valor ["+valor+"]");
         if(centrar){
-            printer.printTextWrap(_numeroLinea, _numeroLinea, obtenerPosicionInicialParaCentrar(PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor), PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
+            printer.printTextWrap(numeroLinea, numeroLinea, obtenerPosicionInicialParaCentrar(PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor), PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
         } else {
-            printer.printTextWrap(_numeroLinea, _numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
+            printer.printTextWrap(numeroLinea, numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
         }
-        ++_numeroLinea;
+        ++numeroLinea;
     }
 
     protected void agregarLineaRepetirValor(String valor) {
-        System.out.println("numeroLinea [" + _numeroLinea + "] - valor ["+valor+"]");
-        printer.printTextWrap(_numeroLinea, _numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, repetirValor(valor, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA));
-        ++_numeroLinea;
+        System.out.println("numeroLinea [" + numeroLinea + "] - valor ["+valor+"]");
+        printer.printTextWrap(numeroLinea, numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, repetirValor(valor, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA));
+        ++numeroLinea;
     }
 }

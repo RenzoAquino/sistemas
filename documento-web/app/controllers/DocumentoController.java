@@ -2,7 +2,8 @@ package controllers;
 
 import commons.Constantes;
 import commons.TypeDocument_ES;
-import commons.util.ImprimirNotaPedido;
+import commons.util.ImprimirDocumentoDetallado;
+import commons.util.ImprimirDocumentoResumido;
 import commons.util.ImprimirNotaPedidoBase;
 import controllers.dto.DocumentoDTO;
 import models.Documento;
@@ -157,7 +158,7 @@ public class DocumentoController extends Controller{
         empresa.setRazonSocial(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_NAME).t_VALUE);
         empresa.setEmail(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_EMAIL).t_VALUE);
         empresa.setTelefono(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_TEL).t_VALUE);
-
+        empresa.setRuc(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_VATNR).t_VALUE);
 
         //Buscar Documento
         document = FktDocument.find.query()
@@ -180,14 +181,15 @@ public class DocumentoController extends Controller{
         document.empresa = empresa;
         System.out.println(document);
 
-        ImprimirNotaPedido imp = new ImprimirNotaPedido(document);
-        ImprimirNotaPedidoBase imp01 = new ImprimirNotaPedidoBase();
+        ImprimirDocumentoResumido impR= new ImprimirDocumentoResumido(document);
+        ImprimirDocumentoDetallado impD = new ImprimirDocumentoDetallado(document);
+
         try {
             if(dto.resumido.equals("D")){
-                imp01.imprimirFactura(document);
+                impD.imprimir();
             }
             else if(dto.resumido.equals("R")){
-                imp.imprimir();
+                impR.imprimir();
             }
         } catch (Exception e) {
             e.printStackTrace();
