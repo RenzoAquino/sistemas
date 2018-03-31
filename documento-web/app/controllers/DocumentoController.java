@@ -2,12 +2,11 @@ package controllers;
 
 import commons.Constantes;
 import commons.TypeDocument_ES;
-import commons.util.ImprimirDocumentoDetallado;
-import commons.util.ImprimirDocumentoResumido;
+import commons.util.GenerarTicketDetallado;
+import commons.util.GenerarTicketResumido;
 import controllers.dto.DocumentoDTO;
 import models.Documento;
 import models.Empresa;
-import models.dto.ParametroDTO;
 import models.fakturama.FktContact;
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
@@ -186,8 +185,8 @@ public class DocumentoController extends Controller{
         document.empresa = empresa;
         System.out.println(document);
 
-        ImprimirDocumentoResumido impR= new ImprimirDocumentoResumido(document);
-        ImprimirDocumentoDetallado impD = new ImprimirDocumentoDetallado(document);
+        GenerarTicketResumido impR= new GenerarTicketResumido(document);
+        GenerarTicketDetallado impD = new GenerarTicketDetallado(document);
 
         try {
             if(dto.tipoDetalle.equals("D")){
