@@ -129,7 +129,7 @@ public class DocumentoController extends Controller{
         return ok(verImprimirTicket.render(documentoDTOForm));
     }
 
-    // para imprimir
+    // para generarTicket
     public Result imprimirTicket() throws Exception {
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).bindFromRequest();
         if(documentoDTOForm.hasErrors()){
@@ -190,10 +190,10 @@ public class DocumentoController extends Controller{
 
         try {
             if(dto.tipoDetalle.equals("D")){
-                impD.imprimir();
+                impD.generarTicket();
             }
             else if(dto.tipoDetalle.equals("R")){
-                impR.imprimir();
+                impR.generarTicket();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,7 +215,7 @@ public class DocumentoController extends Controller{
         }
 */
 
-        //documentoDTO.imprimir();
+        //documentoDTO.generarTicket();
 
         flash("success","Se imprimio correctamente el documento.");
         //Documento.guardar(documento);
