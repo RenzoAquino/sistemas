@@ -20,10 +20,18 @@ public abstract class ImprimirDocumentoBase {
     public static int PARAM_TICKET_LINEAS_DETALLE = (1+3+1); //CABECERA DE DETALLE + LINEAS + ESPACIO EN BLANCO
     public static int PARAM_TICKET_LINEAS_PIE = (2); //PIE TICKET
     public static int PARAM_TICKET_LINEAS_ESPACIOS_BLANCO = (10); //ESPACIOS EN BLANCO DE PIE DE TICKET
+    public static int PARAM_TICKET_LINEAS_TOTALES = (4); //ESPACIOS DE LOS TOTALES DE PIE DE TICKET
 
-    public static final String PARAM_TICKET_ETIQUETA_TELEFONO = "TELEFONO: ";
-    public static final String PARAM_TICKET_ETIQUETA_FECHA = " FECHA: ";
-    public static final String PARAM_TICKET_ETIQUETA_RUC = "RUC: ";
+
+
+    public static final String TICKET_ETIQUETA_TELEFONO = "TELEFONO: ";
+    public static final String TICKET_ETIQUETA_FECHA = " FECHA: ";
+    public static final String TICKET_ETIQUETA_RUC = "RUC: ";
+
+    public static final String TICKET_ETIQUETA_TOTAL_OPERACION_EXONERADA = "     OP EXONERADA";
+    public static final String TICKET_ETIQUETA_TOTAL_OPERACION_GRAVADA = "     OP GRAVADA";
+    public static final String TICKET_ETIQUETA_TOTAL_IGV = "     IGV";
+    public static final String TICKET_ETIQUETA_IMPORTE_TOTAL = "     IMPORTE TOTAL S/";
 
     public static final String TICKET_MARCA_IGV = "*";
 
@@ -71,9 +79,10 @@ public abstract class ImprimirDocumentoBase {
     protected int tamanioProducto;
     protected int tamanioPrecioUnitario;
     protected int tamanioImporteItem;
+    protected int tamanioTotales;
+    protected int tamanioValorTotales;
 
     protected String cabeceraDetalleResumido  = "Cantidad  Unidad  Producto              ";
-    protected String cabeceraDetalleResumid_  = "1234567890123456789012345678901234567890";
     protected String cabeceraDetalleDetallado = "Codigo Cantidad U.M. P.Unitario  Importe";
     protected String marcaIGV = "";
     protected String codigoItem = "";
@@ -82,9 +91,21 @@ public abstract class ImprimirDocumentoBase {
     protected String unidadMedida = "UND";
     protected String precioUnitario = "" + 9900.099;
     protected String importeItem = "" + 989900.099;
+
+    protected Double dTotalOperacionExonerada;
+    protected Double dTotalOperacionGravada;
+    protected Double dTotalIgv;
+    protected Double dImporteTotal;
+
+    protected String totalOperacionExonerada;
+    protected String totalOperacionGravada;
+    protected String totalIgv;
+    protected String importeTotal;
+
     protected StringBuilder tmpItem;
 
-    protected String nombreArchivo = "ticket.txt";
+    protected String nombreArchivoTXT = "ticket.txt";
+    protected String nombreArchivoPDF = "ticket.pdf";
     protected String nombreImpresora = "BIXOLON SRP-270";
 
     protected PrinterMatrix printer;
@@ -101,9 +122,9 @@ public abstract class ImprimirDocumentoBase {
     public void cargarDatosCabeceraPrincipal(){
         this.nombreComercialEmpresa = "";
         this.nombreEmpresa = documento.empresa.getRazonSocial(); //"INVERSIONES UNOCC S.A.C.";
-        this.telefonoEmpresa = PARAM_TICKET_ETIQUETA_TELEFONO.concat(documento.empresa.getTelefono());//"Telefono: 470-8565";
+        this.telefonoEmpresa = TICKET_ETIQUETA_TELEFONO.concat(documento.empresa.getTelefono());//"Telefono: 470-8565";
         this.correoEmpresa = documento.empresa.getEmail();//"ventas@inversionesunocc.com";
-        this.rucEmpresa  = PARAM_TICKET_ETIQUETA_RUC.concat(documento.empresa.getRuc());
+        this.rucEmpresa  = TICKET_ETIQUETA_RUC.concat(documento.empresa.getRuc());
     }
 
     public void cargarDatosCabeceraDocumento() throws Exception {
@@ -111,8 +132,8 @@ public abstract class ImprimirDocumentoBase {
         //PEDIDO: PD02-00000011  FECHA: 12/12/2017
         registroDocumentoCliente = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase()+": "
                 .concat(StringUtil.completarTamanio(documento.NAME, 14, " ", false))
-                .concat(PARAM_TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
-        rucCliente = PARAM_TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
+                .concat(TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
+        rucCliente = TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
         razonSocialCliente = documento.contact.COMPANY;
     }
 
@@ -133,7 +154,7 @@ public abstract class ImprimirDocumentoBase {
     public void enviarAImpresora( ) throws IOException {
         FileInputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(nombreArchivo);
+            inputStream = new FileInputStream(nombreArchivoTXT);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -188,7 +209,7 @@ public abstract class ImprimirDocumentoBase {
     private PrintService findPrintService(String printerName,
                                           PrintService[] services) {
         for (PrintService service : services) {
-            //System.out.println("********************"+service.getName());
+            System.out.println("********************"+service.getName());
             if (service.getName().equalsIgnoreCase(printerName)) {
                 return service;
             }

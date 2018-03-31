@@ -4,10 +4,10 @@ import commons.Constantes;
 import commons.TypeDocument_ES;
 import commons.util.ImprimirDocumentoDetallado;
 import commons.util.ImprimirDocumentoResumido;
-import commons.util.ImprimirNotaPedidoBase;
 import controllers.dto.DocumentoDTO;
 import models.Documento;
 import models.Empresa;
+import models.dto.ParametroDTO;
 import models.fakturama.FktContact;
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
@@ -21,6 +21,7 @@ import views.html.documento.*;
 import views.html.errors.*;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -119,7 +120,11 @@ public class DocumentoController extends Controller{
     public Result verImprimirTicket(){
 
         DocumentoDTO dto = new DocumentoDTO();
-        dto.resumido ="R";
+        dto.tipoDetalle ="R";
+        dto.tipoAccion ="IMP";
+        dto.listaTipoAccion = new ArrayList<String>();
+        dto.listaTipoAccion.add("IMP");
+
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).fill(dto);
 
         return ok(verImprimirTicket.render(documentoDTOForm));
@@ -185,10 +190,10 @@ public class DocumentoController extends Controller{
         ImprimirDocumentoDetallado impD = new ImprimirDocumentoDetallado(document);
 
         try {
-            if(dto.resumido.equals("D")){
+            if(dto.tipoDetalle.equals("D")){
                 impD.imprimir();
             }
-            else if(dto.resumido.equals("R")){
+            else if(dto.tipoDetalle.equals("R")){
                 impR.imprimir();
             }
         } catch (Exception e) {

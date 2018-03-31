@@ -2,6 +2,19 @@ package commons.util;
 
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.font.PDSimpleFont;
+import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
+import org.apache.pdfbox.printing.PDFPrintable;
+import org.apache.pdfbox.printing.Scaling;
+import org.apache.pdfbox.tools.TextToPDF;
+
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.*;
 
 public class ImprimirDocumentoDetallado extends ImprimirDocumentoBase {
 
@@ -26,6 +39,8 @@ public class ImprimirDocumentoDetallado extends ImprimirDocumentoBase {
         tamanioPrecioUnitario = 8;
         tamanioImporteItem = 10;
         tamanioProducto = 39;
+        tamanioTotales = 30;
+        tamanioValorTotales = 10;
     }
 
 	public void calcularTamanioImpresion(){
@@ -34,7 +49,8 @@ public class ImprimirDocumentoDetallado extends ImprimirDocumentoBase {
                 PARAM_TICKET_LINEAS_CABECERA_DOCUMENTO +
                 PARAM_TICKET_LINEAS_DETALLE +
                 PARAM_TICKET_LINEAS_PIE +
-                PARAM_TICKET_LINEAS_ESPACIOS_BLANCO ;
+                PARAM_TICKET_LINEAS_ESPACIOS_BLANCO +
+                PARAM_TICKET_LINEAS_TOTALES;
         cantidadColumnas = PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA;// * cantidadLineasPorRegistro;
 
         System.out.println("cantidadLineas ["+cantidadLineas+"] - cantidadColumnas ["+cantidadColumnas+"]");
@@ -67,20 +83,84 @@ public class ImprimirDocumentoDetallado extends ImprimirDocumentoBase {
         agregarLinea(mensajeFinPagina,true);
         agregarLinea(""+documento.items.size()+" Items.",true);
 
-        printer.toFile(nombreArchivo);
-        //enviarAImpresora();
+        printer.toFile(nombreArchivoTXT);
+
+        enviarAImpresora();
+
+        convertirTXTaPDF();
     }
 
-    private void agregarTotales() {
+    private void convertirTXTaPDF() throws IOException, PrinterException, InterruptedException {
+
+        PDDocument document = new PDDocument();
+        TextToPDF pdf = new TextToPDF();
+        String fileName = nombreArchivoTXT;
+        File pdfFile = new File("D:\\SISGESVEN\\TICKETS\\"+documento.NAME+"_"+documento.contact.COMPANY+".pdf");//new File(nombreArchivoPDF);
+
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+
+        PDSimpleFont courier = PDType1Font.COURIER;
+        PDSimpleFont testFont = PDTrueTypeFont.loadTTF( document, new File("times.ttf" ));
+
+        //pdf.setFont(testFont);
+        pdf.setFont(courier);
+        pdf.setFontSize(8);
+
+
+        pdf.createPDFFromText(document, reader);
+
+        document.save(pdfFile);
+        document.close();
+
+
+        /*
+        PDDocument doc = PDDocument.load(new File(nombreArchivoPDF));
+        PDFPrintable printable = new PDFPrintable(doc, Scaling.SHRINK_TO_FIT);
+        PrinterJob job = PrinterJob.getPrinterJob();
+        job.setPrintable(printable);
+        job.print();
+        */
+
+    }
+
+    private void agregarTotales() throws Exception {
+
+        totalOperacionExonerada =
+                StringUtil.completarTamanio(TICKET_ETIQUETA_TOTAL_OPERACION_EXONERADA, tamanioTotales," ",false)+
+                StringUtil.completarTamanio(NumeroUtil.roundString((dTotalOperacionExonerada),2), tamanioValorTotales," ",true);
+
+        totalOperacionGravada =
+                StringUtil.completarTamanio(TICKET_ETIQUETA_TOTAL_OPERACION_GRAVADA, tamanioTotales," ",false)+
+                StringUtil.completarTamanio(NumeroUtil.roundString((dTotalOperacionGravada),2), tamanioValorTotales," ",true);
+
+        dTotalIgv = dTotalOperacionGravada*0.18;
+        totalIgv =
+                StringUtil.completarTamanio(TICKET_ETIQUETA_TOTAL_IGV, tamanioTotales," ",false)+
+                StringUtil.completarTamanio(NumeroUtil.roundString((dTotalIgv),2), tamanioValorTotales," ",true);
+
+        dImporteTotal = dTotalOperacionExonerada + dTotalOperacionGravada + dTotalIgv;
+        importeTotal =
+                StringUtil.completarTamanio(TICKET_ETIQUETA_IMPORTE_TOTAL, tamanioTotales," ",false)+
+                StringUtil.completarTamanio(NumeroUtil.roundString((dImporteTotal),2), tamanioValorTotales," ",true);
+
+        agregarLinea(totalOperacionExonerada,false);
+        agregarLinea(totalOperacionGravada,false);
+        agregarLinea(totalIgv,false);
+        agregarLinea(importeTotal,false);
     }
 
     protected void agregarLineaProductos() throws  Exception{
         System.out.println("******************cantidadProductos [" + documento.items.size() + "]");
 
+        dTotalOperacionExonerada = new Double(0);
+        dTotalOperacionGravada = new Double(0);
+//        dTotalIgv = new Double(0);
+//        dImporteTotal = new Double(0);
+
         for (FktDocumentitem item:documento.items) {
             codigoItem = (item.ITEMNUMBER==null)?"":item.ITEMNUMBER;
             nombreItem = item.NAME;
-            cantidadItem = StringUtil.completarTamanioDecimal(""+item.QUANTITY,3,"0",true);
+            cantidadItem = StringUtil.completarTamanioDecimal(""+item.QUANTITY,3,"0",false);
             unidadMedida = item.QUANTITYUNIT;
             //precioUnitario =  "" + item.PRICE;
 
@@ -88,10 +168,14 @@ public class ImprimirDocumentoDetallado extends ImprimirDocumentoBase {
                 marcaIGV = " ";
                 precioUnitario =  NumeroUtil.roundString(item.PRICE,2);
                 importeItem = NumeroUtil.roundString((item.QUANTITY*item.PRICE),2);
+
+                dTotalOperacionExonerada = dTotalOperacionExonerada + item.QUANTITY*item.PRICE;
             } else {
                 marcaIGV = TICKET_MARCA_IGV;
                 precioUnitario = NumeroUtil.roundString(((item.vat.TAXVALUE+1)*item.PRICE),2);
                 importeItem = NumeroUtil.roundString(((item.vat.TAXVALUE+1)*item.PRICE*item.QUANTITY),2);
+
+                dTotalOperacionGravada = dTotalOperacionGravada + item.QUANTITY*item.PRICE;
             }
 
             //marcaIGV = ((("" + item.vat.TAXVALUE).trim().equals("0.0"))? " ":TICKET_MARCA_IGV);

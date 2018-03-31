@@ -10,4 +10,12 @@ public class ParametroDTO {
     }
     public String codigo;
     public String descripcion;
+
+    @Override
+    public String toString() {
+        return "ParametroDTO{" +
+                "codigo='" + codigo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
 }

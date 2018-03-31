@@ -23,7 +23,9 @@ public class NumeroUtil {
         String part02 = result.split("\\.")[1];
         //System.out.println("result ["+result+"]");
         //System.out.println("roundString ["+result.split("\\.")[1]+"]");
-        part02 = StringUtil.completarTamanio(part02,places,"0",true);
+        //System.out.println("**********part02 01 ["+part02+"]");
+        part02 = StringUtil.completarTamanio(part02,places,"0",false);
+        //System.out.println("**********part02 02 ["+part02+"]");
         return part01.concat(".").concat(part02);// (part02.length() == 3)?result:part01.concat(".").concat(part02) ;
     }
 }

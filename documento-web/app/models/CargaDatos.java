@@ -41,4 +41,21 @@ public class CargaDatos {
         lista.add("Detallado");
         return lista;
     }
+
+
+    public static Seq<ParametroDTO> cargarTipoAccionSeq() {
+        CargaDatos datos = new CargaDatos();
+        List<ParametroDTO> lista = datos.obtenerListaTipoAccion();
+        return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
+    }
+
+    public List<ParametroDTO> obtenerListaTipoAccion(){
+        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
+        ParametroDTO dto = null;
+        dto = new ParametroDTO("IMP","Impresión");
+        lista.add(dto);
+        dto = new ParametroDTO("PDF","Generar PDF");
+        lista.add(dto);
+        return lista;
+    }
 }

@@ -53,7 +53,7 @@ public class ImprimirDocumentoResumido extends ImprimirDocumentoBase {
         agregarLinea(mensajeFinPagina,true);
         agregarLinea(""+documento.items.size()+" Items.",true);
 
-        printer.toFile(nombreArchivo);
+        printer.toFile(nombreArchivoTXT);
         enviarAImpresora();
     }
 

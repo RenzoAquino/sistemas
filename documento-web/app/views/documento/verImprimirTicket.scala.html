@@ -13,16 +13,23 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        @helper.inputText(documentoDTOForm("tipoDocumento"),'class ->"form-control", '_label -> "Tipo",'readonly -> "readonly" )
+                        @helper.inputText(documentoDTOForm("tipoDocumento"),'class ->"form-control", '_label -> "Tipo de Documento",'readonly -> "readonly" )
                         @helper.inputText(documentoDTOForm("numero"),'class ->"form-control", '_label -> "Número",'autocomplete -> "off", 'placeholder -> "Ingrese el número de documento ...")
                     </div>
 
                     <div class="col-md-6">
                         @inputRadioGroup(
-                            documentoDTOForm("resumido"),
+                            documentoDTOForm("tipoDetalle"),
                             options = CargaDatos.cargarTipoImpresionTicketSeq.map(dto => dto.codigo -> dto.descripcion),
-                            '_label -> "Tipo de Impresion",
-                            '_error -> documentoDTOForm("resumido").error.map(_.withMessage("Seleccionar tipo")))
+                            '_label -> "Tipo de Detalle",
+                            '_error -> documentoDTOForm("tipoDetalle").error.map(_.withMessage("Seleccionar tipo")))
+
+                        <!-- http://www.aipacommander.com/entry/2015/08/09/183306 -->
+                        @inputCheckboxGroup(
+                            documentoDTOForm("listaTipoAccion"),
+                            options = CargaDatos.cargarTipoAccionSeq.map(dto => dto.codigo -> dto.descripcion),
+                            '_label -> "Generar",
+                            '_error -> documentoDTOForm("listaTipoAccion").error.map(_.withMessage("Seleccionar una o más acciones")))
 
                     </div>
                 </div>
