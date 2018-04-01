@@ -22,7 +22,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
-public class PrinterMatrix {
+public class TicketMatrix {//PrinterMatrix
 	private String[][] page;
 
 	public void setOutSize(int lin, int col) {
@@ -119,7 +119,7 @@ public class PrinterMatrix {
 		try {
 			FileOutputStream fo = new FileOutputStream(fileName);
 
-			//System.out.println("PrinterMatrix : ["+fo.toString()+"]");
+			//System.out.println("TicketMatrix : ["+fo.toString()+"]");
 			for (int i = 0; i < this.page.length; ++i) {
 				for (int b = 0; b < this.page[i].length;) {
 					String tmp = this.page[i][b];
@@ -474,7 +474,7 @@ public class PrinterMatrix {
 	}
 
 	public static void main(String[] args) {
-		PrinterMatrix t = new PrinterMatrix();
+		TicketMatrix t = new TicketMatrix();
 
 		t.setOutSize(25, 80);
 

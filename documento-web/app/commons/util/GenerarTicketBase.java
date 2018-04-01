@@ -2,15 +2,8 @@ package commons.util;
 
 import commons.TypeDocument_ES;
 import commons.util.impresion.pos.Extenso;
-import commons.util.impresion.pos.PrinterMatrix;
+import commons.util.impresion.pos.TicketMatrix;
 import models.fakturama.FktDocument;
-
-import javax.print.*;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public abstract class GenerarTicketBase {
 
@@ -104,11 +97,7 @@ public abstract class GenerarTicketBase {
 
     protected StringBuilder tmpItem;
 
-    protected String nombreArchivoTXT = "ticket.txt";
-    protected String nombreArchivoPDF = "ticket.pdf";
-    protected String nombreImpresora = "BIXOLON SRP-270";
-
-    protected PrinterMatrix printer;
+    protected TicketMatrix ticket;
     protected Extenso e;
 
     protected int cantidadLineas = 0;
@@ -138,85 +127,20 @@ public abstract class GenerarTicketBase {
     }
 
     public void cargarConfiguracionImpresion() throws Exception {
-        printer = new PrinterMatrix();
+        ticket = new TicketMatrix();
         e = new Extenso();
         e.setNumber(20.30);//Como configurar ?
 
         //Definir el tamanho del papel para la impresion  aca 25 lineas y 80 columnas
         //System.out.println("cantidadLineas ["+cantidadLineas+"] - cantidadColumnas ["+cantidadColumnas+"]");
-        printer.setOutSize(cantidadLineas, cantidadColumnas);//setOutSize(60, 80);
+        ticket.setOutSize(cantidadLineas, cantidadColumnas);//setOutSize(60, 80);
     }
 
     protected abstract void cargarConfiguracionTamanioDetalle();
     protected abstract void calcularTamanioTicket();
     protected abstract void generarTicket() throws Exception;
 
-    public void enviarAImpresora( ) throws IOException {
-        FileInputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(nombreArchivoTXT);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        if (inputStream == null) {
-            return;
-        }
 
-        //DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
-
-
-        //PrintRequestAttributeSet attributeSet = new HashPrintRequestAttributeSet();
-        //attributeSet.add(OrientationRequested.PORTRAIT);
-        //attributeSet.add(new Copies(2));
-
-        DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
-        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-
-        PrintService printService[] = PrintServiceLookup.lookupPrintServices(
-                flavor, pras);
-        PrintService service = findPrintService("BIXOLON SRP-270", printService);
-        //PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
-
-        System.out.println("PrintService :"+service);
-
-        Doc document = new SimpleDoc(inputStream, flavor, null);
-        DocPrintJob printJob;
-        if (service != null) {
-
-            printJob = service.createPrintJob();
-            /*    printJob.addPrintJobListener(new JobCompleteMonitor());*/
-            try {
-
-                printJob.print(document, pras);
-                printJob = service.createPrintJob();
-                //byte[] bytes = {27, 100, 3};  //CORTE DE HOJA: Para impresora STAR
-                byte[] cutP = new byte[] { 0x1d, 'V', 1 };  //CORTE DE HOJA: Para impresora BIXOLON
-                flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-                document = new SimpleDoc(cutP, flavor, null);
-
-                printJob.print(document, null);
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            System.err.println("No existen impresoras instaladas");
-        }
-
-        inputStream.close();
-    }
-
-    private PrintService findPrintService(String printerName,
-                                          PrintService[] services) {
-        for (PrintService service : services) {
-            System.out.println("********************"+service.getName());
-            if (service.getName().equalsIgnoreCase(printerName)) {
-                return service;
-            }
-        }
-
-        return null;
-    }
 
     protected int obtenerPosicionInicialParaCentrar(int cantidadCaracteresPorFila, String valor){
         return (cantidadCaracteresPorFila-valor.length())/2;
@@ -231,16 +155,16 @@ public abstract class GenerarTicketBase {
     protected void agregarLinea(String valor, boolean centrar) {
         System.out.println("numeroLinea [" + numeroLinea + "] - valor ["+valor+"]");
         if(centrar){
-            printer.printTextWrap(numeroLinea, numeroLinea, obtenerPosicionInicialParaCentrar(PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor), PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
+            ticket.printTextWrap(numeroLinea, numeroLinea, obtenerPosicionInicialParaCentrar(PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor), PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
         } else {
-            printer.printTextWrap(numeroLinea, numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
+            ticket.printTextWrap(numeroLinea, numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, valor);
         }
         ++numeroLinea;
     }
 
     protected void agregarLineaRepetirValor(String valor) {
         System.out.println("numeroLinea [" + numeroLinea + "] - valor ["+valor+"]");
-        printer.printTextWrap(numeroLinea, numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, repetirValor(valor, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA));
+        ticket.printTextWrap(numeroLinea, numeroLinea, 0, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA, repetirValor(valor, PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA));
         ++numeroLinea;
     }
 }

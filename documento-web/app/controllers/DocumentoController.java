@@ -4,6 +4,8 @@ import commons.Constantes;
 import commons.TypeDocument_ES;
 import commons.util.GenerarTicketDetallado;
 import commons.util.GenerarTicketResumido;
+import commons.util.ImpresoraUtil;
+import commons.util.PDFUtil;
 import controllers.dto.DocumentoDTO;
 import models.Documento;
 import models.Empresa;
@@ -20,6 +22,8 @@ import views.html.documento.*;
 import views.html.errors.*;
 
 import javax.inject.Inject;
+import java.awt.print.PrinterException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -199,6 +203,10 @@ public class DocumentoController extends Controller{
             e.printStackTrace();
         }
 
+        ejecutarTipoAccion(dto.listaTipoAccion,document);
+
+
+
 /*
         FktContact fktContact = FktContact.find.byId(document.contact.ID);
         System.out.println(fktContact);
@@ -221,5 +229,16 @@ public class DocumentoController extends Controller{
         //Documento.guardar(documento);
 
         return redirect(routes.DocumentoController.verImprimirTicket());
+    }
+
+    private void ejecutarTipoAccion(List<String> listaTipoAccion,FktDocument document) throws InterruptedException, PrinterException, IOException {
+        for (String string: listaTipoAccion) {
+            System.out.println(string);
+            if(string.equals("IMP")) {
+                ImpresoraUtil.enviarAImpresora();
+            } else if(string.equals("PDF")) {
+                PDFUtil.convertirTXTaPDF(document.NAME+"_"+document.contact.COMPANY+".pdf");
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package commons.util;
 
+import commons.Constantes;
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
 
@@ -53,8 +54,8 @@ public class GenerarTicketResumido extends GenerarTicketBase {
         agregarLinea(mensajeFinPagina,true);
         agregarLinea(""+documento.items.size()+" Items.",true);
 
-        printer.toFile(nombreArchivoTXT);
-        enviarAImpresora();
+        ticket.toFile(Constantes.NOMBRE_ARCHIVO_TXT);
+        //ImpresoraUtil.enviarAImpresora();
     }
 
     protected void agregarLineaProductos() throws  Exception{

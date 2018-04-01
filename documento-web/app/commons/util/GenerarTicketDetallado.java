@@ -1,16 +1,8 @@
 package commons.util;
 
+import commons.Constantes;
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.font.PDSimpleFont;
-import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-
-import org.apache.pdfbox.tools.TextToPDF;
-
-import java.awt.print.PrinterException;
-import java.io.*;
 
 public class GenerarTicketDetallado extends GenerarTicketBase {
 
@@ -79,45 +71,13 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
         agregarLinea(mensajeFinPagina,true);
         agregarLinea(""+documento.items.size()+" Items.",true);
 
-        printer.toFile(nombreArchivoTXT);
+        ticket.toFile(Constantes.NOMBRE_ARCHIVO_TXT);
 
-        enviarAImpresora();
-
-        convertirTXTaPDF();
+        //ImpresoraUtil.enviarAImpresora();
+        //PDFUtil.convertirTXTaPDF(documento.NAME+"_"+documento.contact.COMPANY+".pdf");
     }
 
-    private void convertirTXTaPDF() throws IOException, PrinterException, InterruptedException {
 
-        PDDocument document = new PDDocument();
-        TextToPDF pdf = new TextToPDF();
-        String fileName = nombreArchivoTXT;
-        File pdfFile = new File("D:\\SISGESVEN\\TICKETS\\"+documento.NAME+"_"+documento.contact.COMPANY+".pdf");//new File(nombreArchivoPDF);
-
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-
-        PDSimpleFont courier = PDType1Font.COURIER;
-        PDSimpleFont testFont = PDTrueTypeFont.loadTTF( document, new File("times.ttf" ));
-
-        //pdf.setFont(testFont);
-        pdf.setFont(courier);
-        pdf.setFontSize(8);
-
-
-        pdf.createPDFFromText(document, reader);
-
-        document.save(pdfFile);
-        document.close();
-
-
-        /*
-        PDDocument doc = PDDocument.load(new File(nombreArchivoPDF));
-        PDFPrintable printable = new PDFPrintable(doc, Scaling.SHRINK_TO_FIT);
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintable(printable);
-        job.print();
-        */
-
-    }
 
     private void agregarTotales() throws Exception {
 

@@ -17,4 +17,9 @@ public class Constantes {
     public static String YOURCOMPANY_COMPANY_VATNR     = "YOURCOMPANY_COMPANY_VATNR";
     public static String YOURCOMPANY_COMPANY_WEBSITE   = "YOURCOMPANY_COMPANY_WEBSITE";
     public static String YOURCOMPANY_COMPANY_ZIP       = "YOURCOMPANY_COMPANY_ZIP";
+
+
+    public static String NOMBRE_ARCHIVO_TXT = "ticket.txt";
+    public static String NOMBRE_ARCHIVO_PDF = "ticket.pdf";
+    public static String NOMBRE_IMPRESORA = "BIXOLON SRP-270";
 }
