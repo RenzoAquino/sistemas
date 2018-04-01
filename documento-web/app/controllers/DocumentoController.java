@@ -1,18 +1,12 @@
 package controllers;
 
-import commons.Constantes;
-import commons.TypeDocument_ES;
-import commons.util.GenerarTicketDetallado;
-import commons.util.GenerarTicketResumido;
+import commons.util.ticket.GenerarTicketDetallado;
+import commons.util.ticket.GenerarTicketResumido;
 import commons.util.ImpresoraUtil;
 import commons.util.PDFUtil;
 import controllers.dto.DocumentoDTO;
 import models.Documento;
-import models.Empresa;
-import models.fakturama.FktContact;
 import models.fakturama.FktDocument;
-import models.fakturama.FktDocumentitem;
-import models.fakturama.FktUserproperty;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -27,7 +21,6 @@ import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class DocumentoController extends Controller{
@@ -141,6 +134,11 @@ public class DocumentoController extends Controller{
             return badRequest(verImprimirTicket.render(documentoDTOForm));
         }
 
+        if(documentoDTOForm.get().listaTipoAccion == null){
+            flash("danger","Por favor seleccionar si va imprimir y/o generar un pdf");
+            return badRequest(verImprimirTicket.render(documentoDTOForm));
+        }
+
         DocumentoDTO dto = documentoDTOForm.get();
         System.out.println(dto);
         FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
@@ -183,10 +181,8 @@ public class DocumentoController extends Controller{
         //documentoDTO.generarTicket();
 
         flash("success","Se realizo correctamente la operación.");
-        //Documento.guardar(documento);
 
         //return redirect(routes.DocumentoController.verImprimirTicket());
-        //documentoDTOForm = formFactory.form(DocumentoDTO.class).fill(dto);
         return ok(verImprimirTicket.render(documentoDTOForm));
     }
 

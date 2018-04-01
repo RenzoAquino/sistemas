@@ -1,0 +1,36 @@
+                                        
+        INVERSIONES UNOCC S.A.C.        
+        JR. BRIG. PUMACAHUA 2480        
+                                        
+           Telefono: 470 8565           
+             RUC 204779543              
+                                        
+          FACTURA ELECTRONICA           
+             F001-00000088              
+CODIGO: CLI-12345678    RUC:20477954350 
+      CENCOSUD REATIL PERU S.A.C.       
+----------------------------------------
+  Producto  Cantidad  Precio  Importe   
+----------------------------------------
+FIDEO SPAGUETTI AL HUEVO  500 GR - DON V
+AC0012 90000.099 x 1888.808   800989.808
+FIDEO SPAGUETTI AL HUEVO  500 GR - DON V
+AC0012 90000.099 x 1888.808   800989.808
+----------------------------------------
+      OP EXONERADA             80000.999
+      OP GARAVADA              90989.008
+      IGV                         10.889
+      IMPORTE TOTAL S/.       988999.989
+                                        
+Fecha de Emision: 09/08/2017 Hora: 15:30
+Representaci￳n impresa de la factura electr￳nica generada desde el sistema factu
+rador SUNAT. Puede verificarla utilizando su clave SOL
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        

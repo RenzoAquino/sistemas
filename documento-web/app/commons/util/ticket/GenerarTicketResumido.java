@@ -1,6 +1,7 @@
-package commons.util;
+package commons.util.ticket;
 
 import commons.Constantes;
+import commons.util.StringUtil;
 import models.fakturama.FktDocument;
 import models.fakturama.FktDocumentitem;
 

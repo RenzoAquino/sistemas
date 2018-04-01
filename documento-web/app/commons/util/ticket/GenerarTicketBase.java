@@ -1,6 +1,8 @@
-package commons.util;
+package commons.util.ticket;
 
 import commons.TypeDocument_ES;
+import commons.util.FechaUtil;
+import commons.util.StringUtil;
 import commons.util.impresion.pos.Extenso;
 import commons.util.impresion.pos.TicketMatrix;
 import models.fakturama.FktDocument;
@@ -119,8 +121,12 @@ public abstract class GenerarTicketBase {
     public void cargarDatosCabeceraDocumento() throws Exception {
         fechaDocumento = FechaUtil.convertirDateAString(documento.ORDERDATE,PARAM_TICKET_FORMATO_FECHA);
         //PEDIDO: PD02-00000011  FECHA: 12/12/2017
+
+        int tamanioTipo = TypeDocument_ES.getByName(documento.DTYPE).toString().length();
+        int tamanioTmp = (tamanioTipo ==7)?13:14;
+
         registroDocumentoCliente = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase()+": "
-                .concat(StringUtil.completarTamanio(documento.NAME, 14, " ", false))
+                .concat(StringUtil.completarTamanio(documento.NAME, tamanioTmp, " ", false))
                 .concat(TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
         rucCliente = TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
         razonSocialCliente = documento.contact.COMPANY;
