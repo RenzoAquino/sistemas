@@ -10,7 +10,6 @@ public class DocumentoDTO {
     public String tipoDocumento;
     public String rucEmpresa;
     public String tipoDetalle;
-    public String tipoAccion;
     public List<String> listaTipoAccion;
 
     @Override
@@ -20,7 +19,6 @@ public class DocumentoDTO {
                 ", tipoDocumento='" + tipoDocumento + '\'' +
                 ", rucEmpresa='" + rucEmpresa + '\'' +
                 ", tipoDetalle='" + tipoDetalle + '\'' +
-                ", tipoAccion='" + tipoAccion + '\'' +
                 ", listaTipoAccion=" + listaTipoAccion +
                 '}';
     }

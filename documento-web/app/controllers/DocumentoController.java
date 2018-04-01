@@ -18,6 +18,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import services.DocumentoService;
 import views.html.documento.*;
 import views.html.errors.*;
 
@@ -124,7 +125,6 @@ public class DocumentoController extends Controller{
 
         DocumentoDTO dto = new DocumentoDTO();
         dto.tipoDetalle ="R";
-        dto.tipoAccion ="IMP";
         dto.listaTipoAccion = new ArrayList<String>();
         dto.listaTipoAccion.add("IMP");
 
@@ -143,50 +143,7 @@ public class DocumentoController extends Controller{
 
         DocumentoDTO dto = documentoDTOForm.get();
         System.out.println(dto);
-        FktDocument document = null;
-        Map<String,FktUserproperty> mapUserproperty = null;
-/*
-        FktContact contact = FktContact.find.query().where().eq("vatnumber",dto.rucEmpresa).findOne();
-        System.out.println(contact);
-*/
-/*
-        document =
-                Ebean.find(FktDocument.class)
-                        .where().eq("name",document.NAME)
-                        .findOne();
-*/
-        //Buscar UserProperty
-        mapUserproperty = FktUserproperty.find.query()
-                .where()
-                .like("name","YOURCOMPANY_COMPANY_%")
-                .setMapKey("NAME")
-                .findMap();
-
-        Empresa empresa = new Empresa();
-        empresa.setRazonSocial(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_NAME).t_VALUE);
-        empresa.setEmail(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_EMAIL).t_VALUE);
-        empresa.setTelefono(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_TEL).t_VALUE);
-        empresa.setRuc(mapUserproperty.get(Constantes.YOURCOMPANY_COMPANY_VATNR).t_VALUE);
-
-        //Buscar Documento
-        document = FktDocument.find.query()
-                //.fetch("contact" ).alias("c")
-                //.fetch("fktdocumentitem")
-                //.fetch("fktdocumentitem.vat")
-                .where()
-                .eq("name",dto.numero)
-                .eq("dtype",TypeDocument_ES.valueOf(dto.tipoDocumento).getText())
-                .findOne();
-        document.contact = FktContact.find.byId(document.contact.ID);
-
-        document.items = FktDocumentitem.find.query()
-                .fetch("vat")
-                .where()
-                .eq("fk_document",document.ID)
-                .orderBy().asc("t0.name")
-                .findList();
-
-        document.empresa = empresa;
+        FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
         System.out.println(document);
 
         GenerarTicketResumido impR= new GenerarTicketResumido(document);
@@ -225,10 +182,12 @@ public class DocumentoController extends Controller{
 
         //documentoDTO.generarTicket();
 
-        flash("success","Se imprimio correctamente el documento.");
+        flash("success","Se realizo correctamente la operación.");
         //Documento.guardar(documento);
 
-        return redirect(routes.DocumentoController.verImprimirTicket());
+        //return redirect(routes.DocumentoController.verImprimirTicket());
+        //documentoDTOForm = formFactory.form(DocumentoDTO.class).fill(dto);
+        return ok(verImprimirTicket.render(documentoDTOForm));
     }
 
     private void ejecutarTipoAccion(List<String> listaTipoAccion,FktDocument document) throws InterruptedException, PrinterException, IOException {
