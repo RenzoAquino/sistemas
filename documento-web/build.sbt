@@ -18,6 +18,10 @@ libraryDependencies += guice
 //https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-versions.html
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.42"
 
+// https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.21.0.1"
+
+
 // Test Database
 libraryDependencies += "com.h2database" % "h2" % "1.4.194"
 

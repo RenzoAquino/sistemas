@@ -58,4 +58,82 @@ public class CargaDatos {
         lista.add(dto);
         return lista;
     }
+
+    public static Seq<ParametroDTO> cargarTipoLibroSeq() {
+        CargaDatos datos = new CargaDatos();
+        List<ParametroDTO> lista = datos.obtenerListaTipLibro();
+        return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
+    }
+
+    public List<ParametroDTO> obtenerListaTipLibro(){
+        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
+        ParametroDTO dto = null;
+        dto = new ParametroDTO("0000","SELECCIONAR");
+        lista.add(dto);
+        dto = new ParametroDTO("LCOM","Libro de Compra");
+        lista.add(dto);
+        dto = new ParametroDTO("LVEN","Libro de Venta");
+        lista.add(dto);
+        dto = new ParametroDTO("LDSM","Libro Simplificado Diario");
+        lista.add(dto);
+        return lista;
+    }
+
+    public static Seq<ParametroDTO> cargarAniosSeq() {
+        CargaDatos datos = new CargaDatos();
+        List<ParametroDTO> lista = datos.obtenerListaAnios();
+        return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
+    }
+
+    public List<ParametroDTO> obtenerListaAnios(){
+        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
+        ParametroDTO dto = null;
+        dto = new ParametroDTO("0000","SELECCIONAR");
+        lista.add(dto);
+        dto = new ParametroDTO("2018","2018");
+        lista.add(dto);
+        dto = new ParametroDTO("2019","2019");
+        lista.add(dto);
+        dto = new ParametroDTO("2020","2020");
+        lista.add(dto);
+        return lista;
+    }
+
+    public static Seq<ParametroDTO> cargarMesesSeq() {
+        CargaDatos datos = new CargaDatos();
+        List<ParametroDTO> lista = datos.obtenerListaMeses();
+        return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
+    }
+
+    public List<ParametroDTO> obtenerListaMeses(){
+        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
+        ParametroDTO dto = null;
+        dto = new ParametroDTO("0000","SELECCIONAR");
+        lista.add(dto);
+        dto = new ParametroDTO("1","Enero");
+        lista.add(dto);
+        dto = new ParametroDTO("2","Febrero");
+        lista.add(dto);
+        dto = new ParametroDTO("3","Marzo");
+        lista.add(dto);
+        dto = new ParametroDTO("4","Abril");
+        lista.add(dto);
+        dto = new ParametroDTO("5","Mayo");
+        lista.add(dto);
+        dto = new ParametroDTO("6","Junio");
+        lista.add(dto);
+        dto = new ParametroDTO("7","Julio");
+        lista.add(dto);
+        dto = new ParametroDTO("8","Agosto");
+        lista.add(dto);
+        dto = new ParametroDTO("9","Setiembre");
+        lista.add(dto);
+        dto = new ParametroDTO("10","Octubre");
+        lista.add(dto);
+        dto = new ParametroDTO("11","Noviembre");
+        lista.add(dto);
+        dto = new ParametroDTO("12","Diciembre");
+        lista.add(dto);
+        return lista;
+    }
 }

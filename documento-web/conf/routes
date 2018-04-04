@@ -18,6 +18,9 @@ GET     /welcome/:nombre/:apellido  controllers.HomeController.welcome(nombre: S
 
 GET     /documento                  controllers.DocumentoController.index
 
+GET     /documento/inicioLibroVenta   controllers.DocumentoController.inicioLibroVenta
+GET     /documento/generarLibroVenta   controllers.DocumentoController.generarLibroVenta
+
 GET     /documento/verImprimirTicket   controllers.DocumentoController.verImprimirTicket
 GET     /documento/imprimirTicket   controllers.DocumentoController.imprimirTicket
 
@@ -30,6 +33,7 @@ POST    /documento/crear            controllers.DocumentoController.guardar
 PUT     /documento/editar           controllers.DocumentoController.actualizar
 + nocsrf
 DELETE  /documento/eliminar/:id     controllers.DocumentoController.eliminar(id: Long)
+
 
 
 

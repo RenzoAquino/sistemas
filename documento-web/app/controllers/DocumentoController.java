@@ -1,12 +1,20 @@
 package controllers;
 
+import commons.util.DBConnectionUtil;
 import commons.util.ticket.GenerarTicketDetallado;
 import commons.util.ticket.GenerarTicketResumido;
 import commons.util.ImpresoraUtil;
 import commons.util.PDFUtil;
+import controllers.dto.ContabilidadDTO;
 import controllers.dto.DocumentoDTO;
+import io.ebean.Ebean;
+import io.ebean.EbeanServer;
+import io.ebean.Query;
 import models.Documento;
+import models.dto.ParametroDTO;
 import models.fakturama.FktDocument;
+import models.sgv.ControlVenta;
+import models.sunat.facturador.BandejaFactura;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -195,5 +203,61 @@ public class DocumentoController extends Controller{
                 PDFUtil.convertirTXTaPDF(document.NAME+"_"+document.contact.COMPANY+".pdf");
             }
         }
+    }
+
+    public Result inicioLibroVenta(){
+
+        ContabilidadDTO dto = new ContabilidadDTO();
+        dto.tipoLibro = new ParametroDTO();
+        dto.tipoLibro.codigo ="LVEN";
+        dto.anio = new ParametroDTO();
+        dto.anio.codigo ="2018";
+        dto.mes = new ParametroDTO();
+        dto.mes.codigo ="3"; //Simpre debe ser el mes anterior al actual
+
+        Form<ContabilidadDTO> contabilidadDTOForm = formFactory.form(ContabilidadDTO.class).fill(dto);
+
+/*
+        EbeanServer db = DBConnectionUtil.getDBServerFacturador();
+        List<BandejaFactura> lista = db.find(BandejaFactura.class).findList();; //BandejaFactura.find.all();//obtenerTodos();
+        for (BandejaFactura x:lista) {
+            System.out.println(x);
+        }
+*/
+/*
+        EbeanServer db = DBConnectionUtil.getDBServerSGV();
+        List<ControlVenta> lista = db.find(ControlVenta.class)
+                .where().ilike("CVNT_NUM_DOCUMENTO", "F002-00000213")
+                .findList();
+        for (ControlVenta x:lista) {
+            System.out.println("*********** "+x);
+        }
+*/
+/*
+        EbeanServer db = DBConnectionUtil.getDBServerSGV();
+        List<ControlVenta> lista = db.find(ControlVenta.class).findList();; //BandejaFactura.find.all();//obtenerTodos();
+        for (ControlVenta x:lista) {
+            System.out.println(x);
+        }
+*/
+
+        return ok(libroVenta.render(contabilidadDTOForm));
+    }
+
+    public Result generarLibroVenta(){
+        Form<ContabilidadDTO> form = formFactory.form(ContabilidadDTO.class).bindFromRequest();
+        if(form.hasErrors()){
+            flash("danger","Por favor corregir los errores del formulario");
+            return badRequest(libroVenta.render(form));
+        }
+
+        if(form.get().listaTipoAccion == null){
+            flash("danger","Por favor seleccionar Año");
+            return badRequest(libroVenta.render(form));
+        }
+
+        ContabilidadDTO dto = form.get();
+        System.out.println(dto);
+        return ok(libroVenta.render(form));
     }
 }

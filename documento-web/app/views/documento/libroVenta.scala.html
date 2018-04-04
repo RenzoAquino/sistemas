@@ -1,0 +1,52 @@
+@import controllers.dto.ContabilidadDTO
+@import models.CargaDatos
+@(contabilidadDTOForm: Form[ContabilidadDTO])
+
+
+@import helper._
+
+@layout("Imprimir documento"){
+    <h3>LIBRO DE COMPRAS</h3>
+    @helper.form(action = routes.DocumentoController.generarLibroVenta()){
+            <!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/anidando_columnas.html -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        @helper.inputText(contabilidadDTOForm("rucEmpresa"),'class ->"form-control",'_label -> "RUC", 'autocomplete -> "off", 'placeholder -> "Ingrese el número de RUC ...")
+                        @select(
+                            contabilidadDTOForm("tipoLibro.codigo"),
+                            options = CargaDatos.cargarTipoLibroSeq.map(dto => dto.codigo -> dto.descripcion),
+                            '_label -> "Tipo de Libro",
+                            '_error -> contabilidadDTOForm("tipoLibro.codigo").error.map(_.withMessage("Seleccionar tipo de Libro")))
+                    </div>
+
+                    <div class="col-md-6">
+                        @select(
+                            contabilidadDTOForm("anio.codigo"),
+                            options = CargaDatos.cargarAniosSeq.map(dto => dto.codigo -> dto.descripcion),
+                            '_label -> "Anio",
+                            '_error -> contabilidadDTOForm("anio.codigo").error.map(_.withMessage("Seleccionar Año")))
+                        @select(
+                            contabilidadDTOForm("mes.codigo"),
+                            options = CargaDatos.cargarMesesSeq.map(dto => dto.codigo -> dto.descripcion),
+                            '_label -> "Mes",
+                            '_error -> contabilidadDTOForm("mes.codigo").error.map(_.withMessage("Seleccionar Mes")))
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" type="submit">
+                            <i class="glyphicon glyphicon-signal"></i>
+                            Generar Libro
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

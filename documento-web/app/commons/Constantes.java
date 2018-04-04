@@ -22,4 +22,8 @@ public class Constantes {
     public static String NOMBRE_ARCHIVO_TXT = "ticket.txt";
     public static String NOMBRE_ARCHIVO_PDF = "ticket.pdf";
     public static String NOMBRE_IMPRESORA = "BIXOLON SRP-270";
+
+    public static String DB_ID_FAKTURAMA = "fakturama";
+    public static String DB_ID_SGV = "sgv";
+    public static String DB_ID_FACTURADOR_SUNAT = "facturador";
 }

@@ -2,25 +2,21 @@
         INVERSIONES UNOCC S.A.C.        
            TELEFONO: 470-8565           
       ventas@inversionesunocc.com       
-            RUC: 20477954350            
                                         
-FACTURA: F002-00000206 FECHA: 01/04/2018
-         LA PRIMERA  F  S.A.C.          
+PEDIDO: PD01-00000492  FECHA: 04/04/2018
+          REX BAKERY PERU SAC           
 ----------------------------------------
-Codigo Cantidad U.M. P.Unitario  Importe
+Cantidad  Unidad  Producto              
 ----------------------------------------
- ZZ0002   1.000 UND   204.90     204.90 
-*ABARROTES VARIOS                       
- ZZ0001   1.000 UND   401.00     401.00 
- VERDURAS VARIOS                        
+   0.25 KG  AJI AMARILLO                
+   0.25 KG  AJOS PELADO                 
+    1.0 BLS ARUGULA BEBE                
+    1.0 UND GALLETA DE SODA 250 gr - SAY
+    2.0 KG  PAPA YUNGAY                 
 ----------------------------------------
-     OP EXONERADA                 401.00
-     OP GRAVADA                   173.64
-     IGV                           31.26
-     IMPORTE TOTAL S/             605.90
                                         
    Revisar los productos entregados.    
-                2 Items.                
+                5 Items.                
                                         
                                         
                                         
