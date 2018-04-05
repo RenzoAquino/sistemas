@@ -5,15 +5,19 @@
 
 @import helper._
 
-@layout("Imprimir documento"){
-    <h3>LIBRO DE COMPRAS</h3>
-    @helper.form(action = routes.DocumentoController.generarLibroVenta()){
+@layout("Generar Libro Contable"){
+    <h3>GENERAR LIBRO CONTABLE</h3>
+    @helper.form(action = routes.DocumentoController.generarLibro()){
             <!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/anidando_columnas.html -->
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        @helper.inputText(contabilidadDTOForm("rucEmpresa"),'class ->"form-control",'_label -> "RUC", 'autocomplete -> "off", 'placeholder -> "Ingrese el número de RUC ...")
+                        @select(
+                                contabilidadDTOForm("razonSocial.codigo"),
+                                options = CargaDatos.cargarRazonesSocialesSeq.map(dto => dto.codigo -> dto.descripcion),
+                                '_label -> "Razon Social",
+                                '_error -> contabilidadDTOForm("razonSocial.codigo").error.map(_.withMessage("Seleccionar Razon Social")))
                         @select(
                             contabilidadDTOForm("tipoLibro.codigo"),
                             options = CargaDatos.cargarTipoLibroSeq.map(dto => dto.codigo -> dto.descripcion),

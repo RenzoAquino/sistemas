@@ -18,8 +18,8 @@ GET     /welcome/:nombre/:apellido  controllers.HomeController.welcome(nombre: S
 
 GET     /documento                  controllers.DocumentoController.index
 
-GET     /documento/inicioLibroVenta   controllers.DocumentoController.inicioLibroVenta
-GET     /documento/generarLibroVenta   controllers.DocumentoController.generarLibroVenta
+GET     /documento/inicioLibroVenta   controllers.DocumentoController.inicioGenerarLibro
+GET     /documento/generarLibroVenta   controllers.DocumentoController.generarLibro
 
 GET     /documento/verImprimirTicket   controllers.DocumentoController.verImprimirTicket
 GET     /documento/imprimirTicket   controllers.DocumentoController.imprimirTicket

@@ -16,6 +16,7 @@ public class NumeroUtil {
     }
 
     public static String roundString(double value, int places) throws Exception {
+
         String result = ""+round(value,places);
         //String tmp = (result.split("\\.")[1].length() == 1)?result.concat("0"):result;
 
@@ -27,5 +28,10 @@ public class NumeroUtil {
         part02 = StringUtil.completarTamanio(part02,places,"0",false);
         //System.out.println("**********part02 02 ["+part02+"]");
         return part01.concat(".").concat(part02);// (part02.length() == 3)?result:part01.concat(".").concat(part02) ;
+    }
+    public static String roundStringNull(Double value, int places) throws Exception {
+        if(value == null) value = 0.0;
+
+        return roundString(value, places);
     }
 }

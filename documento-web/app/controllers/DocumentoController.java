@@ -1,25 +1,24 @@
 package controllers;
 
-import commons.util.DBConnectionUtil;
+import commons.Constantes;
+import commons.util.CSVUtil;
 import commons.util.ticket.GenerarTicketDetallado;
 import commons.util.ticket.GenerarTicketResumido;
 import commons.util.ImpresoraUtil;
 import commons.util.PDFUtil;
 import controllers.dto.ContabilidadDTO;
 import controllers.dto.DocumentoDTO;
-import io.ebean.Ebean;
-import io.ebean.EbeanServer;
-import io.ebean.Query;
 import models.Documento;
 import models.dto.ParametroDTO;
 import models.fakturama.FktDocument;
+
 import models.sgv.ControlVenta;
-import models.sunat.facturador.BandejaFactura;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import services.ContabilidadService;
 import services.DocumentoService;
 import views.html.documento.*;
 import views.html.errors.*;
@@ -205,7 +204,7 @@ public class DocumentoController extends Controller{
         }
     }
 
-    public Result inicioLibroVenta(){
+    public Result inicioGenerarLibro(){
 
         ContabilidadDTO dto = new ContabilidadDTO();
         dto.tipoLibro = new ParametroDTO();
@@ -244,20 +243,43 @@ public class DocumentoController extends Controller{
         return ok(libroVenta.render(contabilidadDTOForm));
     }
 
-    public Result generarLibroVenta(){
+    public Result generarLibro() throws Exception {
         Form<ContabilidadDTO> form = formFactory.form(ContabilidadDTO.class).bindFromRequest();
         if(form.hasErrors()){
             flash("danger","Por favor corregir los errores del formulario");
             return badRequest(libroVenta.render(form));
         }
 
-        if(form.get().listaTipoAccion == null){
+        if(form.get().tipoLibro.codigo.equals("0000")){
+            flash("danger","Por favor seleccionar tipo de libro");
+            return badRequest(libroVenta.render(form));
+        }
+        if(form.get().razonSocial.codigo.equals("0000")){
+            flash("danger","Por favor seleccionar Razon Social");
+            return badRequest(libroVenta.render(form));
+        }
+
+        if(form.get().mes.codigo.equals("0000")){
+            flash("danger","Por favor seleccionar mes");
+            return badRequest(libroVenta.render(form));
+        }
+
+        if(form.get().anio.codigo.equals("0000")){
             flash("danger","Por favor seleccionar Año");
             return badRequest(libroVenta.render(form));
         }
 
         ContabilidadDTO dto = form.get();
         System.out.println(dto);
-        return ok(libroVenta.render(form));
+        String nombreArchivo = dto.razonSocial.codigo+"-"+dto.tipoLibro.codigo+"-"+dto.anio.codigo+"."+dto.mes.codigo+Constantes.EXTENSION_CSV;
+        String cabeceraArchivoCsv = "";
+
+        if (dto.tipoLibro.codigo.equals("LVEN")){
+            cabeceraArchivoCsv = Constantes.CABECERA_CSV_LIBRO_VENTA;
+        } else if (dto.tipoLibro.codigo.equals("ANUL")){
+            cabeceraArchivoCsv = Constantes.CABECERA_CSV_ANULACIONES;
+        }
+
+        return ok(CSVUtil.generarCSV(ContabilidadService.obtenerDatosControlMovimientos(dto), cabeceraArchivoCsv,Constantes.RUTA_ARCHIVO_CSV), nombreArchivo);
     }
 }
