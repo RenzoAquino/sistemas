@@ -8,7 +8,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.ContabilidadService;
+import repository.ContabilidadService;
 import views.html.contabilidad.*;
 
 

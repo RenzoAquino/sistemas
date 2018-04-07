@@ -1,4 +1,4 @@
-package services;
+package repository;
 
 import commons.Constantes;
 import commons.util.DBConnectionUtil;

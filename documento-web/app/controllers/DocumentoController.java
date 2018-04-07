@@ -1,31 +1,29 @@
 package controllers;
 
-import commons.Constantes;
-import commons.util.CSVUtil;
 import commons.util.ticket.GenerarTicketDetallado;
 import commons.util.ticket.GenerarTicketResumido;
 import commons.util.ImpresoraUtil;
 import commons.util.PDFUtil;
-import controllers.dto.ContabilidadDTO;
 import controllers.dto.DocumentoDTO;
 import models.Documento;
-import models.dto.ParametroDTO;
 import models.fakturama.FktDocument;
 
-import models.sgv.ControlVenta;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import services.ContabilidadService;
-import services.DocumentoService;
+import repository.DocumentoService;
 import views.html.documento.*;
 import views.html.errors.*;
 
 import javax.inject.Inject;
 import java.awt.print.PrinterException;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,7 +119,19 @@ public class DocumentoController extends Controller{
         return ok(ver.render(documento));
     }
 
-    public Result verImprimirTicket(){
+    public Result verImprimirTicket() throws Exception {
+        String myUrl = "http://localhost:8090/FacturadorSunat/index.htm";
+        // if your url can contain weird characters you will want to
+        // encode it here, something like this:
+        // myUrl = URLEncoder.encode(myUrl, "UTF-8");
+        //doHttpSendDataUrlConnection();
+        //String results = registrarDocumentosDbSUNAT(myUrl);
+        //System.out.println("************"+results);
+
+        //generarDocumentoXMLSUNAT();
+        //enviarDocumentoXmlSUNAT();
+        //generarDocumentoPdfSUNAT();
+        //generarDocumentoPdfSUNAT();
 
         DocumentoDTO dto = new DocumentoDTO();
         dto.tipoDetalle ="R";
@@ -135,6 +145,7 @@ public class DocumentoController extends Controller{
 
     // para generarTicket
     public Result imprimirTicket() throws Exception {
+
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).bindFromRequest();
         if(documentoDTOForm.hasErrors()){
             flash("danger","Por favor corregir los errores del formulario");
@@ -191,6 +202,154 @@ public class DocumentoController extends Controller{
 
         //return redirect(routes.DocumentoController.verImprimirTicket());
         return ok(verImprimirTicket.render(documentoDTOForm));
+    }
+
+    private void doHttpSendDataUrlConnection(){
+        System.out.println("doHttpSendDataUrlConnection.inicio..");
+
+        try {
+            String urlParameters  = "hddNumRuc=20477954350&hddTipDoc=01&hddNumDoc=F002-00000214";
+            byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+            int    postDataLength = postData.length;
+            String request        = "http://localhost:8090/FacturadorSunat/generarXml.htm";
+            URL    url            = new URL( request );
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            conn.setDoOutput( true );
+            conn.setInstanceFollowRedirects( false );
+            conn.setRequestMethod( "GET" );
+            conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty( "charset", "utf-8");
+            conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            conn.setUseCaches( false );
+            try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+                wr.write( postData );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("doHttpSendDataUrlConnection.fin..");
+    }
+    public  void generarDocumentoPdfSUNAT() {
+
+        try {
+
+            String url = "http://localhost:8090/FacturadorSunat/MostrarXml.htm";
+
+            URL obj = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+/*
+            String userpass = "user" + ":" + "pass";
+            String basicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(userpass.getBytes("UTF-8"));
+            conn.setRequestProperty ("Authorization", basicAuth);
+*/
+            String data =  "{\"nomArch\":\"20477954350-01-F002-00000214\",\"sitArch\":\"04\"}";
+            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+            out.write(data);
+            out.close();
+
+            new InputStreamReader(conn.getInputStream());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public  void enviarDocumentoXmlSUNAT() throws Exception {
+        URL url = new URL("http://localhost:8090/FacturadorSunat/enviarXML.htm");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
+        writer.write("hddNumRuc=20477954350&hddTipDoc=01&hddNumDoc=F002-00000214");
+        writer.flush();
+        String line;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        writer.close();
+        reader.close();
+
+    }
+
+    public  void generarDocumentoXmlSUNAT() throws Exception {
+        URL url = new URL("http://localhost:8090/FacturadorSunat/generarXml.htm");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
+        writer.write("hddNumRuc=20477954350&hddTipDoc=01&hddNumDoc=F002-00000214");
+        writer.flush();
+        String line;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        writer.close();
+        reader.close();
+
+    }
+
+    private String registrarDocumentosDbSUNAT(String desiredUrl)
+            throws Exception
+    {
+        URL url = null;
+        BufferedReader reader = null;
+        StringBuilder stringBuilder;
+
+        try
+        {
+            // create the HttpURLConnection
+            url = new URL(desiredUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // just want to do an HTTP GET here
+            connection.setRequestMethod("GET");
+
+            // uncomment this if you want to write output to this url
+            //connection.setDoOutput(true);
+
+            // give it 15 seconds to respond
+            connection.setReadTimeout(15*1000);
+            connection.connect();
+
+            // read the output from the server
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            stringBuilder = new StringBuilder();
+
+            String line = null;
+            while ((line = reader.readLine()) != null)
+            {
+                stringBuilder.append(line + "\n");
+            }
+            return stringBuilder.toString();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw e;
+        }
+        finally
+        {
+            // close the reader; this can throw an exception too, so
+            // wrap it in another try/catch block.
+            if (reader != null)
+            {
+                try
+                {
+                    reader.close();
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+            }
+        }
     }
 
     private void ejecutarTipoAccion(List<String> listaTipoAccion,FktDocument document) throws InterruptedException, PrinterException, IOException {
