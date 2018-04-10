@@ -8,6 +8,9 @@ import controllers.dto.DocumentoDTO;
 import models.Documento;
 import models.fakturama.FktDocument;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -18,6 +21,11 @@ import views.html.documento.*;
 import views.html.errors.*;
 
 import javax.inject.Inject;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import java.awt.print.PrinterException;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -132,6 +140,7 @@ public class DocumentoController extends Controller{
         //enviarDocumentoXmlSUNAT();
         //generarDocumentoPdfSUNAT();
         //generarDocumentoPdfSUNAT();
+        //obtenerHashSUNAT();
 
         DocumentoDTO dto = new DocumentoDTO();
         dto.tipoDetalle ="R";
@@ -156,6 +165,17 @@ public class DocumentoController extends Controller{
             flash("danger","Por favor seleccionar si va imprimir y/o generar un pdf");
             return badRequest(verImprimirTicket.render(documentoDTOForm));
         }
+
+        //Invocar Generador de Archivos TXT
+
+        //Invocar registro de Documento - SFS
+
+        //Generar XML de Documento - SFS
+
+        //Obtener valor hashSUNAT - SFS
+
+        //Actualizar campo comentario 3(HASH) de Documento - FAKTURAMA
+
 
         DocumentoDTO dto = documentoDTOForm.get();
         System.out.println(dto);
@@ -230,6 +250,38 @@ public class DocumentoController extends Controller{
 
         System.out.println("doHttpSendDataUrlConnection.fin..");
     }
+
+    public void obtenerHashSUNAT() throws Exception {
+        // La expresion xpath de busqueda
+        String xPathExpression = "/Invoice/UBLExtensions/UBLExtension/ExtensionContent/Signature/SignedInfo/Reference/DigestValue";//"//DigestValue";
+
+        // Carga del documento xml
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        Document documento = builder.parse(new File("D:\\sunat_archivos\\sfs\\FIRMA\\20477954350-01-F002-00000214.xml"));
+
+        // Preparación de xpath
+        XPath xpath = XPathFactory.newInstance().newXPath();
+
+        // Consultas
+        NodeList nodos = (NodeList) xpath.evaluate(xPathExpression, documento, XPathConstants.NODESET);
+
+        System.out.println("***********["+getString2(nodos)+"]");
+
+    }
+    protected String getString2(NodeList list) {
+        if (list != null && list.getLength() > 0) {
+            NodeList subList = list.item(0).getChildNodes();
+
+            if (subList != null && subList.getLength() > 0) {
+                return subList.item(0).getNodeValue();
+            }
+        }
+
+        return null;
+    }
+
     public  void generarDocumentoPdfSUNAT() {
 
         try {

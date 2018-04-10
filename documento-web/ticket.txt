@@ -1,31 +1,25 @@
                                         
         INVERSIONES UNOCC S.A.C.        
+            RUC: 20477954350            
            TELEFONO: 470-8565           
       ventas@inversionesunocc.com       
                                         
-PEDIDO: PD01-00000450  FECHA: 24/03/2018
+FACTURA: F002-00000029 FECHA: 01/01/2018
           REX BAKERY PERU SAC           
+            RUC: 20566479291            
 ----------------------------------------
-Cantidad  Unidad  Producto              
+Codigo Cantidad U.M. P.Unitario  Importe
 ----------------------------------------
-  0.125 PQT ALBAHACA                    
-    1.0 KG  ARROZ SAMAN                 
-    1.0 UND CHOCLO BEBE                 
-    1.0 CAJ HUEVO DE CODORNIZ           
-    8.0 UND LECHUGA ROMANA              
-    8.0 UND LECHUGA ROMANA              
-    2.0 KG  LIMON                       
-    4.5 KG  MANGO EDWARD                
-    0.5 KG  PALTA FUERTE                
-    5.0 PQT PANKO 230 gr                
-    6.0 KG  PAPA AMARILLA               
-    1.0 UND PIMIENTO VERDE              
-   3.95 KG  PIÑA GOLDEN                 
-    3.0 KG  TOMATE                      
+ VG0040   1.000 UND     3.00       3.00 
+ ZAPALLO LOCHE (S/.3.00)                
 ----------------------------------------
+     OP GRAVADA                     0.00
+     OP EXONERADA                   3.00
+     IGV                            0.00
+     IMPORTE TOTAL S/               3.00
                                         
    Revisar los productos entregados.    
-               14 Items.                
+                1 Items.                
                                         
                                         
                                         

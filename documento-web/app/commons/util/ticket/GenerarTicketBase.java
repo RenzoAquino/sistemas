@@ -86,6 +86,7 @@ public abstract class GenerarTicketBase {
     protected String unidadMedida = "UND";
     protected String precioUnitario = "" + 9900.099;
     protected String importeItem = "" + 989900.099;
+    protected String hashSUNAT = "";
 
     protected Double dTotalOperacionExonerada;
     protected Double dTotalOperacionGravada;
@@ -130,6 +131,7 @@ public abstract class GenerarTicketBase {
                 .concat(TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
         rucCliente = TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
         razonSocialCliente = documento.contact.COMPANY;
+        hashSUNAT = "";
     }
 
     public void cargarConfiguracionImpresion() throws Exception {

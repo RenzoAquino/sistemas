@@ -35,11 +35,11 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
 
 	public void calcularTamanioTicket(){
         cantidadLineas = (documento.items.size() * 2) +
-                PARAM_TICKET_LINEAS_CABECERA_PRINCIPAL + 1+ //Se agrego el RUC
+                PARAM_TICKET_LINEAS_CABECERA_PRINCIPAL + 1+ 1 + //Se agrego el RUC Emisor y RUC Cliente
                 PARAM_TICKET_LINEAS_CABECERA_DOCUMENTO +
                 PARAM_TICKET_LINEAS_DETALLE +
                 PARAM_TICKET_LINEAS_PIE +
-                PARAM_TICKET_LINEAS_ESPACIOS_BLANCO +
+                PARAM_TICKET_LINEAS_ESPACIOS_BLANCO + 1 + //Se agrego hash de SUNAT
                 PARAM_TICKET_LINEAS_TOTALES;
         cantidadColumnas = PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA;// * cantidadLineasPorRegistro;
 
@@ -51,15 +51,17 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
 
         agregarLinea(nombreComercialEmpresa,true);
         agregarLinea(nombreEmpresa,true);
+        agregarLinea(rucEmpresa,true); //*
         //agregarLinea(direccionEmpresa,true);
         //agregarLinea(ubigeoEmpresa,true);
         agregarLinea(telefonoEmpresa,true);
         agregarLinea(correoEmpresa,true);
-        agregarLinea(rucEmpresa,true); //*
+
         //-------------------------------------------------------------------------------
         agregarLinea("",false);
         agregarLinea(registroDocumentoCliente,true);
         agregarLinea(razonSocialCliente,true);
+        agregarLinea(rucCliente,true); //*
         agregarLineaRepetirValor("-");
         agregarLinea(cabeceraDetalleDetallado,true);
         agregarLineaRepetirValor("-");
@@ -69,6 +71,7 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
         agregarLineaRepetirValor("-");
         
         agregarTotales();
+        agregarLinea(hashSUNAT,true);
         agregarLinea("",false);
         agregarLinea(mensajeFinPagina,true);
         agregarLinea(""+documento.items.size()+" Items.",true);
@@ -101,8 +104,8 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
                 StringUtil.completarTamanio(TICKET_ETIQUETA_IMPORTE_TOTAL, tamanioTotales," ",false)+
                 StringUtil.completarTamanio(NumeroUtil.roundString((dImporteTotal),2), tamanioValorTotales," ",true);
 
-        agregarLinea(totalOperacionExonerada,false);
         agregarLinea(totalOperacionGravada,false);
+        agregarLinea(totalOperacionExonerada,false);
         agregarLinea(totalIgv,false);
         agregarLinea(importeTotal,false);
     }
