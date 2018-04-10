@@ -4,22 +4,100 @@
            TELEFONO: 470-8565           
       ventas@inversionesunocc.com       
                                         
-FACTURA: F002-00000029 FECHA: 01/01/2018
-          REX BAKERY PERU SAC           
-            RUC: 20566479291            
+          FACTURA ELECTRONICA           
+             F002-00000200              
+           FECHA: 27/03/2018            
+                                        
+CLIENTE: REX BAKERY PERU SAC            
+RUC: 20566479291                        
 ----------------------------------------
 Codigo Cantidad U.M. P.Unitario  Importe
 ----------------------------------------
- VG0040   1.000 UND     3.00       3.00 
- ZAPALLO LOCHE (S/.3.00)                
+ LF0001   0.200 KG     17.00       3.40 
+ ACEITUNA NEGRA CON PEPA                
+ VG0002   1.080 KG      6.00       6.48 
+ AJI AMARILLO                           
+ VG0051   0.100 KG     10.00       1.00 
+ AJI LIMO                               
+ VG0004   0.250 KG     11.00       2.75 
+ AJOS PELADO                            
+ VH0001   0.625 PQT     5.00       3.13 
+ ALBAHACA                               
+ AZ0001  16.000 KG      3.60      57.60 
+ ARROZ SAMAN                            
+ VO0004   8.000 BLS     4.00      32.00 
+ ARUGULA BEBE                           
+ VG0056   1.000 BOL     2.00       2.00 
+ ARVERJA PELADA                         
+ AW0013   3.000 SOB     1.00       3.00 
+ CANELA ENTERA                          
+ AW0016   0.270 KG     75.00      20.25 
+ CANELA MOLIDA                          
+ VG0011  14.350 KG      2.20      31.57 
+ CEBOLLA BLANCA                         
+ VC0001   1.500 PQT     3.50       5.25 
+ CEBOLLA CHINA                          
+ VG0012  10.720 KG      2.00      21.44 
+ CEBOLLA ROJA                           
+ VG0042   2.000 CAJ     5.50      11.00 
+ CHAMPIÑONES 200 gr                     
+ VO0003   1.000 UND     6.00       6.00 
+ CHOCLO BEBE                            
+ VG0013   0.200 KG      9.00       1.80 
+ CHOCLO DESGRANADO                      
+ VH0004   0.375 PQT     4.00       1.50 
+ CULANTRO                               
+ VG0016   2.500 KG      4.40      11.00 
+ ESPINACA                               
+ VO0001   2.000 BLS     4.00       8.00 
+ ESPINACA BEBE                          
+ VC0002   0.250 KG      4.00       1.00 
+ FREJOL CHINO                           
+ FF0001   7.580 KG     10.00      75.80 
+ FRESA                                  
+ VG0021   1.000 UND     1.50       1.50 
+ LECHUGA ORGANICA                       
+ VG0022  80.000 UND     1.50     120.00 
+ LECHUGA ROMANA                         
+ VG0023  19.500 KG      4.00      78.00 
+ LIMON                                  
+ VG0041   6.000 KG      3.20      19.20 
+ MAIZ MORADO                            
+ FF0002  10.250 KG      8.00      82.00 
+ MANGO EDWARD                           
+ FF0015   1.000 KG      6.00       6.00 
+ MEMBRILLO                              
+ AE0014   0.120 KG     30.00       3.60 
+ OREGANO ENTERO                         
+ FF0006   7.715 KG      7.40      57.09 
+ PALTA FUERTE                           
+ VG0025  35.090 KG      3.40     119.31 
+ PAPA AMARILLA                          
+ VG0026  14.120 KG      1.80      25.42 
+ PAPA CANCHAN                           
+ AM0002   1.000 KG      8.00       8.00 
+ PAPA SECA AMARILLA                     
+ VG0027   6.000 KG      1.50       9.00 
+ PAPA YUNGAY                            
+ FF0007   9.070 KG      4.00      36.28 
+ PAPAYA                                 
 ----------------------------------------
      OP GRAVADA                     0.00
-     OP EXONERADA                   3.00
+     OP EXONERADA                 871.36
      IGV                            0.00
-     IMPORTE TOTAL S/               3.00
+     IMPORTE TOTAL S/             871.36
                                         
-   Revisar los productos entregados.    
-                1 Items.                
+OCHOCIENTOS SETENTA Y UNO CON 36/100 SOL
+                                        
+      AWuCqkixURJWlDCf8UTNYXgPUpg=      
+                                        
+Representación impresa de la factura ele
+ctrónica generada desde el sistema factu
+rador SUNAT. Puede verificarla utilizand
+o su clave SOL                          
+                                        
+                                        
+                                        
                                         
                                         
                                         

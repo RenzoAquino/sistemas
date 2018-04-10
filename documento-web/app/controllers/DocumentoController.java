@@ -1,5 +1,10 @@
 package controllers;
 
+import commons.Constantes;
+import commons.TypeDocument_ES;
+import commons.TypeOperationSUNAT;
+import commons.util.HttpUtil;
+import commons.util.SFSUtil;
 import commons.util.ticket.GenerarTicketDetallado;
 import commons.util.ticket.GenerarTicketResumido;
 import commons.util.ImpresoraUtil;
@@ -9,7 +14,6 @@ import models.Documento;
 import models.fakturama.FktDocument;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import play.data.Form;
 import play.data.FormFactory;
@@ -154,7 +158,7 @@ public class DocumentoController extends Controller{
 
     // para generarTicket
     public Result imprimirTicket() throws Exception {
-
+        boolean esParaSUNAT = false;
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).bindFromRequest();
         if(documentoDTOForm.hasErrors()){
             flash("danger","Por favor corregir los errores del formulario");
@@ -166,24 +170,33 @@ public class DocumentoController extends Controller{
             return badRequest(verImprimirTicket.render(documentoDTOForm));
         }
 
-        //Invocar Generador de Archivos TXT
-
-        //Invocar registro de Documento - SFS
-
-        //Generar XML de Documento - SFS
-
-        //Obtener valor hashSUNAT - SFS
-
-        //Actualizar campo comentario 3(HASH) de Documento - FAKTURAMA
-
-
         DocumentoDTO dto = documentoDTOForm.get();
         System.out.println(dto);
+
         FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
         System.out.println(document);
 
+        if(dto.tipoDocumento.codigo.equals("Factura")){
+            //Invocar Generador de Archivos TXT
+            generarTxtDocumentoElectronico(dto);
+
+            //Invocar registro de Documento - SFS
+            registrarDocumentosDbSUNAT();
+
+            //Generar XML de Documento - SFS
+            generarDocumentoXmlSUNAT(dto);
+
+            //Obtener valor hashSUNAT - SFS
+            String hash = SFSUtil.obtenerHashSUNAT(dto);
+            System.out.println("*****************HASH["+hash+"]");
+            document.MESSAGE3 = hash;
+
+            //Actualizar campo comentario 3(HASH) de Documento - FAKTURAMA
+            esParaSUNAT = true;
+        }
+
         GenerarTicketResumido impR= new GenerarTicketResumido(document);
-        GenerarTicketDetallado impD = new GenerarTicketDetallado(document);
+        GenerarTicketDetallado impD = new GenerarTicketDetallado(document,esParaSUNAT);
 
         try {
             if(dto.tipoDetalle.equals("D")){
@@ -224,6 +237,19 @@ public class DocumentoController extends Controller{
         return ok(verImprimirTicket.render(documentoDTOForm));
     }
 
+    private void generarTxtDocumentoElectronico(DocumentoDTO dto) throws Exception {
+        List<String> parametros = new ArrayList<String>();
+        parametros.add("emisorRUC="+dto.rucEmpresa);
+        parametros.add("documentoTipo="+TypeDocument_ES.valueOf(dto.tipoDocumento.codigo).getText());
+        parametros.add("documentoNumero="+dto.numero);
+        parametros.add("radTipoOperacion="+TypeOperationSUNAT.valueOf("ALTA").getText());
+        HttpUtil.enviarParametroPaginaWeb(Constantes.URL_GENERAR_TXT_ALTA_SUNAT,parametros);
+    }
+
+    private void registrarDocumentosDbSUNAT() throws Exception {
+        HttpUtil.consultarpaginaWeb(Constantes.URL_ACTUALIZAR_DB_SFS,Constantes.WEB_TIPO_ENVIO_GET);
+    }
+
     private void doHttpSendDataUrlConnection(){
         System.out.println("doHttpSendDataUrlConnection.inicio..");
 
@@ -251,36 +277,6 @@ public class DocumentoController extends Controller{
         System.out.println("doHttpSendDataUrlConnection.fin..");
     }
 
-    public void obtenerHashSUNAT() throws Exception {
-        // La expresion xpath de busqueda
-        String xPathExpression = "/Invoice/UBLExtensions/UBLExtension/ExtensionContent/Signature/SignedInfo/Reference/DigestValue";//"//DigestValue";
-
-        // Carga del documento xml
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-
-        Document documento = builder.parse(new File("D:\\sunat_archivos\\sfs\\FIRMA\\20477954350-01-F002-00000214.xml"));
-
-        // Preparación de xpath
-        XPath xpath = XPathFactory.newInstance().newXPath();
-
-        // Consultas
-        NodeList nodos = (NodeList) xpath.evaluate(xPathExpression, documento, XPathConstants.NODESET);
-
-        System.out.println("***********["+getString2(nodos)+"]");
-
-    }
-    protected String getString2(NodeList list) {
-        if (list != null && list.getLength() > 0) {
-            NodeList subList = list.item(0).getChildNodes();
-
-            if (subList != null && subList.getLength() > 0) {
-                return subList.item(0).getNodeValue();
-            }
-        }
-
-        return null;
-    }
 
     public  void generarDocumentoPdfSUNAT() {
 
@@ -329,7 +325,16 @@ public class DocumentoController extends Controller{
 
     }
 
-    public  void generarDocumentoXmlSUNAT() throws Exception {
+    public  void generarDocumentoXmlSUNAT(DocumentoDTO dto) throws Exception {
+        List<String> parametros = new ArrayList<String>();
+        //"hddNumRuc=20477954350&hddTipDoc=01&hddNumDoc=F002-00000214"
+        parametros.add("hddNumRuc="+dto.rucEmpresa);
+        parametros.add("hddTipDoc=01");//TypeDocument_ES.valueOf(dto.tipoDocumento.codigo).getText());
+        parametros.add("hddNumDoc="+dto.numero);
+        HttpUtil.enviarParametroPaginaWeb(Constantes.URL_GENERAR_XML_SFS,parametros);
+    }
+
+    public  void generarDocumentoXmlSUNAT_(DocumentoDTO dto) throws Exception {
         URL url = new URL("http://localhost:8090/FacturadorSunat/generarXml.htm");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
@@ -347,7 +352,7 @@ public class DocumentoController extends Controller{
 
     }
 
-    private String registrarDocumentosDbSUNAT(String desiredUrl)
+    private String registrarDocumentosDbSUNAT_(String desiredUrl)
             throws Exception
     {
         URL url = null;

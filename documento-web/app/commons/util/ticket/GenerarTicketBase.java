@@ -1,5 +1,6 @@
 package commons.util.ticket;
 
+import commons.Constantes;
 import commons.TypeDocument_ES;
 import commons.util.FechaUtil;
 import commons.util.StringUtil;
@@ -22,6 +23,7 @@ public abstract class GenerarTicketBase {
     public static final String TICKET_ETIQUETA_TELEFONO = "TELEFONO: ";
     public static final String TICKET_ETIQUETA_FECHA = " FECHA: ";
     public static final String TICKET_ETIQUETA_RUC = "RUC: ";
+    public static final String TICKET_ETIQUETA_CLIENTE = "CLIENTE: ";
 
     public static final String TICKET_ETIQUETA_TOTAL_OPERACION_EXONERADA = "     OP EXONERADA";
     public static final String TICKET_ETIQUETA_TOTAL_OPERACION_GRAVADA = "     OP GRAVADA";
@@ -32,7 +34,7 @@ public abstract class GenerarTicketBase {
 
     public static final String PARAM_TICKET_FORMATO_FECHA = "dd/MM/yyyy";
 
-
+    protected boolean esParaSUNAT = false;
 
     public GenerarTicketBase(){
         super();
@@ -51,7 +53,19 @@ public abstract class GenerarTicketBase {
         cargarConfiguracionImpresion();
     }
 
+    public GenerarTicketBase(FktDocument documento, boolean esParaSUNAT) throws Exception {
+        super();
+        this.documento = documento;
+        this.esParaSUNAT = esParaSUNAT;
 
+        cargarDatosCabeceraPrincipal();
+        cargarDatosCabeceraDocumento();
+
+        cargarConfiguracionTamanioDetalle();
+
+        calcularTamanioTicket();
+        cargarConfiguracionImpresion();
+    }
 
     protected FktDocument documento;
     protected String nombreComercialEmpresa;
@@ -61,6 +75,10 @@ public abstract class GenerarTicketBase {
     protected String ubigeoEmpresa;
     protected String telefonoEmpresa;
     protected String correoEmpresa;
+
+    protected String nombreDocumento;
+    protected String numeroDocumento;
+    protected String fechaEmisionDocumento;
 
     protected String fechaDocumento;
     protected String registroDocumentoCliente;
@@ -129,9 +147,19 @@ public abstract class GenerarTicketBase {
         registroDocumentoCliente = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase()+": "
                 .concat(StringUtil.completarTamanio(documento.NAME, tamanioTmp, " ", false))
                 .concat(TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
+
+        if (esParaSUNAT) {
+            nombreDocumento = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase() + " " + Constantes.PALABRA_ELECTRONICA;
+            numeroDocumento = documento.NAME;
+            fechaEmisionDocumento = TICKET_ETIQUETA_FECHA.concat(fechaDocumento);
+
+            razonSocialCliente = TICKET_ETIQUETA_CLIENTE.concat(documento.contact.COMPANY);
+        } else {
+            razonSocialCliente = documento.contact.COMPANY;
+        }
         rucCliente = TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
-        razonSocialCliente = documento.contact.COMPANY;
-        hashSUNAT = "";
+
+        hashSUNAT = documento.MESSAGE3;
     }
 
     public void cargarConfiguracionImpresion() throws Exception {

@@ -1,6 +1,7 @@
 package commons.util.ticket;
 
 import commons.Constantes;
+import commons.util.MoneyUtil;
 import commons.util.NumeroUtil;
 import commons.util.StringUtil;
 import models.fakturama.FktDocument;
@@ -8,11 +9,18 @@ import models.fakturama.FktDocumentitem;
 
 public class GenerarTicketDetallado extends GenerarTicketBase {
 
+    private String montoEnLetras;
+    private String mensajeFinalFactura;
+
     public GenerarTicketDetallado(){
         super();
     }
     public GenerarTicketDetallado(FktDocument documento) throws Exception {
         super(documento);
+    }
+
+    public GenerarTicketDetallado(FktDocument documento, boolean esParaSUNAT) throws Exception {
+        super(documento,esParaSUNAT);
     }
 
     public static void main(String[] args) throws Exception {
@@ -39,14 +47,19 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
                 PARAM_TICKET_LINEAS_CABECERA_DOCUMENTO +
                 PARAM_TICKET_LINEAS_DETALLE +
                 PARAM_TICKET_LINEAS_PIE +
-                PARAM_TICKET_LINEAS_ESPACIOS_BLANCO + 1 + //Se agrego hash de SUNAT
+                PARAM_TICKET_LINEAS_ESPACIOS_BLANCO +
                 PARAM_TICKET_LINEAS_TOTALES;
+        System.out.println("**********************cantidadLineas "+cantidadLineas);
+        cantidadLineas = cantidadLineas + (esParaSUNAT? (2+ 3+ 2 + 1 + 4 ): 0); //Se agrego nombre y numero de documento + monto en letras + hash de SUNAT + espacio SUNAT + mensaje SUNAT
+        System.out.println("**********************cantidadLineas "+cantidadLineas);
         cantidadColumnas = PARAM_TICKET_CANTIDAD_CARACTERES_POR_FILA;// * cantidadLineasPorRegistro;
 
         System.out.println("cantidadLineas ["+cantidadLineas+"] - cantidadColumnas ["+cantidadColumnas+"]");
     }
 
     public void generarTicket() throws Exception {
+
+
         String mensajeFinPagina = "Revisar los productos entregados.";
 
         agregarLinea(nombreComercialEmpresa,true);
@@ -59,9 +72,17 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
 
         //-------------------------------------------------------------------------------
         agregarLinea("",false);
-        agregarLinea(registroDocumentoCliente,true);
-        agregarLinea(razonSocialCliente,true);
-        agregarLinea(rucCliente,true); //*
+        if(esParaSUNAT) {
+            agregarLinea(nombreDocumento,true);
+            agregarLinea(numeroDocumento,true);
+            agregarLinea(fechaEmisionDocumento.substring(1,fechaEmisionDocumento.length()),true);
+            agregarLinea(" ",false);
+        } else {
+            agregarLinea(registroDocumentoCliente,true);
+        }
+
+        agregarLinea(razonSocialCliente,false);
+        agregarLinea(rucCliente,false); //*
         agregarLineaRepetirValor("-");
         agregarLinea(cabeceraDetalleDetallado,true);
         agregarLineaRepetirValor("-");
@@ -71,11 +92,20 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
         agregarLineaRepetirValor("-");
         
         agregarTotales();
-        agregarLinea(hashSUNAT,true);
-        agregarLinea("",false);
-        agregarLinea(mensajeFinPagina,true);
-        agregarLinea(""+documento.items.size()+" Items.",true);
 
+        if(esParaSUNAT) {
+            cargarDatosParaSUNAT();
+            agregarLinea(" ", false);
+            agregarLinea(montoEnLetras.concat("            ."), false);
+            agregarLinea(" ", false);
+            agregarLinea(hashSUNAT, true);
+            agregarLinea(" ", false);
+            agregarLinea(mensajeFinalFactura, false);
+        } else {
+            agregarLinea(" ", false);
+            agregarLinea(mensajeFinPagina, true);
+            agregarLinea("" + documento.items.size() + " Items.", true);
+        }
         ticket.toFile(Constantes.NOMBRE_ARCHIVO_TXT);
 
         //ImpresoraUtil.enviarAImpresora();
@@ -167,5 +197,10 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
             tmpItem.append(StringUtil.completarTamanio(nombreItem, tamanioProducto, " ", false));
             agregarLinea(tmpItem.toString(),true);
         }
+    }
+
+    public void cargarDatosParaSUNAT() {
+        mensajeFinalFactura = "Representación impresa de la factura electrónica generada desde el sistema facturador SUNAT. Puede verificarla utilizando su clave SOL";
+        montoEnLetras = MoneyUtil.convertirNumeroAPalabra(dImporteTotal, false).toUpperCase();
     }
 }
