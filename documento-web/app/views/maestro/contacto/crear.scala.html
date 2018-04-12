@@ -7,20 +7,30 @@
 @layout("Maestro de Contacto") {
     <h1>MAESTRO DE CONTACTO</h1>
     @helper.form(action = routes.ContactoController.guardar()){
+        <div class="row">
+            <div class="col-md-12">
+                @_contactoFormsFields(contactoForm)
 
-        @_contactoFormsFields(contactoForm)
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" type="submit">
+                                <!--i class="glyphicon glyphicon-plus"></i-->
+                            <i class="glyphicon glyphicon-floppy-save"></i>
+                            Crear
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
 
-        <button class="btn btn-success" type="submit">
-                <!--i class="glyphicon glyphicon-plus"></i-->
-            <i class="glyphicon glyphicon-floppy-save"></i>
-            Crear
-        </button>
+            </div>
+        </div>
     }
 }
 
 <script>$('#fechaCreacionGrp').datetimepicker({
-
-
     language:  'es',
     weekStart: 1,
     todayBtn:  1,
