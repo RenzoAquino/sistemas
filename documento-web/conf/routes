@@ -13,20 +13,29 @@ GET     /message                    controllers.AsyncController.message
 #GET     /detDocumento                    controllers.HomeController.detDocumento(nombre: String, apellido: String)
 
 #Ingresar parametros de la siguiente manera: http://localhost:9000/welcome/Renzo/Aquino
-GET     /welcome/:nombre/:apellido  controllers.HomeController.welcome(nombre: String, apellido: String)
+GET     /welcome/:nombre/:apellido                controllers.HomeController.welcome(nombre: String, apellido: String)
 
 
-GET     /documento                  controllers.DocumentoController.index
 
-GET     /contabilidad/inicioLibroContable   controllers.ContabilidadController.inicioGenerarLibro
-GET     /contabilidad/generarLibroContable   controllers.ContabilidadController.generarLibro
 
-GET     /documento/verImprimirTicket   controllers.DocumentoController.verImprimirTicket
-GET     /documento/imprimirTicket   controllers.DocumentoController.imprimirTicket
+GET     /contabilidad/inicioLibroContable         controllers.ContabilidadController.inicioGenerarLibro
+GET     /contabilidad/generarLibroContable        controllers.ContabilidadController.generarLibro
 
-GET     /documento/crear            controllers.DocumentoController.crear
-GET     /documento/:id              controllers.DocumentoController.ver(id: Long)
-GET     /documento/editar/:id       controllers.DocumentoController.editar(id: Long)
+GET     /maestro/inicioContacto                   controllers.ContactoController.inicio
+GET     /maestro/inicioProducto                   controllers.ProductoController.inicio
+GET     /maestro/inicioCategoria                  controllers.CategoriaController.inicio
+GET     /maestro/inicioMaestroGeneral             controllers.MaestroGeneralController.inicio
+
+
+
+GET     /documento                                controllers.DocumentoController.index
+
+GET     /documento/verImprimirTicket              controllers.DocumentoController.verImprimirTicket
+GET     /documento/imprimirTicket                 controllers.DocumentoController.imprimirTicket
+
+GET     /documento/crear                          controllers.DocumentoController.crear
+GET     /documento/:id                            controllers.DocumentoController.ver(id: Long)
+GET     /documento/editar/:id                     controllers.DocumentoController.editar(id: Long)
 + nocsrf
 POST    /documento/crear            controllers.DocumentoController.guardar
 + nocsrf

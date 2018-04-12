@@ -23,20 +23,38 @@
                     </div>
                     <div class="collapse navbar-collapse" id="exnav">
                         <ul class="nav navbar-nav navbar-left">
-                            <li>
-                                <a href="@routes.DocumentoController.index()">
-                                    <i class="glyphicon glyphicon-file"></i>
-                                    <!--i class="glyphicon glyphicon-book"></i-->
-                                    Todos los Documentos
-                                </a>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="glyphicon glyphicon-barcode"></i>
+                                    Venta
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="background-color: #e3f2fd;">
+                                    <li><a href="#">Pedido</a></li>
+                                    <li><a href="#">Factura/Boleta</a></li>
+                                    <li><a href="#">Nota de Credito/Debito</a></li>
+                                    <li><a href="#">Guia Remision</a></li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="@routes.DocumentoController.crear()">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    Crear Documento
-                                </a>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="glyphicon glyphicon-book"></i>
+                                    Compra
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="background-color: #e3f2fd;">
+                                    <li><a href="#">...</a></li>
+                                </ul>
                             </li>
-
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="glyphicon glyphicon-book"></i>
+                                    Inventario
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="background-color: #e3f2fd;">
+                                    <li><a href="#">Generar inventario</a></li>
+                                    <li><a href="#">Crear Inventario</a></li>
+                                    <li><a href="#">...</a></li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <i class="glyphicon glyphicon-book"></i>
@@ -45,7 +63,18 @@
                                 <ul class="dropdown-menu" style="background-color: #e3f2fd;">
                                     <li><a href="#">Cargar Libro</a></li>
                                     <li><a href="@routes.ContabilidadController.inicioGenerarLibro()">Generar Libro</a></li>
-                                    <li><a href="#">hhhh</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="glyphicon glyphicon-folder-open"></i>
+                                    Maestros
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="background-color: #e3f2fd;">
+                                    <li><a href="@routes.ContactoController.inicio()">Contactos</a></li>
+                                    <li><a href="@routes.ProductoController.inicio()">Productos</a></li>
+                                    <li><a href="@routes.CategoriaController.inicio()">Categorias</a></li>
+                                    <li><a href="@routes.MaestroGeneralController.inicio()">Varios</a></li>
                                 </ul>
                             </li>
                         </ul>

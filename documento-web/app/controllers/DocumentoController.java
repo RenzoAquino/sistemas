@@ -13,8 +13,6 @@ import controllers.dto.DocumentoDTO;
 import models.Documento;
 import models.fakturama.FktDocument;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -25,11 +23,6 @@ import views.html.documento.*;
 import views.html.errors.*;
 
 import javax.inject.Inject;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 import java.awt.print.PrinterException;
 import java.io.*;
 import java.net.HttpURLConnection;
