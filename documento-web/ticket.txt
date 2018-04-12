@@ -1,39 +1,21 @@
                                         
         INVERSIONES UNOCC S.A.C.        
-            RUC: 20477954350            
            TELEFONO: 470-8565           
       ventas@inversionesunocc.com       
                                         
-PEDIDO: PD01-00000522  FECHA: 11/04/2018
-LA POSITIVA SEGUROS Y REASEGUROS        
-RUC: 20100210909                        
+PEDIDO: PD01-00000526  FECHA: 12/04/2018
+          REX BAKERY PERU SAC           
 ----------------------------------------
-Codigo Cantidad U.M. P.Unitario  Importe
+Cantidad  Unidad  Producto              
 ----------------------------------------
- VG0002   0.250 KG      4.80       1.20 
- AJI AMARILLO                           
- VG0006   0.500 KG      6.00       3.00 
- ARVERJA ENTERA                         
- AB0003   1.500 BOT     3.80       5.70 
- CHICHA DE JORA 1.5 L                   
- VH0004   0.250 PQT     4.00       1.00 
- CULANTRO                               
- VG0048   1.000 UND     1.80       1.80 
- LECHUGA MORADA                         
- VG0021   2.000 UND     1.50       3.00 
- LECHUGA ORGANICA                       
- VO0002   1.000 CAJ     6.00       6.00 
- TOMATE CHERRY                          
- VG0039   0.250 KG      2.60       0.65 
- ZAPALLO  MACRE                         
+   0.85 KG  BROCOLI                     
+    6.0 UND LECHUGA ROMANA              
+   1.24 KG  PALTA FUERTE                
+   2.14 KG  PAPA YUNGAY                 
 ----------------------------------------
-     OP GRAVADA                     0.00
-     OP EXONERADA                  22.35
-     IGV                            0.00
-     IMPORTE TOTAL S/              22.35
                                         
    Revisar los productos entregados.    
-                8 Items.                
+                4 Items.                
                                         
                                         
                                         

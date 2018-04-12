@@ -2,16 +2,16 @@ package models.sgv;
 
 
 import io.ebean.Finder;
-import models.Auditoria;
+import io.ebean.Model;
+import play.data.validation.Constraints;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.Constraint;
 import java.util.Date;
 
 @Entity
 @Table(name="contacto")
-public class Contacto extends Auditoria {
+public class Contacto extends Model {
 
     @Id
     public Long id;
@@ -26,16 +26,20 @@ public class Contacto extends Auditoria {
     public String apellidoMaterno;
     public String razonSocial;
 
+
     public Date fechaCreacion;
+    @Constraints.Email
     public String email;
     public String telefonoFijo;
     public String telefonoMovil;
     public String webSite;
     public String comentario;
 
-    public Direccion direccion;
-    public ListaPrecio listaPrecio;
+    public Direccion direccion = new Direccion();
+    public ListaPrecio listaPrecio = new ListaPrecio();
 
+    @Embedded
+    public Auditoria auditoria;
 
     public static Finder<Long,Contacto> find = new Finder<>(Contacto.class);
 
@@ -59,12 +63,7 @@ public class Contacto extends Auditoria {
         sb.append(", webSite='").append(webSite).append('\'');
         sb.append(", comentario='").append(comentario).append('\'');
         sb.append(", direccion=").append(direccion);
-        sb.append(", usuarioCreacionRegistro='").append(usuarioCreacionRegistro).append('\'');
-        sb.append(", usuarioModificacionRegistro='").append(usuarioModificacionRegistro).append('\'');
-        sb.append(", fechaCreacionRegistro=").append(fechaCreacionRegistro);
-        sb.append(", fechaModificacionRegistro=").append(fechaModificacionRegistro);
-        sb.append(", estadoRegistro=").append(estadoRegistro);
-        sb.append(", listaPrecio=").append(listaPrecio);
+        sb.append(", auditoria=").append(auditoria);
         sb.append('}');
         return sb.toString();
     }

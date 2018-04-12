@@ -2,16 +2,13 @@ package models.sgv;
 
 
 import io.ebean.Finder;
-import models.Auditoria;
+import io.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 @Table(name="listaPrecioDetalle")
-public class ListaPrecioDetalle extends Auditoria {
+public class ListaPrecioDetalle extends Model {
 
     @Id
     public Long id;
@@ -20,6 +17,10 @@ public class ListaPrecioDetalle extends Auditoria {
     public Double precio;
 
     public ListaPrecio listaPrecio;
+
+    @Embedded
+    //@EmbeddedId
+    public Auditoria auditoria;
 
     public static Finder<Long,ListaPrecioDetalle> find = new Finder<>(ListaPrecioDetalle.class);
 
@@ -31,11 +32,6 @@ public class ListaPrecioDetalle extends Auditoria {
         sb.append(", alias='").append(alias).append('\'');
         sb.append(", precio=").append(precio);
         sb.append(", listaPrecio=").append(listaPrecio);
-        sb.append(", usuarioCreacionRegistro='").append(usuarioCreacionRegistro).append('\'');
-        sb.append(", usuarioModificacionRegistro='").append(usuarioModificacionRegistro).append('\'');
-        sb.append(", fechaCreacionRegistro=").append(fechaCreacionRegistro);
-        sb.append(", fechaModificacionRegistro=").append(fechaModificacionRegistro);
-        sb.append(", estadoRegistro=").append(estadoRegistro);
         sb.append('}');
         return sb.toString();
     }

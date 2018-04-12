@@ -1,0 +1,19 @@
+@import models.sgv.Contacto
+@(contactos : List[Contacto])
+
+@import views.html.partials._contactoFormsFieldsViews
+
+@layout("Todos los contactos"){
+    <h1>
+        TODOS LOS CONTACTOS
+    </h1>
+    @for(contacto <- contactos){
+        <a class="btn btn-link" href="#">@contacto.alias</a>
+        @_contactoFormsFieldsViews(contacto)
+    }
+
+        <!--a  class="btn btn-success" href="@routes.DocumentoController.crear()">
+    <i class="glyphicon glyphicon-plus-sign" ></i>
+    Crear Documento
+    </a-->
+}

@@ -22,6 +22,11 @@ GET     /contabilidad/inicioLibroContable         controllers.ContabilidadContro
 GET     /contabilidad/generarLibroContable        controllers.ContabilidadController.generarLibro
 
 GET     /maestro/inicioContacto                   controllers.ContactoController.inicio
+GET     /maestro/buscar                            controllers.ContactoController.buscar
+GET     /maestro/crear                          controllers.ContactoController.crear
++ nocsrf
+POST    /maestro/crear                            controllers.ContactoController.guardar
+
 GET     /maestro/inicioProducto                   controllers.ProductoController.inicio
 GET     /maestro/inicioCategoria                  controllers.CategoriaController.inicio
 GET     /maestro/inicioMaestroGeneral             controllers.MaestroGeneralController.inicio

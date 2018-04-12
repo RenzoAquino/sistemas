@@ -3,6 +3,42 @@
 
 # --- !Ups
 
+create table categoria (
+  id                            bigint auto_increment not null,
+  codigo                        varchar(255),
+  nombre                        varchar(255),
+  descripcion                   varchar(255),
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_categoria primary key (id)
+);
+
+create table contacto (
+  id                            bigint auto_increment not null,
+  codigo                        varchar(255),
+  codigo_tipo_contacto          varchar(255),
+  codigo_tipo_persona           varchar(255),
+  numero_documento              varchar(255),
+  alias                         varchar(255),
+  nombres                       varchar(255),
+  apellido_paterno              varchar(255),
+  apellido_materno              varchar(255),
+  razon_social                  varchar(255),
+  fecha_creacion                datetime(6),
+  email                         varchar(255),
+  telefono_fijo                 varchar(255),
+  telefono_movil                varchar(255),
+  web_site                      varchar(255),
+  comentario                    varchar(255),
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_contacto primary key (id)
+);
+
 create table control_venta (
   cvnt_id                       bigint auto_increment not null,
   cvnt_fec_emi_documento        datetime(6),
@@ -49,8 +85,77 @@ create table control_venta (
   constraint pk_control_venta primary key (cvnt_id)
 );
 
+create table direccion (
+  id                            bigint auto_increment not null,
+  codigo                        varchar(255),
+  calle                         varchar(255),
+  codigo_postal                 varchar(255),
+  referencia                    varchar(255),
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_direccion primary key (id)
+);
+
+create table listaprecio (
+  id                            bigint auto_increment not null,
+  codigo                        varchar(255),
+  alias                         varchar(255),
+  fecha_inicio                  datetime(6),
+  fecha_termino                 datetime(6),
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_listaprecio primary key (id)
+);
+
+create table listapreciodetalle (
+  id                            bigint auto_increment not null,
+  codigo                        varchar(255),
+  alias                         varchar(255),
+  precio                        double,
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_listapreciodetalle primary key (id)
+);
+
+create table producto (
+  id                            bigint auto_increment not null,
+  codigo                        varchar(255),
+  nombre                        varchar(255),
+  descripcion                   varchar(255),
+  precio_venta                  double,
+  precio_compra                 double,
+  peso                          double,
+  ruta_imagen                   varchar(255),
+  codigo_barra                  varchar(255),
+  cantidad_actual               double,
+  cantidad_minima               double,
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_producto primary key (id)
+);
+
 
 # --- !Downs
 
+drop table if exists categoria;
+
+drop table if exists contacto;
+
 drop table if exists control_venta;
+
+drop table if exists direccion;
+
+drop table if exists listaprecio;
+
+drop table if exists listapreciodetalle;
+
+drop table if exists producto;
 

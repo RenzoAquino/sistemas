@@ -1,8 +1,34 @@
+@import models.sgv.Contacto
+
 @(form: Form[Contacto])
-@helper.inputText(form("id"),'class ->"form-control")
-@helper.inputText(form("name"),'class ->"form-control")
-@helper.inputText(form("typeDocumento"),'class ->"form-control")
-@helper.inputText(form("igv"),'class ->"form-control")
-@helper.inputText(form("menssage1"),'class ->"form-control")
-@helper.inputText(form("menssage2"),'class ->"form-control")
-@helper.inputText(form("menssage3"),'class ->"form-control")
+
+
+
+
+
+
+@helper.inputText(form("codigoTipoContacto"),'_label -> "Tipo de Contacto",'class ->"form-control",   'maxlength->"4")
+@helper.inputText(form("codigoTipoPersona"),'class ->"form-control")
+@helper.inputText(form("numeroDocumento"),'class ->"form-control")
+@helper.inputText(form("alias"),'class ->"form-control")
+@helper.inputText(form("nombres"),'class ->"form-control")
+@helper.inputText(form("apellidoPaterno"),'class ->"form-control")
+@helper.inputText(form("apellidoMaterno"),'class ->"form-control")
+@helper.inputText(form("razonSocial"),'class ->"form-control")
+@helper.inputText(form("email"),'class ->"form-control")
+<div class="form-group">
+    <label for="fechaCreacion" >Fecha de Creación</label>
+    <div id = "fechaCreacionGrp" class="input-group date fechaCreacion " data-date="" data-date-format="dd MM yyyy" data-link-field="fechaCreacion" data-link-format="yyyy-mm-dd">
+        <input class="form-control"  type="text" value="" readonly>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+    <input type="hidden" id="fechaCreacion" name="fechaCreacion" value="" /><br/>
+</div>
+@helper.inputText(form("telefonoFijo"),'class ->"form-control")
+@helper.inputText(form("telefonoMovil"),'class ->"form-control")
+
+@helper.inputText(form("webSite"),'class ->"form-control")
+@helper.inputText(form("comentario"),'class ->"form-control")
+
+

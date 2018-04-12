@@ -1,16 +1,14 @@
 package models.sgv;
 
 import io.ebean.Finder;
-import models.Auditoria;
+import io.ebean.Model;
 import models.dto.ParametroDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="producto")
-public class Producto extends Auditoria {
+public class Producto extends Model {
 
     @Id
     public Long id;
@@ -23,11 +21,17 @@ public class Producto extends Auditoria {
     public ParametroDTO impuesto;
     public Double peso;
     public String rutaImagen;
+    public String codigoBarra;
 
     public Double cantidadActual;
     public Double cantidadMinima;
 
+    @Embedded
+    //@EmbeddedId
+    public Auditoria auditoria;
+
     public Categoria categoria;
+
 
     public static Finder<Long,Producto> find = new Finder<>(Producto.class);
 
@@ -44,14 +48,17 @@ public class Producto extends Auditoria {
         sb.append(", impuesto=").append(impuesto);
         sb.append(", peso=").append(peso);
         sb.append(", rutaImagen=").append(rutaImagen);
+        sb.append(", codigoBarra=").append(codigoBarra);
         sb.append(", cantidadActual=").append(cantidadActual);
         sb.append(", cantidadMinima=").append(cantidadMinima);
         sb.append(", categoria=").append(categoria);
+        /*
         sb.append(", usuarioCreacionRegistro='").append(usuarioCreacionRegistro).append('\'');
         sb.append(", usuarioModificacionRegistro='").append(usuarioModificacionRegistro).append('\'');
         sb.append(", fechaCreacionRegistro=").append(fechaCreacionRegistro);
         sb.append(", fechaModificacionRegistro=").append(fechaModificacionRegistro);
         sb.append(", estadoRegistro=").append(estadoRegistro);
+        */
         sb.append('}');
         return sb.toString();
     }

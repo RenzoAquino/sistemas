@@ -37,3 +37,4 @@ libraryDependencies += "org.apache.pdfbox" % "pdfbox-tools" % "2.0.9"
 
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+
