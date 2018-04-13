@@ -29,9 +29,9 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoImpresionTicket(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("R","Resumido");
+        dto = new Parametro("R","","Resumido");
         lista.add(dto);
-        dto = new Parametro("D","Detallado");
+        dto = new Parametro("D","","Detallado");
         lista.add(dto);
         return lista;
     }
@@ -52,9 +52,9 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoAccion(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("IMP","Impresión");
+        dto = new Parametro("IMP","","Impresión");
         lista.add(dto);
-        dto = new Parametro("PDF","Generar PDF");
+        dto = new Parametro("PDF","","Generar PDF");
         lista.add(dto);
         return lista;
     }
@@ -68,15 +68,15 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipLibro(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("LCOM","LIBRO DE COMPRAS");
+        dto = new Parametro("LCOM","","LIBRO DE COMPRAS");
         lista.add(dto);
-        dto = new Parametro("LVEN","LIBRO DE VENTAS");
+        dto = new Parametro("LVEN","","LIBRO DE VENTAS");
         lista.add(dto);
-        dto = new Parametro("LDSM","LIBRO SIMPLIFICADO DIARIO");
+        dto = new Parametro("LDSM","","LIBRO SIMPLIFICADO DIARIO");
         lista.add(dto);
-        dto = new Parametro("ANUL","ANULACIONES");
+        dto = new Parametro("ANUL","","ANULACIONES");
         lista.add(dto);
         return lista;
     }
@@ -90,13 +90,13 @@ public class CargaDatos {
     public List<Parametro> obtenerListaAnios(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("2018","2018");
+        dto = new Parametro("2018","","2018");
         lista.add(dto);
-        dto = new Parametro("2019","2019");
+        dto = new Parametro("2019","","2019");
         lista.add(dto);
-        dto = new Parametro("2020","2020");
+        dto = new Parametro("2020","","2020");
         lista.add(dto);
         return lista;
     }
@@ -110,31 +110,31 @@ public class CargaDatos {
     public List<Parametro> obtenerListaMeses(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("01","Enero");
+        dto = new Parametro("01","","Enero");
         lista.add(dto);
-        dto = new Parametro("02","Febrero");
+        dto = new Parametro("02","","Febrero");
         lista.add(dto);
-        dto = new Parametro("03","Marzo");
+        dto = new Parametro("03","","Marzo");
         lista.add(dto);
-        dto = new Parametro("04","Abril");
+        dto = new Parametro("04","","Abril");
         lista.add(dto);
-        dto = new Parametro("05","Mayo");
+        dto = new Parametro("05","","Mayo");
         lista.add(dto);
-        dto = new Parametro("06","Junio");
+        dto = new Parametro("06","","Junio");
         lista.add(dto);
-        dto = new Parametro("07","Julio");
+        dto = new Parametro("07","","Julio");
         lista.add(dto);
-        dto = new Parametro("08","Agosto");
+        dto = new Parametro("08","","Agosto");
         lista.add(dto);
-        dto = new Parametro("09","Setiembre");
+        dto = new Parametro("09","","Setiembre");
         lista.add(dto);
-        dto = new Parametro("10","Octubre");
+        dto = new Parametro("10","","Octubre");
         lista.add(dto);
-        dto = new Parametro("11","Noviembre");
+        dto = new Parametro("11","","Noviembre");
         lista.add(dto);
-        dto = new Parametro("12","Diciembre");
+        dto = new Parametro("12","","Diciembre");
         lista.add(dto);
         return lista;
     }
@@ -148,17 +148,17 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoDocumento(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("Pedido","Pedido");
+        dto = new Parametro("Pedido","","Pedido");
         lista.add(dto);
-        dto = new Parametro("Factura","Factura");
+        dto = new Parametro("Factura","","Factura");
         lista.add(dto);
-        dto = new Parametro("Corrección factura","Corrección factura");
+        dto = new Parametro("Corrección factura","","Corrección factura");
         lista.add(dto);
-        dto = new Parametro("Proforma","Proforma");
+        dto = new Parametro("Proforma","","Proforma");
         lista.add(dto);
-        dto = new Parametro("Albarán envío","Albarán envío");
+        dto = new Parametro("Albarán envío","","Albarán envío");
         lista.add(dto);
         return lista;
     }
@@ -172,13 +172,13 @@ public class CargaDatos {
     public List<Parametro> obtenerListaRazonesSociales(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("20477954350","INVERSIONES UNOCC S.A.C.");
+        dto = new Parametro("20477954350","","INVERSIONES UNOCC S.A.C.");
         lista.add(dto);
-        dto = new Parametro("20601017564","D'UNOCC S.A.C.");
+        dto = new Parametro("20601017564","","D'UNOCC S.A.C.");
         lista.add(dto);
-        dto = new Parametro("20602885772","INVERSIONES AQUINO Y UNOCC S.A.C.");
+        dto = new Parametro("20602885772","","INVERSIONES AQUINO Y UNOCC S.A.C.");
         lista.add(dto);
         return lista;
     }
@@ -192,11 +192,11 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoContacto(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("01","CLIENTE");
+        dto = new Parametro("01","","CLIENTE");
         lista.add(dto);
-        dto = new Parametro("02","PROVEEDOR");
+        dto = new Parametro("02","","PROVEEDOR");
         lista.add(dto);
         return lista;
     }
@@ -210,11 +210,11 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoPersona(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("01","PERSONA NATURAL");
+        dto = new Parametro("01","","PERSONA NATURAL");
         lista.add(dto);
-        dto = new Parametro("02","PERSONA JURIDICA");
+        dto = new Parametro("02","","PERSONA JURIDICA");
         lista.add(dto);
         return lista;
     }
@@ -228,13 +228,13 @@ public class CargaDatos {
     public List<Parametro> obtenerListaPais(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("01","PERU");
+        dto = new Parametro("01","","PERU");
         lista.add(dto);
-        dto = new Parametro("02","CHILE");
+        dto = new Parametro("02","","CHILE");
         lista.add(dto);
-        dto = new Parametro("03","ARGENTINA");
+        dto = new Parametro("03","","ARGENTINA");
         lista.add(dto);
         return lista;
     }
@@ -248,13 +248,13 @@ public class CargaDatos {
     public List<Parametro> obtenerListaCiudad(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("01","LIMA");
+        dto = new Parametro("01","","LIMA");
         lista.add(dto);
-        dto = new Parametro("02","JUNIN");
+        dto = new Parametro("02","","JUNIN");
         lista.add(dto);
-        dto = new Parametro("03","CALLAO");
+        dto = new Parametro("03","","CALLAO");
         lista.add(dto);
         return lista;
     }
@@ -267,13 +267,13 @@ public class CargaDatos {
     public List<Parametro> obtenerListaDistrito(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro("0000","SELECCIONAR");
+        dto = new Parametro("0000","","SELECCIONAR");
         lista.add(dto);
-        dto = new Parametro("01","LINCE");
+        dto = new Parametro("01","","LINCE");
         lista.add(dto);
-        dto = new Parametro("02","SANTA ANITA");
+        dto = new Parametro("02","","SANTA ANITA");
         lista.add(dto);
-        dto = new Parametro("03","SAN ISIDRO");
+        dto = new Parametro("03","","SAN ISIDRO");
         lista.add(dto);
         return lista;
     }

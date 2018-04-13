@@ -169,7 +169,7 @@ public class DocumentoController extends Controller{
         FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
         System.out.println(document);
 
-        if(dto.tipoDocumento.parametroId.codigo.equals("Factura")){
+        if(dto.tipoDocumento.id.codigo.equals("Factura")){
             //Invocar Generador de Archivos TXT
             generarTxtDocumentoElectronico(dto);
 
@@ -233,7 +233,7 @@ public class DocumentoController extends Controller{
     private void generarTxtDocumentoElectronico(DocumentoDTO dto) throws Exception {
         List<String> parametros = new ArrayList<String>();
         parametros.add("emisorRUC="+dto.rucEmpresa);
-        parametros.add("documentoTipo="+TypeDocument_ES.valueOf(dto.tipoDocumento.parametroId.codigo).getText());
+        parametros.add("documentoTipo="+TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText());
         parametros.add("documentoNumero="+dto.numero);
         parametros.add("radTipoOperacion="+TypeOperationSUNAT.valueOf("ALTA").getText());
         HttpUtil.enviarParametroPaginaWeb(Constantes.URL_GENERAR_TXT_ALTA_SUNAT,parametros);

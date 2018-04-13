@@ -22,8 +22,8 @@ public class ContabilidadService {
         //DateTime firstDayOfMonth= new DateTime().withDayOfMonth(1);
         //DateTime lastDayOfMonth = new DateTime().dayOfMonth().withMaximumValue();
 
-        String inicioDateTime = dto.anio.parametroId.codigo + "-" + dto.mes.parametroId.codigo + "-01 00:00:00";
-        String finDateTime = dto.anio.parametroId.codigo + "-" + dto.mes.parametroId.codigo + "-31 23:59:59";
+        String inicioDateTime = dto.anio.id.codigo + "-" + dto.mes.id.codigo + "-01 00:00:00";
+        String finDateTime = dto.anio.id.codigo + "-" + dto.mes.id.codigo + "-31 23:59:59";
 
         // Format for input
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -40,20 +40,20 @@ public class ContabilidadService {
         String cabeceraSelect = "";
         List<String> listaIn = new ArrayList<String>();
 
-        if (dto.tipoLibro.parametroId.codigo.equals("LVEN")){
+        if (dto.tipoLibro.id.codigo.equals("LVEN")){
             cabeceraSelect = Constantes.SELECT_LIBRO_VENTA;
             listaIn.add("01");
             listaIn.add("03");
             listaIn.add("07");
             listaIn.add("08");
-        } else if (dto.tipoLibro.parametroId.codigo.equals("ANUL")){
+        } else if (dto.tipoLibro.id.codigo.equals("ANUL")){
             cabeceraSelect = Constantes.SELECT_ANULACIONES;
             listaIn.add("RA");
         }
 
         List<ControlVenta> lista = db.find(ControlVenta.class).select(cabeceraSelect)
                 .where()
-                .eq("CVNT_NUM_DOC_EMISOR", dto.razonSocial.parametroId.codigo)
+                .eq("CVNT_NUM_DOC_EMISOR", dto.razonSocial.id.codigo)
                 .between("CVNT_FEC_EMI_DOCUMENTO", inicioDate.format(outputFormat), finDate.format(outputFormat))
                 .in("CVNT_TIP_DOCUMENTO",listaIn)
                 .findList();
@@ -62,12 +62,12 @@ public class ContabilidadService {
             return listaRetorno;
         }
 
-        if (dto.tipoLibro.parametroId.codigo.equals("LVEN")){
+        if (dto.tipoLibro.id.codigo.equals("LVEN")){
             for (ControlVenta x : lista) {
                 System.out.println("LVEN---"+x);
                 listaRetorno.add(x.stringParaLibroVentasCSV(";"));
             }
-        } else if (dto.tipoLibro.parametroId.codigo.equals("ANUL")){
+        } else if (dto.tipoLibro.id.codigo.equals("ANUL")){
             for (ControlVenta x : lista) {
                 System.out.println("ANUL---"+x);
                 listaRetorno.add(x.stringParaAnulacionesCSV(";"));

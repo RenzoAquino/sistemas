@@ -3,16 +3,16 @@ package controllers;
 import commons.util.DBConnectionUtil;
 import controllers.dto.ContactoDTO;
 import io.ebean.EbeanServer;
-import io.ebean.Expr;
-import models.Documento;
+
 import models.sgv.Contacto;
 import play.data.Form;
 import play.mvc.Result;
 import repository.sgv.ContactoService;
-import views.html.documento.ver;
 import views.html.errors._404;
-import views.html.maestro.contacto.listado;
 import views.html.maestro.contacto.crear;
+import views.html.maestro.contacto.editar;
+import views.html.maestro.contacto.listado;
+import views.html.maestro.contacto.ver;
 
 import java.util.List;
 
@@ -52,6 +52,16 @@ public class ContactoController extends CommonController {
 
         return ok(crear.render(form));
     }
+
+    public Result editar(Long id){
+        Contacto obj = ContactoService.obtenerPorId(id);
+        if(obj==null)
+            return notFound(_404.render());
+
+        Form<Contacto> form = formFactory.form(Contacto.class).fill(obj);
+
+        return ok(editar.render(form));
+    }
     // para guardar
     public Result guardar(){
         Form<Contacto> form = formFactory.form(Contacto.class).bindFromRequest();
@@ -68,5 +78,27 @@ public class ContactoController extends CommonController {
         //Documento.guardar(documento);
 
         return redirect(routes.ContactoController.inicio());
+    }
+
+    public Result eliminar(Long id){
+        Contacto obj = ContactoService.obtenerPorId(id);
+        if(obj==null) {
+            flash("danger", "Contacto no encontrado");
+            return notFound();
+        }
+        obj.delete();
+
+        flash("success","Se elimino correctamente el contacto.");
+
+        return ok();//redirect(routes.DocumentoController.index());
+    }
+
+    // para el detalle
+    public Result ver(Long id){
+        Contacto obj = ContactoService.obtenerPorId(id);
+        if(obj == null)
+            return notFound(_404.render());
+
+        return ok(ver.render(obj));
     }
 }

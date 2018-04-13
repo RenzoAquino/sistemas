@@ -16,14 +16,20 @@ public class Contacto extends Model {
     public Long id;
     public String codigo;
 
-    @Embedded(prefix="tipoContacto_")
+    //@Embedded(prefix="tipoContacto_")
     @ManyToOne
-    @JoinColumn(name = "maestro_parametro", referencedColumnName = "codigo, codigoPadre")
-    public ParametroId tipoContacto;
-    @Embedded(prefix="tipoPersona_")
+    @JoinColumns ({
+            @JoinColumn(name="tipoContacto_codigo", referencedColumnName = "codigo"),
+            @JoinColumn(name="tipoContacto_codigo_padre", referencedColumnName = "codigo_padre"),
+    })
+    public Parametro tipoContacto;
+    //@Embedded(prefix="tipoPersona_")
     @ManyToOne
-    @JoinColumn(name = "maestro_parametro", referencedColumnName = "codigo, codigoPadre")
-    public ParametroId tipoPersona;
+    @JoinColumns ({
+            @JoinColumn(name="tipoPersona_codigo", referencedColumnName = "codigo"),
+            @JoinColumn(name="tipoPersona_codigo_padre", referencedColumnName = "codigo_padre"),
+    })
+    public Parametro tipoPersona;
 
     public String numeroDocumento;
     public String alias;

@@ -21,11 +21,16 @@ GET     /welcome/:nombre/:apellido                controllers.HomeController.wel
 GET     /contabilidad/inicioLibroContable         controllers.ContabilidadController.inicioGenerarLibro
 GET     /contabilidad/generarLibroContable        controllers.ContabilidadController.generarLibro
 
-GET     /maestro/inicioContacto                   controllers.ContactoController.inicio
-GET     /maestro/buscar                            controllers.ContactoController.buscar
-GET     /maestro/crear                          controllers.ContactoController.crear
+GET     /maestro/contacto/inicio                  controllers.ContactoController.inicio
+GET     /maestro/contacto/buscar                  controllers.ContactoController.buscar
+GET     /maestro/contacto/crear                   controllers.ContactoController.crear
+GET     /maestro/contacto/editar/:id              controllers.ContactoController.editar(id: Long)
+GET     /maestro/contacto/:id                     controllers.ContactoController.ver(id: Long)
 + nocsrf
 POST    /maestro/crear                            controllers.ContactoController.guardar
++ nocsrf
+DELETE  /maestro/contacto/eliminar/:id            controllers.ContactoController.eliminar(id: Long)
+
 
 GET     /maestro/inicioProducto                   controllers.ProductoController.inicio
 GET     /maestro/inicioCategoria                  controllers.CategoriaController.inicio

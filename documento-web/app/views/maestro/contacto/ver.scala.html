@@ -1,0 +1,18 @@
+@import models.sgv.Contacto
+@import views.html.partials._contactoFormsFieldsViews
+
+@(contacto: Contacto)
+
+@layout(contacto.alias){
+    <h2>
+    @contacto.alias
+    </h2>
+    @_contactoFormsFieldsViews(contacto)
+
+    <a class="btn btn-primary" href="@routes.ContactoController.editar(contacto.id)">Editar</a>
+    <button class="btn btn-danger" onclick="sendDeleteRequest(
+            '@routes.ContactoController.eliminar(contacto.id)',
+            '@routes.ContactoController.inicio()'
+    )">Eliminar</button>
+}
+

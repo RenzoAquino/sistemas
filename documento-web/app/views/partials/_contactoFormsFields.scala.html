@@ -8,11 +8,11 @@
         <div class="row">
             <div class="col-md-6">
                 @select(
-                    form("tipoContacto.codigo"),
-                    options = ParametroService.cargarTipoContactoSeq.map(dto => dto.parametroId.codigo -> dto.descripcion),
+                    form("tipoContacto.id.codigo"),
+                    options = ParametroService.cargarTipoContactoSeq.map(dto => dto.id.codigo -> dto.descripcion),
                     'class ->"form-control",
                     '_label -> "Tipo de Contacto",
-                    '_error -> form("tipoContacto.codigo").error.map(_.withMessage("Seleccionar Tipo de Contacto")))
+                    '_error -> form("tipoContacto.id.codigo").error.map(_.withMessage("Seleccionar Tipo de Contacto")))
             </div>
             <div class="col-md-6">
                 @helper.inputText(form("codigo"),'_label -> "Codigo",'class ->"form-control",  'maxlength->"10",'readonly -> "readonly")
@@ -27,11 +27,11 @@
             <div class="col-md-6">
 
                 @select(
-                    form("tipoPersona.codigo"),
-                    options = ParametroService.cargarTipoPersonaSeq.map(dto => dto.parametroId.codigo -> dto.descripcion),
+                    form("tipoPersona.id.codigo"),
+                    options = ParametroService.cargarTipoPersonaSeq.map(dto => dto.id.codigo -> dto.descripcion),
                     'class ->"form-control",
                     '_label -> "Tipo de Persona",
-                    '_error -> form("tipoPersona.codigo").error.map(_.withMessage("Seleccionar Tipo de Persona")))
+                    '_error -> form("tipoPersona.id.codigo").error.map(_.withMessage("Seleccionar Tipo de Persona")))
 
                 @helper.inputText(form("numeroDocumento"),
                     '_label -> "DNI / RUC",

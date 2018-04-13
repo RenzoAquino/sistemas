@@ -1,17 +1,19 @@
 @import models.sgv.Contacto
 
 @(contacto: Contacto)
-<p>Tipo Persona         : @contacto.tipoPersona.codigo</p>
-<p>numeroDocumento		: @contacto.numeroDocumento</p>
-<p>alias				: @contacto.alias</p>
-<p>nombres				: @contacto.nombres</p>
-<p>apellidoPaterno		: @contacto.apellidoPaterno</p>
-<p>apellidoMaterno		: @contacto.apellidoMaterno</p>
-<p>razonSocial			: @contacto.razonSocial</p>
-<p>email				: @contacto.email</p>
-<p>telefonoFijo 		: @contacto.telefonoFijo</p>
-<p>telefonoMovil 		: @contacto.telefonoMovil</p>
-
-<p>webSite				: @contacto.webSite</p>
-<p>direccion			: @contacto.comentario</p>
-
+<tr>
+    <td><a class="btn btn-link" href="@routes.ContactoController.ver(contacto.id)">@contacto.alias</a></td>
+    <td>@contacto.tipoPersona.descripcion</td>
+    <td>@contacto.numeroDocumento</td>
+    <td>
+    @if(contacto.tipoPersona.id.codigo.equals("01")) {
+        @(contacto.apellidoPaterno+" "+contacto.apellidoMaterno+", "+contacto.nombres)
+    } else {
+        @contacto.razonSocial
+    }
+    </td>
+    <td>@contacto.email</td>
+    <td>@contacto.telefonoFijo</td>
+    <td>@contacto.telefonoMovil</td>
+    <td>@contacto.webSite</td>
+</tr>

@@ -14,7 +14,7 @@ public class ContactoService extends SVGConnection{
         List<Contacto> lista = db.find(Contacto.class).select("")
                 .where().or(
                         Expr.eq("codigo",dto.codigo),
-                        Expr.eq("tipoContacto",dto.tipoContacto)
+                        Expr.eq("tipocontacto",dto.tipoContacto)
                 )
                 .findList();
 
@@ -82,9 +82,15 @@ public class ContactoService extends SVGConnection{
     }
 
     public static void crearContacto(Contacto contacto) {
-        contacto.tipoContacto.codigoPadre = Constantes.PARAMETRO_TIPO_CONTACTO;
-        contacto.tipoPersona.codigoPadre = Constantes.PARAMETRO_TIPO_PERSONA;
+        contacto.tipoContacto.id.codigoPadre = Constantes.PARAMETRO_TIPO_CONTACTO;
+        contacto.tipoPersona.id.codigoPadre = Constantes.PARAMETRO_TIPO_PERSONA;
         System.out.println("**************crearContacto - "+contacto);
         db.save(contacto);
+    }
+
+    public static Contacto obtenerPorId(Long id) {
+        return db.find(Contacto.class).select("")
+                .where().eq("id",id)
+                .findOne();
     }
 }

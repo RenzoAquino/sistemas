@@ -46,7 +46,7 @@ public class DocumentoService {
                 //.fetch("fktdocumentitem.vat")
                 .where()
                 .eq("name",dto.numero)
-                .eq("dtype", TypeDocument_ES.valueOf(dto.tipoDocumento.parametroId.codigo).getText())
+                .eq("dtype", TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText())
                 .findOne();
         document.contact = FktContact.find.byId(document.contact.ID);
 

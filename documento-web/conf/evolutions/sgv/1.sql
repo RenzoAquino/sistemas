@@ -160,10 +160,22 @@ create table producto (
 
 alter table contacto add constraint fk_contacto_direccion_id foreign key (direccion_id) references direccion (id) on delete restrict on update restrict;
 
+alter table contacto add constraint fk_contacto_tipocontacto foreign key (tipocontacto_codigo,tipocontacto_codigo_padre) references maestro_parametro (codigo,codigo_padre) on delete restrict on update restrict;
+create index ix_contacto_tipocontacto on contacto (tipocontacto_codigo,tipocontacto_codigo_padre);
+
+alter table contacto add constraint fk_contacto_tipopersona foreign key (tipopersona_codigo,tipopersona_codigo_padre) references maestro_parametro (codigo,codigo_padre) on delete restrict on update restrict;
+create index ix_contacto_tipopersona on contacto (tipopersona_codigo,tipopersona_codigo_padre);
+
 
 # --- !Downs
 
 alter table contacto drop foreign key fk_contacto_direccion_id;
+
+alter table contacto drop foreign key fk_contacto_tipocontacto;
+drop index ix_contacto_tipocontacto on contacto;
+
+alter table contacto drop foreign key fk_contacto_tipopersona;
+drop index ix_contacto_tipopersona on contacto;
 
 drop table if exists categoria;
 

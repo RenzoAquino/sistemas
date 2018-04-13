@@ -7,13 +7,31 @@
     <h1>
         TODOS LOS CONTACTOS
     </h1>
-    @for(contacto <- contactos){
-        <a class="btn btn-link" href="#">@contacto.alias</a>
-        @_contactoFormsFieldsViews(contacto)
-    }
+
+    <table class="table table-bordered table-striped" id="dashboard-table">
+        <thead>
+            <tr>
+                <th>*</th>
+                <th>Persona</th>
+                <th>DNI / RUC</th>
+                <th>Nombre / Razon Social</th>
+                <th>Correo E.</th>
+                <th>Telefono Fijo</th>
+                <th>Telefono Movil</th>
+                <th>Pag. Web</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(contacto <- contactos) {
+            @_contactoFormsFieldsViews(contacto)
+        }
+        </tbody>
+    </table>
 
         <!--a  class="btn btn-success" href="@routes.DocumentoController.crear()">
     <i class="glyphicon glyphicon-plus-sign" ></i>
     Crear Documento
     </a-->
 }
+
+<script src="@routes.Assets.versioned("js/maestro.contacto.js")" type="text/javascript"></script>
