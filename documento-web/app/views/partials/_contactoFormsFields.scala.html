@@ -1,41 +1,110 @@
 @import models.sgv.Contacto
+@import repository.sgv.ParametroService
+
+
+@import helper._
 
 @(form: Form[Contacto])
-<div class="row">
-    <div class="col-md-6">
-        @helper.inputText(form("codigo"),'_label -> "Codigo",'class ->"form-control",   'maxlength->"10")
-        @helper.inputText(form("codigoTipoContacto"),'_label -> "Tipo de Contacto",'class ->"form-control")
-        @helper.inputText(form("codigoTipoPersona"),'class ->"form-control")
-        @helper.inputText(form("numeroDocumento"),'class ->"form-control")
-        @helper.inputText(form("alias"),'class ->"form-control")
-        @helper.inputText(form("nombres"),'class ->"form-control")
-        @helper.inputText(form("apellidoPaterno"),'class ->"form-control")
-        @helper.inputText(form("apellidoMaterno"),'class ->"form-control")
-    </div>
-    <div class="col-md-6">
-        @helper.inputText(form("razonSocial"),'class ->"form-control")
-        @helper.inputText(form("email"),'class ->"form-control")
-        <div class="form-group">
-            <label for="fechaCreacion" >Fecha de Creación</label>
-            <div id = "fechaCreacionGrp" class="input-group date fechaCreacion " data-date="" data-date-format="dd MM yyyy" data-link-field="fechaCreacion" data-link-format="yyyy-mm-dd">
-                <input class="form-control"  type="text" value="" readonly>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        <div class="row">
+            <div class="col-md-6">
+                @select(
+                    form("tipoContacto.codigo"),
+                    options = ParametroService.cargarTipoContactoSeq.map(dto => dto.parametroId.codigo -> dto.descripcion),
+                    'class ->"form-control",
+                    '_label -> "Tipo de Contacto",
+                    '_error -> form("tipoContacto.codigo").error.map(_.withMessage("Seleccionar Tipo de Contacto")))
             </div>
-            <input type="hidden" id="fechaCreacion" name="fechaCreacion" value="" /><br/>
+            <div class="col-md-6">
+                @helper.inputText(form("codigo"),'_label -> "Codigo",'class ->"form-control",  'maxlength->"10",'readonly -> "readonly")
+            </div>
         </div>
-        @helper.inputText(form("telefonoFijo"),'class ->"form-control")
-        @helper.inputText(form("telefonoMovil"),'class ->"form-control")
+        <div class="row">
+            <div class="col-md-12">
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
 
-        @helper.inputText(form("webSite"),'class ->"form-control")
-        @helper.textarea(
-            form("comentario"),
-            '_label -> "Comentario",
-            'placeholder -> "Agregar cualquier comentario",
-            'rows -> 5,
-            'cols -> 70)
-    </div>
-</div>
+                @select(
+                    form("tipoPersona.codigo"),
+                    options = ParametroService.cargarTipoPersonaSeq.map(dto => dto.parametroId.codigo -> dto.descripcion),
+                    'class ->"form-control",
+                    '_label -> "Tipo de Persona",
+                    '_error -> form("tipoPersona.codigo").error.map(_.withMessage("Seleccionar Tipo de Persona")))
+
+                @helper.inputText(form("numeroDocumento"),
+                    '_label -> "DNI / RUC",
+                    'class ->"form-control",
+                    'placeholder -> "Ingresar DNI / RUC",
+                    '_error -> form("numeroDocumento").error.map(_.withMessage("Ingresar DNI /RUC")))
+                @helper.inputText(form("alias"),
+                    '_label -> "Alias",
+                    'class ->"form-control",
+                    'placeholder -> "Ingresar Alias",
+                    '_error -> form("alias").error.map(_.withMessage("Ingresar Alias")))
+                @helper.inputText(form("nombres"),
+                    '_label -> "Nombres",
+                    'class ->"form-control",
+                    'placeholder -> "Ingresar Nombres",
+                    '_error -> form("nombres").error.map(_.withMessage("Ingresar Nombres")))
+                @helper.inputText(form("apellidoPaterno"),
+                    '_label -> "Apellido Paterno",
+                    'class ->"form-control",
+                    'placeholder -> "Ingresar Apellido Paterno",
+                    '_error -> form("apellidoPaterno").error.map(_.withMessage("Ingresar Apellido Paterno")))
+                @helper.inputText(form("apellidoMaterno"),
+                    '_label -> "Apellido Materno",
+                    'class ->"form-control",
+                    'placeholder -> "Ingresar Apellido Materno",
+                    '_error -> form("apellidoMaterno").error.map(_.withMessage("Ingresar Apellido Materno")))
+                @helper.inputText(form("razonSocial"),
+                    '_label -> "Razon Social",
+                    'class ->"form-control",
+                    'placeholder -> "Ingresar Razon Social",
+                    '_error -> form("razonSocial").error.map(_.withMessage("Ingresar Razon Social")))
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="fechaCreacion" >Fecha de Creación</label>
+                    <div id = "fechaCreacionGrp" class="input-group date fechaCreacion " data-date="" data-date-format="dd MM yyyy" data-link-field="fechaCreacion" data-link-format="yyyy-mm-dd">
+                        <input class="form-control"  type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="fechaCreacion" name="fechaCreacion" value="" /><br/>
+                </div>
+                @helper.inputText(form("email"),
+                    '_label -> "Correo Electronico",
+                    'class ->"form-control",
+                    '_showConstraints -> false,
+                    'placeholder -> "usuario@dominio.com",
+                    '_error -> form("email").error.map(_.withMessage("Ingresar Email")))
+                @helper.inputText(form("telefonoFijo"),
+                    '_label -> "Telefono Fijo",
+                    'class ->"form-control",
+                    'placeholder -> "999-9999",
+                    '_error -> form("telefonoFijo").error.map(_.withMessage("Ingresar Telefono Fijo")))
+                @helper.inputText(form("telefonoMovil"),
+                    '_label -> "Telefono Movil",
+                    'class ->"form-control",
+                    'placeholder -> "999-999-999",
+                    '_error -> form("telefonoMovil").error.map(_.withMessage("Ingresar Telefono Movil")))
+                @helper.inputText(form("webSite"),
+                    '_label -> "Pagina Web",
+                    'class ->"form-control",
+                    'placeholder -> "www.dominio.com",
+                    '_error -> form("webSite").error.map(_.withMessage("Ingresar Pagina Web")))
+                @helper.textarea(
+                    form("comentario"),
+                    '_label -> "Comentario",
+                    'placeholder -> "Agregar comentario",
+                    'rows -> 5,
+                    'cols -> 70)
+            </div>
+        </div>
+
+
 
 
 

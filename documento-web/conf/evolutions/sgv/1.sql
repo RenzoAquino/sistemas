@@ -18,8 +18,10 @@ create table categoria (
 create table contacto (
   id                            bigint auto_increment not null,
   codigo                        varchar(255),
-  codigo_tipo_contacto          varchar(255),
-  codigo_tipo_persona           varchar(255),
+  tipocontacto_codigo           varchar(255),
+  tipocontacto_codigo_padre     varchar(255),
+  tipopersona_codigo            varchar(255),
+  tipopersona_codigo_padre      varchar(255),
   numero_documento              varchar(255),
   alias                         varchar(255),
   nombres                       varchar(255),
@@ -32,10 +34,12 @@ create table contacto (
   telefono_movil                varchar(255),
   web_site                      varchar(255),
   comentario                    varchar(255),
+  direccion_id                  bigint,
   usuario_creacion_registro     varchar(255),
   usuario_modificacion_registro varchar(255),
   fecha_creacion_registro       datetime(6),
   fecha_modificacion_registro   datetime(6),
+  constraint uq_contacto_direccion_id unique (direccion_id),
   constraint pk_contacto primary key (id)
 );
 
@@ -123,6 +127,18 @@ create table listapreciodetalle (
   constraint pk_listapreciodetalle primary key (id)
 );
 
+create table maestro_parametro (
+  codigo                        varchar(255) not null,
+  codigo_padre                  varchar(255) not null,
+  descripcion                   varchar(255),
+  orden                         integer not null,
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_maestro_parametro primary key (codigo,codigo_padre)
+);
+
 create table producto (
   id                            bigint auto_increment not null,
   codigo                        varchar(255),
@@ -142,8 +158,12 @@ create table producto (
   constraint pk_producto primary key (id)
 );
 
+alter table contacto add constraint fk_contacto_direccion_id foreign key (direccion_id) references direccion (id) on delete restrict on update restrict;
+
 
 # --- !Downs
+
+alter table contacto drop foreign key fk_contacto_direccion_id;
 
 drop table if exists categoria;
 
@@ -156,6 +176,8 @@ drop table if exists direccion;
 drop table if exists listaprecio;
 
 drop table if exists listapreciodetalle;
+
+drop table if exists maestro_parametro;
 
 drop table if exists producto;
 

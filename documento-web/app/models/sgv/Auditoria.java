@@ -10,10 +10,10 @@ public class Auditoria implements Serializable {
     //protected Long id;
     //protected String codigo;
     public String usuarioCreacionRegistro;
-    protected String usuarioModificacionRegistro;
-    protected Timestamp fechaCreacionRegistro;
-    protected Timestamp fechaModificacionRegistro;
-    protected Character estadoRegistro; //E: Eliminado,C: Creado
+    public String usuarioModificacionRegistro;
+    public Timestamp fechaCreacionRegistro;
+    public Timestamp fechaModificacionRegistro;
+    public Character estadoRegistro; //E: Eliminado,C: Creado
 
 
     @Override

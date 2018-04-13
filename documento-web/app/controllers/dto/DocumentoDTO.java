@@ -1,12 +1,12 @@
 package controllers.dto;
 
-import models.dto.ParametroDTO;
+import models.sgv.Parametro;
 
 import java.util.List;
 
 public class DocumentoDTO {
 
-    public ParametroDTO tipoDocumento;
+    public Parametro tipoDocumento;
 
     public String numero;
     //public String tipoDocumento;

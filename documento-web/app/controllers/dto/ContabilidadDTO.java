@@ -1,13 +1,13 @@
 package controllers.dto;
 
-import models.dto.ParametroDTO;
+import models.sgv.Parametro;
 
 public class ContabilidadDTO {
 
-    public ParametroDTO razonSocial;
-    public ParametroDTO tipoLibro;
-    public ParametroDTO anio;
-    public ParametroDTO mes;
+    public Parametro razonSocial;
+    public Parametro tipoLibro;
+    public Parametro anio;
+    public Parametro mes;
 
     @Override
     public String toString() {

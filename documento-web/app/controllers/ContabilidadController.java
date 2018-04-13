@@ -3,7 +3,7 @@ package controllers;
 import commons.Constantes;
 import commons.util.CSVUtil;
 import controllers.dto.ContabilidadDTO;
-import models.dto.ParametroDTO;
+import models.sgv.Parametro;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -26,12 +26,12 @@ public class ContabilidadController extends Controller{
     public Result inicioGenerarLibro(){
 
         ContabilidadDTO dto = new ContabilidadDTO();
-        dto.tipoLibro = new ParametroDTO();
-        dto.tipoLibro.codigo ="LVEN";
-        dto.anio = new ParametroDTO();
-        dto.anio.codigo ="2018";
-        dto.mes = new ParametroDTO();
-        dto.mes.codigo ="3"; //Simpre debe ser el mes anterior al actual
+        dto.tipoLibro = new Parametro();
+        dto.tipoLibro.parametroId.codigo ="LVEN";
+        dto.anio = new Parametro();
+        dto.anio.parametroId.codigo ="2018";
+        dto.mes = new Parametro();
+        dto.mes.parametroId.codigo ="3"; //Simpre debe ser el mes anterior al actual
 
         Form<ContabilidadDTO> contabilidadDTOForm = formFactory.form(ContabilidadDTO.class).fill(dto);
 
@@ -69,33 +69,33 @@ public class ContabilidadController extends Controller{
             return badRequest(generadorLibrosContables.render(form));
         }
 
-        if(form.get().tipoLibro.codigo.equals("0000")){
+        if(form.get().tipoLibro.parametroId.codigo.equals("0000")){
             flash("danger","Por favor seleccionar tipo de libro");
             return badRequest(generadorLibrosContables.render(form));
         }
-        if(form.get().razonSocial.codigo.equals("0000")){
+        if(form.get().razonSocial.parametroId.codigo.equals("0000")){
             flash("danger","Por favor seleccionar Razon Social");
             return badRequest(generadorLibrosContables.render(form));
         }
 
-        if(form.get().mes.codigo.equals("0000")){
+        if(form.get().mes.parametroId.codigo.equals("0000")){
             flash("danger","Por favor seleccionar mes");
             return badRequest(generadorLibrosContables.render(form));
         }
 
-        if(form.get().anio.codigo.equals("0000")){
+        if(form.get().anio.parametroId.codigo.equals("0000")){
             flash("danger","Por favor seleccionar Año");
             return badRequest(generadorLibrosContables.render(form));
         }
 
         ContabilidadDTO dto = form.get();
         System.out.println(dto);
-        String nombreArchivo = dto.razonSocial.codigo+"-"+dto.tipoLibro.codigo+"-"+dto.anio.codigo+"."+dto.mes.codigo+ Constantes.EXTENSION_CSV;
+        String nombreArchivo = dto.razonSocial.parametroId.codigo+"-"+dto.tipoLibro.parametroId.codigo+"-"+dto.anio.parametroId.codigo+"."+dto.mes.parametroId.codigo+ Constantes.EXTENSION_CSV;
         String cabeceraArchivoCsv = "";
 
-        if (dto.tipoLibro.codigo.equals("LVEN")){
+        if (dto.tipoLibro.parametroId.codigo.equals("LVEN")){
             cabeceraArchivoCsv = Constantes.CABECERA_CSV_LIBRO_VENTA;
-        } else if (dto.tipoLibro.codigo.equals("ANUL")){
+        } else if (dto.tipoLibro.parametroId.codigo.equals("ANUL")){
             cabeceraArchivoCsv = Constantes.CABECERA_CSV_ANULACIONES;
         }
 

@@ -2,7 +2,6 @@ package models.sgv;
 
 import io.ebean.Finder;
 import io.ebean.Model;
-import models.dto.ParametroDTO;
 
 import javax.persistence.*;
 
@@ -16,7 +15,7 @@ public class Categoria extends Model {
     public String nombre;
     public String descripcion;
     public Categoria categoriaPadre;
-    public ParametroDTO tipoCategoria;
+    public Parametro tipoCategoria;
 
     @Embedded
     //@EmbeddedId

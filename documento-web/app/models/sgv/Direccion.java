@@ -2,7 +2,6 @@ package models.sgv;
 
 import io.ebean.Finder;
 import io.ebean.Model;
-import models.dto.ParametroDTO;
 
 import javax.persistence.*;
 
@@ -11,12 +10,13 @@ import javax.persistence.*;
 public class Direccion extends Model {
 
     @Id
+    @Column(name = "id")
     public Long id;
     public String codigo;
     public String calle;
-    public ParametroDTO distrito;
-    public ParametroDTO ciudad;
-    public ParametroDTO pais;
+    public Parametro distrito;
+    public Parametro ciudad;
+    public Parametro pais;
     public String codigoPostal;
     public String referencia;
 

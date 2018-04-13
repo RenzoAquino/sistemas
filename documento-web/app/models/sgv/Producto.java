@@ -2,7 +2,6 @@ package models.sgv;
 
 import io.ebean.Finder;
 import io.ebean.Model;
-import models.dto.ParametroDTO;
 
 import javax.persistence.*;
 
@@ -15,10 +14,10 @@ public class Producto extends Model {
     public String codigo;
     public String nombre;
     public String descripcion;
-    public ParametroDTO unidadMedida;
+    public Parametro unidadMedida;
     public Double precioVenta;
     public Double precioCompra;
-    public ParametroDTO impuesto;
+    public Parametro impuesto;
     public Double peso;
     public String rutaImagen;
     public String codigoBarra;

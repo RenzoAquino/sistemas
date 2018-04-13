@@ -1,5 +1,6 @@
 package repository.sgv;
 
+import commons.Constantes;
 import controllers.dto.ContactoDTO;
 import io.ebean.Expr;
 import models.sgv.Contacto;
@@ -9,10 +10,11 @@ import java.util.List;
 public class ContactoService extends SVGConnection{
 
     public static List<Contacto> obtenerListaContactos(ContactoDTO dto) throws Exception {
+        System.out.println("************obtenerListaContactos "+dto);
         List<Contacto> lista = db.find(Contacto.class).select("")
                 .where().or(
                         Expr.eq("codigo",dto.codigo),
-                        Expr.eq("codigoTipoContacto",dto.tipoContacto)
+                        Expr.eq("tipoContacto",dto.tipoContacto)
                 )
                 .findList();
 
@@ -80,6 +82,9 @@ public class ContactoService extends SVGConnection{
     }
 
     public static void crearContacto(Contacto contacto) {
+        contacto.tipoContacto.codigoPadre = Constantes.PARAMETRO_TIPO_CONTACTO;
+        contacto.tipoPersona.codigoPadre = Constantes.PARAMETRO_TIPO_PERSONA;
+        System.out.println("**************crearContacto - "+contacto);
         db.save(contacto);
     }
 }

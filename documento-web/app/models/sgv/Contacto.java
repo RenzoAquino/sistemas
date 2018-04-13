@@ -6,7 +6,6 @@ import io.ebean.Model;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
 import java.util.Date;
 
 @Entity
@@ -16,8 +15,15 @@ public class Contacto extends Model {
     @Id
     public Long id;
     public String codigo;
-    public String codigoTipoContacto;
-    public String codigoTipoPersona;
+
+    @Embedded(prefix="tipoContacto_")
+    @ManyToOne
+    @JoinColumn(name = "maestro_parametro", referencedColumnName = "codigo, codigoPadre")
+    public ParametroId tipoContacto;
+    @Embedded(prefix="tipoPersona_")
+    @ManyToOne
+    @JoinColumn(name = "maestro_parametro", referencedColumnName = "codigo, codigoPadre")
+    public ParametroId tipoPersona;
 
     public String numeroDocumento;
     public String alias;
@@ -35,7 +41,10 @@ public class Contacto extends Model {
     public String webSite;
     public String comentario;
 
+    @OneToOne(optional=true)
+    @JoinColumn(name = "direccion_id", nullable = true, referencedColumnName = "id")
     public Direccion direccion = new Direccion();
+    @Transient
     public ListaPrecio listaPrecio = new ListaPrecio();
 
     @Embedded
@@ -48,8 +57,8 @@ public class Contacto extends Model {
         final StringBuffer sb = new StringBuffer("Contacto{");
         sb.append("id=").append(id);
         sb.append(", codigo='").append(codigo).append('\'');
-        sb.append(", codigoTipoContacto='").append(codigoTipoContacto).append('\'');
-        sb.append(", codigoTipoPersona='").append(codigoTipoPersona).append('\'');
+        sb.append(", tipoContacto='").append(tipoContacto).append('\'');
+        sb.append(", tipoPersona='").append(tipoPersona).append('\'');
         sb.append(", numeroDocumento='").append(numeroDocumento).append('\'');
         sb.append(", alias='").append(alias).append('\'');
         sb.append(", nombres='").append(nombres).append('\'');

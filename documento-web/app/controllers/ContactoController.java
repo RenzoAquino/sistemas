@@ -23,6 +23,11 @@ public class ContactoController extends CommonController {
         EbeanServer db = DBConnectionUtil.getDBServerSGV();
 
         List<Contacto> lista = db.find(Contacto.class).findList(); //Contacto.find.all();
+        System.out.println("**********inicio size lista "+lista.size());
+        for (Contacto obj: lista) {
+            System.out.println("********** "+obj.id);
+            System.out.println("********** "+obj.direccion);
+        }
 
         //return ok(generadorLibrosContables.render(form));
         return ok(listado.render(lista));

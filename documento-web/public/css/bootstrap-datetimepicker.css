@@ -416,3 +416,6 @@
 	width: 14px;
 	height: 14px;
 }
+
+/* Corrigiendo bug en chrome  https://stackoverflow.com/questions/12978254/twitter-bootstrap-datepicker-within-modal-window/15183778#15183778*/
+.datepicker{z-index:1151 !important;}

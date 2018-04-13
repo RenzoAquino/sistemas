@@ -1,6 +1,6 @@
 package models;
 
-import models.dto.ParametroDTO;
+import models.sgv.Parametro;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
@@ -21,17 +21,17 @@ public class CargaDatos {
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarTipoImpresionTicketSeq() {
+    public static Seq<Parametro> cargarTipoImpresionTicketSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaTipoImpresionTicket();
+        List<Parametro> lista = datos.obtenerListaTipoImpresionTicket();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
-    public List<ParametroDTO> obtenerListaTipoImpresionTicket(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("R","Resumido");
+    public List<Parametro> obtenerListaTipoImpresionTicket(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("R","Resumido");
         lista.add(dto);
-        dto = new ParametroDTO("D","Detallado");
+        dto = new Parametro("D","Detallado");
         lista.add(dto);
         return lista;
     }
@@ -43,237 +43,237 @@ public class CargaDatos {
     }
 
 
-    public static Seq<ParametroDTO> cargarTipoAccionSeq() {
+    public static Seq<Parametro> cargarTipoAccionSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaTipoAccion();
+        List<Parametro> lista = datos.obtenerListaTipoAccion();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaTipoAccion(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("IMP","Impresión");
+    public List<Parametro> obtenerListaTipoAccion(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("IMP","Impresión");
         lista.add(dto);
-        dto = new ParametroDTO("PDF","Generar PDF");
+        dto = new Parametro("PDF","Generar PDF");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarTipoLibroSeq() {
+    public static Seq<Parametro> cargarTipoLibroSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaTipLibro();
+        List<Parametro> lista = datos.obtenerListaTipLibro();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaTipLibro(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaTipLibro(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("LCOM","LIBRO DE COMPRAS");
+        dto = new Parametro("LCOM","LIBRO DE COMPRAS");
         lista.add(dto);
-        dto = new ParametroDTO("LVEN","LIBRO DE VENTAS");
+        dto = new Parametro("LVEN","LIBRO DE VENTAS");
         lista.add(dto);
-        dto = new ParametroDTO("LDSM","LIBRO SIMPLIFICADO DIARIO");
+        dto = new Parametro("LDSM","LIBRO SIMPLIFICADO DIARIO");
         lista.add(dto);
-        dto = new ParametroDTO("ANUL","ANULACIONES");
+        dto = new Parametro("ANUL","ANULACIONES");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarAniosSeq() {
+    public static Seq<Parametro> cargarAniosSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaAnios();
+        List<Parametro> lista = datos.obtenerListaAnios();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaAnios(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaAnios(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("2018","2018");
+        dto = new Parametro("2018","2018");
         lista.add(dto);
-        dto = new ParametroDTO("2019","2019");
+        dto = new Parametro("2019","2019");
         lista.add(dto);
-        dto = new ParametroDTO("2020","2020");
+        dto = new Parametro("2020","2020");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarMesesSeq() {
+    public static Seq<Parametro> cargarMesesSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaMeses();
+        List<Parametro> lista = datos.obtenerListaMeses();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaMeses(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaMeses(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("01","Enero");
+        dto = new Parametro("01","Enero");
         lista.add(dto);
-        dto = new ParametroDTO("02","Febrero");
+        dto = new Parametro("02","Febrero");
         lista.add(dto);
-        dto = new ParametroDTO("03","Marzo");
+        dto = new Parametro("03","Marzo");
         lista.add(dto);
-        dto = new ParametroDTO("04","Abril");
+        dto = new Parametro("04","Abril");
         lista.add(dto);
-        dto = new ParametroDTO("05","Mayo");
+        dto = new Parametro("05","Mayo");
         lista.add(dto);
-        dto = new ParametroDTO("06","Junio");
+        dto = new Parametro("06","Junio");
         lista.add(dto);
-        dto = new ParametroDTO("07","Julio");
+        dto = new Parametro("07","Julio");
         lista.add(dto);
-        dto = new ParametroDTO("08","Agosto");
+        dto = new Parametro("08","Agosto");
         lista.add(dto);
-        dto = new ParametroDTO("09","Setiembre");
+        dto = new Parametro("09","Setiembre");
         lista.add(dto);
-        dto = new ParametroDTO("10","Octubre");
+        dto = new Parametro("10","Octubre");
         lista.add(dto);
-        dto = new ParametroDTO("11","Noviembre");
+        dto = new Parametro("11","Noviembre");
         lista.add(dto);
-        dto = new ParametroDTO("12","Diciembre");
+        dto = new Parametro("12","Diciembre");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarTipoDocumentoSeq() {
+    public static Seq<Parametro> cargarTipoDocumentoSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaTipoDocumento();
+        List<Parametro> lista = datos.obtenerListaTipoDocumento();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaTipoDocumento(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaTipoDocumento(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("Pedido","Pedido");
+        dto = new Parametro("Pedido","Pedido");
         lista.add(dto);
-        dto = new ParametroDTO("Factura","Factura");
+        dto = new Parametro("Factura","Factura");
         lista.add(dto);
-        dto = new ParametroDTO("Corrección factura","Corrección factura");
+        dto = new Parametro("Corrección factura","Corrección factura");
         lista.add(dto);
-        dto = new ParametroDTO("Proforma","Proforma");
+        dto = new Parametro("Proforma","Proforma");
         lista.add(dto);
-        dto = new ParametroDTO("Albarán envío","Albarán envío");
+        dto = new Parametro("Albarán envío","Albarán envío");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarRazonesSocialesSeq() {
+    public static Seq<Parametro> cargarRazonesSocialesSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaRazonesSociales();
+        List<Parametro> lista = datos.obtenerListaRazonesSociales();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaRazonesSociales(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaRazonesSociales(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("20477954350","INVERSIONES UNOCC S.A.C.");
+        dto = new Parametro("20477954350","INVERSIONES UNOCC S.A.C.");
         lista.add(dto);
-        dto = new ParametroDTO("20601017564","D'UNOCC S.A.C.");
+        dto = new Parametro("20601017564","D'UNOCC S.A.C.");
         lista.add(dto);
-        dto = new ParametroDTO("20602885772","INVERSIONES AQUINO Y UNOCC S.A.C.");
+        dto = new Parametro("20602885772","INVERSIONES AQUINO Y UNOCC S.A.C.");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarTipoContactoSeq() {
+    public static Seq<Parametro> cargarTipoContactoSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaTipoContacto();
+        List<Parametro> lista = datos.obtenerListaTipoContacto();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaTipoContacto(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaTipoContacto(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("01","CLIENTE");
+        dto = new Parametro("01","CLIENTE");
         lista.add(dto);
-        dto = new ParametroDTO("02","PROVEEDOR");
+        dto = new Parametro("02","PROVEEDOR");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarTipoPersonaSeq() {
+    public static Seq<Parametro> cargarTipoPersonaSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaTipoPersona();
+        List<Parametro> lista = datos.obtenerListaTipoPersona();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaTipoPersona(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaTipoPersona(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("01","PERSONA NATURAL");
+        dto = new Parametro("01","PERSONA NATURAL");
         lista.add(dto);
-        dto = new ParametroDTO("02","PERSONA JURIDICA");
+        dto = new Parametro("02","PERSONA JURIDICA");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarPaisesSeq() {
+    public static Seq<Parametro> cargarPaisesSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaPais();
+        List<Parametro> lista = datos.obtenerListaPais();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaPais(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaPais(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("01","PERU");
+        dto = new Parametro("01","PERU");
         lista.add(dto);
-        dto = new ParametroDTO("02","CHILE");
+        dto = new Parametro("02","CHILE");
         lista.add(dto);
-        dto = new ParametroDTO("03","ARGENTINA");
+        dto = new Parametro("03","ARGENTINA");
         lista.add(dto);
         return lista;
     }
 
-    public static Seq<ParametroDTO> cargarCiudadSeq() {
+    public static Seq<Parametro> cargarCiudadSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaCiudad();
+        List<Parametro> lista = datos.obtenerListaCiudad();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaCiudad(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaCiudad(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("01","LIMA");
+        dto = new Parametro("01","LIMA");
         lista.add(dto);
-        dto = new ParametroDTO("02","JUNIN");
+        dto = new Parametro("02","JUNIN");
         lista.add(dto);
-        dto = new ParametroDTO("03","CALLAO");
+        dto = new Parametro("03","CALLAO");
         lista.add(dto);
         return lista;
     }
-    public static Seq<ParametroDTO> cargarDistritoSeq() {
+    public static Seq<Parametro> cargarDistritoSeq() {
         CargaDatos datos = new CargaDatos();
-        List<ParametroDTO> lista = datos.obtenerListaDistrito();
+        List<Parametro> lista = datos.obtenerListaDistrito();
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
     }
 
-    public List<ParametroDTO> obtenerListaDistrito(){
-        List<ParametroDTO> lista = new ArrayList<ParametroDTO>();
-        ParametroDTO dto = null;
-        dto = new ParametroDTO("0000","SELECCIONAR");
+    public List<Parametro> obtenerListaDistrito(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro("0000","SELECCIONAR");
         lista.add(dto);
-        dto = new ParametroDTO("01","LINCE");
+        dto = new Parametro("01","LINCE");
         lista.add(dto);
-        dto = new ParametroDTO("02","SANTA ANITA");
+        dto = new Parametro("02","SANTA ANITA");
         lista.add(dto);
-        dto = new ParametroDTO("03","SAN ISIDRO");
+        dto = new Parametro("03","SAN ISIDRO");
         lista.add(dto);
         return lista;
     }
