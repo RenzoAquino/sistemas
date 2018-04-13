@@ -27,7 +27,7 @@ GET     /maestro/contacto/crear                   controllers.ContactoController
 GET     /maestro/contacto/editar/:id              controllers.ContactoController.editar(id: Long)
 GET     /maestro/contacto/:id                     controllers.ContactoController.ver(id: Long)
 + nocsrf
-POST    /maestro/crear                            controllers.ContactoController.guardar
+POST    /maestro/contacto/crear                   controllers.ContactoController.guardar
 + nocsrf
 DELETE  /maestro/contacto/eliminar/:id            controllers.ContactoController.eliminar(id: Long)
 

@@ -74,7 +74,7 @@ public class ContactoController extends CommonController {
         //objeto.save();
         ContactoService.crearContacto(form.get());
 
-        flash("success","Se creo correctamente el Contacto.");
+        flash("success","Se guardo correctamente el Contacto.");
         //Documento.guardar(documento);
 
         return redirect(routes.ContactoController.inicio());
