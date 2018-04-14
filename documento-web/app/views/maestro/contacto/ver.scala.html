@@ -4,15 +4,23 @@
 @(contacto: Contacto)
 
 @layout(contacto.alias){
+
     <h2>
     @contacto.alias
     </h2>
     @_contactoFormsFieldsViews(contacto)
 
     <a class="btn btn-primary" href="@routes.ContactoController.editar(contacto.id)">Editar</a>
-    <button class="btn btn-danger" onclick="sendDeleteRequest(
+    <a class="btn btn-danger" id="btn_contacto_eliminar" name="btn_contacto_eliminar" >Eliminar</a>
+
+    <input type="hidden" id="id" name="id" value='@contacto.id' />
+    <input type="hidden" id="urlEliminar" name="urlEliminar" value='@routes.ContactoController.eliminar(contacto.id)' />
+    <input type="hidden" id="urlInicio" name="urlListar" value='@routes.ContactoController.inicio(contacto.tipoContacto.id.codigo)' />
+
+    <!--buttonclass="btn btn-danger" onclick="sendDeleteRequest(
             '@routes.ContactoController.eliminar(contacto.id)',
-            '@routes.ContactoController.inicio()'
-    )">Eliminar</button>
+            '@routes.ContactoController.inicio(contacto.tipoContacto.id.codigo)'
+    )">Eliminar2</button-->
 }
 
+<script src="@routes.Assets.versioned("js/maestro.contacto.js")" type="text/javascript"></script>

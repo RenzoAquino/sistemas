@@ -64,4 +64,9 @@ public class Constantes {
     public static final String PARAMETRO_TIPO_CONTACTO = "TBL_TIPO_CONTACTO";
     public static final String PARAMETRO_TIPO_PERSONA = "TBL_TIPO_PERSONA";
 
+    public static final String PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL = "01";
+    public static final String PARAMETRO_CODIGO_TIPO_PERSONA_JURIDICA = "02";
+
+    public static final String PARAMETRO_CODIGO_TIPO_CONTACTO_CLIENTE = "01";
+    public static final String PARAMETRO_CODIGO_TIPO_CONTACTO_PROVEEDOR = "02";
 }

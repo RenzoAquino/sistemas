@@ -7,12 +7,7 @@
 @(form: Form[Contacto])
         <div class="row">
             <div class="col-md-6">
-                @select(
-                    form("tipoContacto.id.codigo"),
-                    options = ParametroService.cargarTipoContactoSeq.map(dto => dto.id.codigo -> dto.descripcion),
-                    'class ->"form-control",
-                    '_label -> "Tipo de Contacto",
-                    '_error -> form("tipoContacto.id.codigo").error.map(_.withMessage("Seleccionar Tipo de Contacto")))
+                @helper.inputText(form("tipoContacto.descripcion"),'_label -> "Tipo de Contacto",'class ->"form-control", 'readonly -> "readonly")
             </div>
             <div class="col-md-6">
                 @helper.inputText(form("codigo"),'_label -> "Codigo",'class ->"form-control",  'maxlength->"10",'readonly -> "readonly")
@@ -72,7 +67,7 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
-                    <input type="hidden" id="fechaCreacion" name="fechaCreacion" value="" /><br/>
+                    <input type="hidden" id='@form("fechaCreacion").name' name='@form("fechaCreacion").name' value='@form("fechaCreacion").value' /><br/>
                 </div>
                 @helper.inputText(form("email"),
                     '_label -> "Correo Electronico",
@@ -103,9 +98,4 @@
                     'cols -> 70)
             </div>
         </div>
-
-
-
-
-
-
+<input type="hidden" id="tipoContacto.id.codigo" name="tipoContacto.id.codigo" value='@form.get().tipoContacto.id.codigo' />

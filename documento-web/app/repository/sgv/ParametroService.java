@@ -32,6 +32,17 @@ public class ParametroService extends SVGConnection{
         return lista;
     }
 
+    public static Parametro obtenerParametro(String codigo, String codigoPadre) throws Exception {
+        System.out.println("obtenerParametro : codigo ["+codigo+"] - codigoPadre ["+codigoPadre+"]");
+        Parametro parametro = db.find(Parametro.class).select("codigo, codigo_padre, descripcion")
+                .where()
+                .eq("codigo_padre", codigoPadre)
+                .eq("codigo", codigo)
+                .findOne();
+        System.out.println(parametro);
+        return parametro;
+    }
+
     private static Seq<Parametro> convertListToSeq(List<Parametro> lista){
         lista.add(0,new Parametro("0000","","SELECCIONAR"));
         return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();

@@ -99,8 +99,7 @@ public class DocumentoController extends Controller{
 
         flash("success","Se actualizo correctamente el documento.");
 
-        return ok();
-        //return redirect(routes.DocumentoController.index());
+        return redirect(routes.DocumentoController.index());
     }
     public Result eliminar(Long id){
         Documento documento = Documento.find.byId(id);

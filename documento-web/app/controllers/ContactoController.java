@@ -1,13 +1,16 @@
 package controllers;
 
+import commons.Constantes;
 import commons.util.DBConnectionUtil;
 import controllers.dto.ContactoDTO;
 import io.ebean.EbeanServer;
 
 import models.sgv.Contacto;
+import models.sgv.Parametro;
 import play.data.Form;
 import play.mvc.Result;
 import repository.sgv.ContactoService;
+import repository.sgv.ParametroService;
 import views.html.errors._404;
 import views.html.maestro.contacto.crear;
 import views.html.maestro.contacto.editar;
@@ -19,14 +22,14 @@ import java.util.List;
 public class ContactoController extends CommonController {
 
 
-    public Result inicio(){
-        EbeanServer db = DBConnectionUtil.getDBServerSGV();
-
-        List<Contacto> lista = db.find(Contacto.class).findList(); //Contacto.find.all();
+    public Result inicio(String tipo) throws Exception {
+        ContactoDTO dto = new ContactoDTO();
+        dto.tipoContacto = tipo;
+        List<Contacto> lista = ContactoService.obtenerListaContactos(dto); //Documento.find.all();
         System.out.println("**********inicio size lista "+lista.size());
         for (Contacto obj: lista) {
             System.out.println("********** "+obj.id);
-            System.out.println("********** "+obj.direccion);
+            //System.out.println("********** "+obj.direccion);
         }
 
         //return ok(generadorLibrosContables.render(form));
@@ -47,8 +50,11 @@ public class ContactoController extends CommonController {
     }
 
     // para crear
-    public Result crear(){
-        Form<Contacto> form = formFactory.form(Contacto.class);
+    public Result crear(String tipo) throws Exception {
+        Contacto obj = new Contacto();
+        obj.tipoContacto = ParametroService.obtenerParametro(tipo,Constantes.PARAMETRO_TIPO_CONTACTO);
+        System.out.println("ContactoController.crear : "+obj);
+        Form<Contacto> form = formFactory.form(Contacto.class).fill(obj);
 
         return ok(crear.render(form));
     }
@@ -70,14 +76,51 @@ public class ContactoController extends CommonController {
             return badRequest(crear.render(form));
         }
 
-        //Contacto objeto = form.get();
-        //objeto.save();
-        ContactoService.crearContacto(form.get());
+        //obj.save();
+        ContactoService.crear(prepararDatos(form.get()));
 
-        flash("success","Se guardo correctamente el Contacto.");
+        flash("success","Se guardo correctamente el Documento.");
         //Documento.guardar(documento);
 
-        return redirect(routes.ContactoController.inicio());
+        return redirect(routes.ContactoController.inicio(form.get().tipoContacto.id.codigo));
+    }
+    public Result actualizar(Long id){
+
+        Form<Contacto> form = formFactory.form(Contacto.class).bindFromRequest();
+        if(form.hasErrors()){
+            flash("danger","Por favor corregir los errores del formulario");
+            return badRequest(editar.render(form));
+        }
+
+        Contacto obj = prepararDatos(form.get());
+
+        Contacto oldObj = ContactoService.obtenerPorId(id);
+        if(oldObj==null) {
+            flash("danger", "Contacto no encontrado");
+            return notFound();
+        }
+        if(oldObj.id !=obj.id) {
+            flash("danger", "El identificador del Contacto no coincide con el de la DB");
+            return notFound();
+        }
+
+        ContactoService.actualizar(obj);
+
+        System.out.print("Termino de actualizar");
+
+        flash("success","Se actualizo correctamente el Contacto.");
+        return ok();
+    }
+
+    private Contacto prepararDatos(Contacto contacto) {
+        if(contacto.tipoPersona.id.codigo.equals(Constantes.PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL)){
+            contacto.razonSocial = null;
+        } else if(contacto.tipoPersona.id.codigo.equals(Constantes.PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL)){
+            contacto.nombres = null;
+            contacto.apellidoPaterno = null;
+            contacto.apellidoMaterno = null;
+        }
+        return contacto;
     }
 
     public Result eliminar(Long id){
@@ -86,11 +129,12 @@ public class ContactoController extends CommonController {
             flash("danger", "Contacto no encontrado");
             return notFound();
         }
-        obj.delete();
+        ContactoService.eliminar(obj);
 
         flash("success","Se elimino correctamente el contacto.");
 
-        return ok();//redirect(routes.DocumentoController.index());
+        //return ok();
+        return redirect(routes.ContactoController.inicio(obj.tipoContacto.id.codigo));
     }
 
     // para el detalle

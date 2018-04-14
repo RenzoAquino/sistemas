@@ -1,75 +1,63 @@
-$('#fechaCreacionGrp').datetimepicker({
-    language:  'es',
-    weekStart: 1,
-    todayBtn:  1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    minView: 2,
-    forceParse: 0
-});
+
 
 //https://www.jqueryscript.net/form/Input-Field-Data-Formatting-Plugin-Mask.html
-$('#telefonoFijo').mask('999-9999');
-$('#telefonoMovil').mask('999-999-999');
+function cargaInicial(){
+    //alert($('#fechaCreacionGrp input.form-control').val());
+
+    $('#fechaCreacionGrp input').val($('#fechaCreacion').val());
+    //$('#fechaCreacionGrp input.form-control').val = $('#fechaCreacion').val();
+
+    $('#telefonoFijo').mask('999-9999');
+    $('#telefonoMovil').mask('999-999-999');
+}
 
 
+function mostrarDatosTipoPersona() {
+    var selTipoPerona = $("#tipoPersona_id_codigo");
 
-function ocultarContactoDatosTipoPersona() {
-    $('#alias_field').hide();
-    $('#numeroDocumento_field').hide();
-    $('#nombres_field').hide();
-    $('#apellidoPaterno_field').hide();
-    $('#apellidoMaterno_field').hide();
-    $('#razonSocial_field').hide();
+    if(selTipoPerona.val() == "0000"){
+        $('#alias_field').hide();
+        $('#numeroDocumento_field').hide();
+        $('#nombres_field').hide();
+        $('#apellidoPaterno_field').hide();
+        $('#apellidoMaterno_field').hide();
+        $('#razonSocial_field').hide();
+    } else if(selTipoPerona.val() == "01"){
+        $('#alias_field').show();
+        $('#numeroDocumento_field').show();
+        $('#nombres_field').show();
+        $('#apellidoPaterno_field').show();
+        $('#apellidoMaterno_field').show();
+        $('#razonSocial_field').hide();
+        $('#numeroDocumento').mask('99999999');
+    } else if(selTipoPerona.val() == "02"){
+        $('#alias_field').show();
+        $('#numeroDocumento_field').show();
+        $('#nombres_field').hide();
+        $('#apellidoPaterno_field').hide();
+        $('#apellidoMaterno_field').hide();
+        $('#razonSocial_field').show();
+        $('#numeroDocumento').mask('99999999999');
+    }
+
 }
 
 $(document).ready(function() {
-    //$('select').on('change', function() {
-    //    alert( "xxx" + this.value );
-    //})
-    alert($('#tipoContacto.id.codigo' ).selected());
-});
 
-ocultarContactoDatosTipoPersona();
+    cargaInicial();
+    mostrarDatosTipoPersona();
 
-$('select').on('change', function() {
-    if("tipoPersona.id.codigo" == this.name) {
-        $('#alias').val("");
-        $('#numeroDocumento').val("");
-        $('#nombres').val("");
-        $('#apellidoPaterno').val("");
-        $('#apellidoMaterno').val("");
-        $('#razonSocial').val("");
+    $('#fechaCreacionGrp').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
 
-
-
-        if(this.value == "0000"){
-            ocultarContactoDatosTipoPersona();
-        } else if(this.value == "01"){
-            $('#alias_field').show();
-            $('#numeroDocumento_field').show();
-            $('#nombres_field').show();
-            $('#apellidoPaterno_field').show();
-            $('#apellidoMaterno_field').show();
-            $('#razonSocial_field').hide();
-            $('#numeroDocumento').mask('99999999');
-        } else if(this.value == "02"){
-            $('#alias_field').show();
-            $('#numeroDocumento_field').show();
-            $('#nombres_field').hide();
-            $('#apellidoPaterno_field').hide();
-            $('#apellidoMaterno_field').hide();
-            $('#razonSocial_field').show();
-            $('#numeroDocumento').mask('99999999999');
-        }
-
-    }
-
-})
-
-
-$(document).ready(function() {
     $('#dashboard-table').DataTable( {
         "language": {
             "sProcessing":     "Procesando...",
@@ -96,5 +84,52 @@ $(document).ready(function() {
             }
         }
     } );
-    // other stuff
+
+
+    $('select').on('change', function() {
+        if("tipoPersona.id.codigo" == this.name) {
+            mostrarDatosTipoPersona();
+        }
+    });
+
+
+    $("#btn_contacto_eliminar").click(function() {
+        sendDeleteRequest(""+$('#urlEliminar').val(),""+$('#urlInicio').val());
+    });
+
+    $("#btn_contacto_actualizar").click(function() {
+        //alert($(elem).closest('form').attr('name'));
+        sendPutRequest("contactoActualizarForm", "" + $('#urlActualizar').val());
+    });
 });
+
+function sendDeleteRequest(url, rUrl) {
+    $.ajax({
+        url: url,
+        method: "DELETE",
+        success: function () {
+            window.location = rUrl;
+            //window.location.replace(rUrl);
+        },
+        error: function () {
+            window.location.reload();
+        }
+    });
+}
+
+
+function sendPutRequest(formId, rUrl) {
+    var form = $('#'+formId);
+    $.ajax({
+        url: form.attr('action'),
+        method: "PUT",
+        data: form.serialize(),
+        success: function () {
+            window.location = rUrl;
+            //window.location.replace(rUrl);
+        },
+        error: function () {
+            window.location.reload();
+        }
+    });
+}

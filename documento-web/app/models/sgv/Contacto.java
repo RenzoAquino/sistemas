@@ -60,7 +60,7 @@ public class Contacto extends Model {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Contacto{");
+        final StringBuffer sb = new StringBuffer("Documento{");
         sb.append("id=").append(id);
         sb.append(", codigo='").append(codigo).append('\'');
         sb.append(", tipoContacto='").append(tipoContacto).append('\'');

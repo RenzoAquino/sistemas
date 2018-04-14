@@ -1,8 +1,6 @@
 package models;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 import io.ebean.Finder;
 import io.ebean.Model;
@@ -32,7 +30,7 @@ public class Documento extends Model{
     public String menssage2;
     public String menssage3;
 
-    public static Finder<Long,Documento> find = new Finder<>(Documento.class);
+    public static Finder<Long, Documento> find = new Finder<>(Documento.class);
     /*
     private static Set<Documento> documentos;
 

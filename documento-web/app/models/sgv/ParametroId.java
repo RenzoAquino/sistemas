@@ -22,7 +22,7 @@ public class ParametroId implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Parametro{");
+        final StringBuffer sb = new StringBuffer("ParametroId{");
         sb.append("codigo='").append(codigo).append('\'');
         sb.append(", codigoPadre='").append(codigoPadre).append('\'');
         sb.append('}');
