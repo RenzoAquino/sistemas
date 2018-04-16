@@ -1,0 +1,58 @@
+@import models.sgv.Contacto
+
+@(contacto: Contacto)
+        <div class="row">
+            <div class="col-md-4">
+                Tipo de Contacto : @contacto.tipoContacto.valor
+            </div>
+            <div class="col-md-4">
+                Codigo : @contacto.codigo
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>
+                Tipo de Persona : @contacto.tipoPersona.id.codigo
+                </p>
+                <p>
+                    DNI / RUC : @contacto.numeroDocumento
+                </p>
+                <p>
+                    Alias : @contacto.alias
+                </p>
+                @if(contacto.tipoPersona.id.codigo.equals("01")) {
+                    Nombre : @(contacto.apellidoPaterno+" "+contacto.apellidoMaterno+", "+contacto.nombres)
+                } else {
+                    Razon Social : @contacto.razonSocial
+                }
+
+            </div>
+            <div class="col-md-4">
+                <p>
+                    Fecha de Creación : @contacto.fechaCreacion
+                </p>
+                <p>
+
+                <p>
+                    Correo Electronico : @contacto.email
+                </p>
+                <p>
+                    Telefono Fijo : @contacto.telefonoFijo
+                </p>
+                <p>
+                    Telefono Movil : @contacto.telefonoMovil
+                </p>
+                <p>
+                    Pagina Web : @contacto.webSite
+                </p>
+                <p>
+                    Comentario : @contacto.comentario
+                </p>
+
+            </div>
+        </div>

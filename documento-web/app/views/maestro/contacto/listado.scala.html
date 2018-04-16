@@ -4,10 +4,12 @@
 
 @(contactoDTOForm: Form[ContactoDTO], contactos : List[Contacto])
 
-@import views.html.partials._contactoFormsFieldsViews
+@import views.html.partials._contactoFormsFieldsViewList
 @import helper._
 
 @layout("Todos los contactos"){
+
+    <div class="modal fade" id="fooModal"></div>
     <div class="row">
         <div class="col-md-12">
                 <!-- https://www.w3schools.com/bootstrap/bootstrap_panels.asp -->
@@ -67,6 +69,9 @@
                 </div>
                 <div class="panel-body">
 
+
+
+
     <table class="table table-bordered table-striped" id="dashboard-table">
         <thead>
             <tr>
@@ -82,7 +87,7 @@
         </thead>
         <tbody>
         @for(contacto <- contactos) {
-            @_contactoFormsFieldsViews(contacto)
+            @_contactoFormsFieldsViewList(contacto)
         }
         </tbody>
     </table>

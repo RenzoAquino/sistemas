@@ -101,6 +101,44 @@ $(document).ready(function() {
         //alert($(elem).closest('form').attr('name'));
         sendPutRequest("contactoActualizarForm", "" + $('#urlActualizar').val());
     });
+
+
+    $("a[data-toggle=modal]").click(function() {
+
+        //alert($("a[data-toggle=modal]").attr("href"));
+
+        target = $(this).attr('data-target');
+        url = $(this).attr("href");
+
+        //$(target).load(url);
+
+        $(target).load( url, function() {
+            $("#btn_contacto_eliminar").click(function() {
+                sendDeleteRequest(""+$('#urlEliminar').val(),""+$('#urlInicio').val());
+            });
+        });
+
+/*
+
+        $(target).html(url);
+        $(target).on('shown.bs.modal', function () {
+            alert("22222");
+        });
+*/
+/*      //Recorer todo los atributos
+        $(this).each(function() {
+            $.each(this.attributes, function() {
+                // this.attributes is not a plain object, but an array
+                // of attribute nodes, which contain both the name and value
+                if(this.specified) {
+                    console.log(this.name, this.value);
+                    alert(this.name +" : "+ this.value);
+                }
+            });
+        });
+*/
+    });
+
 });
 
 function sendDeleteRequest(url, rUrl) {
