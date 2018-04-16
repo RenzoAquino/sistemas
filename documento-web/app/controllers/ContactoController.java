@@ -27,7 +27,10 @@ public class ContactoController extends CommonController {
         List<Contacto> lista = ContactoService.obtenerListaContactos(dto); //Documento.find.all();
         System.out.println("ContactoController.inicio listasize "+lista.size());
         //return ok(generadorLibrosContables.render(form));
-        return ok(listado.render(lista));
+
+        Form<ContactoDTO> form = formFactory.form(ContactoDTO.class).fill(dto);
+
+        return ok(listado.render(form,lista));
     }
 
     public Result buscar() throws Exception {
@@ -36,15 +39,15 @@ public class ContactoController extends CommonController {
         List<Contacto> lista = ContactoService.obtenerListaContactos(form.get());
         if(lista.size() == 0)
             flash("info","No se encontraron resultados");
-        for (Contacto x:lista) {
-            System.out.println("*********** "+x);
-        }
 
-        return ok(listado.render(lista));
+        System.out.println("ContactoController.inicio listasize "+lista.size());
+
+        return ok(listado.render(form,lista));
     }
 
     // para crear
     public Result crear(String tipo) throws Exception {
+        System.out.println("ContactoController.crear : tipo "+tipo);
         Contacto obj = new Contacto();
         obj.codigo = GeneradorCodigoUtil.generarCodigoCliente(tipo);
         obj.tipoContacto = ParametroService.obtenerTipoContacto(tipo);
