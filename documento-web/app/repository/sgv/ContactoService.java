@@ -1,8 +1,9 @@
 package repository.sgv;
 
 import commons.Constantes;
+import commons.DatosSession;
+import commons.util.GeneradorCodigoUtil;
 import controllers.dto.ContactoDTO;
-import io.ebean.Expr;
 import models.sgv.Contacto;
 
 import java.util.List;
@@ -11,8 +12,10 @@ public class ContactoService extends SVGConnection{
 
     public static List<Contacto> obtenerListaContactos(ContactoDTO dto) throws Exception {
         System.out.println("************obtenerListaContactos "+dto);
-        List<Contacto> lista = db.find(Contacto.class).select("")
-                .where().eq("tipocontacto_codigo",dto.tipoContacto)
+        List<Contacto> lista = db.find(Contacto.class)
+                .where()
+                .eq("ruc", DatosSession.getInstance().ruc)
+                .eq("tipocontacto_codigo",dto.tipoContacto)
                 .findList();
 
         /*
@@ -78,26 +81,40 @@ public class ContactoService extends SVGConnection{
         return lista;
     }
 
-    public static void crear(Contacto contacto) {
+    public static Contacto prepararDatos(Contacto contacto) {
+        contacto.ruc = DatosSession.getInstance().ruc;
+        contacto.tipoContacto.id.ruc =  DatosSession.getInstance().ruc;
         contacto.tipoContacto.id.codigoPadre = Constantes.PARAMETRO_TIPO_CONTACTO;
+        contacto.tipoPersona.id.ruc =  DatosSession.getInstance().ruc;
         contacto.tipoPersona.id.codigoPadre = Constantes.PARAMETRO_TIPO_PERSONA;
-        System.out.println("**************crear - "+contacto);
-        db.save(contacto);
+
+        if(contacto.tipoPersona.id.codigo.equals(Constantes.PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL)){
+            contacto.razonSocial = null;
+        } else if(contacto.tipoPersona.id.codigo.equals(Constantes.PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL)){
+            contacto.nombres = null;
+            contacto.apellidoPaterno = null;
+            contacto.apellidoMaterno = null;
+        }
+        System.out.println("ContactoService.prepararDatos :"+contacto);
+        return contacto;
+    }
+
+    public static void crear(Contacto contacto) throws Exception {
+        db.save(prepararDatos(contacto));
+
+        GeneradorCodigoUtil.actualizarCodigoCliente(contacto.tipoContacto.id.codigo);
     }
     public static void eliminar(Contacto contacto) {
         System.out.println("**************eliminar - "+contacto);
         db.delete(contacto);
     }
     public static Contacto obtenerPorId(Long id) {
-        return db.find(Contacto.class).select("")
+        return db.find(Contacto.class)
                 .where().eq("id",id)
                 .findOne();
     }
 
     public static void actualizar(Contacto contacto) {
-        contacto.tipoContacto.id.codigoPadre = Constantes.PARAMETRO_TIPO_CONTACTO;
-        contacto.tipoPersona.id.codigoPadre = Constantes.PARAMETRO_TIPO_PERSONA;
-        System.out.println("**************actualizar - "+contacto);
-        db.update(contacto);
+        db.update(prepararDatos(contacto));
     }
 }

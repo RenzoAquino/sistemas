@@ -49,7 +49,7 @@ public class Documento extends Model{
         }
         return null;
     }
-    public static void guardar(Documento documento){
+    public static void actualizar(Documento documento){
         documentos.add(documento);
     }
     public static void eliminar(Documento documento){

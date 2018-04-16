@@ -1,5 +1,7 @@
 package commons;
 
+import models.sgv.Secuencia;
+
 public class Constantes {
 
     public static final String XPATH_XML_FIRMADO_HASH_SFS = "/Invoice/UBLExtensions/UBLExtension/ExtensionContent/Signature/SignedInfo/Reference/DigestValue";
@@ -30,34 +32,38 @@ public class Constantes {
 
 
 
-    public static String PALABRA_ELECTRONICA = "ELECTRONICA";
+    public static final String PALABRA_ELECTRONICA = "ELECTRONICA";
 
-    public static String NOMBRE_ARCHIVO_TXT = "ticket.txt";
-    public static String NOMBRE_ARCHIVO_PDF = "ticket.pdf";
-    public static String NOMBRE_IMPRESORA = "BIXOLON SRP-270";
+    public static final String NOMBRE_ARCHIVO_TXT = "ticket.txt";
+    public static final String NOMBRE_ARCHIVO_PDF = "ticket.pdf";
+    public static final String NOMBRE_IMPRESORA = "BIXOLON SRP-270";
 
-    public static String DB_ID_FAKTURAMA = "fakturama";
-    public static String DB_ID_SGV = "sgv";
-    public static String DB_ID_FACTURADOR_SUNAT = "facturador";
+    public static final String DB_ID_FAKTURAMA = "fakturama";
+    public static final String DB_ID_SGV = "sgv";
+    public static final String DB_ID_FACTURADOR_SUNAT = "facturador";
 
-    public static String FORMATO_FECHA_DD_MM_YYYY = "dd/MM/yyyy";
+    public static final String FORMATO_FECHA_DD_MM_YYYY = "dd/MM/yyyy";
 
-    public static String RUTA_ARCHIVO_CSV = "D:\\SISGESVEN\\archivoCSV.csv";
+    public static final String RUTA_ARCHIVO_CSV = "D:\\SISGESVEN\\archivoCSV.csv";
 
     public static final String EXTENSION_CSV = ".CSV";
     public static final String EXTENSION_XML = ".xml";
 
-    public static String SELECT_LIBRO_VENTA = "CVNT_FEC_EMI_DOCUMENTO, CVNT_NUM_DOCUMENTO, CVNT_NUM_DOC_EMISOR, CVNT_RAZ_SOC_EMISOR, " +
+    public static final String SELECT_LIBRO_VENTA = "CVNT_FEC_EMI_DOCUMENTO, CVNT_NUM_DOCUMENTO, CVNT_NUM_DOC_EMISOR, CVNT_RAZ_SOC_EMISOR, " +
             "CVNT_NUM_DOC_RECEPTOR, CVNT_RAZ_SOC_RECEPTOR, " +
             "CVNT_VAL_OPE_GRAVADA, CVNT_VAL_OPE_EXONERADA, CVNT_VAL_OPE_INAFECTA, CVNT_IGV, CVNT_IMP_TOTAL";
 
-    public static String SELECT_ANULACIONES = "CVNT_FEC_EMI_DOCUMENTO, CVNT_NUM_DOCUMENTO, CVNT_FEC_DOC_REFERENCIA, CVNT_TIP_DOC_REFERENCIA, CVNT_NUM_DOC_REFERENCIA";
+    public static final String SELECT_ANULACIONES = "CVNT_FEC_EMI_DOCUMENTO, CVNT_NUM_DOCUMENTO, CVNT_FEC_DOC_REFERENCIA, CVNT_TIP_DOC_REFERENCIA, CVNT_NUM_DOC_REFERENCIA";
 
-    public static String CABECERA_CSV_LIBRO_VENTA = "FECHA EMISION; NUMERO DOCUMENTO; NUMERO DOCUMENTO EMISOR; RAZON SOCIAL EMISOR; " +
+    public static final String SELECT_BASE_PARAMETROS = "ruc, codigo, codigo_padre, valor";
+
+
+
+    public static final String CABECERA_CSV_LIBRO_VENTA = "FECHA EMISION; NUMERO DOCUMENTO; NUMERO DOCUMENTO EMISOR; RAZON SOCIAL EMISOR; " +
             "NUMERO DOCUMENTO RECEPTOR; RAZON SOCIAL RECEPTOR; " +
             "OPERACION GRAVADA; OPERACION EXONERADA; OPERACION INAFECTA; IGV; IMPORTE TOTAL\n";
 
-    public static String CABECERA_CSV_ANULACIONES = "FECHA EMISION; NUMERO DOCUMENTO; FECHA DE DOCUMENTO ANULADO;  TIPO DE DOCUMENTO; NUMERO DOCUMENTO ANULADO\n";
+    public static final String CABECERA_CSV_ANULACIONES = "FECHA EMISION; NUMERO DOCUMENTO; FECHA DE DOCUMENTO ANULADO;  TIPO DE DOCUMENTO; NUMERO DOCUMENTO ANULADO\n";
 
 
 
@@ -69,4 +75,10 @@ public class Constantes {
 
     public static final String PARAMETRO_CODIGO_TIPO_CONTACTO_CLIENTE = "01";
     public static final String PARAMETRO_CODIGO_TIPO_CONTACTO_PROVEEDOR = "02";
+
+    public static final String PARAMETRO_FORMATO_CODIGO = "TBL_FORMATO_CODIGO";
+    public static final String PARAMETRO_CODIGO_FORMATO_CLIENTE = "01";
+    public static final String PARAMETRO_CODIGO_FORMATO_PROVEEDOR = "02";
+    public static final String MAP_SEQ_TIPO_CLIENTE = "TBL_FORMATO_CODIGO_01";
+    public static final String MAP_SEQ_TIPO_PROVEEDOR = "TBL_FORMATO_CODIGO_02";
 }

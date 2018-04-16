@@ -18,10 +18,13 @@ create table categoria (
 create table contacto (
   id                            bigint auto_increment not null,
   codigo                        varchar(255),
+  tipocontacto_ruc              varchar(255),
   tipocontacto_codigo           varchar(255),
   tipocontacto_codigo_padre     varchar(255),
+  tipopersona_ruc               varchar(255),
   tipopersona_codigo            varchar(255),
   tipopersona_codigo_padre      varchar(255),
+  ruc                           varchar(255),
   numero_documento              varchar(255),
   alias                         varchar(255),
   nombres                       varchar(255),
@@ -127,16 +130,34 @@ create table listapreciodetalle (
   constraint pk_listapreciodetalle primary key (id)
 );
 
-create table maestro_parametro (
+create table parametro (
+  ruc                           varchar(255) not null,
   codigo                        varchar(255) not null,
   codigo_padre                  varchar(255) not null,
+  valor                         varchar(255),
   descripcion                   varchar(255),
+  etiqueta                      varchar(255),
   orden                         integer not null,
   usuario_creacion_registro     varchar(255),
   usuario_modificacion_registro varchar(255),
   fecha_creacion_registro       datetime(6),
   fecha_modificacion_registro   datetime(6),
-  constraint pk_maestro_parametro primary key (codigo,codigo_padre)
+  constraint pk_parametro primary key (ruc,codigo,codigo_padre)
+);
+
+create table parametro_sistema (
+  ruc                           varchar(255) not null,
+  codigo                        varchar(255) not null,
+  codigo_padre                  varchar(255) not null,
+  valor                         varchar(255),
+  descripcion                   varchar(255),
+  etiqueta                      varchar(255),
+  orden                         integer not null,
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_parametro_sistema primary key (ruc,codigo,codigo_padre)
 );
 
 create table producto (
@@ -158,13 +179,29 @@ create table producto (
   constraint pk_producto primary key (id)
 );
 
+create table secuencia (
+  ruc                           varchar(255) not null,
+  codigo                        varchar(255) not null,
+  codigo_padre                  varchar(255) not null,
+  valor                         varchar(255),
+  secuencia                     bigint,
+  orden                         integer not null,
+  etiqueta                      varchar(255),
+  descripcion                   varchar(255),
+  usuario_creacion_registro     varchar(255),
+  usuario_modificacion_registro varchar(255),
+  fecha_creacion_registro       datetime(6),
+  fecha_modificacion_registro   datetime(6),
+  constraint pk_secuencia primary key (ruc,codigo,codigo_padre)
+);
+
 alter table contacto add constraint fk_contacto_direccion_id foreign key (direccion_id) references direccion (id) on delete restrict on update restrict;
 
-alter table contacto add constraint fk_contacto_tipocontacto foreign key (tipocontacto_codigo,tipocontacto_codigo_padre) references maestro_parametro (codigo,codigo_padre) on delete restrict on update restrict;
-create index ix_contacto_tipocontacto on contacto (tipocontacto_codigo,tipocontacto_codigo_padre);
+alter table contacto add constraint fk_contacto_tipocontacto foreign key (tipocontacto_ruc,tipocontacto_codigo,tipocontacto_codigo_padre) references parametro (ruc,codigo,codigo_padre) on delete restrict on update restrict;
+create index ix_contacto_tipocontacto on contacto (tipocontacto_ruc,tipocontacto_codigo,tipocontacto_codigo_padre);
 
-alter table contacto add constraint fk_contacto_tipopersona foreign key (tipopersona_codigo,tipopersona_codigo_padre) references maestro_parametro (codigo,codigo_padre) on delete restrict on update restrict;
-create index ix_contacto_tipopersona on contacto (tipopersona_codigo,tipopersona_codigo_padre);
+alter table contacto add constraint fk_contacto_tipopersona foreign key (tipopersona_ruc,tipopersona_codigo,tipopersona_codigo_padre) references parametro (ruc,codigo,codigo_padre) on delete restrict on update restrict;
+create index ix_contacto_tipopersona on contacto (tipopersona_ruc,tipopersona_codigo,tipopersona_codigo_padre);
 
 
 # --- !Downs
@@ -189,7 +226,11 @@ drop table if exists listaprecio;
 
 drop table if exists listapreciodetalle;
 
-drop table if exists maestro_parametro;
+drop table if exists parametro;
+
+drop table if exists parametro_sistema;
 
 drop table if exists producto;
+
+drop table if exists secuencia;
 

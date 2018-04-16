@@ -14,12 +14,12 @@
                     <div class="col-md-6">
                         @select(
                             contabilidadDTOForm("razonSocial.codigo"),
-                            options = CargaDatos.cargarRazonesSocialesSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarRazonesSocialesSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Razon Social",
                             '_error -> contabilidadDTOForm("razonSocial.codigo").error.map(_.withMessage("Seleccionar Razon Social")))
                         @select(
                             contabilidadDTOForm("tipoLibro.codigo"),
-                            options = CargaDatos.cargarTipoLibroSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarTipoLibroSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Tipo de Libro",
                             '_error -> contabilidadDTOForm("tipoLibro.codigo").error.map(_.withMessage("Seleccionar tipo de Libro")))
                     </div>
@@ -27,12 +27,12 @@
                     <div class="col-md-6">
                         @select(
                             contabilidadDTOForm("anio.codigo"),
-                            options = CargaDatos.cargarAniosSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarAniosSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Anio",
                             '_error -> contabilidadDTOForm("anio.codigo").error.map(_.withMessage("Seleccionar Año")))
                         @select(
                             contabilidadDTOForm("mes.codigo"),
-                            options = CargaDatos.cargarMesesSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarMesesSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Mes",
                             '_error -> contabilidadDTOForm("mes.codigo").error.map(_.withMessage("Seleccionar Mes")))
                     </div>

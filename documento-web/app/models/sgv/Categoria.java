@@ -29,7 +29,7 @@ public class Categoria extends Model {
         sb.append("id=").append(id);
         sb.append(", codigo='").append(codigo).append('\'');
         sb.append(", nombre='").append(nombre).append('\'');
-        sb.append(", descripcion='").append(descripcion).append('\'');
+        sb.append(", valor='").append(descripcion).append('\'');
         sb.append(", categoriaPadre=").append(categoriaPadre);
         sb.append(", tipoCategoria=").append(tipoCategoria);
         sb.append('}');

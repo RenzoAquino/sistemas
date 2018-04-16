@@ -12,7 +12,7 @@ import java.util.Map;
 public class CargaDatos {
     // options = Seq("S"->"Resumido","N"->"Detallado"),
     //options = options(CargaDatos.cargarTipoImpresionTicket),
-    //options = CargaDatos.cargarTipoImpresionTicketSeq.map(dto => dto.codigo -> dto.descripcion)
+    //options = CargaDatos.cargarTipoImpresionTicketSeq.map(dto => dto.codigo -> dto.valor)
 
     public static Map<String, String> cargarTipoImpresionTicket() {
         Map<String, String> lista = new HashMap<String, String>();

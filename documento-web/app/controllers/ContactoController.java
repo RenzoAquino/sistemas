@@ -1,12 +1,11 @@
 package controllers;
 
 import commons.Constantes;
-import commons.util.DBConnectionUtil;
+import commons.DatosSession;
+import commons.util.GeneradorCodigoUtil;
 import controllers.dto.ContactoDTO;
-import io.ebean.EbeanServer;
 
 import models.sgv.Contacto;
-import models.sgv.Parametro;
 import play.data.Form;
 import play.mvc.Result;
 import repository.sgv.ContactoService;
@@ -26,12 +25,7 @@ public class ContactoController extends CommonController {
         ContactoDTO dto = new ContactoDTO();
         dto.tipoContacto = tipo;
         List<Contacto> lista = ContactoService.obtenerListaContactos(dto); //Documento.find.all();
-        System.out.println("**********inicio size lista "+lista.size());
-        for (Contacto obj: lista) {
-            System.out.println("********** "+obj.id);
-            //System.out.println("********** "+obj.direccion);
-        }
-
+        System.out.println("ContactoController.inicio listasize "+lista.size());
         //return ok(generadorLibrosContables.render(form));
         return ok(listado.render(lista));
     }
@@ -52,7 +46,8 @@ public class ContactoController extends CommonController {
     // para crear
     public Result crear(String tipo) throws Exception {
         Contacto obj = new Contacto();
-        obj.tipoContacto = ParametroService.obtenerParametro(tipo,Constantes.PARAMETRO_TIPO_CONTACTO);
+        obj.codigo = GeneradorCodigoUtil.generarCodigoCliente(tipo);
+        obj.tipoContacto = ParametroService.obtenerTipoContacto(tipo);
         System.out.println("ContactoController.crear : "+obj);
         Form<Contacto> form = formFactory.form(Contacto.class).fill(obj);
 
@@ -61,6 +56,7 @@ public class ContactoController extends CommonController {
 
     public Result editar(Long id){
         Contacto obj = ContactoService.obtenerPorId(id);
+        System.out.println("editar "+obj);
         if(obj==null)
             return notFound(_404.render());
 
@@ -68,8 +64,8 @@ public class ContactoController extends CommonController {
 
         return ok(editar.render(form));
     }
-    // para guardar
-    public Result guardar(){
+    // para actualizar
+    public Result guardar() throws Exception {
         Form<Contacto> form = formFactory.form(Contacto.class).bindFromRequest();
         if(form.hasErrors()){
             flash("danger","Por favor corregir los errores del formulario");
@@ -77,10 +73,10 @@ public class ContactoController extends CommonController {
         }
 
         //obj.save();
-        ContactoService.crear(prepararDatos(form.get()));
+        ContactoService.crear(form.get());
 
         flash("success","Se guardo correctamente el Documento.");
-        //Documento.guardar(documento);
+        //Documento.actualizar(documento);
 
         return redirect(routes.ContactoController.inicio(form.get().tipoContacto.id.codigo));
     }
@@ -92,8 +88,7 @@ public class ContactoController extends CommonController {
             return badRequest(editar.render(form));
         }
 
-        Contacto obj = prepararDatos(form.get());
-
+        Contacto obj = form.get();
         Contacto oldObj = ContactoService.obtenerPorId(id);
         if(oldObj==null) {
             flash("danger", "Contacto no encontrado");
@@ -110,17 +105,6 @@ public class ContactoController extends CommonController {
 
         flash("success","Se actualizo correctamente el Contacto.");
         return ok();
-    }
-
-    private Contacto prepararDatos(Contacto contacto) {
-        if(contacto.tipoPersona.id.codigo.equals(Constantes.PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL)){
-            contacto.razonSocial = null;
-        } else if(contacto.tipoPersona.id.codigo.equals(Constantes.PARAMETRO_CODIGO_TIPO_PERSONA_NATURAL)){
-            contacto.nombres = null;
-            contacto.apellidoPaterno = null;
-            contacto.apellidoMaterno = null;
-        }
-        return contacto;
     }
 
     public Result eliminar(Long id){

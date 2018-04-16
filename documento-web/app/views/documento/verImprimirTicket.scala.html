@@ -15,7 +15,7 @@
                     <div class="col-md-6">
                         @select(
                             documentoDTOForm("tipoDocumento.codigo"),
-                            options = CargaDatos.cargarTipoDocumentoSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarTipoDocumentoSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Tipo Documento",
                             '_error -> documentoDTOForm("tipoDocumento.codigo").error.map(_.withMessage("Seleccionar Tipo de Documento")))
 
@@ -25,14 +25,14 @@
                     <div class="col-md-6">
                         @inputRadioGroup(
                             documentoDTOForm("tipoDetalle"),
-                            options = CargaDatos.cargarTipoImpresionTicketSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarTipoImpresionTicketSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Tipo de Detalle",
                             '_error -> documentoDTOForm("tipoDetalle").error.map(_.withMessage("Seleccionar tipo")))
 
                         <!-- http://www.aipacommander.com/entry/2015/08/09/183306 -->
                         @inputCheckboxGroup(
                             documentoDTOForm("listaTipoAccion"),
-                            options = CargaDatos.cargarTipoAccionSeq.map(dto => dto.id.codigo -> dto.descripcion),
+                            options = CargaDatos.cargarTipoAccionSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Generar",
                             '_error -> documentoDTOForm("listaTipoAccion").error.map(_.withMessage("Seleccionar una o más acciones")))
 

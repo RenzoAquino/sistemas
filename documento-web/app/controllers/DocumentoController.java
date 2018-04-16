@@ -51,7 +51,7 @@ public class DocumentoController extends Controller{
         return ok(crear.render(documentoForm));
     }
 
-    // para guardar
+    // para actualizar
     public Result guardar(){
         Form<Documento> documentoForm = formFactory.form(Documento.class).bindFromRequest();
         if(documentoForm.hasErrors()){
@@ -62,7 +62,7 @@ public class DocumentoController extends Controller{
         Documento documento = documentoForm.get();
         documento.save();
         flash("success","Se creo correctamente el documento.");
-        //Documento.guardar(documento);
+        //Documento.actualizar(documento);
 
         return redirect(routes.DocumentoController.index());
     }

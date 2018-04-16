@@ -2,33 +2,36 @@ package models.sgv;
 
 import io.ebean.Model;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="parametro")
-public class Parametro extends Model{
-    public Parametro(){
+@Table(name="parametro_sistema")
+public class ParametroSistema extends Model{
+    public ParametroSistema(){
     }
-    public Parametro(String ruc, String codigo, String codigoPadre){
+    public ParametroSistema(String ruc, String codigo, String codigoPadre){
         this.id = new ParametroId(ruc,codigo,codigoPadre);
     }
-    public Parametro(String ruc,String codigo, String codigoPadre, String valor){
+    public ParametroSistema(String ruc,String codigo, String codigoPadre, String valor){
         this.id = new ParametroId(ruc,codigo,codigoPadre);
         this.valor = valor;
     }
     @EmbeddedId
     public ParametroId id;
-
     public String valor;
     public String descripcion;
     public String etiqueta;
+
     public int orden;
     @Embedded
     public Auditoria auditoria;
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Parametro{");
+        final StringBuffer sb = new StringBuffer("ParametroSistema{");
         sb.append("id=").append(id);
         sb.append(", valor='").append(valor).append('\'');
         sb.append(", descripcion='").append(descripcion).append('\'');

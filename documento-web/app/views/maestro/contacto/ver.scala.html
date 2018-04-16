@@ -6,7 +6,11 @@
 @layout(contacto.alias){
 
     <h2>
-    @contacto.alias
+    @if(contacto.tipoPersona.id.codigo.equals("01")) {
+        @(contacto.apellidoPaterno+" "+contacto.apellidoMaterno+", "+contacto.nombres)
+    } else {
+        @contacto.razonSocial
+    }
     </h2>
     @_contactoFormsFieldsViews(contacto)
 

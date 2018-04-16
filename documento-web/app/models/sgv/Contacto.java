@@ -19,6 +19,7 @@ public class Contacto extends Model {
     //@Embedded(prefix="tipoContacto_")
     @ManyToOne
     @JoinColumns ({
+            @JoinColumn(name="tipoContacto_ruc", referencedColumnName = "ruc"),
             @JoinColumn(name="tipoContacto_codigo", referencedColumnName = "codigo"),
             @JoinColumn(name="tipoContacto_codigo_padre", referencedColumnName = "codigo_padre"),
     })
@@ -26,11 +27,13 @@ public class Contacto extends Model {
     //@Embedded(prefix="tipoPersona_")
     @ManyToOne
     @JoinColumns ({
+            @JoinColumn(name="tipoPersona_ruc", referencedColumnName = "ruc"),
             @JoinColumn(name="tipoPersona_codigo", referencedColumnName = "codigo"),
             @JoinColumn(name="tipoPersona_codigo_padre", referencedColumnName = "codigo_padre"),
     })
     public Parametro tipoPersona;
 
+    public String ruc;
     public String numeroDocumento;
     public String alias;
     public String nombres;
@@ -62,6 +65,7 @@ public class Contacto extends Model {
     public String toString() {
         final StringBuffer sb = new StringBuffer("Documento{");
         sb.append("id=").append(id);
+        sb.append(", ruc='").append(ruc).append('\'');
         sb.append(", codigo='").append(codigo).append('\'');
         sb.append(", tipoContacto='").append(tipoContacto).append('\'');
         sb.append(", tipoPersona='").append(tipoPersona).append('\'');

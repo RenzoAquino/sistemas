@@ -11,11 +11,13 @@ public class ParametroId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public String ruc;
     public String codigo;
     @Column(name = "codigo_padre")
     public String codigoPadre;
 
-    public ParametroId(String codigo, String codigoPadre){
+    public ParametroId(String ruc, String codigo, String codigoPadre){
+        this.ruc = ruc;
         this.codigo = codigo;
         this.codigoPadre = codigoPadre;
     }
@@ -23,12 +25,12 @@ public class ParametroId implements Serializable {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ParametroId{");
-        sb.append("codigo='").append(codigo).append('\'');
+        sb.append("ruc='").append(ruc).append('\'');
+        sb.append(", codigo='").append(codigo).append('\'');
         sb.append(", codigoPadre='").append(codigoPadre).append('\'');
         sb.append('}');
         return sb.toString();
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -45,7 +47,9 @@ public class ParametroId implements Serializable {
         if ((this.codigoPadre == null) ? (other.codigoPadre != null) : !this.codigoPadre.equals(other.codigoPadre)) {
             return false;
         }
-
+        if ((this.ruc == null) ? (other.ruc != null) : !this.ruc.equals(other.ruc)) {
+            return false;
+        }
         return true;
     }
 
@@ -54,6 +58,7 @@ public class ParametroId implements Serializable {
         int hash = 3;
         hash = 89 * hash + (this.codigo != null ? this.codigo.hashCode() : 0);
         hash = 89 * hash + (this.codigoPadre != null ? this.codigoPadre.hashCode() : 0);
+        hash = 89 * hash + (this.ruc != null ? this.ruc.hashCode() : 0);
         return hash;
     }
 }
