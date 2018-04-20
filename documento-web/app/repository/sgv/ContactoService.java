@@ -4,6 +4,9 @@ import commons.Constantes;
 import commons.DatosSession;
 import commons.util.GeneradorCodigoUtil;
 import controllers.dto.ContactoDTO;
+import io.ebean.Expr;
+import io.ebean.Junction;
+import io.ebean.Query;
 import models.sgv.Contacto;
 
 import java.util.List;
@@ -11,12 +14,72 @@ import java.util.List;
 public class ContactoService extends SVGConnection{
 
     public static List<Contacto> obtenerListaContactos(ContactoDTO dto) throws Exception {
-        System.out.println("************obtenerListaContactos "+dto);
+        System.out.println("ContactoService.obtenerListaContactos "+dto);
+/*
         List<Contacto> lista = db.find(Contacto.class)
                 .where()
                 .eq("ruc", DatosSession.getInstance().ruc)
                 .eq("tipocontacto_codigo",dto.tipoContacto)
                 .findList();
+*/
+/*
+        Query<Contacto> query = db.find(Contacto.class)
+                .where()
+                .conjunction()
+                    .conjunction()
+                        .eq("ruc", DatosSession.getInstance().ruc)
+                        .eq("tipocontacto_codigo",dto.tipoContacto)
+                    .endJunction()
+                .endJunction()
+                .or()
+                    .disjunction()
+                        .eq("codigo", dto.codigo)
+                    .endJunction()
+                    .disjunction()
+                        .eq("numeroDocumento", dto.codigo)
+                    .endJunction()
+                    .disjunction()
+                        .eq("tipoPersona_codigo", dto.tipoPersona)
+                    .endJunction()
+                .endJunction()
+                .orderBy().asc("codigo");
+
+
+        List<Contacto> lista  = query.findList();
+        String sql = query.getGeneratedSql();
+        System.out.println("ContactoService.obtenerListaContactos sql "+sql);
+        System.out.println("ContactoService.obtenerListaContactos size "+lista.size());
+*/
+        Junction<Contacto> filters = db.find(Contacto.class).where().conjunction();
+
+        filters
+                .conjunction()
+                .eq("ruc", DatosSession.getInstance().ruc)
+                .eq("tipocontacto_codigo",dto.tipoContacto)
+                .endJunction();
+
+        if(dto.numero != null && !dto.numero.isEmpty()){
+            filters
+                    .conjunction()
+                    .eq("numeroDocumento", dto.numero)
+                    .endJunction();
+        } else {
+            if(dto.tipoPersona != null && !dto.tipoPersona.isEmpty() && !dto.tipoPersona.equals("0000")){
+                filters
+                        .conjunction()
+                        .eq("tipoPersona_codigo", dto.tipoPersona)
+                        .endJunction();
+            }
+        }
+
+
+//        System.out.println("ContactoService.obtenerListaContactos sql 2 "+q.getGeneratedSql());
+
+        List<Contacto> lista = filters.endJunction().findList();
+
+        System.out.println("ContactoService.obtenerListaContactos size "+lista.size());
+
+        return lista;
 
         /*
         ControlVenta libro = null;
@@ -78,7 +141,7 @@ public class ContactoService extends SVGConnection{
 
         System.out.println("*********** size "+listaRetorno.size());
         */
-        return lista;
+        //return lista;
     }
 
     public static Contacto prepararDatos(Contacto contacto) {

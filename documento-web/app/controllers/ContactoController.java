@@ -20,27 +20,19 @@ import java.util.List;
 
 public class ContactoController extends CommonController {
 
-
-    public Result inicio(String tipo) throws Exception {
-        ContactoDTO dto = new ContactoDTO();
-        dto.tipoContacto = tipo;
-        List<Contacto> lista = ContactoService.obtenerListaContactos(dto); //Documento.find.all();
-        System.out.println("ContactoController.inicio listasize "+lista.size());
-        //return ok(generadorLibrosContables.render(form));
-
-        Form<ContactoDTO> form = formFactory.form(ContactoDTO.class).fill(dto);
-
-        return ok(listado.render(form,lista));
-    }
-
-    public Result buscar() throws Exception {
+    public Result buscar(String tipo) throws Exception {
         Form<ContactoDTO> form = formFactory.form(ContactoDTO.class).bindFromRequest();
+        System.out.println("ContactoController.buscar  : "+form.get());
 
-        List<Contacto> lista = ContactoService.obtenerListaContactos(form.get());
+        ContactoDTO dto = form.get();
+        dto.tipoContacto = tipo;
+        List<Contacto> lista = ContactoService.obtenerListaContactos(dto);
         if(lista.size() == 0)
             flash("info","No se encontraron resultados");
 
-        System.out.println("ContactoController.inicio listasize "+lista.size());
+        System.out.println("ContactoController.buscar lista.size "+lista.size());
+
+        form = formFactory.form(ContactoDTO.class).fill(dto);
 
         return ok(listado.render(form,lista));
     }
@@ -81,7 +73,7 @@ public class ContactoController extends CommonController {
         flash("success","Se guardo correctamente el Documento.");
         //Documento.actualizar(documento);
 
-        return redirect(routes.ContactoController.inicio(form.get().tipoContacto.id.codigo));
+        return redirect(routes.ContactoController.buscar(form.get().tipoContacto.id.codigo));
     }
     public Result actualizar(Long id){
 
@@ -121,7 +113,7 @@ public class ContactoController extends CommonController {
         flash("success","Se elimino correctamente el contacto.");
 
         //return ok();
-        return redirect(routes.ContactoController.inicio(obj.tipoContacto.id.codigo));
+        return redirect(routes.ContactoController.buscar(obj.tipoContacto.id.codigo));
     }
 
     // para el detalle

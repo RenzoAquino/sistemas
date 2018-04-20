@@ -20,9 +20,7 @@ GET     /welcome/:nombre/:apellido                controllers.HomeController.wel
 
 GET     /contabilidad/inicioLibroContable         controllers.ContabilidadController.inicioGenerarLibro
 GET     /contabilidad/generarLibroContable        controllers.ContabilidadController.generarLibro
-
-GET     /maestro/contacto/inicio/$tipo<(01|02)>   controllers.ContactoController.inicio(tipo: String)
-GET     /maestro/contacto/buscar                  controllers.ContactoController.buscar
+GET     /maestro/contacto/buscar/$tipo<(01|02)>   controllers.ContactoController.buscar(tipo: String)
 GET     /maestro/contacto/crear/$tipo<(01|02)>    controllers.ContactoController.crear(tipo: String)
 GET     /maestro/contacto/:id                     controllers.ContactoController.ver(id: Long)
 GET     /maestro/contacto/editar/:id              controllers.ContactoController.editar(id: Long)

@@ -3,10 +3,11 @@
 @(contacto: Contacto)
 <tr>
     <td>
-        <a class="btn" id='@contacto.codigo' name='@contacto.codigo' data-toggle="modal" href="@routes.ContactoController.ver(contacto.id)" data-target="#fooModal"><i class="icon-resize-full"></i>
+        <a class="btn" id='@contacto.codigo' name='@contacto.codigo' data-toggle="modal" href="@routes.ContactoController.ver(contacto.id)" data-target="#myModal"><i class="icon-resize-full"></i>
             @contacto.codigo
         </a>
     </td>
+
     <td>@contacto.tipoPersona.valor</td>
     <td>@contacto.numeroDocumento</td>
     <td>

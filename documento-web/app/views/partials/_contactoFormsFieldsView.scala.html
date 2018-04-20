@@ -2,56 +2,66 @@
 
 @(contacto: Contacto)
         <div class="row">
-            <div class="col-md-4">
-                Tipo de Contacto : @contacto.tipoContacto.valor
+            <div class="col-md-6">
+                <b>Tipo de Contacto : </b>@contacto.tipoContacto.valor
             </div>
-            <div class="col-md-4">
-                Codigo : @contacto.codigo
+            <div class="col-md-6">
+                <b>Codigo : </b>@contacto.codigo
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <hr/>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <p>
-                Tipo de Persona : @contacto.tipoPersona.id.codigo
+                    <b>Tipo de Persona : </b>@contacto.tipoPersona.id.codigo
                 </p>
                 <p>
-                    DNI / RUC : @contacto.numeroDocumento
+                    @if(contacto.tipoPersona.id.codigo.equals("01")) {
+                        <b>DNI : </b>
+                    } else {
+                        <b>RUC : </b>
+                    }
+                    @contacto.numeroDocumento
                 </p>
                 <p>
-                    Alias : @contacto.alias
+                    <b>Alias : </b>@contacto.alias
                 </p>
                 @if(contacto.tipoPersona.id.codigo.equals("01")) {
-                    Nombre : @(contacto.apellidoPaterno+" "+contacto.apellidoMaterno+", "+contacto.nombres)
+                    <b>Nombre : </b>@(contacto.apellidoPaterno+" "+contacto.apellidoMaterno+", "+contacto.nombres)
                 } else {
-                    Razon Social : @contacto.razonSocial
+                    <b>Razon Social : </b>@contacto.razonSocial
                 }
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <p>
-                    Fecha de Creación : @contacto.fechaCreacion
+                    @if(contacto.tipoPersona.id.codigo.equals("01")) {
+                        <b>Fecha de Nacimiento : </b>
+                    } else {
+                        <b>Fecha de Creación : </b>
+                    }
+                    @contacto.fechaCreacion.format("dd-MM-yyyy")
                 </p>
                 <p>
 
                 <p>
-                    Correo Electronico : @contacto.email
+                    <b>Correo Electronico : </b>@contacto.email
                 </p>
                 <p>
-                    Telefono Fijo : @contacto.telefonoFijo
+                    <b>Telefono Fijo : </b>@contacto.telefonoFijo
                 </p>
                 <p>
-                    Telefono Movil : @contacto.telefonoMovil
+                    <b>Telefono Movil : </b>@contacto.telefonoMovil
                 </p>
                 <p>
-                    Pagina Web : @contacto.webSite
+                    <b>Pagina Web : </b>@contacto.webSite
                 </p>
                 <p>
-                    Comentario : @contacto.comentario
+                    <b>Comentario : </b>@contacto.comentario
                 </p>
 
             </div>

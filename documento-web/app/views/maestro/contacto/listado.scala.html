@@ -1,6 +1,7 @@
 @import models.sgv.Contacto
 @import controllers.dto.ContactoDTO
 @import repository.sgv.ParametroService
+@import  commons.Constantes
 
 @(contactoDTOForm: Form[ContactoDTO], contactos : List[Contacto])
 
@@ -9,12 +10,28 @@
 
 @layout("Todos los contactos"){
 
-    <div class="modal fade" id="fooModal"></div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    </div>
+
     <div class="row">
         <div class="col-md-12">
                 <!-- https://www.w3schools.com/bootstrap/bootstrap_panels.asp -->
             <div class="panel panel-primary">
-                <div class="panel-heading"><h3>BUSQUEDA DE CONTACTO</h3></div>
+
+    @helper.form(action = routes.ContactoController.buscar(contactoDTOForm.get().tipoContacto),'id -> "contactoBuscarForm"){
+
+                    <input type="hidden" id="tipoContacto" name="tipoContacto" value='@contactoDTOForm.get().tipoContacto' />
+                    <input type="hidden" id="urlDestino" name="urlDestino" value='@routes.ContactoController.buscar(contactoDTOForm.get().tipoContacto)' />
+
+                <div class="panel-heading">
+                    <h3>
+                    @if(contactoDTOForm.get().tipoContacto.equals(Constantes.PARAMETRO_CODIGO_TIPO_CONTACTO_CLIENTE)) {
+                        <b>BUSQUEDA DE CLIENTE : </b>
+                    } else {
+                        <b>BUSQUEDA DE PROVEEDOR : </b>
+                    }
+                    </h3>
+                </div>
                 <div class="panel-body">
 
                     <div class="row">
@@ -34,26 +51,29 @@
                         </div>
                         <div class="col-md-4">
                             @select(
-                                contactoDTOForm("tipoPersona.id.codigo"),
+                                contactoDTOForm("tipoPersona"),
                                 options = ParametroService.cargarTipoPersonaSeq.map(dto => dto.id.codigo -> dto.valor),
                                 'class ->"form-control",
                                 '_label -> "Tipo de Persona",
-                                '_error -> contactoDTOForm("tipoPersona.id.codigo").error.map(_.withMessage("Seleccionar Tipo de Persona")))
+                                '_error -> contactoDTOForm("tipoPersona").error.map(_.withMessage("Seleccionar Tipo de Persona")))
                         </div>
                     </div>
 
                 </div>
+
+
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-4" align="center">
-                            <a class="btn btn-primary" href="@routes.ContactoController.inicio(contactoDTOForm.get().tipoContacto)">
+                            <button id="btn_contacto_buscar" class="btn btn-primary" type="submit">
+                                    <!--i class="glyphicon glyphicon-plus"></i-->
                                 <i class="glyphicon glyphicon-search"></i>
                                 Buscar
-                            </a>
+                            </button>
                             <a class="btn btn-success" href="@routes.ContactoController.crear(contactoDTOForm.get().tipoContacto)">
-                                <i class="glyphicon glyphicon-floppy-save"></i>
+                                <i class="glyphicon glyphicon-plus"></i>
                                 Crear
                             </a>
                         </div>
@@ -61,6 +81,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row">
                     <div class="col-md-12">
@@ -92,6 +113,8 @@
         </tbody>
     </table>
 
+    }
+
                 </div>
                 <div class="panel-footer">
                     <div class="row">
@@ -108,11 +131,5 @@
             </div>
         </div>
     </div>
-
-        <!--a  class="btn btn-success" href="@routes.DocumentoController.crear()">
-    <i class="glyphicon glyphicon-plus-sign" ></i>
-    Crear Documento
-    </a-->
 }
-
 <script src="@routes.Assets.versioned("js/maestro.contacto.js")" type="text/javascript"></script>

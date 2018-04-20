@@ -85,7 +85,6 @@ $(document).ready(function() {
         }
     } );
 
-
     $('select').on('change', function() {
         if("tipoPersona.id.codigo" == this.name) {
             mostrarDatosTipoPersona();
@@ -103,8 +102,9 @@ $(document).ready(function() {
     });
 
 
-    $("a[data-toggle=modal]").click(function() {
 
+
+    $("a[data-toggle=modal]").click(function() {
         //alert($("a[data-toggle=modal]").attr("href"));
 
         target = $(this).attr('data-target');
@@ -119,24 +119,12 @@ $(document).ready(function() {
         });
 
 /*
-
         $(target).html(url);
         $(target).on('shown.bs.modal', function () {
             alert("22222");
         });
 */
-/*      //Recorer todo los atributos
-        $(this).each(function() {
-            $.each(this.attributes, function() {
-                // this.attributes is not a plain object, but an array
-                // of attribute nodes, which contain both the name and value
-                if(this.specified) {
-                    console.log(this.name, this.value);
-                    alert(this.name +" : "+ this.value);
-                }
-            });
-        });
-*/
+
     });
 
 });
@@ -157,7 +145,7 @@ function sendDeleteRequest(url, rUrl) {
 
 
 function sendPutRequest(formId, rUrl) {
-    var form = $('#'+formId);
+    var form = $('#' + formId);
     $.ajax({
         url: form.attr('action'),
         method: "PUT",
@@ -170,4 +158,20 @@ function sendPutRequest(formId, rUrl) {
             window.location.reload();
         }
     });
+}
+
+function sendGetRequest(formId, rUrl) {
+        var form = $('#'+formId);
+        $.ajax({
+            url: form.attr('action'),
+            method: "GET",
+            data: form.serialize(),
+            success: function () {
+                window.location = rUrl;
+                //window.location.replace(rUrl);
+            },
+            error: function () {
+                window.location.reload();
+            }
+        });
 }
