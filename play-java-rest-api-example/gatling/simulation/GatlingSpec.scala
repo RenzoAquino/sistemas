@@ -33,7 +33,7 @@ object Index {
   def refreshAfterOneSecond =
     exec(http("Index").get("/").check(status.is(200))).pause(1)
 
-  val refreshManyTimes = repeat(500) {
+  val refreshManyTimes = repeat(50) {
     refreshAfterOneSecond
   }
 }

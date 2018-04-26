@@ -1,6 +1,7 @@
 package v1.post;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.sisint.common.controllers.CommonAction;
 import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.*;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 
-@With(PostAction.class)
+@With(CommonAction.class)
 public class PostController extends Controller {
 
     private HttpExecutionContext ec;

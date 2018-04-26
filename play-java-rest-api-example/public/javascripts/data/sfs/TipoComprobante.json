@@ -1,0 +1,9 @@
+{
+  "TipoComprobante":[ 
+    {"id":"01","nombre":"Factura"},
+    {"id":"03","nombre":"Boleta de Venta"},
+    {"id":"07","nombre":"Nota de Credito"},
+    {"id":"08","nombre":"Nota de Debito"},
+    {"id":"RA","nombre":"Comunicación de Baja"}
+  ]
+}

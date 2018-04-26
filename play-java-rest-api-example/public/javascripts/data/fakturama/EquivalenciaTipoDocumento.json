@@ -1,0 +1,9 @@
+{"MapTipoDocumento":
+  [
+    {"key":"Factura","value":"Invoice"},
+    {"key":"Credito","value":"Credit"},
+    {"key":"Proforma","value":"Proforma"},
+    {"key":"Nota_Envio","value":"Delivery"},
+    {"key":"Pedido","value":"Order"}
+  ]
+}
