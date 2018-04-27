@@ -1,0 +1,14 @@
+{"ListaSituacion":
+  [
+    {"id":"01","nombre":"Por Generar XML"},
+    {"id":"02","nombre":"XML Generado"},
+    {"id":"03","nombre":"Enviado y Aceptado SUNAT"},
+    {"id":"04","nombre":"Enviado y Aceptado SUNAT con Obs."},
+    {"id":"05","nombre":"Rechazado por SUNAT"},
+    {"id":"06","nombre":"Con Errores"},
+    {"id":"07","nombre":"Por Validar XML"},
+    {"id":"08","nombre":"Enviado a SUNAT Por Procesar"},
+    {"id":"09","nombre":"Enviado a SUNAT Procesando"},
+    {"id":"10","nombre":"Rechazado por SUNAT"}
+  ]
+}
