@@ -1,8 +1,11 @@
 package com.sisint.fakturama.repository.jpa;
 
+import com.sisint.common.exceptions.BusinessException;
+import com.sisint.common.util.OptionUtil;
 import com.sisint.fakturama.models.FktDocument;
 import com.sisint.fakturama.repository.FakturamaExecutionContext;
 import com.sisint.fakturama.repository.FktDocumentRepository;
+import com.sisint.generador.resources.GeneradorResource;
 import net.jodah.failsafe.CircuitBreaker;
 import net.jodah.failsafe.Failsafe;
 import play.db.jpa.JPAApi;
@@ -10,6 +13,7 @@ import play.db.jpa.JPAApi;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
@@ -36,8 +40,12 @@ public class JPAFktDocumentRepository implements FktDocumentRepository {
     }
 
     @Override
-    public CompletionStage<Optional<FktDocument>> getByNumber(String number) {
-        return supplyAsync(() -> wrap(em -> Failsafe.with(circuitBreaker).get(() -> selectByNumber(em, number))), ec);
+    public CompletionStage<Optional<FktDocument>> getByNumber(GeneradorResource resource) {
+        return supplyAsync(() -> wrap(
+                em -> Failsafe.with(circuitBreaker).get(
+                        () -> selectByNumber(em, resource)
+                )
+        ), ec);
     }
 /*
     @Override
@@ -65,15 +73,14 @@ public class JPAFktDocumentRepository implements FktDocumentRepository {
         //return jpaApi.withTransaction(function);
     }
 
-    private Optional<FktDocument> selectByNumber(EntityManager em, String number) {
-        TypedQuery<FktDocument> query = em.createQuery("SELECT d FROM FktDocument d WHERE d.NAME = :par01", FktDocument.class);
-        query.setParameter("par01", number);
+    private Optional<FktDocument> selectByNumber(EntityManager em, GeneradorResource resource) {
+        String sQuery = "SELECT d FROM FktDocument d WHERE d.NAME = :par01 AND d.DTYPE IN ('Invoice','Proforma','Credit') AND d.DTYPE = :par02";
+        TypedQuery<FktDocument> query = em.createQuery(sQuery, FktDocument.class);
+        query.setParameter("par01", resource.getDocumentoNumero());
+        query.setParameter("par02", resource.getEquivalenciaDocumentoTipo() );
+
+        //return OptionUtil.resolve(() -> query.getSingleResult());
         return Optional.ofNullable(query.getSingleResult());
-        /*
-        FktDocument result = query.getSingleResult();
-        System.out.println("selectByNumber result = "+result);
-        return Optional.ofNullable(result);
-        */
     }
 
 /*

@@ -2,6 +2,7 @@ package com.sisint.generador.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sisint.common.controllers.CommonAction;
+import com.sisint.common.exceptions.BusinessException;
 import com.sisint.generador.handler.GeneradorHandler;
 import com.sisint.generador.resources.GeneradorResource;
 import play.Logger;
@@ -29,7 +30,7 @@ public class GeneradorArchivoController extends Controller {
         this.handler = handler;
     }
 
-    public CompletionStage<Result> generarArchivo() throws IOException {
+    public CompletionStage<Result> generarArchivo() throws IOException, BusinessException {
         JsonNode json = request().body().asJson();
         final GeneradorResource resource = Json.fromJson(json, GeneradorResource.class);
 
@@ -37,9 +38,8 @@ public class GeneradorArchivoController extends Controller {
             logger.debug("generarTxt() resource = " + resource);
         }
 
-        //final PostResource resource = Json.fromJson(json, PostResource.class);
-        return handler.generarArchivo(resource).thenApplyAsync(savedResource -> {
-            return created(Json.toJson(savedResource));
-        }, ec.current());
+        return handler.generarArchivo(resource).thenApplyAsync(savedResource ->
+            created(Json.toJson(savedResource))
+        , ec.current());
     }
 }

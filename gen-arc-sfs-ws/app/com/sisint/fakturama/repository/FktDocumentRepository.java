@@ -1,13 +1,14 @@
 package com.sisint.fakturama.repository;
 
 import com.sisint.fakturama.models.FktDocument;
+import com.sisint.generador.resources.GeneradorResource;
 
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
 public interface FktDocumentRepository {
 
-    CompletionStage<Optional<FktDocument>> getByNumber(String number);
+    CompletionStage<Optional<FktDocument>> getByNumber(GeneradorResource resource);
 /*
     CompletionStage<Stream<PostData>> list();
 

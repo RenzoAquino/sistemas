@@ -12,6 +12,9 @@ import java.io.IOException;
  * Resource for the API.  This is a presentation class for frontend work.
  */
 public class GeneradorResource {
+    private String operacionCodigo;
+    private String operacionMensaje;
+
     private String id;
     private String emisorRuc;
     private String documentoNumero;
@@ -21,9 +24,13 @@ public class GeneradorResource {
     private String nombreArchivo;
     private String link;
 
+
     public GeneradorResource() {
     }
-
+    public GeneradorResource(String operacionCodigo,String operacionMensaje) {
+        this.operacionCodigo = operacionCodigo;
+        this.operacionMensaje = operacionMensaje;
+    }
     public GeneradorResource(String id, String emisorRuc, String documentoNumero, String documentoTipo, String tipoOperacion, String nombreArchivo, String link) {
         this.id = id;
         this.emisorRuc = emisorRuc;
@@ -35,8 +42,7 @@ public class GeneradorResource {
     }
 
     public GeneradorResource(FktDocument data, String link) {
-        System.out.print("GeneradorResource data = "+data);
-
+        //System.out.print("GeneradorResource data = "+data);
         this.id = data.ID.toString();
         this.link = link;
         this.documentoNumero = data.NAME;
@@ -90,6 +96,14 @@ public class GeneradorResource {
 
     public String getLink() {
         return link;
+    }
+
+    public String getOperacionCodigo() {
+        return operacionCodigo;
+    }
+
+    public String getOperacionMensaje() {
+        return operacionMensaje;
     }
 
     @Override

@@ -107,9 +107,11 @@ public class FktDocument {
     public String MESSAGE2;
 
     public String MESSAGE3;
-    
-    //public FktContact contact;
-    //public List<FktDocumentitem> items;
+
+	@Transient
+    public FktContact contact;
+	@Transient
+    public List<FktDocumentitem> items;
 
 	@Transient
     public Date DUEDATE;
@@ -358,7 +360,6 @@ public class FktDocument {
 			builder.append(MESSAGE3);
 			builder.append(", ");
 		}
-/*
 		if (contact != null) {
 			builder.append("contact=");
 			builder.append(contact);
@@ -371,7 +372,6 @@ public class FktDocument {
 			}
 			builder.append(", ");
 		}
-*/
 		if (DUEDATE != null) {
 			builder.append("DUEDATE=");
 			builder.append(DUEDATE);
