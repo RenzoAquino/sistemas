@@ -12,11 +12,11 @@
     <result column="TAXVALUE" jdbcType="DOUBLE" property="TAXVALUE" />
     <result column="VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
     <result column="VALIDTO" jdbcType="DATE" property="VALIDTO" />
-    <result column="VAT_CATEGORY" jdbcType="BIGINT" property="VAT_CATEGORY" />
+    <result column="FK_CATEGORY" jdbcType="BIGINT" property="FK_CATEGORY" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, DATEADDED, DELETED, DESCRIPTION, MODIFIED, MODIFIEDBY, NAME, TAXVALUE, VALIDFROM, 
-    VALIDTO, VAT_CATEGORY
+    VALIDTO, FK_CATEGORY
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 'false' as QUERYID,
@@ -32,11 +32,11 @@
     insert into fkt_vat (ID, DATEADDED, DELETED, 
       DESCRIPTION, MODIFIED, MODIFIEDBY, 
       NAME, TAXVALUE, VALIDFROM, 
-      VALIDTO, VAT_CATEGORY)
+      VALIDTO, FK_CATEGORY)
     values (#{ID,jdbcType=BIGINT}, #{DATEADDED,jdbcType=DATE}, #{DELETED,jdbcType=BIT}, 
       #{DESCRIPTION,jdbcType=VARCHAR}, #{MODIFIED,jdbcType=DATE}, #{MODIFIEDBY,jdbcType=VARCHAR}, 
       #{NAME,jdbcType=VARCHAR}, #{TAXVALUE,jdbcType=DOUBLE}, #{VALIDFROM,jdbcType=DATE}, 
-      #{VALIDTO,jdbcType=DATE}, #{VAT_CATEGORY,jdbcType=BIGINT})
+      #{VALIDTO,jdbcType=DATE}, #{FK_CATEGORY,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.sgv.fakturama.dao.model.FktVat">
     insert into fkt_vat
@@ -71,8 +71,8 @@
       <if test="VALIDTO != null">
         VALIDTO,
       </if>
-      <if test="VAT_CATEGORY != null">
-        VAT_CATEGORY,
+      <if test="FK_CATEGORY != null">
+        FK_CATEGORY,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -106,8 +106,8 @@
       <if test="VALIDTO != null">
         #{VALIDTO,jdbcType=DATE},
       </if>
-      <if test="VAT_CATEGORY != null">
-        #{VAT_CATEGORY,jdbcType=BIGINT},
+      <if test="FK_CATEGORY != null">
+        #{FK_CATEGORY,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -141,8 +141,8 @@
       <if test="VALIDTO != null">
         VALIDTO = #{VALIDTO,jdbcType=DATE},
       </if>
-      <if test="VAT_CATEGORY != null">
-        VAT_CATEGORY = #{VAT_CATEGORY,jdbcType=BIGINT},
+      <if test="FK_CATEGORY != null">
+        FK_CATEGORY = #{FK_CATEGORY,jdbcType=BIGINT},
       </if>
     </set>
     where ID = #{ID,jdbcType=BIGINT}
@@ -158,7 +158,7 @@
       TAXVALUE = #{TAXVALUE,jdbcType=DOUBLE},
       VALIDFROM = #{VALIDFROM,jdbcType=DATE},
       VALIDTO = #{VALIDTO,jdbcType=DATE},
-      VAT_CATEGORY = #{VAT_CATEGORY,jdbcType=BIGINT}
+      FK_CATEGORY = #{FK_CATEGORY,jdbcType=BIGINT}
     where ID = #{ID,jdbcType=BIGINT}
   </update>
   <resultMap id="BaseResultSunatMap" type="com.sgv.fakturama.dao.model.FktVat">
@@ -172,6 +172,6 @@
     <result column="TAXVALUE" jdbcType="DOUBLE" property="TAXVALUE" />
     <result column="VAT_VALIDFROM" jdbcType="DATE" property="VALIDFROM" />
     <result column="VAT_VALIDTO" jdbcType="DATE" property="VALIDTO" />
-    <result column="VAT_CATEGORY" jdbcType="BIGINT" property="VAT_CATEGORY" />
+    <result column="FK_CATEGORY" jdbcType="BIGINT" property="FK_CATEGORY" />
   </resultMap>
 </mapper>
