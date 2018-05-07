@@ -462,8 +462,9 @@
     <id column="CONTACT_ID" jdbcType="BIGINT" property="ID" />
     <result column="COMPANY" jdbcType="VARCHAR" property="COMPANY" />
     <result column="VATNUMBER" jdbcType="VARCHAR" property="VATNUMBER" />
-     <result column="CONTACT_FIRSTNAME" jdbcType="VARCHAR" property="FIRSTNAME" />
-      <result column="CONTACT_NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="CONTACT_GENDER" jdbcType="INTEGER" property="GENDER" />
+    <result column="CONTACT_FIRSTNAME" jdbcType="VARCHAR" property="FIRSTNAME" />
+    <result column="CONTACT_NAME" jdbcType="VARCHAR" property="NAME" />
     <result column="FK_ADDRESS" jdbcType="BIGINT" property="FK_ADDRESS" />
     <association property="address" column="ADDRESS_ID" 
 	    resultMap="com.sgv.fakturama.dao.FktAddressMapper.BaseResultSunatMap"/>

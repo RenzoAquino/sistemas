@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.sgv.common.exception.BusinessException;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import com.sgv.base.dao.ControlCompraDAO;
@@ -47,7 +48,7 @@ public abstract class  AbstractDocumento {
 		//this.nombreBaseDelArchivo = generarNombreArchivo();
 	}
 
-	public void generarDocumentoSUNAT(String tipoOperacion) throws DocumentoException, PersistenceException, IOException {
+	public void generarDocumentoSUNAT(String tipoOperacion) throws DocumentoException, PersistenceException, IOException, BusinessException {
 		
 		//Validar si se encunetra registrado y enviado
 		
@@ -232,7 +233,7 @@ public abstract class  AbstractDocumento {
 		//CREAR CAMPOS DE REFERENCIA (RUC,TIPO, NUMERO) 
 		return item;
 	}
-	abstract void crearArchivoCabecera() throws DocumentoException, IOException;
+	abstract void crearArchivoCabecera() throws DocumentoException, IOException, BusinessException;
 	abstract void crearArchivoDetalle() throws DocumentoException, IOException;
 	abstract void crearArchivoDocumentoRelacionado() throws DocumentoException, IOException;
 	abstract void crearArchivoAdicionalCabecera() throws DocumentoException, IOException;

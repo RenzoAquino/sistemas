@@ -18,7 +18,7 @@
       <!--  Parámetros de conexión a la bd -->
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
         connectionURL="jdbc:mysql://localhost:3306/sistemagestionventa"
-        userId="sisfac"
+        userId="sisgesven"
         password="zxcV1234!">
     </jdbcConnection>
 

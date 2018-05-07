@@ -17,8 +17,8 @@
     
       <!--  Parámetros de conexión a la bd -->
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://localhost:3306/sistemaFacturacion"
-        userId="sisfac"
+        connectionURL="jdbc:mysql://localhost:3306/fakturama"
+        userId="sisgesven"
         password="zxcV1234!">
     </jdbcConnection>
 

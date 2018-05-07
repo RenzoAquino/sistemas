@@ -625,7 +625,8 @@
 	DATE_ADD(DOCUMENTDATE,INTERVAL DUEDAYS DAY) AS DUEDATE
   </sql>
   <sql id="FktContactMapper_Base_Column_List">
-    fkt_contact.ID AS CONTACT_ID, COMPANY, VATNUMBER, fkt_contact.FIRSTNAME AS CONTACT_FIRSTNAME,fkt_contact.NAME AS CONTACT_NAME
+    fkt_contact.ID AS CONTACT_ID, COMPANY, VATNUMBER, fkt_contact.FIRSTNAME AS CONTACT_FIRSTNAME,fkt_contact.NAME AS CONTACT_NAME,
+    fkt_contact.GENDER AS CONTACT_GENDER
   </sql>
   <sql id="FktDocumentItemMapper_Base">
     fkt_documentitem.ID AS DOCUMENTITEM_ID, fkt_documentitem.DATEADDED AS DOCUMENTITEM_DATEADDED, fkt_documentitem.DELETED AS DOCUMENTITEM_DELETED, GTIN, ITEMNUMBER, ITEMREBATE, ITEMTYPE,
@@ -641,7 +642,7 @@
   </sql>
   <sql id="FktVatMapper_Base_Column_List">
     fkt_vat.ID AS VAT_ID, fkt_vat.DATEADDED AS VAT_DATEADDED, fkt_vat.DELETED AS VAT_DELETED, fkt_vat.DESCRIPTION AS VAT_DESCRIPTION, fkt_vat.MODIFIED AS VAT_MODIFIED, fkt_vat.MODIFIEDBY AS VAT_MODIFIEDBY, 
-    fkt_vat.NAME AS VAT_NAME, TAXVALUE, fkt_vat.VALIDFROM AS VAT_VALIDFROM, fkt_vat.VALIDTO AS VAT_VALIDTO, VAT_CATEGORY
+    fkt_vat.NAME AS VAT_NAME, TAXVALUE, fkt_vat.VALIDFROM AS VAT_VALIDFROM, fkt_vat.VALIDTO AS VAT_VALIDTO, fkt_vat.FK_CATEGORY AS VAT_FK_CATEGORY
   </sql>  
   <resultMap extends="ResultMapWithBLOBs" id="ResultMapWithContac" type="com.sgv.fakturama.dao.model.FktDocument">
   	<result column="DUEDATE" jdbcType="DATE" property="DUEDATE" />
