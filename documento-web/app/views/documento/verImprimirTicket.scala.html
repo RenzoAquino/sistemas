@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         @select(
-                            documentoDTOForm("tipoDocumento.codigo"),
+                            documentoDTOForm("tipoDocumento.id.codigo"),
                             options = CargaDatos.cargarTipoDocumentoSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Tipo Documento",
                             '_error -> documentoDTOForm("tipoDocumento.codigo").error.map(_.withMessage("Seleccionar Tipo de Documento")))

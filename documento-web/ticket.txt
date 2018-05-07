@@ -3,19 +3,35 @@
            TELEFONO: 470-8565           
       ventas@inversionesunocc.com       
                                         
-PEDIDO: PD01-00000526  FECHA: 12/04/2018
-          REX BAKERY PERU SAC           
+PEDIDO: PD01-00000638  FECHA: 29/04/2018
+        BECERRA ABUSADA CLAUDIA         
 ----------------------------------------
 Cantidad  Unidad  Producto              
 ----------------------------------------
-   0.85 KG  BROCOLI                     
-    6.0 UND LECHUGA ROMANA              
-   1.24 KG  PALTA FUERTE                
-   2.14 KG  PAPA YUNGAY                 
+    1.0 KG  AJI AMARILLO                
+   0.25 KG  AJI LIMO                    
+    1.0 KG  ARVERJA ENTERA              
+   2.31 KG  BROCOLI                     
+    1.0 POT BROTE DE ALFALFA            
+    2.0 KG  CEBOLLA BLANCA              
+   2.32 KG  CHOCLO DESGRANADO           
+    0.5 PQT CULANTRO                    
+    0.5 KG  ESPINACA                    
+    1.5 KG  ESPINACA                    
+    4.0 KG  MANZANA ISRAEL              
+   1.26 KG  PALTA FUERTE                
+    6.0 KG  PAPA AMARILLA               
+    3.0 KG  PAPA COCTEL                 
+    4.0 KG  PAPA YUNGAY                 
+    2.0 UND PORO                        
+    6.0 UND ROCOTO                      
+    4.0 KG  TOMATE                      
+    3.0 KG  VAINITA                     
+    4.0 KG  ZANAHORIA                   
 ----------------------------------------
                                         
    Revisar los productos entregados.    
-                4 Items.                
+               20 Items.                
                                         
                                         
                                         

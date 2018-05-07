@@ -16,6 +16,7 @@ public class DocumentoService {
     public static FktDocument obtenerDatosDocumento(DocumentoDTO dto){
         FktDocument document = null;
         Map<String,FktUserproperty> mapUserproperty = null;
+        System.out.println("obtenerDatosDocumento "+dto);
 /*
         FktContact contact = FktContact.find.query().where().eq("vatnumber",dto.rucEmpresa).findOne();
         System.out.println(contact);

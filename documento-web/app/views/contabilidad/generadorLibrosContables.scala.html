@@ -13,12 +13,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         @select(
-                            contabilidadDTOForm("razonSocial.codigo"),
+                            contabilidadDTOForm("razonSocial.id.codigo"),
                             options = CargaDatos.cargarRazonesSocialesSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Razon Social",
                             '_error -> contabilidadDTOForm("razonSocial.codigo").error.map(_.withMessage("Seleccionar Razon Social")))
                         @select(
-                            contabilidadDTOForm("tipoLibro.codigo"),
+                            contabilidadDTOForm("tipoLibro.id.codigo"),
                             options = CargaDatos.cargarTipoLibroSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Tipo de Libro",
                             '_error -> contabilidadDTOForm("tipoLibro.codigo").error.map(_.withMessage("Seleccionar tipo de Libro")))
@@ -26,12 +26,12 @@
 
                     <div class="col-md-6">
                         @select(
-                            contabilidadDTOForm("anio.codigo"),
+                            contabilidadDTOForm("anio.id.codigo"),
                             options = CargaDatos.cargarAniosSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Anio",
                             '_error -> contabilidadDTOForm("anio.codigo").error.map(_.withMessage("Seleccionar Año")))
                         @select(
-                            contabilidadDTOForm("mes.codigo"),
+                            contabilidadDTOForm("mes.id.codigo"),
                             options = CargaDatos.cargarMesesSeq.map(dto => dto.id.codigo -> dto.valor),
                             '_label -> "Mes",
                             '_error -> contabilidadDTOForm("mes.codigo").error.map(_.withMessage("Seleccionar Mes")))
