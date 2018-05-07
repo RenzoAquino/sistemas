@@ -4,6 +4,7 @@ import commons.Constantes;
 import commons.util.CSVUtil;
 import controllers.dto.ContabilidadDTO;
 import models.sgv.Parametro;
+import models.sgv.ParametroId;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -24,14 +25,15 @@ public class ContabilidadController extends Controller{
 
 
     public Result inicioGenerarLibro(){
-
+        //Form<ContabilidadDTO> form = formFactory.form(ContabilidadDTO.class).bindFromRequest();
+       // System.out.println(form.get());
         ContabilidadDTO dto = new ContabilidadDTO();
-        dto.tipoLibro = new Parametro();
-        dto.tipoLibro.id.codigo ="LVEN";
-        dto.anio = new Parametro();
-        dto.anio.id.codigo ="2018";
-        dto.mes = new Parametro();
-        dto.mes.id.codigo ="3"; //Simpre debe ser el mes anterior al actual
+        dto.tipoLibro = new Parametro("","LVEN","");
+        //dto.tipoLibro.id.codigo ="LVEN";
+        dto.anio = new Parametro("","2018","");
+        //dto.anio.id.codigo ="2018";
+        dto.mes = new Parametro("","3","");
+        //dto.mes.id.codigo ="3"; //Simpre debe ser el mes anterior al actual
 
         Form<ContabilidadDTO> contabilidadDTOForm = formFactory.form(ContabilidadDTO.class).fill(dto);
 
