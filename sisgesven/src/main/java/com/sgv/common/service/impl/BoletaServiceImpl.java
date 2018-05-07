@@ -18,6 +18,7 @@ import com.sgv.fakturama.dao.model.FktDocumentitem;
 
 public class BoletaServiceImpl extends AbstractDocumento implements DocumentoService {
 
+	boolean conDireccionFiscal = true;
 	public BoletaServiceImpl(){		
 		super();
 	}
@@ -30,24 +31,33 @@ public class BoletaServiceImpl extends AbstractDocumento implements DocumentoSer
 		StringJoiner sj = new StringJoiner("|");
 		sj.add(Constants.CATALOGO_17_NO_DOMICILIADOS);
 		sj.add(DateUtil.formatDate(documento.getDOCUMENTDATE(),Constants.FORMAT_DATE_YYYY_MM_DD));
-		sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_00_SIN_DIRECCION);		
-		switch (documento.getContact().getVATNUMBER().length()) {
-		case 8:
-			sj.add(Constants.CATALOGO_06_DNI);
-			sj.add(documento.getContact().getVATNUMBER());
-			sj.add(documento.getContact().getCOMPANY());
-			break;
-		case 11:
-			sj.add(Constants.CATALOGO_06_RUC);
-			sj.add(documento.getContact().getVATNUMBER());
-			sj.add(documento.getContact().getCOMPANY());
-			break;
-		default:
-			sj.add(Constants.CATALOGO_06_SIN_RUC);
-			sj.add(" ");
-			sj.add("");
-			break;
-		}
+
+        if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
+            sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_01_PRIMERA_DIRECCION);
+            sj.add(Constants.CATALOGO_06_RUC);
+            sj.add(documento.getContact().getVATNUMBER());
+            sj.add(documento.getContact().getCOMPANY());
+        } else if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
+            sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_00_SIN_DIRECCION);
+            sj.add(Constants.CATALOGO_06_SIN_RUC);
+            //sj.add("00000000");
+            //sj.add("SIN DNI");
+            sj.add(documento.getContact().getVATNUMBER());
+            sj.add(documento.getContact().getCOMPANY());
+            conDireccionFiscal = false;
+        } else {//TIPO HOMBRE, MUJER, FAMILIA
+            if(documento.getContact().getVATNUMBER().length() != 8 ){
+                sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_00_SIN_DIRECCION);
+                sj.add(Constants.CATALOGO_06_DNI);
+                conDireccionFiscal = false;
+            } else if(documento.getContact().getVATNUMBER().length() != 11 ) {
+                sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_01_PRIMERA_DIRECCION);
+                sj.add(Constants.CATALOGO_06_RUC);
+            }
+            sj.add(documento.getContact().getVATNUMBER());
+            sj.add(documento.getContact().getFIRSTNAME().concat(", ").concat(documento.getContact().getNAME()));
+        }
+
 		sj.add(Constants.CABECERA_TIPO_MONEDA_PERU);
 		//sj.add(Constants.CABECERA_CTE_DESCUENTO_GLOBAL);
 		sj.add(Constants.VALOR_CERO_STRING);
@@ -69,19 +79,7 @@ public class BoletaServiceImpl extends AbstractDocumento implements DocumentoSer
 		sj.add(Constants.VALOR_CERO_STRING);
 		//sj.add(Constants.CABECERA_CTE_IMPORTE_TOTAL);
 		sj.add(MoneyUtil.convertDoubleToString(documento.getImporteTotal()));
-		
-		/*
-		text = sj.toString().replaceAll(
-				Constants.CABECERA_CTE_DESCUENTO_GLOBAL+"|"+
-				Constants.CABECERA_CTE_SUMATORIA_OTROS_CARGOS+"|"+
-				Constants.CABECERA_CTE_TOTAL_DESCUENTOS+"|"+
-				Constants.CABECERA_CTE_TOTAL_VALOR_VENTA_OPERACIONES_INAFECTAS+"|"+
-				Constants.CABECERA_CTE_SUMATORIA_ISC+"|"+
-				Constants.CABECERA_CTE_SUMATORIA_OTROS_TRIBUTOS
-		, Constants.VALOR_CERO_STRING);
-		System.out.println("FILE_CONTENT : "+text);
-		lContenido.add(text);
-		*/
+
 		System.out.println("FILE_CONTENT : "+sj.toString());
 		lContenido.add(sj.toString());
 		
@@ -191,7 +189,7 @@ public class BoletaServiceImpl extends AbstractDocumento implements DocumentoSer
 	}
 	@Override
 	void crearArchivoAdicionalCabecera() throws IOException {
-		if(!"CLIENTE GENERICO".equals(documento.getContact().getCOMPANY())){
+        if(conDireccionFiscal){
 			List<String> lContenido = new ArrayList<String>();
 			StringJoiner sj = new StringJoiner("|");
 			sj.add("0");

@@ -2,6 +2,7 @@ package com.sgv.common.service.impl;
 
 import java.io.IOException;
 
+import com.sgv.fakturama.dao.model.FktDocumentitem;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import com.sgv.common.constants.Catalogo01SUNAT;
@@ -39,7 +40,19 @@ public class EnvioSunatServiceImpl implements EnvioSunatService {
 			if((null == result.getItems() ) || 0 == result.getItems().size()) {
 				System.err.println("EL DOCUMENTO NO TIENE ITEMS");
 				throw new BusinessException("EL DOCUMENTO NO TIENE ITEMS");
-			} else if (null == result.getContact() || null == result.getContact().getVATNUMBER() ){
+			} else {
+				for (FktDocumentitem item:result.getItems()
+					 ) {
+					if(item.getQUANTITY() == 0) {
+						throw new BusinessException("LA CANTIDAD ["+item.getQUANTITY()+"] DEL PRODUCTO "+item.getNAME()+" ES INVALIDO");
+					}
+					if (item.getQUANTITYUNIT() == null || item.getQUANTITYUNIT().isEmpty() ){
+						throw new BusinessException("LA UNIDAD DE MEDIDA ["+item.getQUANTITYUNIT()+"] DEL PRODUCTO "+item.getNAME()+" ES INVALIDO");
+					}
+				}
+			}
+
+			if (null == result.getContact() || null == result.getContact().getVATNUMBER() ){
 				System.err.println("EL DOCUMENTO NO TIENE CONTACTO");
 				throw new BusinessException("EL DOCUMENTO NO TIENE CONTACTO");
 			}

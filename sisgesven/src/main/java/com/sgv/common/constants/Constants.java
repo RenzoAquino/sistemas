@@ -6,13 +6,15 @@ import java.util.Map;
 import com.sgv.fakturama.dao.impl.UserPropertyDAOImpl;
 
 public class Constants {
-	
+
+	public static final String SISGESVEN_PATH_FILE = "D:\\SISGESVEN\\CONSOLIDADO\\";
+
 	public static final String FACTURADOR_PATH_FILE = "D:\\sunat_archivos\\sfs\\DATA\\";
 	public static final String FACTURADOR_PATH_REPO = "D:\\sunat_archivos\\sfs\\REPO\\";
 	public static final String FACTURADOR_PATH_RPTA = "D:\\sunat_archivos\\sfs\\RPTA\\";
 	public static final String FAKTURAMA_PATH_BASE = "D:\\WS_FAKTURAMA\\WS_INVERSIONES_UNOCC";
 	public static final String FAKTURAMA_PATH_FACTURAS = "\\Documentos\\PDF\\Facturas";	
-	public static final String FAKTURAMA_PATH_NOTA_ENVIO = "\\Documentos\\PDF\\Notas de Envío";
+	public static final String FAKTURAMA_PATH_NOTA_ENVIO = "\\Documentos\\PDF\\Notas de Envï¿½o";
 	
 	public static final String STRING_PIPE = "|";
 	
@@ -176,7 +178,7 @@ public class Constants {
 	public static final String CATALOGO_12_OTROS = "OTROS";
 	public static final Map<String, String> CATALOGO_12 = new HashMap<>();
 	static {
-		CATALOGO_12.put("FACTURA – EMITIDA POR CORREGIR ERROR EN EL RUC","01");
+		CATALOGO_12.put("FACTURA ï¿½ EMITIDA POR CORREGIR ERROR EN EL RUC","01");
 		CATALOGO_12.put("FACTURA - EMITIDA POR ANTICIPOS","02");
 		CATALOGO_12.put("BOLETA DE VENTA - EMITIDA POR ANTICIPOS","03");
 		CATALOGO_12.put("TICKECT DE SALIDA - NAPU","04");

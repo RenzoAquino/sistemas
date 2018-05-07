@@ -90,7 +90,7 @@ public class ConsolidadorPedidoServiceImpl implements ConsolidadorPedidoService 
 		//System.out.println("**************** "+nombreCSV);
 		nombreCSV = nombreCSV.replaceAll("/","-");
 		//System.out.println("**************** "+nombreCSV);
-		FileUtil.createFile("C:\\Users\\USUARIO_01\\Desktop\\", nombreCSV, lContenido.toArray(new String[0]));		
+		FileUtil.createFile(Constants.SISGESVEN_PATH_FILE, nombreCSV, lContenido.toArray(new String[0]));
 
 		/*
 		 * 
@@ -153,7 +153,7 @@ public class ConsolidadorPedidoServiceImpl implements ConsolidadorPedidoService 
 	}
 
 	private List<FktDocument> generarListaPedidos(FktDocument documentoBase, ConsolidadorPedidoVO vo,Map<String,ConsolidadorProductoVO> mProductoConIGV, Map<String,ConsolidadorProductoVO> mProductoSinIGV) throws BusinessException {
-		//Declaración de Variables
+		//Declaraciï¿½n de Variables
 		FktDocument documento = null;
 		List<FktDocument> listaPedidos = new ArrayList<FktDocument>();
 		List<FktDocumentitem> listaItemsTMP = null;
@@ -324,15 +324,16 @@ public class ConsolidadorPedidoServiceImpl implements ConsolidadorPedidoService 
 
 	
 	private FktDocument cargarDocumento(String numeroPedido, FktDocument documentoBase, ConsolidadorPedidoVO vo) {
-		// TODO Auto-generated method stub
+		System.out.println("cargarDocumento : "+documentoBase);
+
 		FktDocument fktDocument = new FktDocument();
 		fktDocument.setNAME(numeroPedido);
 		fktDocument.setDTYPE(TypeDocument_ES.Pedido.getText());
 		fktDocument.setADDRESSFIRSTLINE(documentoBase.getContact().getCOMPANY()
 				.concat(", ")
-				.concat(documentoBase.getContact().getNAME())
+				.concat((documentoBase.getContact().getNAME() != null)? (documentoBase.getContact().getNAME()):"")
 				.concat(" ")
-				.concat(documentoBase.getContact().getFIRSTNAME()));
+                .concat((documentoBase.getContact().getFIRSTNAME() != null)? (documentoBase.getContact().getFIRSTNAME()):""));
 		fktDocument.setBILLINGTYPE(3);
 		fktDocument.setCONSULTANT("AUTOGENERADO");
 		fktDocument.setCUSTOMERREF("CONSOLIDADO DEL "+vo.getFechaInicio()+" AL "+vo.getFechaFin());
@@ -341,7 +342,7 @@ public class ConsolidadorPedidoServiceImpl implements ConsolidadorPedidoService 
 		fktDocument.setDOCUMENTDATE(new Date());
 		fktDocument.setDUEDAYS(0);
 		fktDocument.setITEMSREBATE(0.0);
-		fktDocument.setMESSAGE("");
+		fktDocument.setMESSAGE(fktDocument.getCUSTOMERREF());
 		fktDocument.setMESSAGE2("");
 		fktDocument.setMESSAGE3("");
 		fktDocument.setMODIFIED(new Date());

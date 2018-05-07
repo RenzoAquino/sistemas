@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.sgv.common.exception.BusinessException;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import com.sgv.base.dao.model.ControlVenta;
@@ -24,7 +25,7 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 	public FacturaServiceImpl(FktDocument document){
 		super(document);
 	}
-	void crearArchivoCabecera() throws IOException {
+	void crearArchivoCabecera() throws IOException, BusinessException {
 		List<String> lContenido = new ArrayList<String>();
 		//String text = null;
 		StringJoiner sj = new StringJoiner("|");
@@ -34,10 +35,18 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 		// y por ende no crear archivo REL relacionado a cabecera
 		sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_01_PRIMERA_DIRECCION);
 		sj.add(Constants.CATALOGO_06_RUC);
+
+		if(documento.getContact().getVATNUMBER().length() != 11 ) throw new BusinessException("El RUC no tiene 11 digitos.");
+
 		sj.add(documento.getContact().getVATNUMBER());
-		// SI TIPO DE GENERO ES 1 O 2 SE DEBE OBTENER EL DATOS DE NAME Y FIRST NAME
-		// SI TIPO GENERO ES 3 EL DATO SE OBTIENE COMPANY 
-		sj.add(documento.getContact().getCOMPANY());
+		if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
+			sj.add(documento.getContact().getCOMPANY());
+		} else if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
+			sj.add("");
+		} else {//TIPO HOMBRE, MUJER, FAMILIA
+			sj.add(documento.getContact().getFIRSTNAME().concat(", ").concat(documento.getContact().getNAME()));
+		}
+
 		sj.add(Constants.CABECERA_TIPO_MONEDA_PERU);
 		//sj.add(Constants.CABECERA_CTE_DESCUENTO_GLOBAL);
 		sj.add(Constants.VALOR_CERO_STRING);
@@ -59,19 +68,7 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 		sj.add(Constants.VALOR_CERO_STRING);
 		//sj.add(Constants.CABECERA_CTE_IMPORTE_TOTAL);
 		sj.add(MoneyUtil.convertDoubleToString(documento.getImporteTotal()));
-		
-		/*
-		text = sj.toString().replaceAll(
-				Constants.CABECERA_CTE_DESCUENTO_GLOBAL+"|"+
-				Constants.CABECERA_CTE_SUMATORIA_OTROS_CARGOS+"|"+
-				Constants.CABECERA_CTE_TOTAL_DESCUENTOS+"|"+
-				Constants.CABECERA_CTE_TOTAL_VALOR_VENTA_OPERACIONES_INAFECTAS+"|"+
-				Constants.CABECERA_CTE_SUMATORIA_ISC+"|"+
-				Constants.CABECERA_CTE_SUMATORIA_OTROS_TRIBUTOS
-		, Constants.VALOR_CERO_STRING);
-		System.out.println("FILE_CONTENT : "+text);
-		lContenido.add(text);
-		*/
+
 		System.out.println("FILE_CONTENT : "+sj.toString());
 		lContenido.add(sj.toString());
 		
@@ -162,21 +159,24 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 	void crearArchivoDocumentoRelacionado() throws IOException {
 		List<String> lContenido = new ArrayList<String>();
 		StringJoiner sj = null;
-		String msg = documento.getMESSAGE().trim().toUpperCase();
 
-		if(msg.startsWith(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS_OC)){
-			documento.setOc(msg.replaceAll(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS_OC, "").trim());
-			sj = new StringJoiner("|");
-			sj.add(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS.get(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS_OC));
-			sj.add(Constants.CATALOGO_12.get(Constants.CATALOGO_12_OTROS));
-			sj.add(documento.getOc());
-			sj.add("0");
-			sj.add("0");
-			sj.add("0");
-			System.out.println("FILE_CONTENT : "+sj.toString());
-			lContenido.add(sj.toString());
-			
-			crearArchivo(Constants.FACTURADOR_PATH_FILE, nombreBaseDelArchivo.concat(Constants.ARCHIVO_RELACIONADO_EXTENSION), lContenido.toArray(new String[0]));		
+		if(documento.getMESSAGE() != null){
+			String msg = documento.getMESSAGE().trim().toUpperCase();
+
+			if(msg.startsWith(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS_OC)){
+				documento.setOc(msg.replaceAll(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS_OC, "").trim());
+				sj = new StringJoiner("|");
+				sj.add(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS.get(Constants.INDICADOR_DOCUMENTOS_RELACIONADOS_OC));
+				sj.add(Constants.CATALOGO_12.get(Constants.CATALOGO_12_OTROS));
+				sj.add(documento.getOc());
+				sj.add("0");
+				sj.add("0");
+				sj.add("0");
+				System.out.println("FILE_CONTENT : "+sj.toString());
+				lContenido.add(sj.toString());
+
+				crearArchivo(Constants.FACTURADOR_PATH_FILE, nombreBaseDelArchivo.concat(Constants.ARCHIVO_RELACIONADO_EXTENSION), lContenido.toArray(new String[0]));
+			}
 		}
 	}
 	@Override
