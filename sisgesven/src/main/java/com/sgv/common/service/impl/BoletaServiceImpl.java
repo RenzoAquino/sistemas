@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.sgv.common.exception.BusinessException;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import com.sgv.base.dao.model.ControlVenta;
@@ -25,19 +26,21 @@ public class BoletaServiceImpl extends AbstractDocumento implements DocumentoSer
 	public BoletaServiceImpl(FktDocument document){
 		super(document);
 	}
-	void crearArchivoCabecera() throws IOException {
+	void crearArchivoCabecera() throws IOException, BusinessException {
 		List<String> lContenido = new ArrayList<String>();
 		//String text = null;
 		StringJoiner sj = new StringJoiner("|");
 		sj.add(Constants.CATALOGO_17_NO_DOMICILIADOS);
 		sj.add(DateUtil.formatDate(documento.getDOCUMENTDATE(),Constants.FORMAT_DATE_YYYY_MM_DD));
 
-        if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
+		if(documento.getContact().getVATNUMBER().length() != 8 ) throw new BusinessException("El DNI no tiene 8 digitos.");
+
+        /*if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
             sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_01_PRIMERA_DIRECCION);
             sj.add(Constants.CATALOGO_06_RUC);
             sj.add(documento.getContact().getVATNUMBER());
             sj.add(documento.getContact().getCOMPANY());
-        } else if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
+        } else */if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
             sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_00_SIN_DIRECCION);
             sj.add(Constants.CATALOGO_06_SIN_RUC);
             //sj.add("00000000");
@@ -46,14 +49,11 @@ public class BoletaServiceImpl extends AbstractDocumento implements DocumentoSer
             sj.add(documento.getContact().getCOMPANY());
             conDireccionFiscal = false;
         } else {//TIPO HOMBRE, MUJER, FAMILIA
-            if(documento.getContact().getVATNUMBER().length() != 8 ){
-                sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_00_SIN_DIRECCION);
-                sj.add(Constants.CATALOGO_06_DNI);
-                conDireccionFiscal = false;
-            } else if(documento.getContact().getVATNUMBER().length() != 11 ) {
-                sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_01_PRIMERA_DIRECCION);
-                sj.add(Constants.CATALOGO_06_RUC);
-            }
+
+			sj.add(Constants.CABECERA_CODIGO_DOMICILIO_FISCAL_00_SIN_DIRECCION);
+			sj.add(Constants.CATALOGO_06_DNI);
+			conDireccionFiscal = false;
+
             sj.add(documento.getContact().getVATNUMBER());
             sj.add(documento.getContact().getFIRSTNAME().concat(", ").concat(documento.getContact().getNAME()));
         }

@@ -41,9 +41,9 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 		sj.add(documento.getContact().getVATNUMBER());
 		if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
 			sj.add(documento.getContact().getCOMPANY());
-		} else if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
+		} /*else if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
 			sj.add("");
-		} else {//TIPO HOMBRE, MUJER, FAMILIA
+		}*/ else {//TIPO HOMBRE, MUJER, FAMILIA
 			sj.add(documento.getContact().getFIRSTNAME().concat(", ").concat(documento.getContact().getNAME()));
 		}
 
@@ -181,25 +181,27 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 	}
 	@Override
 	void crearArchivoAdicionalCabecera() throws IOException {
-		List<String> lContenido = new ArrayList<String>();
-		StringJoiner sj = new StringJoiner("|");
-		sj.add("0");
-		sj.add("0");
-		sj.add("0");
-		sj.add("0");
-		sj.add("0");
-		sj.add("0");
-		sj.add(documento.getContact().getAddress().getCOUNTRYCODE());
-		sj.add(documento.getContact().getAddress().getZIP());
-		sj.add(documento.getContact().getAddress().getSTREET());
-		sj.add(documento.getContact().getAddress().getCOUNTRYCODE());
-		sj.add(documento.getContact().getAddress().getZIP());
-		sj.add(documento.getContact().getAddress().getSTREET());
-		sj.add(DateUtil.formatDate(documento.getDUEDATE(),Constants.FORMAT_DATE_YYYY_MM_DD));
-		System.out.println("FILE_CONTENT : "+sj.toString());
-		lContenido.add(sj.toString());
-		
-		crearArchivo(Constants.FACTURADOR_PATH_FILE, nombreBaseDelArchivo.concat(Constants.ARCHIVO_ADICIONAL_CABECERA_EXTENSION), lContenido.toArray(new String[0]));			
+		if(documento.getContact().getAddress() != null){
+			List<String> lContenido = new ArrayList<String>();
+			StringJoiner sj = new StringJoiner("|");
+			sj.add("0");
+			sj.add("0");
+			sj.add("0");
+			sj.add("0");
+			sj.add("0");
+			sj.add("0");
+			sj.add(documento.getContact().getAddress().getCOUNTRYCODE());
+			sj.add(documento.getContact().getAddress().getZIP());
+			sj.add(documento.getContact().getAddress().getSTREET());
+			sj.add(documento.getContact().getAddress().getCOUNTRYCODE());
+			sj.add(documento.getContact().getAddress().getZIP());
+			sj.add(documento.getContact().getAddress().getSTREET());
+			sj.add(DateUtil.formatDate(documento.getDUEDATE(),Constants.FORMAT_DATE_YYYY_MM_DD));
+			System.out.println("FILE_CONTENT : "+sj.toString());
+			lContenido.add(sj.toString());
+
+			crearArchivo(Constants.FACTURADOR_PATH_FILE, nombreBaseDelArchivo.concat(Constants.ARCHIVO_ADICIONAL_CABECERA_EXTENSION), lContenido.toArray(new String[0]));
+		}
 	}
 	@Override
 	void crearArchivoLeyenda() throws IOException {
