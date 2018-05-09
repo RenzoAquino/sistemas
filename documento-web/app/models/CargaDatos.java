@@ -157,7 +157,11 @@ public class CargaDatos {
         lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"Corrección factura","","Corrección factura");
         lista.add(dto);
+        dto = new Parametro(DatosSession.getInstance().ruc,"Proforma","","Boleta");
+        /*
+        lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"Proforma","","Proforma");
+        * */
         lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"Albarán envío","","Albarán envío");
         lista.add(dto);

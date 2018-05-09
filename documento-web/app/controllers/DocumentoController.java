@@ -1,5 +1,6 @@
 package controllers;
 
+import commons.Catalogo01SUNAT;
 import commons.Constantes;
 import commons.TypeDocument_ES;
 import commons.TypeOperationSUNAT;
@@ -31,6 +32,7 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class DocumentoController extends Controller{
@@ -168,7 +170,7 @@ public class DocumentoController extends Controller{
         FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
         System.out.println(document);
 
-        if(dto.tipoDocumento.id.codigo.equals("Factura")){
+        if(dto.tipoDocumento.id.codigo.equals("Factura") || dto.tipoDocumento.id.codigo.equals("Proforma")){
             //Invocar Generador de Archivos TXT
             generarTxtDocumentoElectronico(dto);
 
@@ -177,6 +179,8 @@ public class DocumentoController extends Controller{
 
             //Generar XML de Documento - SFS
             generarDocumentoXmlSUNAT(dto);
+
+            TimeUnit.SECONDS.sleep(5);
 
             //Obtener valor hashSUNAT - SFS
             String hash = SFSUtil.obtenerHashSUNAT(dto);
@@ -187,15 +191,15 @@ public class DocumentoController extends Controller{
             esParaSUNAT = true;
         }
 
-        GenerarTicketResumido impR= new GenerarTicketResumido(document);
-        GenerarTicketDetallado impD = new GenerarTicketDetallado(document,esParaSUNAT);
+        //GenerarTicketResumido impR= new GenerarTicketResumido(document);
+        //GenerarTicketDetallado impD = new GenerarTicketDetallado(document,esParaSUNAT);
 
         try {
             if(dto.tipoDetalle.equals("D")){
-                impD.generarTicket();
+                (new GenerarTicketDetallado(document,esParaSUNAT)).generarTicket();
             }
             else if(dto.tipoDetalle.equals("R")){
-                impR.generarTicket();
+                (new GenerarTicketResumido(document)).generarTicket();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -321,7 +325,18 @@ public class DocumentoController extends Controller{
         List<String> parametros = new ArrayList<String>();
         //"hddNumRuc=20477954350&hddTipDoc=01&hddNumDoc=F002-00000214"
         parametros.add("hddNumRuc="+dto.rucEmpresa);
-        parametros.add("hddTipDoc=01");//TypeDocument_ES.valueOf(dto.tipoDocumento.codigo).getText());
+
+        //System.out.println("************ 01 "+TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText());
+        //System.out.println("************ 02 "+Catalogo01SUNAT.valueOf(TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText()).getText());
+
+        String  tipoDocumento = Catalogo01SUNAT.valueOf(TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText()).getText();
+        parametros.add("hddTipDoc="+tipoDocumento);
+        /*
+        if(dto.tipoDocumento.id.codigo.equals("Factura")){
+            parametros.add("hddTipDoc=01");
+        } else if(dto.tipoDocumento.id.codigo.equals("Proforma")){
+            parametros.add("hddTipDoc=03");//TypeDocument_ES.valueOf(dto.tipoDocumento.codigo).getText());
+        }*/
         parametros.add("hddNumDoc="+dto.numero);
         HttpUtil.enviarParametroPaginaWeb(Constantes.URL_GENERAR_XML_SFS,parametros);
     }

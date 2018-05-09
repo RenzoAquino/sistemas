@@ -140,16 +140,22 @@ public abstract class GenerarTicketBase {
     public void cargarDatosCabeceraDocumento() throws Exception {
         fechaDocumento = FechaUtil.convertirDateAString(documento.ORDERDATE,PARAM_TICKET_FORMATO_FECHA);
         //PEDIDO: PD02-00000011  FECHA: 12/12/2017
+        String nombreDocumento_ = (TypeDocument_ES.getByName(documento.DTYPE).toString().equals("Proforma")?"BOLETA":TypeDocument_ES.getByName(documento.DTYPE).toString());
+        System.out.println("*********************** nombreDocumento ["+nombreDocumento_+"]");
 
-        int tamanioTipo = TypeDocument_ES.getByName(documento.DTYPE).toString().length();
+        //int tamanioTipo = TypeDocument_ES.getByName(documento.DTYPE).toString().length();
+        int tamanioTipo = nombreDocumento_.length();
         int tamanioTmp = (tamanioTipo ==7)?13:14;
 
-        registroDocumentoCliente = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase()+": "
+        //registroDocumentoCliente = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase()+": "
+        registroDocumentoCliente = nombreDocumento_.toUpperCase().concat(": ")
                 .concat(StringUtil.completarTamanio(documento.NAME, tamanioTmp, " ", false))
                 .concat(TICKET_ETIQUETA_FECHA).concat(fechaDocumento);
 
         if (esParaSUNAT) {
-            nombreDocumento = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase() + " " + Constantes.PALABRA_ELECTRONICA;
+
+            //nombreDocumento = TypeDocument_ES.getByName(documento.DTYPE).toString().toUpperCase() + " " + Constantes.PALABRA_ELECTRONICA;
+            nombreDocumento = nombreDocumento_.toUpperCase().concat(" ").concat(Constantes.PALABRA_ELECTRONICA);
             numeroDocumento = documento.NAME;
             fechaEmisionDocumento = TICKET_ETIQUETA_FECHA.concat(fechaDocumento);
 

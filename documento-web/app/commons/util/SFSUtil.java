@@ -1,6 +1,8 @@
 package commons.util;
 
+import commons.Catalogo01SUNAT;
 import commons.Constantes;
+import commons.TypeDocument_ES;
 import controllers.dto.DocumentoDTO;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -17,7 +19,18 @@ public class SFSUtil {
     public static String obtenerHashSUNAT(DocumentoDTO dto) throws Exception {
         // La expresion xpath de busqueda
         //String xPathExpression = "/Invoice/UBLExtensions/UBLExtension/ExtensionContent/Signature/SignedInfo/Reference/DigestValue";//"//DigestValue";
-        String nombreArchivo = dto.rucEmpresa.concat("-01-").concat(dto.numero).concat(Constantes.EXTENSION_XML);
+        //String nombreArchivo = dto.rucEmpresa;
+        //System.out.println("TipoDcoumento : "+dto.tipoDocumento);
+
+        String  tipoDocumento = Catalogo01SUNAT.valueOf(TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText()).getText();
+        String nombreArchivo = dto.rucEmpresa.concat("-"+tipoDocumento+"-").concat(dto.numero).concat(Constantes.EXTENSION_XML);
+/*
+        if(dto.tipoDocumento.id.codigo.equals("Factura")){
+            nombreArchivo = nombreArchivo.concat("-01-").concat(dto.numero).concat(Constantes.EXTENSION_XML);
+        } else if(dto.tipoDocumento.id.codigo.equals("Proforma")){
+            nombreArchivo = nombreArchivo.concat("-03-").concat(dto.numero).concat(Constantes.EXTENSION_XML);
+        }
+*/
         nombreArchivo = Constantes.RUTA_XML_FIRMADO_SFS.concat(nombreArchivo);
 
         System.out.println("*******nombreArchivo["+nombreArchivo+"]");
