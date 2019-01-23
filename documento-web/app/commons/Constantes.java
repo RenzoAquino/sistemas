@@ -5,7 +5,7 @@ import models.sgv.Secuencia;
 public class Constantes {
 
     public static final String XPATH_XML_FIRMADO_HASH_SFS = "/Invoice/UBLExtensions/UBLExtension/ExtensionContent/Signature/SignedInfo/Reference/DigestValue";
-    public static final String RUTA_XML_FIRMADO_SFS = "D:\\sunat_archivos\\sfs\\FIRMA\\";
+    public static final String RUTA_XML_FIRMADO_SFS = "D:\\SISGESVEN\\SFS\\sunat_archivos\\sfs\\FIRMA\\";
 
     public static final String URL_GENERAR_XML_SFS = "http://localhost:8090/FacturadorSunat/generarXml.htm";
     public static final String URL_ACTUALIZAR_DB_SFS = "http://localhost:8090/FacturadorSunat/index.htm";

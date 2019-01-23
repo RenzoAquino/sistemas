@@ -155,7 +155,8 @@ public class CargaDatos {
         lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"Factura","","Factura");
         lista.add(dto);
-        dto = new Parametro(DatosSession.getInstance().ruc,"Corrección factura","","Corrección factura");
+        //dto = new Parametro(DatosSession.getInstance().ruc,"Corrección factura","","Nota de crédito");
+        dto = new Parametro(DatosSession.getInstance().ruc,"Credito","","Nota de crédito");
         lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"Proforma","","Boleta");
         /*
@@ -163,7 +164,7 @@ public class CargaDatos {
         dto = new Parametro(DatosSession.getInstance().ruc,"Proforma","","Proforma");
         * */
         lista.add(dto);
-        dto = new Parametro(DatosSession.getInstance().ruc,"Albarán envío","","Albarán envío");
+        dto = new Parametro(DatosSession.getInstance().ruc,"Albarán envío","","Guia de remisión");
         lista.add(dto);
         return lista;
     }
@@ -279,6 +280,26 @@ public class CargaDatos {
         dto = new Parametro(DatosSession.getInstance().ruc,"02","","SANTA ANITA");
         lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"03","","SAN ISIDRO");
+        lista.add(dto);
+        return lista;
+    }
+
+    public static Seq<Parametro> cargarTipoDocumentoFiscalesSeq() {
+        CargaDatos datos = new CargaDatos();
+        List<Parametro> lista = datos.obtenerListaTipoDocumentoFiscales();
+        return JavaConverters.asScalaIteratorConverter(lista.iterator()).asScala().toSeq();
+    }
+
+    public List<Parametro> obtenerListaTipoDocumentoFiscales(){
+        List<Parametro> lista = new ArrayList<Parametro>();
+        Parametro dto = null;
+        dto = new Parametro(DatosSession.getInstance().ruc,"0000","","SELECCIONAR");
+        lista.add(dto);
+        dto = new Parametro(DatosSession.getInstance().ruc,"Factura","","Factura");
+        lista.add(dto);
+        dto = new Parametro(DatosSession.getInstance().ruc,"Proforma","","Boleta");
+        lista.add(dto);
+        dto = new Parametro(DatosSession.getInstance().ruc,"Corrección factura","","Nota de crédito");
         lista.add(dto);
         return lista;
     }

@@ -125,7 +125,7 @@ public class DocumentoController extends Controller{
         return ok(ver.render(documento));
     }
 
-    public Result verImprimirTicket() throws Exception {
+    public Result inicioImprimirTicket() throws Exception {
         String myUrl = "http://localhost:8090/FacturadorSunat/index.htm";
         // if your url can contain weird characters you will want to
         // encode it here, something like this:
@@ -144,6 +144,7 @@ public class DocumentoController extends Controller{
         dto.tipoDetalle ="R";
         dto.listaTipoAccion = new ArrayList<String>();
         dto.listaTipoAccion.add("IMP");
+        dto.listaTipoAccion.add("PDF");
 
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).fill(dto);
 
@@ -165,10 +166,11 @@ public class DocumentoController extends Controller{
         }
 
         DocumentoDTO dto = documentoDTOForm.get();
-        System.out.println(dto);
+        dto.radTipoOperacion = "ALTA";
+        System.out.println("DATO ENTRADA : "+dto);
 
         FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
-        System.out.println(document);
+        System.out.println("DATO RECUPERADO : "+document);
 
         if(dto.tipoDocumento.id.codigo.equals("Factura") || dto.tipoDocumento.id.codigo.equals("Proforma")){
             //Invocar Generador de Archivos TXT
@@ -189,6 +191,9 @@ public class DocumentoController extends Controller{
 
             //Actualizar campo comentario 3(HASH) de Documento - FAKTURAMA
             esParaSUNAT = true;
+        } else if (dto.tipoDocumento.id.codigo.equals("Credito")){
+            //Invocar Generador de Archivos TXT
+            generarTxtDocumentoElectronico(dto);
         }
 
         //GenerarTicketResumido impR= new GenerarTicketResumido(document);
@@ -236,9 +241,11 @@ public class DocumentoController extends Controller{
     private void generarTxtDocumentoElectronico(DocumentoDTO dto) throws Exception {
         List<String> parametros = new ArrayList<String>();
         parametros.add("emisorRUC="+dto.rucEmpresa);
-        parametros.add("documentoTipo="+TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText());
+        //parametros.add("documentoTipo="+TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText());
+        parametros.add("documentoTipo="+dto.tipoDocumento.id.codigo);
         parametros.add("documentoNumero="+dto.numero);
-        parametros.add("radTipoOperacion="+TypeOperationSUNAT.valueOf("ALTA").getText());
+        parametros.add("radTipoOperacion="+dto.radTipoOperacion);
+        //parametros.add("radTipoOperacion="+TypeOperationSUNAT.valueOf("ALTA").getText());
         HttpUtil.enviarParametroPaginaWeb(Constantes.URL_GENERAR_TXT_ALTA_SUNAT,parametros);
     }
 
@@ -427,5 +434,63 @@ public class DocumentoController extends Controller{
         }
     }
 
+    public Result iniciarAnular() throws Exception {
+        DocumentoDTO dto = new DocumentoDTO();
+        Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).fill(dto);
+        return ok(anular.render(documentoDTOForm));
+    }
 
+    public Result anular() throws Exception {
+
+        boolean esParaSUNAT = false;
+        Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).bindFromRequest();
+
+        DocumentoDTO dto = documentoDTOForm.get();
+        dto.radTipoOperacion = "BAJA";
+        System.out.println(dto);
+
+        if(documentoDTOForm.hasErrors()){
+            flash("danger","Corregir los errores del formulario");
+            return badRequest(anular.render(documentoDTOForm));
+        }
+
+        if(documentoDTOForm.get().tipoDocumento.id.codigo.equals("0000")){
+            flash("danger","Seleccionar el tipo de documento");
+            return badRequest(anular.render(documentoDTOForm));
+        }
+
+        if(documentoDTOForm.get().numero.trim().isEmpty()){
+            flash("danger","Ingresar el número del documento.");
+            return badRequest(anular.render(documentoDTOForm));
+        }
+
+
+        FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
+        System.out.println(document);
+
+        if(dto.tipoDocumento.id.codigo.equals("Factura") || dto.tipoDocumento.id.codigo.equals("Proforma") || dto.tipoDocumento.id.codigo.equals("Corrección factura")){
+            //Invocar Generador de Archivos TXT
+            generarTxtDocumentoElectronico(dto);
+
+            //Invocar registro de Documento - SFS
+            registrarDocumentosDbSUNAT();
+
+            //Generar XML de Documento - SFS
+            generarDocumentoXmlSUNAT(dto);
+
+            TimeUnit.SECONDS.sleep(5);
+
+            //Obtener valor hashSUNAT - SFS
+            //String hash = SFSUtil.obtenerHashSUNAT(dto);
+            //System.out.println("*****************HASH["+hash+"]");
+            //document.MESSAGE3 = hash;
+
+            //Actualizar campo comentario 3(HASH) de Documento - FAKTURAMA
+            esParaSUNAT = true;
+        }
+
+        flash("success","Se envío a anular el documento a SUNAT.");
+
+        return ok(anular.render(documentoDTOForm));
+    }
 }

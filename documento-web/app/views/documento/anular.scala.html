@@ -1,0 +1,44 @@
+@import controllers.dto.DocumentoDTO
+@import models.CargaDatos
+@(documentoDTOForm: Form[DocumentoDTO])
+
+
+@import helper._
+
+@layout("Anular documento"){
+    <h3>ANULAR DOCUMENTO</h3>
+    @helper.form(action = routes.DocumentoController.anular()){
+<!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/anidando_columnas.html -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        @select(
+                            documentoDTOForm("tipoDocumento.id.codigo"),
+                            options = CargaDatos.cargarTipoDocumentoFiscalesSeq.map(dto => dto.id.codigo -> dto.valor),
+                            '_label -> "Tipo Documento",
+                            '_error -> documentoDTOForm("tipoDocumento.codigo").error.map(_.withMessage("Seleccionar Tipo de Documento")))
+                    </div>
+
+                    <div class="col-md-6">
+                    @helper.inputText(documentoDTOForm("numero"),'class ->"form-control", '_label -> "Número",'autocomplete -> "off", 'placeholder -> "Ingrese el número de documento ...")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" type="submit">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            Anular Documento
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @helper.inputText(documentoDTOForm("nombreEmpresa"),'class ->"form-control", '_label -> null, 'style -> "display: none",'readonly -> "readonly")
+        @helper.inputText(documentoDTOForm("rucEmpresa"),'class ->"form-control",'_label -> null, 'style -> "display: none",'readonly -> "readonly")
+    }
+}

@@ -17,9 +17,11 @@ GET     /welcome/:nombre/:apellido                controllers.HomeController.wel
 
 
 
-
+# ==================== CONTABILIDAD
 GET     /contabilidad/inicioLibroContable         controllers.ContabilidadController.inicioGenerarLibro
 GET     /contabilidad/generarLibroContable        controllers.ContabilidadController.generarLibro
+# ==================== CONTABILIDAD
+# ==================== MAESTRO
 GET     /maestro/contacto/buscar/$tipo<(01|02)>   controllers.ContactoController.buscar(tipo: String)
 GET     /maestro/contacto/crear/$tipo<(01|02)>    controllers.ContactoController.crear(tipo: String)
 GET     /maestro/contacto/:id                     controllers.ContactoController.ver(id: Long)
@@ -30,13 +32,15 @@ POST    /maestro/contacto/crear                   controllers.ContactoController
 PUT     /maestro/contacto/editar/:id              controllers.ContactoController.actualizar(id: Long)
 + nocsrf
 DELETE  /maestro/contacto/eliminar/:id            controllers.ContactoController.eliminar(id: Long)
-
 GET     /maestro/inicioProducto                   controllers.ProductoController.inicio
 GET     /maestro/inicioCategoria                  controllers.CategoriaController.inicio
 GET     /maestro/inicioMaestroGeneral             controllers.MaestroGeneralController.inicio
+# ==================== MAESTRO
 
-GET     /documento/verImprimirTicket              controllers.DocumentoController.verImprimirTicket
+GET     /documento/inicioImprimirTicket           controllers.DocumentoController.inicioImprimirTicket
 GET     /documento/imprimirTicket                 controllers.DocumentoController.imprimirTicket
+GET     /documento/inicioAnular                   controllers.DocumentoController.iniciarAnular
+GET     /documento/anular                         controllers.DocumentoController.anular
 
 GET     /documento                                controllers.DocumentoController.index
 GET     /documento/crear                          controllers.DocumentoController.crear

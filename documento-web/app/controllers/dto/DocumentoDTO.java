@@ -9,7 +9,7 @@ public class DocumentoDTO {
     public Parametro tipoDocumento;
 
     public String numero;
-    //public String tipoDocumento;
+    public String radTipoOperacion;
     public String rucEmpresa;
     public String tipoDetalle;
     public List<String> listaTipoAccion;
@@ -18,8 +18,8 @@ public class DocumentoDTO {
     public String toString() {
         return "DocumentoDTO{" +
                 "numero='" + numero + '\'' +
+                ", radTipoOperacion='" + radTipoOperacion + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
-                //", tipoDocumento='" + tipoDocumento + '\'' +
                 ", rucEmpresa='" + rucEmpresa + '\'' +
                 ", tipoDetalle='" + tipoDetalle + '\'' +
                 ", listaTipoAccion=" + listaTipoAccion +

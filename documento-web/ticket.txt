@@ -1,37 +1,65 @@
                                         
         INVERSIONES UNOCC S.A.C.        
+            RUC: 20477954350            
            TELEFONO: 470-8565           
-      ventas@inversionesunocc.com       
+      VENTAS@INVERSIONESUNOCC.COM       
                                         
-PEDIDO: PD01-00000638  FECHA: 29/04/2018
-        BECERRA ABUSADA CLAUDIA         
+PEDIDO: PD05-00000493  FECHA: 21/01/2019
+LA POSITIVA SEGUROS Y REASEGUROS        
+RUC: 20100210909                        
 ----------------------------------------
-Cantidad  Unidad  Producto              
+Codigo Cantidad U.M. P.Unitario  Importe
 ----------------------------------------
-    1.0 KG  AJI AMARILLO                
-   0.25 KG  AJI LIMO                    
-    1.0 KG  ARVERJA ENTERA              
-   2.31 KG  BROCOLI                     
-    1.0 POT BROTE DE ALFALFA            
-    2.0 KG  CEBOLLA BLANCA              
-   2.32 KG  CHOCLO DESGRANADO           
-    0.5 PQT CULANTRO                    
-    0.5 KG  ESPINACA                    
-    1.5 KG  ESPINACA                    
-    4.0 KG  MANZANA ISRAEL              
-   1.26 KG  PALTA FUERTE                
-    6.0 KG  PAPA AMARILLA               
-    3.0 KG  PAPA COCTEL                 
-    4.0 KG  PAPA YUNGAY                 
-    2.0 UND PORO                        
-    6.0 UND ROCOTO                      
-    4.0 KG  TOMATE                      
-    3.0 KG  VAINITA                     
-    4.0 KG  ZANAHORIA                   
+ AA0005   3.000 BOT     7.80      23.40 
+*ACEITE VEGETAL CLASICO 1 Lt - PRIMOR   
+          4.000 LAT     5.00      20.00 
+*AGUA TONICA 150 ml - BRITVIC           
+ AZ0004   8.000 BOL     3.80      30.40 
+ ARROZ 750 gr - COSTEÑO                 
+ AS0017   1.000 UND    16.00      16.00 
+*CEREZAS MARRASQUINO ROJO 340 g - SANTIS
+ AP0010   2.000 UND     2.80       5.60 
+*FIDEO SPAGUETTI 500 gr - DON VITTORIO  
+ AS0006   6.000 LAT     5.50      33.00 
+*FILETE DE ATUN 170 gr - FLORIDA        
+ AM0016   2.000 UND     6.00      12.00 
+ FRIJOL CANARIO 500 gr - COSTEÑO        
+          2.000 PQT     4.50       9.00 
+*GALLETA DE VAINILLA SIX PACK - DIA     
+ AM0018   2.000 UND     7.00      14.00 
+ GARBANZO 500 gr - COSTEÑO              
+ AS0019   4.000 LAT     7.00      28.00 
+*GARBANZOS 570 gr - HOJA REDONDA        
+ PH0010   1.000 PQT     6.00       6.00 
+*HARINA SIN PREPARAR 1 Kg - BLANCA FLOR 
+ ID0009   1.000 BOT     7.00       7.00 
+*LAVANDA 900 mL - POETT                 
+ LL0007  10.000 LAT     3.30      33.00 
+*LECHE EVAPORADA AZUL 400 gr - GLORIA   
+ AM0017   2.000 UND     5.50      11.00 
+ LENTEJA 500 gr - COSTEÑO               
+ ID0008   2.000 BOT     5.50      11.00 
+*LIMPIAVAJILLA LIQUIDO 500 mL - SAPOLIO 
+          1.000 UND    17.00      17.00 
+*MR MUSCULO CON ROCIADOR                
+ AW0042   1.000 UND    13.00      13.00 
+*PIMIENTA BLANCA 56.7 gr - BADIA        
+ AS0015   2.000 LAT     6.50      13.00 
+*PIÑA EN RODAJAS 340 gr - COMPASS       
+ AB0011   3.000 BOT     2.40       7.20 
+*SCHWEPPES GINGER ALE 500 mL            
+ ID0007   3.000 PQT     3.00       9.00 
+*SERVILLETA 60 und - ELITE ULTRA        
+ AB0006   3.000 CAJ    13.00      39.00 
+*VINO BLANCO 1 L - GATO NEGRO           
 ----------------------------------------
+     OP GRAVADA                   245.93
+     OP EXONERADA                  67.40
+     IGV                           44.27
+     IMPORTE TOTAL S/             357.60
                                         
    Revisar los productos entregados.    
-               20 Items.                
+               21 Items.                
                                         
                                         
                                         
