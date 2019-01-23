@@ -39,13 +39,18 @@ public class FacturaServiceImpl extends AbstractDocumento implements DocumentoSe
 		if(documento.getContact().getVATNUMBER().length() != 11 ) throw new BusinessException("El RUC no tiene 11 digitos.");
 
 		sj.add(documento.getContact().getVATNUMBER());
-		if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
+		if(documento.getContact().getCOMPANY() != null && !documento.getContact().getCOMPANY().isEmpty()){
 			sj.add(documento.getContact().getCOMPANY());
-		} /*else if(documento.getContact().getGENDER() == 0){//TIPO CLIENTE GENERICO
-			sj.add("");
-		}*/ else {//TIPO HOMBRE, MUJER, FAMILIA
+		} else {
 			sj.add(documento.getContact().getFIRSTNAME().concat(", ").concat(documento.getContact().getNAME()));
 		}
+		/*
+		if(documento.getContact().getGENDER() == 3){//TIPO EMPRESA
+			sj.add(documento.getContact().getCOMPANY());
+		}  else {//TIPO HOMBRE, MUJER, FAMILIA
+			sj.add(documento.getContact().getFIRSTNAME().concat(", ").concat(documento.getContact().getNAME()));
+		}
+		*/
 
 		sj.add(Constants.CABECERA_TIPO_MONEDA_PERU);
 		//sj.add(Constants.CABECERA_CTE_DESCUENTO_GLOBAL);

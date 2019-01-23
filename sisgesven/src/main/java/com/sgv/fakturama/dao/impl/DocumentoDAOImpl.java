@@ -32,7 +32,7 @@ public class DocumentoDAOImpl extends GenericDAO implements DocumentDAO{
 	    FktDocument document = null;
 	    System.out.println("DocumentoDAOImpl.selectByNumeroBasico "+documento);
        	document = session.selectOne("com.sgv.fakturama.dao.FktDocumentMapper.selectByNumeroBasico", documento );
-        return document;
+	   return document;
     } 
    
    @Override

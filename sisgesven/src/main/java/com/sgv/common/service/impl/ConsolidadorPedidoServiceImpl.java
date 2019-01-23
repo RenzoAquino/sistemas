@@ -134,6 +134,9 @@ public class ConsolidadorPedidoServiceImpl implements ConsolidadorPedidoService 
 			//System.out.println("CONSOLIDADOR : "+tmp);
 			documento.setID(tmp.getID());
 			*/
+
+			//System.out.print("====>>>>>>  get FktDocument "+dao.selectByNumeroBasico(documentoVO));
+
 			documento.setID(dao.selectByNumeroBasico(documentoVO).getID());
 			dao.updateByPrimaryKey(documento);			
 			docItemDAO.deleteByFKDocument(documento.getID());	
@@ -221,31 +224,31 @@ public class ConsolidadorPedidoServiceImpl implements ConsolidadorPedidoService 
 			
 			if(cantidadPedidos > vo.getListaNumeroDocumento().size()){
 				throw new BusinessException("SE REQUIEREN GENERAR "+(cantidadPedidos-vo.getListaNumeroDocumento().size())+"DOCUMENTO(S).");
-			}
-			
-			cantidadResiduoSinIGV = nPSI%maximaCantidadRegistros;
-			cantidadResiduoConIGV = nPCI%maximaCantidadRegistros;
+            }
 
-			listaItemsSIGV = mProductoSinIGV.entrySet()
-					.stream()
-					//.sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
-					//.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
-					.map(e -> convertirConsolidadirProductoAFktDocumentItem(e.getValue()))
-					.collect(Collectors.toList());			
-			//Collections.sort(listaItemsSIGV, new FktDocumentitemComparator());
-			
-			listaItemsCIGV = mProductoConIGV.entrySet()
-					.stream()
-					//.sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
-					//.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
-					.map(e -> convertirConsolidadirProductoAFktDocumentItem(e.getValue()))
-					.collect(Collectors.toList());
-			//Collections.sort(listaItemsCIGV, new FktDocumentitemComparator());
-			
-			//Cargar Pedidos
-			for (int i = 0; i < cantidadPedidosSinIGV; i++) {
-				numeroPedido = vo.getListaNumeroDocumento().get(i);			
-				documento = cargarDocumento(numeroPedido, documentoBase, vo);
+            cantidadResiduoSinIGV = nPSI%maximaCantidadRegistros;
+            cantidadResiduoConIGV = nPCI%maximaCantidadRegistros;
+
+            listaItemsSIGV = mProductoSinIGV.entrySet()
+                    .stream()
+                    //.sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
+                    //.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                    .map(e -> convertirConsolidadirProductoAFktDocumentItem(e.getValue()))
+                    .collect(Collectors.toList());
+            //Collections.sort(listaItemsSIGV, new FktDocumentitemComparator());
+
+            listaItemsCIGV = mProductoConIGV.entrySet()
+                    .stream()
+                    //.sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
+                    //.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                    .map(e -> convertirConsolidadirProductoAFktDocumentItem(e.getValue()))
+                    .collect(Collectors.toList());
+            //Collections.sort(listaItemsCIGV, new FktDocumentitemComparator());
+
+            //Cargar Pedidos
+            for (int i = 0; i < cantidadPedidosSinIGV; i++) {
+                numeroPedido = vo.getListaNumeroDocumento().get(i);
+                documento = cargarDocumento(numeroPedido, documentoBase, vo);
 				
 		    	registroInicial = maximaCantidadRegistros*i;
 		    	registroFinal = (maximaCantidadRegistros*(i+1));//-1;

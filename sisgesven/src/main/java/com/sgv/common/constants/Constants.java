@@ -9,7 +9,9 @@ public class Constants {
 
 	public static final String SISGESVEN_PATH_FILE = "D:\\SISGESVEN\\CONSOLIDADO\\";
 
-	public static final String FACTURADOR_PATH_FILE = "D:\\sunat_archivos\\sfs\\DATA\\";
+	//public static final String FACTURADOR_PATH_FILE = "D:\\sunat_archivos\\sfs\\DATA\\";
+	public static final String FACTURADOR_PATH_FILE = "d:\\SISGESVEN\\SFS\\sunat_archivos\\sfs\\\\DATA\\";
+
 	public static final String FACTURADOR_PATH_REPO = "D:\\sunat_archivos\\sfs\\REPO\\";
 	public static final String FACTURADOR_PATH_RPTA = "D:\\sunat_archivos\\sfs\\RPTA\\";
 	public static final String FAKTURAMA_PATH_BASE = "D:\\WS_FAKTURAMA\\WS_INVERSIONES_UNOCC";
