@@ -6,17 +6,22 @@ import commons.TypeDocument_ES;
 import controllers.dto.DocumentoDTO;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
+import java.io.IOException;
 
 public class SFSUtil {
 
-    public static String obtenerHashSUNAT(DocumentoDTO dto) throws Exception {
+    public static String obtenerHashSUNAT(DocumentoDTO dto) throws SAXException, ParserConfigurationException, IOException, XPathExpressionException {
         // La expresion xpath de busqueda
         //String xPathExpression = "/Invoice/UBLExtensions/UBLExtension/ExtensionContent/Signature/SignedInfo/Reference/DigestValue";//"//DigestValue";
         //String nombreArchivo = dto.rucEmpresa;

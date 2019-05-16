@@ -15,11 +15,11 @@ import java.io.IOException;
 
 public class PDFUtil {
 
-    public static void convertirTXTaPDF(String nombreArchivoPdf) throws IOException, PrinterException, InterruptedException {
+    public static void convertirTXTaPDF(String ruc,String nombreArchivoPdf) throws IOException, PrinterException, InterruptedException {
 
         PDDocument document = new PDDocument();
         TextToPDF pdf = new TextToPDF();
-        File pdfFile = new File("D:\\SISGESVEN\\TICKETS\\"+nombreArchivoPdf);//new File(nombreArchivoPDF);
+        File pdfFile = new File(Constantes.RUTA_BASE_TICKET+"\\"+ruc+"\\"+nombreArchivoPdf);//new File(nombreArchivoPDF);
 
         BufferedReader reader = new BufferedReader(new FileReader(Constantes.NOMBRE_ARCHIVO_TXT));
 

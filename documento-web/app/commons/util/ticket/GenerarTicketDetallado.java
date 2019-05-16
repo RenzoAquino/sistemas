@@ -82,7 +82,7 @@ public class GenerarTicketDetallado extends GenerarTicketBase {
         }
 
         agregarLinea(razonSocialCliente,false);
-        agregarLinea(rucCliente,false); //*
+        agregarLinea(numeroCliente,false); //*
         agregarLineaRepetirValor("-");
         agregarLinea(cabeceraDetalleDetallado,true);
         agregarLineaRepetirValor("-");

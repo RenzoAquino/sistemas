@@ -37,7 +37,7 @@ public class FktUserproperty  extends Model {
 
 
     @Override
-    public String toString() {
+    public String toString() { //this.db("");
         return "FktUserproperty{" +
                 "ID=" + ID +
                 ", DATEADDED=" + DATEADDED +

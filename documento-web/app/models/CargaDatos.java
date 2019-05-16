@@ -30,9 +30,9 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoImpresionTicket(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
-        dto = new Parametro(DatosSession.getInstance().ruc,"R","","Resumido");
+        dto = new Parametro(DatosSession.getInstance().ruc,"S","","SI");
         lista.add(dto);
-        dto = new Parametro(DatosSession.getInstance().ruc,"D","","Detallado");
+        dto = new Parametro(DatosSession.getInstance().ruc,"N","","NO");
         lista.add(dto);
         return lista;
     }
@@ -53,6 +53,8 @@ public class CargaDatos {
     public List<Parametro> obtenerListaTipoAccion(){
         List<Parametro> lista = new ArrayList<Parametro>();
         Parametro dto = null;
+        dto = new Parametro(DatosSession.getInstance().ruc,"SFS","","Enviar a SFS");
+        lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"IMP","","Impresión");
         lista.add(dto);
         dto = new Parametro(DatosSession.getInstance().ruc,"PDF","","Generar PDF");

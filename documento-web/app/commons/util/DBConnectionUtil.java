@@ -15,4 +15,7 @@ public class DBConnectionUtil {
     public static EbeanServer getDBServerFacturador(){
         return getDBServer(Constantes.DB_ID_FACTURADOR_SUNAT);
     }
+    public static EbeanServer getDBServerFakturama01(){
+        return getDBServer(Constantes.DB_ID_FAKTURAMA01);
+    }
 }

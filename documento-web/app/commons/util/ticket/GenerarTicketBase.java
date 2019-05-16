@@ -23,6 +23,7 @@ public abstract class GenerarTicketBase {
     public static final String TICKET_ETIQUETA_TELEFONO = "TELEFONO: ";
     public static final String TICKET_ETIQUETA_FECHA = " FECHA: ";
     public static final String TICKET_ETIQUETA_RUC = "RUC: ";
+    public static final String TICKET_ETIQUETA_DNI = "DNI: ";
     public static final String TICKET_ETIQUETA_CLIENTE = "CLIENTE: ";
 
     public static final String TICKET_ETIQUETA_TOTAL_OPERACION_EXONERADA = "     OP EXONERADA";
@@ -82,7 +83,7 @@ public abstract class GenerarTicketBase {
 
     protected String fechaDocumento;
     protected String registroDocumentoCliente;
-    protected String rucCliente;
+    protected String numeroCliente;
     protected String razonSocialCliente;
 
     protected int tamanioCodigoProducto;
@@ -163,7 +164,13 @@ public abstract class GenerarTicketBase {
         } else {
             razonSocialCliente = documento.contact.COMPANY;
         }
-        rucCliente = TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
+
+        if(TypeDocument_ES.getByName(documento.DTYPE).toString().equals("Proforma")){
+            numeroCliente = TICKET_ETIQUETA_DNI.concat(documento.contact.VATNUMBER);
+        } else {
+            numeroCliente = TICKET_ETIQUETA_RUC.concat(documento.contact.VATNUMBER);
+        }
+
 
         hashSUNAT = documento.MESSAGE3;
     }

@@ -2,6 +2,7 @@ package repository;
 
 import commons.Constantes;
 import commons.TypeDocument_ES;
+import commons.exception.BusinessException;
 import controllers.dto.DocumentoDTO;
 import models.Empresa;
 import models.fakturama.FktContact;
@@ -13,10 +14,10 @@ import java.util.Map;
 
 public class DocumentoService {
 
-    public static FktDocument obtenerDatosDocumento(DocumentoDTO dto){
+    public static FktDocument obtenerDatosDocumento(DocumentoDTO dto) throws BusinessException {
         FktDocument document = null;
         Map<String,FktUserproperty> mapUserproperty = null;
-        System.out.println("obtenerDatosDocumento "+dto);
+        System.out.println("DocumentoService.obtenerDatosDocumento "+dto);
 /*
         FktContact contact = FktContact.find.query().where().eq("vatnumber",dto.rucEmpresa).findOne();
         System.out.println(contact);
@@ -49,6 +50,7 @@ public class DocumentoService {
                 .eq("name",dto.numero)
                 .eq("dtype", TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText())
                 .findOne();
+        if(document == null) throw new BusinessException("No se encontro el registro "+dto.numero);
         document.contact = FktContact.find.byId(document.contact.ID);
 
         document.items = FktDocumentitem.find.query()

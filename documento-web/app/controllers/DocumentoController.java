@@ -4,6 +4,7 @@ import commons.Catalogo01SUNAT;
 import commons.Constantes;
 import commons.TypeDocument_ES;
 import commons.TypeOperationSUNAT;
+import commons.exception.BusinessException;
 import commons.util.HttpUtil;
 import commons.util.SFSUtil;
 import commons.util.ticket.GenerarTicketDetallado;
@@ -14,6 +15,7 @@ import controllers.dto.DocumentoDTO;
 import models.Documento;
 import models.fakturama.FktDocument;
 
+import org.xml.sax.SAXException;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -141,7 +143,7 @@ public class DocumentoController extends Controller{
         //obtenerHashSUNAT();
 
         DocumentoDTO dto = new DocumentoDTO();
-        dto.tipoDetalle ="R";
+        dto.tipoDetalle ="N";
         dto.listaTipoAccion = new ArrayList<String>();
         dto.listaTipoAccion.add("IMP");
         dto.listaTipoAccion.add("PDF");
@@ -153,7 +155,7 @@ public class DocumentoController extends Controller{
 
     // para generarTicket
     public Result imprimirTicket() throws Exception {
-        boolean esParaSUNAT = false;
+       // boolean esParaSUNAT = false;
         Form<DocumentoDTO> documentoDTOForm = formFactory.form(DocumentoDTO.class).bindFromRequest();
         if(documentoDTOForm.hasErrors()){
             flash("danger","Por favor corregir los errores del formulario");
@@ -161,7 +163,7 @@ public class DocumentoController extends Controller{
         }
 
         if(documentoDTOForm.get().listaTipoAccion == null){
-            flash("danger","Por favor seleccionar si va imprimir y/o generar un pdf");
+            flash("danger","Por favor seleccionar una accion");
             return badRequest(verImprimirTicket.render(documentoDTOForm));
         }
 
@@ -169,18 +171,75 @@ public class DocumentoController extends Controller{
         dto.radTipoOperacion = "ALTA";
         System.out.println("DATO ENTRADA : "+dto);
 
-        FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
-        System.out.println("DATO RECUPERADO : "+document);
+        try {
 
+            FktDocument document = DocumentoService.obtenerDatosDocumento(dto);
+            System.out.println("DATO RECUPERADO : " + document);
+
+            if (dto.tipoDocumento.id.codigo.equals("Pedido")) {
+                try {
+                    if (dto.tipoDetalle.equals("S")) {//DETALLADO
+                        System.out.println("IMPRESION CON PRECIOS....");
+
+                        (new GenerarTicketDetallado(document, false)).generarTicket();
+                    } else if (dto.tipoDetalle.equals("N")) {//RESUMIDO
+                        System.out.println("IMPRESION SIN PRECIOS....");
+                        (new GenerarTicketResumido(document)).generarTicket();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else { // FACTURA, BOLETA, NOTA DE CREDITO
+                if (ejecutarEnvioSFS(dto.listaTipoAccion, dto)) {
+
+                    //Invocar registro de Documento - SFS
+                    registrarDocumentosDbSUNAT();
+
+                    //Generar XML de Documento - SFS
+                    generarDocumentoXmlSUNAT(dto);
+
+                    TimeUnit.MILLISECONDS.sleep(750);
+
+                    flash("success", "El documento " + document.NAME + ", se envio al SFS.");
+
+                    return ok(verImprimirTicket.render(documentoDTOForm));
+                } else {
+                    if (!dto.tipoDocumento.id.codigo.equals("Credito")) {
+
+
+
+                        //TimeUnit.SECONDS.sleep(5);
+
+                        String hash = null;
+                        try {
+                            //Obtener valor hashSUNAT - SFS
+                            hash = SFSUtil.obtenerHashSUNAT(dto);
+                        } catch (FileNotFoundException e) {
+                            flash("warning", "No se encontro la firma del  documento \"" + dto.numero + "\"");
+                            return badRequest(verImprimirTicket.render(documentoDTOForm));
+                        }
+
+                        System.out.println("*****************HASH[" + hash + "]");
+                        document.MESSAGE3 = hash;
+
+                        //Actualizar campo comentario 3(HASH) de Documento - FAKTURAMA
+
+                        //Generar Ticket
+                        (new GenerarTicketDetallado(document, true)).generarTicket();
+                    }
+                }
+            }
+
+/*
         if(dto.tipoDocumento.id.codigo.equals("Factura") || dto.tipoDocumento.id.codigo.equals("Proforma")){
             //Invocar Generador de Archivos TXT
             generarTxtDocumentoElectronico(dto);
 
             //Invocar registro de Documento - SFS
-            registrarDocumentosDbSUNAT();
+            //registrarDocumentosDbSUNAT();
 
             //Generar XML de Documento - SFS
-            generarDocumentoXmlSUNAT(dto);
+            //generarDocumentoXmlSUNAT(dto);
 
             TimeUnit.SECONDS.sleep(5);
 
@@ -195,22 +254,22 @@ public class DocumentoController extends Controller{
             //Invocar Generador de Archivos TXT
             generarTxtDocumentoElectronico(dto);
         }
-
-        //GenerarTicketResumido impR= new GenerarTicketResumido(document);
-        //GenerarTicketDetallado impD = new GenerarTicketDetallado(document,esParaSUNAT);
-
+*/
+            //GenerarTicketResumido impR= new GenerarTicketResumido(document);
+            //GenerarTicketDetallado impD = new GenerarTicketDetallado(document,esParaSUNAT);
+/*
         try {
-            if(dto.tipoDetalle.equals("D")){
+            if(dto.tipoDetalle.equals("D")){//DETALLADO
                 (new GenerarTicketDetallado(document,esParaSUNAT)).generarTicket();
             }
-            else if(dto.tipoDetalle.equals("R")){
+            else if(dto.tipoDetalle.equals("R")){//RESUMIDO
                 (new GenerarTicketResumido(document)).generarTicket();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        ejecutarTipoAccion(dto.listaTipoAccion,document);
+*/
+            ejecutarTipoAccion(dto.listaTipoAccion, document);
 
 
 
@@ -230,10 +289,13 @@ public class DocumentoController extends Controller{
         }
 */
 
-        //documentoDTO.generarTicket();
+            //documentoDTO.generarTicket();
 
-        flash("success","Se realizo correctamente la operación.");
-
+            flash("success", "El documento " + document.NAME + " fue procesado correctamente.");
+        }catch (BusinessException be){
+            flash("danger",be.getMessage());
+            return badRequest(verImprimirTicket.render(documentoDTOForm));
+        }
         //return redirect(routes.DocumentoController.verImprimirTicket());
         return ok(verImprimirTicket.render(documentoDTOForm));
     }
@@ -250,9 +312,13 @@ public class DocumentoController extends Controller{
     }
 
     private void registrarDocumentosDbSUNAT() throws Exception {
-        HttpUtil.consultarpaginaWeb(Constantes.URL_ACTUALIZAR_DB_SFS,Constantes.WEB_TIPO_ENVIO_GET);
+        HttpUtil.consultarpaginaWeb(Constantes.URL_ACTUALIZAR_DB_SFS,Constantes.WEB_TIPO_ENVIO_POST
+        );
     }
-
+    private void generarXMLSUNAT() throws Exception {
+        HttpUtil.consultarpaginaWeb(Constantes.URL_GENERAR_XML_SFS,Constantes.WEB_TIPO_ENVIO_POST
+        );
+    }
     private void doHttpSendDataUrlConnection(){
         System.out.println("doHttpSendDataUrlConnection.inicio..");
 
@@ -331,21 +397,15 @@ public class DocumentoController extends Controller{
     public  void generarDocumentoXmlSUNAT(DocumentoDTO dto) throws Exception {
         List<String> parametros = new ArrayList<String>();
         //"hddNumRuc=20477954350&hddTipDoc=01&hddNumDoc=F002-00000214"
-        parametros.add("hddNumRuc="+dto.rucEmpresa);
+        parametros.add("{\"num_ruc\":\""+dto.rucEmpresa+"\"");
 
         //System.out.println("************ 01 "+TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText());
         //System.out.println("************ 02 "+Catalogo01SUNAT.valueOf(TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText()).getText());
 
         String  tipoDocumento = Catalogo01SUNAT.valueOf(TypeDocument_ES.valueOf(dto.tipoDocumento.id.codigo).getText()).getText();
-        parametros.add("hddTipDoc="+tipoDocumento);
-        /*
-        if(dto.tipoDocumento.id.codigo.equals("Factura")){
-            parametros.add("hddTipDoc=01");
-        } else if(dto.tipoDocumento.id.codigo.equals("Proforma")){
-            parametros.add("hddTipDoc=03");//TypeDocument_ES.valueOf(dto.tipoDocumento.codigo).getText());
-        }*/
-        parametros.add("hddNumDoc="+dto.numero);
-        HttpUtil.enviarParametroPaginaWeb(Constantes.URL_GENERAR_XML_SFS,parametros);
+        parametros.add("\"tip_docu\":\""+tipoDocumento+"\"");
+        parametros.add("\"num_docu\":\""+dto.numero+"\"}");
+        HttpUtil.enviarParametroJSONPaginaWeb(Constantes.URL_GENERAR_XML_SFS,parametros,Constantes.WEB_TIPO_ENVIO_POST);
     }
 
     public  void generarDocumentoXmlSUNAT_(DocumentoDTO dto) throws Exception {
@@ -429,9 +489,20 @@ public class DocumentoController extends Controller{
             if(string.equals("IMP")) {
                 ImpresoraUtil.enviarAImpresora();
             } else if(string.equals("PDF")) {
-                PDFUtil.convertirTXTaPDF(document.NAME+"_"+document.contact.COMPANY+".pdf");
+                PDFUtil.convertirTXTaPDF(document.empresa.getRuc(),document.NAME+"_"+document.contact.COMPANY+".pdf");
             }
         }
+    }
+
+    private boolean ejecutarEnvioSFS(List<String> listaTipoAccion,DocumentoDTO dto) throws Exception {
+        for (String string: listaTipoAccion) {
+            System.out.println(string);
+            if(string.equals("SFS")) {
+                generarTxtDocumentoElectronico(dto);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Result iniciarAnular() throws Exception {
